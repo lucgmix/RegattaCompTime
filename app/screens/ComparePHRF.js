@@ -13,11 +13,19 @@ function ComparePHRF(props) {
   const [boatList, setBoatList] = useState();
   const [boatResultsList, setBoatResultsList] = useState();
 
-  const { getBoats, getElapsedDiff, secondsToHms } = useContext(PhrfContext);
+  const {
+    getBoats,
+    getElapsedDiff,
+    secondsToHms,
+    isAlterNatePHRF,
+  } = useContext(PhrfContext);
 
   const handleOnSelectedBoat = (item) => {
     setSelectedBoat(item);
-    setBoatResultsList(getElapsedDiff(boatList, item.rating, 3600, false));
+
+    setBoatResultsList(
+      getElapsedDiff(boatList, item.rating, 3600, isAlterNatePHRF)
+    );
   };
 
   useEffect(() => {

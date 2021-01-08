@@ -4,8 +4,18 @@ import { getBoats, getElapsedDiff, secondsToHms } from "../utils/phrf";
 const PhrfContext = React.createContext();
 
 export function PhrfProvider({ children }) {
+  const [isAlterNatePHRF, setIsAlternatePHRF] = useState(false);
+
   return (
-    <PhrfContext.Provider value={{ getBoats, getElapsedDiff, secondsToHms }}>
+    <PhrfContext.Provider
+      value={{
+        getBoats,
+        getElapsedDiff,
+        secondsToHms,
+        isAlterNatePHRF,
+        setIsAlternatePHRF,
+      }}
+    >
       {children}
     </PhrfContext.Provider>
   );
