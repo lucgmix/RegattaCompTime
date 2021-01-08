@@ -1,6 +1,7 @@
 {
   "expo": {
-    "name": "Regatta CompTime",
+    "name": "Regatta Comp Time",
+    "description": "Sailboat Racing Handicap Comparator",
     "slug": "RegattaCompTime",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -13,9 +14,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -27,7 +26,6 @@
     },
     "web": {
       "favicon": "./app/assets/favicon.png"
-    },
-    "description": ""
+    }
   }
 }
