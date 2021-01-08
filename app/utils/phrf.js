@@ -121,12 +121,6 @@ function printResults(isAlternate = false) {
   });
 }
 
-//printResults(true);
-
-//console.log(getResults(boats, 3600, false));
-//return { getBoats, getElapsedDiff };
-//}
-
 export function getBoats() {
   return [
     {

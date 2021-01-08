@@ -3,15 +3,17 @@ import { FlatList, StyleSheet } from "react-native";
 import Picker from "../components/Picker";
 import Screen from "../components/Screen";
 import Text from "../components/Text";
-import { getBoats, getElapsedDiff, secondsToHms } from "../utils/phrf";
+
 import ListItem from "../components/lists/ListItem";
-import DateTimePicker from "@react-native-community/datetimepicker";
 import PhrfContext from "../context/PhrfContext";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 function ComparePHRF(props) {
   const [selectedBoat, setSelectedBoat] = useState();
   const [boatList, setBoatList] = useState();
   const [boatResultsList, setBoatResultsList] = useState();
+
+  const { getBoats, getElapsedDiff, secondsToHms } = useContext(PhrfContext);
 
   const handleOnSelectedBoat = (item) => {
     setSelectedBoat(item);
