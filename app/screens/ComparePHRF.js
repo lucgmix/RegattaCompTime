@@ -1,17 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FlatList, StyleSheet } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import Picker from "../components/Picker";
 import Screen from "../components/Screen";
 import Text from "../components/Text";
 
 import ListItem from "../components/lists/ListItem";
 import PhrfContext from "../context/PhrfContext";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import TimePicker from "react-native-simple-time-picker";
 
 function ComparePHRF(props) {
   const [selectedBoat, setSelectedBoat] = useState();
   const [boatList, setBoatList] = useState();
   const [boatResultsList, setBoatResultsList] = useState();
+
+  const [selectedHours, setSelectedHours] = useState(0);
+  const [selectedMinutes, setSelectedMinutes] = useState(0);
 
   const {
     getBoats,
@@ -35,6 +38,23 @@ function ComparePHRF(props) {
   return (
     <Screen style={styles.container}>
       <Text>Corrected Time Comparisons</Text>
+
+      <View style={styles.container}>
+        <Text>
+          Selected Time: {selectedHours}:{selectedMinutes}
+        </Text>
+        <TimePicker
+          selectedHours={selectedHours}
+          //initial Hourse value
+          selectedMinutes={selectedMinutes}
+          //initial Minutes value
+          onChange={(hours, minutes) => {
+            setSelectedHours(hours);
+            setSelectedMinutes(minutes);
+          }}
+        />
+      </View>
+
       <Picker
         icon="sail-boat"
         placeholder="Select Boat"
