@@ -6,7 +6,7 @@ import Text from "../components/Text";
 
 import ListItem from "../components/lists/ListItem";
 import PhrfContext from "../context/PhrfContext";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 function ComparePHRF(props) {
   const [selectedBoat, setSelectedBoat] = useState();
