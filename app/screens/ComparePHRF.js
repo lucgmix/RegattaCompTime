@@ -10,6 +10,7 @@ import Screen from "../components/Screen";
 import Text from "../components/Text";
 
 import ListItem from "../components/lists/ListItem";
+import ListItemSeparator from "../components/lists/ListItemSeparator";
 import PhrfContext from "../context/PhrfContext";
 
 function ComparePHRF(props) {
@@ -45,7 +46,7 @@ function ComparePHRF(props) {
 
   return (
     <Screen style={styles.container}>
-      <Text>Corrected Time Comparisons</Text>
+      <Text style={styles.header}>Time Comparisons</Text>
       <Picker
         icon="sail-boat"
         placeholder="Select Boat"
@@ -56,6 +57,16 @@ function ComparePHRF(props) {
       <FlatList
         data={boatResultsList}
         keyExtractor={(resultItem) => resultItem.boat.name}
+        ItemSeparatorComponent={() => <ListItemSeparator />}
+        ListHeaderComponent={() => (
+          <ListItem
+            name="Boat"
+            rating="Rating"
+            correctedTime="Corrected Time"
+            isHeader
+          />
+        )}
+        stickyHeaderIndices={[0]}
         renderItem={({ item }) => (
           <TouchableWithoutFeedback onPress={() => handleBoatItemClicked(item)}>
             <View>
@@ -75,6 +86,11 @@ function ComparePHRF(props) {
 
 const styles = StyleSheet.create({
   container: { backgroundColor: "#fff", padding: 5, paddingTop: 30 },
+  header: {
+    alignSelf: "center",
+    fontSize: 18,
+    marginBottom: 20,
+  },
 });
 
 export default ComparePHRF;

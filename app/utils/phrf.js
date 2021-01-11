@@ -158,5 +158,11 @@ export function getBoats() {
       sail: "106",
       rating: 128,
     },
+    {
+      name: "Stella",
+      type: "Laser 28",
+      sail: "160",
+      rating: 126,
+    },
   ];
 }
