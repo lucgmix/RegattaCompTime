@@ -116,7 +116,6 @@ export function secondsToHms(seconds) {
 function printResults(isAlternate = false) {
   getElapsedDiff(boats, 126, 3600, isAlternate).forEach((result) => {
     const timeStamp = secondsToHms(result.diff);
-    //console.log(result);
     console.log(`${result.boat.rating} ${result.boat.name} ${timeStamp}`);
   });
 }

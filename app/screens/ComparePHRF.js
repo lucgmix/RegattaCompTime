@@ -1,12 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FlatList, StyleSheet } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import Picker from "../components/Picker";
 import Screen from "../components/Screen";
 import Text from "../components/Text";
 
 import ListItem from "../components/lists/ListItem";
 import PhrfContext from "../context/PhrfContext";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 function ComparePHRF(props) {
   const [selectedBoat, setSelectedBoat] = useState();
@@ -21,8 +25,15 @@ function ComparePHRF(props) {
   } = useContext(PhrfContext);
 
   const handleOnSelectedBoat = (item) => {
-    setSelectedBoat(item);
+    updateBoatList(item);
+  };
 
+  const handleBoatItemClicked = (item) => {
+    updateBoatList(item.boat);
+  };
+
+  const updateBoatList = (item) => {
+    setSelectedBoat(item);
     setBoatResultsList(
       getElapsedDiff(boatList, item.rating, 3600, isAlterNatePHRF)
     );
@@ -46,12 +57,16 @@ function ComparePHRF(props) {
         data={boatResultsList}
         keyExtractor={(resultItem) => resultItem.boat.name}
         renderItem={({ item }) => (
-          <ListItem
-            name={item.boat.name}
-            rating={item.boat.rating}
-            correctedTime={secondsToHms(item.diff)}
-            isSelectedItem={selectedBoat && selectedBoat === item.boat}
-          />
+          <TouchableWithoutFeedback onPress={() => handleBoatItemClicked(item)}>
+            <View>
+              <ListItem
+                name={item.boat.name}
+                rating={item.boat.rating}
+                correctedTime={secondsToHms(item.diff)}
+                isSelectedItem={selectedBoat && selectedBoat === item.boat}
+              />
+            </View>
+          </TouchableWithoutFeedback>
         )}
       />
     </Screen>

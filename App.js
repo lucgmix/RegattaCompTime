@@ -1,28 +1,15 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import ComparePHRF from "./app/screens/ComparePHRF";
-import Race from "./app/screens/Race";
-import Settings from "./app/screens/Settings";
 import { PhrfProvider } from "./app/context/PhrfContext";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
-
-const Tab = createBottomTabNavigator();
-const TabNavigator = () => {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Time Diffs" component={ComparePHRF} />
-      <Tab.Screen name="Race" component={Race} />
-      <Tab.Screen name="Settings" component={Settings} />
-    </Tab.Navigator>
-  );
-};
+import AppNavigator from "./app/navigation/AppNavigator";
+import navigationTheme from "./app/navigation/navigationTheme";
 
 export default function App() {
   return (
     <PhrfProvider>
-      <NavigationContainer>
-        <TabNavigator />
+      <NavigationContainer theme={navigationTheme}>
+        <AppNavigator />
       </NavigationContainer>
     </PhrfProvider>
   );
