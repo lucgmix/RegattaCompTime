@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
+  TextInput,
 } from "react-native";
 import Picker from "../components/Picker";
 import Screen from "../components/Screen";
@@ -13,10 +14,14 @@ import ListItem from "../components/lists/ListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
 import PhrfContext from "../context/PhrfContext";
 
+import InputSpinner from "react-native-input-spinner";
+import colors from "../config/colors";
+
 function ComparePHRF(props) {
   const [selectedBoat, setSelectedBoat] = useState();
   const [boatList, setBoatList] = useState();
   const [boatResultsList, setBoatResultsList] = useState();
+  const [myTextValue, setMyTextValue] = useState();
 
   const {
     getBoats,
@@ -47,6 +52,29 @@ function ComparePHRF(props) {
   return (
     <Screen style={styles.container}>
       <Text style={styles.header}>Time Comparisons</Text>
+      <TextInput
+        editable
+        keyboardType="numeric"
+        value={myTextValue}
+        onChangeText={(value) =>
+          value.match(/[0-9]*/gm) && setMyTextValue(value)
+        }
+      />
+      <View style={styles.spinnerContainer}>
+        <InputSpinner
+          style={styles.spinner}
+          buttonStyle={styles.spinnerButton}
+          max={60}
+          min={0}
+          step={1}
+          value={48}
+          onChange={(num) => {
+            console.log(num);
+          }}
+          showBorder
+          rounded={false}
+        />
+      </View>
       <Picker
         icon="sail-boat"
         placeholder="Select Boat"
@@ -85,11 +113,22 @@ function ComparePHRF(props) {
 }
 
 const styles = StyleSheet.create({
-  container: { backgroundColor: "#fff", padding: 5, paddingTop: 30 },
+  container: { flex: 1, backgroundColor: "#fff", padding: 5, paddingTop: 30 },
   header: {
     alignSelf: "center",
     fontSize: 18,
     marginBottom: 20,
+  },
+  spinner: {
+    backgroundColor: "white",
+  },
+  spinnerButton: {
+    height: 50,
+    backgroundColor: colors.medium,
+  },
+  spinnerContainer: {
+    height: 50,
+    width: 150,
   },
 });
 
