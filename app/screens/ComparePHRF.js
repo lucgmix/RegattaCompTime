@@ -64,6 +64,7 @@ function ComparePHRF(props) {
   return (
     <Screen style={styles.container}>
       <Text style={styles.header}>Time Comparisons</Text>
+      <Text>Select reference boat</Text>
       <Picker
         icon="sail-boat"
         placeholder="Select Boat"
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
   header: {
     alignSelf: "center",
     fontSize: 18,
-    marginBottom: 20,
+    marginBottom: 24,
   },
 });
 
