@@ -17,7 +17,7 @@ let listItemHeight = 0;
 
 function ComparePHRF(props) {
   const [selectedBoat, setSelectedBoat] = useState();
-  const [boatList, setBoatList] = useState([]);
+  const [boatSelectList, setBoatSelectList] = useState([]);
   const [boatResultsList, setBoatResultsList] = useState([]);
   const resultListRef = useRef();
 
@@ -39,15 +39,21 @@ function ComparePHRF(props) {
   const updateBoatList = (item) => {
     setSelectedBoat(item);
     setBoatResultsList(
-      getElapsedDiff(boatList, item.rating, 3600, isAlterNatePHRF)
+      getElapsedDiff(boatSelectList, item.rating, 3600, isAlterNatePHRF)
     );
   };
 
   useEffect(() => {
+    setBoatSelectList(getBoats().sort((a, b) => (a.name > b.name ? 1 : -1)));
+  }, []);
+
+  useEffect(() => {
     if (!selectedBoat) return;
+
     const indexOfSelectedBoat = boatResultsList.findIndex(
       (item) => item.boat.name === selectedBoat.name
     );
+
     resultListRef &&
       resultListRef.current.scrollToIndex({
         animated: true,
@@ -55,17 +61,13 @@ function ComparePHRF(props) {
       });
   }, [selectedBoat]);
 
-  useEffect(() => {
-    setBoatList(getBoats().sort((a, b) => (a.name > b.name ? 1 : -1)));
-  }, []);
-
   return (
     <Screen style={styles.container}>
       <Text style={styles.header}>Time Comparisons</Text>
       <Picker
         icon="sail-boat"
         placeholder="Select Boat"
-        items={boatList}
+        items={boatSelectList}
         selectedItem={selectedBoat}
         onSelectItem={handleOnSelectedBoat}
       />
@@ -82,24 +84,22 @@ function ComparePHRF(props) {
         keyExtractor={(resultItem) => resultItem.boat.name}
         ItemSeparatorComponent={() => <ListItemSeparator />}
         ListHeaderComponent={() => (
-          <View
-            onLayout={(event) => {
-              const { height } = event.nativeEvent.layout;
-              listItemHeight = height;
-            }}
-          >
-            <ListItem
-              name="Boat"
-              rating="Rating"
-              correctedTime="Corrected Time"
-              isHeader
-            />
-          </View>
+          <ListItem
+            name="Boat"
+            rating="Rating"
+            correctedTime="Corrected Time"
+            isHeader
+          />
         )}
         stickyHeaderIndices={[0]}
         renderItem={({ item }) => (
           <TouchableWithoutFeedback onPress={() => handleBoatItemClicked(item)}>
-            <View>
+            <View
+              onLayout={(event) => {
+                const { height } = event.nativeEvent.layout;
+                listItemHeight = height;
+              }}
+            >
               <ListItem
                 name={item.boat.name}
                 rating={item.boat.rating}
