@@ -51,7 +51,7 @@ function Picker({
           />
         </View>
       </TouchableWithoutFeedback>
-      <Modal visible={modalVisible} animationType="slide">
+      <Modal visible={modalVisible} animationType="fade">
         <Screen>
           <FlatList
             data={items}
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 15,
     marginVertical: 10,
-    marginBottom: 40,
+    marginBottom: 30,
   },
   icon: {
     marginRight: 10,

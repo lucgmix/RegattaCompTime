@@ -141,6 +141,13 @@ export function getBoats() {
       rating: 106,
     },
     {
+      name: "Wadjet",
+      type: "Viper 640",
+      sail: "211",
+      rating: 106,
+    },
+
+    {
       name: "Colibri",
       type: "Laser 28",
       sail: "224",
@@ -153,16 +160,48 @@ export function getBoats() {
       rating: 149,
     },
     {
+      name: "Organized Chaos",
+      type: "J80",
+      sail: "669",
+      rating: 126,
+    },
+    {
       name: "HiJinx",
       type: "J-30",
       sail: "106",
       rating: 128,
     },
+
     {
       name: "Stella",
       type: "Laser 28",
       sail: "160",
       rating: 126,
+    },
+    {
+      name: "Cavale",
+      type: "Laser 28",
+      sail: "227",
+      rating: 126,
+    },
+    {
+      name: "Alpha",
+      type: "Laser 28",
+      sail: "212",
+      rating: 126,
+    },
+
+    {
+      name: "Wind Warrior",
+      type: "C&C 115",
+      sail: "11585",
+      rating: 63,
+    },
+    {
+      name: "Gone",
+      type: "J/70",
+      sail: "550",
+      rating: 117,
     },
   ];
 }

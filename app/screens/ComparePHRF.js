@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import {
   FlatList,
   StyleSheet,
@@ -13,10 +13,13 @@ import ListItem from "../components/lists/ListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
 import PhrfContext from "../context/PhrfContext";
 
+let listItemHeight = 0;
+
 function ComparePHRF(props) {
   const [selectedBoat, setSelectedBoat] = useState();
-  const [boatList, setBoatList] = useState();
-  const [boatResultsList, setBoatResultsList] = useState();
+  const [boatList, setBoatList] = useState([]);
+  const [boatResultsList, setBoatResultsList] = useState([]);
+  const resultListRef = useRef();
 
   const {
     getBoats,
@@ -41,6 +44,18 @@ function ComparePHRF(props) {
   };
 
   useEffect(() => {
+    if (!selectedBoat) return;
+    const indexOfSelectedBoat = boatResultsList.findIndex(
+      (item) => item.boat.name === selectedBoat.name
+    );
+    resultListRef &&
+      resultListRef.current.scrollToIndex({
+        animated: true,
+        index: indexOfSelectedBoat,
+      });
+  }, [selectedBoat]);
+
+  useEffect(() => {
     setBoatList(getBoats().sort((a, b) => (a.name > b.name ? 1 : -1)));
   }, []);
 
@@ -55,16 +70,31 @@ function ComparePHRF(props) {
         onSelectItem={handleOnSelectedBoat}
       />
       <FlatList
+        ref={resultListRef}
         data={boatResultsList}
+        getItemLayout={(_, index) => {
+          return {
+            length: listItemHeight,
+            offset: listItemHeight * index,
+            index,
+          };
+        }}
         keyExtractor={(resultItem) => resultItem.boat.name}
         ItemSeparatorComponent={() => <ListItemSeparator />}
         ListHeaderComponent={() => (
-          <ListItem
-            name="Boat"
-            rating="Rating"
-            correctedTime="Corrected Time"
-            isHeader
-          />
+          <View
+            onLayout={(event) => {
+              const { height } = event.nativeEvent.layout;
+              listItemHeight = height;
+            }}
+          >
+            <ListItem
+              name="Boat"
+              rating="Rating"
+              correctedTime="Corrected Time"
+              isHeader
+            />
+          </View>
         )}
         stickyHeaderIndices={[0]}
         renderItem={({ item }) => (
@@ -85,7 +115,12 @@ function ComparePHRF(props) {
 }
 
 const styles = StyleSheet.create({
-  container: { backgroundColor: "#fff", padding: 5, paddingTop: 30 },
+  container: {
+    backgroundColor: "#fff",
+    paddingLeft: 4,
+    paddingRight: 4,
+    paddingTop: 28,
+  },
   header: {
     alignSelf: "center",
     fontSize: 18,
