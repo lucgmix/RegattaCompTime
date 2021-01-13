@@ -171,26 +171,6 @@ export function getBoats() {
       sail: "106",
       rating: 128,
     },
-
-    {
-      name: "Stella",
-      type: "Laser 28",
-      sail: "160",
-      rating: 126,
-    },
-    {
-      name: "Cavale",
-      type: "Laser 28",
-      sail: "227",
-      rating: 126,
-    },
-    {
-      name: "Alpha",
-      type: "Laser 28",
-      sail: "212",
-      rating: 126,
-    },
-
     {
       name: "Wind Warrior",
       type: "C&C 115",

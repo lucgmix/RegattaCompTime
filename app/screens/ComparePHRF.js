@@ -25,7 +25,7 @@ function ComparePHRF(props) {
     getBoats,
     getElapsedDiff,
     secondsToHms,
-    isAlterNatePHRF,
+    isAlternatePHRF,
   } = useContext(PhrfContext);
 
   const handleOnSelectedBoat = (item) => {
@@ -39,9 +39,13 @@ function ComparePHRF(props) {
   const updateBoatList = (item) => {
     setSelectedBoat(item);
     setBoatResultsList(
-      getElapsedDiff(boatSelectList, item.rating, 3600, isAlterNatePHRF)
+      getElapsedDiff(boatSelectList, item.rating, 3600, isAlternatePHRF)
     );
   };
+
+  useEffect(() => {
+    selectedBoat && updateBoatList(selectedBoat);
+  }, [isAlternatePHRF]);
 
   useEffect(() => {
     setBoatSelectList(getBoats().sort((a, b) => (a.name > b.name ? 1 : -1)));
@@ -64,10 +68,9 @@ function ComparePHRF(props) {
   return (
     <Screen style={styles.container}>
       <Text style={styles.header}>Time Comparisons</Text>
-      <Text>Select reference boat</Text>
       <Picker
         icon="sail-boat"
-        placeholder="Select Boat"
+        placeholder="Select Reference Boat"
         items={boatSelectList}
         selectedItem={selectedBoat}
         onSelectItem={handleOnSelectedBoat}

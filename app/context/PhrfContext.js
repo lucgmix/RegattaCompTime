@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { getBoats, getElapsedDiff, secondsToHms } from "../utils/phrf";
 
-const PhrfContext = React.createContext();
+const PhrfContext = createContext();
 
 export function PhrfProvider({ children }) {
-  const [isAlterNatePHRF, setIsAlternatePHRF] = useState(false);
+  const [isAlternatePHRF, setIsAlternatePHRF] = useState(false);
 
   return (
     <PhrfContext.Provider
@@ -12,7 +12,7 @@ export function PhrfProvider({ children }) {
         getBoats,
         getElapsedDiff,
         secondsToHms,
-        isAlterNatePHRF,
+        isAlternatePHRF,
         setIsAlternatePHRF,
       }}
     >

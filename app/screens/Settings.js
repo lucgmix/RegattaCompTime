@@ -1,12 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, StyleSheet } from "react-native";
 import { RadioButton } from "react-native-paper";
 import Screen from "../components/Screen";
 import color from "../config/colors";
 import Text from "../components/Text";
 
+import PhrfContext from "../context/PhrfContext";
+
+const PHRF_FORMULA = {
+  STANDARD: "standard",
+  ALTERNATE: "alternate",
+};
+
 function Settings(props) {
-  const [value, setValue] = useState("first");
+  const { isAlternatePHRF, setIsAlternatePHRF } = useContext(PhrfContext);
+  const [value, setValue] = useState(
+    isAlternatePHRF ? PHRF_FORMULA.ALTERNATE : PHRF_FORMULA.STANDARD
+  );
+
+  const updatePhrfFormula = (value) => {
+    setValue(value);
+    const isAlternate = value === PHRF_FORMULA.ALTERNATE;
+    setIsAlternatePHRF(isAlternate);
+  };
 
   return (
     <Screen style={styles.container}>
@@ -14,16 +30,15 @@ function Settings(props) {
 
       <Text>PHRF-LO Formula</Text>
       <RadioButton.Group
-        onValueChange={(value) => setValue(value)}
+        onValueChange={(value) => updatePhrfFormula(value)}
         value={value}
         style={styles.radionGroup}
       >
         <View>
           <View style={styles.radioButton}>
             <RadioButton
-              value="standard"
+              value={PHRF_FORMULA.STANDARD}
               color={color.primary}
-              checked
               styles={styles.radio}
             />
             <Text style={styles.radioText}>Standard</Text>
@@ -38,7 +53,7 @@ function Settings(props) {
         <View>
           <View style={styles.radioButton}>
             <RadioButton
-              value="alternate"
+              value={PHRF_FORMULA.ALTERNATE}
               color={color.primary}
               styles={styles.radio}
             />
