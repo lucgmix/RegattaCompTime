@@ -6,16 +6,15 @@ import {
   View,
   Modal,
 } from "react-native";
+
 import Picker from "../components/Picker";
 import Screen from "../components/Screen";
 import Text from "../components/Text";
 import Button from "../components/Button";
 import TimeInput from "../components/TimeInput";
-
 import ListItem from "../components/lists/ListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
 import PhrfContext from "../context/PhrfContext";
-
 import colors from "../config/colors";
 
 let listItemHeight = 0;
@@ -84,7 +83,8 @@ function ComparePHRF(props) {
     <Screen style={styles.container}>
       <Text style={styles.header}>Time Delta</Text>
       <View style={styles.labelContainer}>
-        <Text>Race Duration {secondsToHms(raceDuration)}</Text>
+        <Text>Race Duration</Text>
+        <Text>{secondsToHms(raceDuration)}</Text>
         <Button title="Set" onPress={handleSetRaceDuration}></Button>
       </View>
       <Modal visible={isTimeModalVisible} animationType="fade">

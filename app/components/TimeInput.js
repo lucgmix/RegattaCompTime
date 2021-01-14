@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, TextInput } from "react-native";
+
 import Text from "./Text";
+import colors from "../config/colors";
 
 function getHour(time) {
   return Math.floor(time / 60 / 60);
@@ -93,13 +95,14 @@ function TimeDigits({ timeValue, timeUnit, size = 8, onChange }) {
             style={digitStyles.textInputStyle}
             textAlign={"right"}
             placeholder="00"
-            placeholderTextColor="#ccc"
+            placeholderTextColor={colors.grey}
             numeric
             keyboardType={"numeric"}
             maxLength={2}
             onChangeText={(text) => handleOnTextChange(text)}
             selectTextOnFocus={true}
             contextMenuHidden={true}
+            selectionColor={colors.secondary}
           />
         </View>
       </View>
@@ -117,9 +120,11 @@ const digitStyles = StyleSheet.create({
   textInputStyle: {
     flex: 1,
     fontSize: 64,
+    color: colors.dark,
   },
   colonSeparator: {
     fontSize: 64,
+    color: colors.medium,
   },
   timeUnits: {
     fontSize: 16,

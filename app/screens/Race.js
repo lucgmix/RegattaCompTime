@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingLeft: 4,
     paddingRight: 4,
-    paddingTop: 28,
+    paddingTop: 16,
   },
   header: {
     alignSelf: "center",

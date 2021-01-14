@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     paddingLeft: 4,
     paddingRight: 4,
-    paddingTop: 28,
+    paddingTop: 16,
   },
   radioButton: {
     flexDirection: "row",
