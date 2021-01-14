@@ -4,14 +4,19 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
+  Modal,
 } from "react-native";
 import Picker from "../components/Picker";
 import Screen from "../components/Screen";
 import Text from "../components/Text";
+import Button from "../components/Button";
+import TimeInput from "../components/TimeInput";
 
 import ListItem from "../components/lists/ListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
 import PhrfContext from "../context/PhrfContext";
+
+import colors from "../config/colors";
 
 let listItemHeight = 0;
 
@@ -19,6 +24,8 @@ function ComparePHRF(props) {
   const [selectedBoat, setSelectedBoat] = useState();
   const [boatSelectList, setBoatSelectList] = useState([]);
   const [boatResultsList, setBoatResultsList] = useState([]);
+  const [raceDuration, setRaceDuration] = useState(3600);
+  const [isTimeModalVisible, setIsTimeModalVisible] = useState(false);
   const resultListRef = useRef();
 
   const {
@@ -39,13 +46,13 @@ function ComparePHRF(props) {
   const updateBoatList = (item) => {
     setSelectedBoat(item);
     setBoatResultsList(
-      getElapsedDiff(boatSelectList, item.rating, 3600, isAlternatePHRF)
+      getElapsedDiff(boatSelectList, item.rating, raceDuration, isAlternatePHRF)
     );
   };
 
   useEffect(() => {
     selectedBoat && updateBoatList(selectedBoat);
-  }, [isAlternatePHRF]);
+  }, [isAlternatePHRF, raceDuration]);
 
   useEffect(() => {
     setBoatSelectList(getBoats().sort((a, b) => (a.name > b.name ? 1 : -1)));
@@ -65,9 +72,36 @@ function ComparePHRF(props) {
       });
   }, [selectedBoat]);
 
+  const onRaceDurationChanged = (time) => {
+    setRaceDuration(time);
+  };
+
+  const handleSetRaceDuration = () => {
+    setIsTimeModalVisible(true);
+  };
+
   return (
     <Screen style={styles.container}>
-      <Text style={styles.header}>Time Comparisons</Text>
+      <Text style={styles.header}>Time Delta</Text>
+      <View style={styles.labelContainer}>
+        <Text>Race Duration {secondsToHms(raceDuration)}</Text>
+        <Button title="Set" onPress={handleSetRaceDuration}></Button>
+      </View>
+      <Modal visible={isTimeModalVisible} animationType="fade">
+        <Screen>
+          <View style={styles.timeModalContainer}>
+            <TimeInput
+              duration={raceDuration}
+              onDurationChange={onRaceDurationChanged}
+            />
+            <Button
+              title="Done"
+              onPress={() => setIsTimeModalVisible(false)}
+            ></Button>
+          </View>
+        </Screen>
+      </Modal>
+
       <Picker
         icon="sail-boat"
         placeholder="Select Reference Boat"
@@ -123,12 +157,29 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     paddingLeft: 4,
     paddingRight: 4,
-    paddingTop: 28,
+    paddingTop: 16,
   },
   header: {
     alignSelf: "center",
     fontSize: 18,
-    marginBottom: 24,
+    marginBottom: 16,
+  },
+  labelContainer: {
+    flexDirection: "row",
+    backgroundColor: colors.light,
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingLeft: 16,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#fff",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  timeModalContainer: {
+    marginTop: 24,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

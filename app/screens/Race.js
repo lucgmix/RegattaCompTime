@@ -1,13 +1,11 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
-import TimeInput from "../components/TimeInput";
+import { Text, StyleSheet } from "react-native";
 import Screen from "../components/Screen";
 
 function Race(props) {
   return (
     <Screen style={styles.container}>
-      {/* <Text>Race</Text> */}
-      <TimeInput />
+      <Text style={styles.header}>Race</Text>
     </Screen>
   );
 }
@@ -15,11 +13,15 @@ function Race(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //justifyContent: "center",
     alignItems: "center",
     paddingLeft: 4,
     paddingRight: 4,
     paddingTop: 28,
+  },
+  header: {
+    alignSelf: "center",
+    fontSize: 18,
+    marginBottom: 24,
   },
 });
 

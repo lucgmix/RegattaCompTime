@@ -4,7 +4,6 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Modal,
-  Button,
   FlatList,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -77,11 +76,11 @@ function Picker({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: defaultStyles.colors.light,
-    borderRadius: 10,
+    borderRadius: 8,
     flexDirection: "row",
     padding: 15,
     marginVertical: 10,
-    marginBottom: 30,
+    marginBottom: 12,
   },
   icon: {
     marginRight: 10,

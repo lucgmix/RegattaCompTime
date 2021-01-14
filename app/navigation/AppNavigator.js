@@ -10,7 +10,7 @@ import TabBarButton from "./TabBarButton";
 
 const SECTIONS = {
   RACE: { name: "race", title: "Race" },
-  TIMEDIFF: { name: "timediff", title: "Time Comparisons" },
+  TIMEDELTA: { name: "timedelta", title: "Time Delta" },
   SETTINGS: { name: "settings", title: "Settings" },
 };
 
@@ -18,7 +18,7 @@ const Tab = createBottomTabNavigator();
 const AppNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName={SECTIONS.TIMEDIFF.name}
+      initialRouteName={SECTIONS.TIMEDELTA.name}
       tabBarOptions={{ showLabel: true, showIcon: true, fontSize: 24 }}
     >
       <Tab.Screen
@@ -32,13 +32,13 @@ const AppNavigator = () => {
         }}
       />
       <Tab.Screen
-        name={SECTIONS.TIMEDIFF.name}
+        name={SECTIONS.TIMEDELTA.name}
         component={ComparePHRF}
         options={{
           tabBarIcon: ({ size, color }) => (
             <Entypo name="stopwatch" size={size} color={color} />
           ),
-          title: SECTIONS.TIMEDIFF.title,
+          title: SECTIONS.TIMEDELTA.title,
         }}
       />
       <Tab.Screen
