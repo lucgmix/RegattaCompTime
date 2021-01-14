@@ -1,6 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import ComparePHRF from "../screens/ComparePHRF";
+import TimeDelta from "../screens/TimeDelta";
 import Race from "../screens/Race";
 import Settings from "../screens/Settings";
 
@@ -33,7 +33,7 @@ const AppNavigator = () => {
       />
       <Tab.Screen
         name={SECTIONS.TIMEDELTA.name}
-        component={ComparePHRF}
+        component={TimeDelta}
         options={{
           tabBarIcon: ({ size, color }) => (
             <Entypo name="stopwatch" size={size} color={color} />
