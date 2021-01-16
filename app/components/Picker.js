@@ -32,8 +32,8 @@ function Picker({
           {icon && (
             <MaterialCommunityIcons
               name={icon}
-              size={20}
-              color={defaultStyles.colors.medium}
+              size={24}
+              color={defaultStyles.colors.primary}
               style={styles.icon}
             />
           )}
@@ -45,8 +45,8 @@ function Picker({
 
           <MaterialCommunityIcons
             name="chevron-down"
-            size={20}
-            color={defaultStyles.colors.medium}
+            size={24}
+            color={defaultStyles.colors.primary}
           />
         </View>
       </TouchableWithoutFeedback>
@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
     backgroundColor: defaultStyles.colors.light,
     borderRadius: 8,
     flexDirection: "row",
-    padding: 15,
+    padding: 12,
+    paddingLeft: 16,
     marginVertical: 10,
     marginBottom: 12,
   },

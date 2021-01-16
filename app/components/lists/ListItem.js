@@ -12,11 +12,11 @@ function ListItem({ name, rating, correctedTime, isSelectedItem, isHeader }) {
         isHeader && headerStyles.container,
       ]}
     >
-      <Text style={[styles.name, isHeader && headerStyles.name]}>{name}</Text>
-      <Text style={[styles.rating, isHeader && headerStyles.name]}>
+      <Text style={[styles.name, isHeader && headerStyles.label]}>{name}</Text>
+      <Text style={[styles.rating, isHeader && headerStyles.label]}>
         {rating}
       </Text>
-      <Text style={[styles.time, isHeader && headerStyles.time]}>
+      <Text style={[styles.time, isHeader && headerStyles.label]}>
         {correctedTime}
       </Text>
     </View>
@@ -25,22 +25,17 @@ function ListItem({ name, rating, correctedTime, isSelectedItem, isHeader }) {
 
 const seletedStyles = StyleSheet.create({
   container: {
-    backgroundColor: defaultStyles.colors.mediumlight,
+    backgroundColor: defaultStyles.colors.primary500,
   },
 });
 
 const headerStyles = StyleSheet.create({
   container: {
-    backgroundColor: defaultStyles.colors.medium,
+    backgroundColor: defaultStyles.colors.primary,
   },
-  name: {
+  label: {
     color: "white",
-  },
-  rating: {
-    color: "white",
-  },
-  time: {
-    color: "white",
+    fontWeight: "700",
   },
 });
 
@@ -49,7 +44,7 @@ const styles = StyleSheet.create({
     backgroundColor: defaultStyles.colors.light,
     borderRadius: 0,
     flexDirection: "row",
-    padding: 15,
+    padding: 14,
   },
   name: {
     flex: 0.4,

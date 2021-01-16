@@ -4,22 +4,24 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
-  Modal,
 } from "react-native";
 
 import Picker from "../components/Picker";
 import Screen from "../components/Screen";
 import Text from "../components/Text";
 import Button from "../components/Button";
-import TimeInput from "../components/TimeInput";
 import ListItem from "../components/lists/ListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
 import PhrfContext from "../context/PhrfContext";
 import colors from "../config/colors";
+import TimeInpuModal from "../components/TimeInputModal";
+
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 
 let listItemHeight = 0;
 
-function ComparePHRF(props) {
+function TimeDelta(props) {
   const [selectedBoat, setSelectedBoat] = useState();
   const [boatSelectList, setBoatSelectList] = useState([]);
   const [boatResultsList, setBoatResultsList] = useState([]);
@@ -82,25 +84,18 @@ function ComparePHRF(props) {
   return (
     <Screen style={styles.container}>
       <Text style={styles.header}>Time Delta</Text>
-      <View style={styles.labelContainer}>
-        <Text>Race Duration</Text>
-        <Text>{secondsToHms(raceDuration)}</Text>
+      <View style={styles.timeInputContainer}>
+        <Entypo name="stopwatch" size={24} color={colors.primary} />
+        <Text style={styles.timeDisplay}>{secondsToHms(raceDuration)}</Text>
         <Button title="Set" onPress={handleSetRaceDuration}></Button>
       </View>
-      <Modal visible={isTimeModalVisible} animationType="fade">
-        <Screen>
-          <View style={styles.timeModalContainer}>
-            <TimeInput
-              duration={raceDuration}
-              onDurationChange={onRaceDurationChanged}
-            />
-            <Button
-              title="Done"
-              onPress={() => setIsTimeModalVisible(false)}
-            ></Button>
-          </View>
-        </Screen>
-      </Modal>
+      <TimeInpuModal
+        isModalVisible={isTimeModalVisible}
+        duration={raceDuration}
+        onDurationChange={onRaceDurationChanged}
+        onModalButtonPress={() => setIsTimeModalVisible(false)}
+        buttonLabel="Done"
+      />
 
       <Picker
         icon="sail-boat"
@@ -125,7 +120,7 @@ function ComparePHRF(props) {
           <ListItem
             name="Boat"
             rating="Rating"
-            correctedTime="Corrected Time"
+            correctedTime="Time Delta"
             isHeader
           />
         )}
@@ -164,23 +159,24 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 16,
   },
-  labelContainer: {
+  timeInputContainer: {
     flexDirection: "row",
     backgroundColor: colors.light,
     paddingTop: 8,
     paddingBottom: 8,
-    paddingLeft: 16,
+    paddingLeft: 12,
     borderRadius: 8,
     borderWidth: 1,
     borderColor: "#fff",
     alignItems: "center",
     justifyContent: "space-between",
   },
-  timeModalContainer: {
-    marginTop: 24,
-    alignItems: "center",
-    justifyContent: "center",
+  timeDisplay: {
+    // flex: 1,
+    color: colors.medium,
+    fontWeight: "600",
+    // textAlign: "center",
   },
 });
 
-export default ComparePHRF;
+export default TimeDelta;
