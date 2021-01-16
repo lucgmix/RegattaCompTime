@@ -79,9 +79,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     flexDirection: "row",
     padding: 12,
-    paddingLeft: 16,
     marginVertical: 10,
     marginBottom: 12,
+    alignItems: "center",
   },
   icon: {
     marginRight: 10,
@@ -92,6 +92,10 @@ const styles = StyleSheet.create({
   },
   text: {
     flex: 1,
+    fontWeight: "400",
+    marginLeft: 4,
+    paddingTop: 2,
+    alignItems: "center",
   },
 });
 

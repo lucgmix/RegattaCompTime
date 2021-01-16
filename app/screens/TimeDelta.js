@@ -16,7 +16,6 @@ import PhrfContext from "../context/PhrfContext";
 import colors from "../config/colors";
 import TimeInpuModal from "../components/TimeInputModal";
 
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 
 let listItemHeight = 0;
@@ -85,8 +84,15 @@ function TimeDelta(props) {
     <Screen style={styles.container}>
       <Text style={styles.header}>Time Delta</Text>
       <View style={styles.timeInputContainer}>
-        <Entypo name="stopwatch" size={24} color={colors.primary} />
-        <Text style={styles.timeDisplay}>{secondsToHms(raceDuration)}</Text>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <Entypo name="stopwatch" size={24} color={colors.primary} />
+          <Text style={styles.timeDisplay}>{secondsToHms(raceDuration)}</Text>
+        </View>
         <Button title="Set" onPress={handleSetRaceDuration}></Button>
       </View>
       <TimeInpuModal
@@ -158,6 +164,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontSize: 18,
     marginBottom: 16,
+    fontWeight: "600",
+    color: colors.text,
   },
   timeInputContainer: {
     flexDirection: "row",
@@ -172,10 +180,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   timeDisplay: {
-    // flex: 1,
-    color: colors.medium,
-    fontWeight: "600",
-    // textAlign: "center",
+    color: colors.text,
+    fontWeight: "400",
+    marginLeft: 12,
+    paddingTop: 2,
+    alignItems: "center",
   },
 });
 

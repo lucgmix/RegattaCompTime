@@ -35,7 +35,7 @@ const headerStyles = StyleSheet.create({
   },
   label: {
     color: "white",
-    fontWeight: "700",
+    fontWeight: "600",
   },
 });
 
