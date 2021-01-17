@@ -19,7 +19,14 @@ const AppNavigator = () => {
   return (
     <Tab.Navigator
       initialRouteName={SECTIONS.TIMEDELTA.name}
-      tabBarOptions={{ showLabel: true, showIcon: true, fontSize: 24 }}
+      tabBarOptions={{
+        showLabel: true,
+        showIcon: true,
+        labelStyle: {
+          fontWeight: "600",
+          fontSize: 12,
+        },
+      }}
     >
       <Tab.Screen
         name={SECTIONS.RACE.name}

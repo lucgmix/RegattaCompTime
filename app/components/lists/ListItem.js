@@ -3,7 +3,14 @@ import { View, StyleSheet } from "react-native";
 import Text from "../Text";
 import defaultStyles from "../../config/styles";
 
-function ListItem({ name, rating, correctedTime, isSelectedItem, isHeader }) {
+function ListItem({
+  name,
+  type,
+  rating,
+  correctedTime,
+  isSelectedItem,
+  isHeader,
+}) {
   return (
     <View
       style={[
@@ -12,7 +19,18 @@ function ListItem({ name, rating, correctedTime, isSelectedItem, isHeader }) {
         isHeader && headerStyles.container,
       ]}
     >
-      <Text style={[styles.name, isHeader && headerStyles.label]}>{name}</Text>
+      <Text
+        numberOfLines={1}
+        style={[styles.name, isHeader && headerStyles.label]}
+      >
+        {name}
+      </Text>
+      <Text
+        numberOfLines={1}
+        style={[styles.type, isHeader && headerStyles.label]}
+      >
+        {type}
+      </Text>
       <Text style={[styles.rating, isHeader && headerStyles.label]}>
         {rating}
       </Text>
@@ -36,6 +54,7 @@ const headerStyles = StyleSheet.create({
   label: {
     color: "white",
     fontWeight: "600",
+    fontSize: 16,
   },
 });
 
@@ -47,18 +66,26 @@ const styles = StyleSheet.create({
     padding: 14,
   },
   name: {
-    flex: 0.4,
+    flex: 0.5,
     flexDirection: "row",
+    fontSize: 14,
+  },
+  type: {
+    flex: 0.3,
+    flexDirection: "row",
+    fontSize: 14,
   },
   rating: {
     flex: 0.2,
     flexDirection: "row",
     textAlign: "right",
+    fontSize: 14,
   },
   time: {
     flex: 0.4,
     flexDirection: "row",
     textAlign: "right",
+    fontSize: 14,
   },
 });
 

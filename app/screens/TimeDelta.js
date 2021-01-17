@@ -127,6 +127,7 @@ function TimeDelta(props) {
           <ListItem
             name="Boat"
             rating="Rating"
+            type="Type"
             correctedTime="Time Delta"
             isHeader
           />
@@ -143,6 +144,7 @@ function TimeDelta(props) {
               <ListItem
                 name={item.boat.name}
                 rating={item.boat.rating}
+                type={item.boat.type}
                 correctedTime={secondsToHms(item.diff)}
                 isSelectedItem={selectedBoat && selectedBoat === item.boat}
               />

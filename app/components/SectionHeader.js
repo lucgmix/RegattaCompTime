@@ -14,10 +14,13 @@ function SectionHeader({ title }) {
 const styles = StyleSheet.create({
   container: {},
   header: {
-    alignSelf: "center",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
     fontSize: 18,
-    marginBottom: 16,
     fontWeight: "600",
+    marginBottom: 16,
     color: defaultStyles.colors.primary,
   },
 });
