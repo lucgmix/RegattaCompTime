@@ -6,6 +6,7 @@ import color from "../config/colors";
 import Text from "../components/Text";
 
 import PhrfContext from "../context/PhrfContext";
+import SectionHeader from "../components/SectionHeader";
 
 const PHRF_FORMULA = {
   STANDARD: "standard",
@@ -26,8 +27,7 @@ function Settings(props) {
 
   return (
     <Screen style={styles.container}>
-      <Text style={styles.header}>Settings</Text>
-
+      <SectionHeader title="Settings" />
       <Text>PHRF-LO Formula</Text>
       <RadioButton.Group
         onValueChange={(value) => updatePhrfFormula(value)}
@@ -83,11 +83,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginTop: 10,
-  },
-  header: {
-    alignSelf: "center",
-    fontSize: 18,
-    marginBottom: 24,
   },
   radioText: {
     marginLeft: 20,

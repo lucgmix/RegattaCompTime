@@ -1,7 +1,10 @@
 export default {
-  primary: "#fc5c65",
-  primary500: "#fc5c6577",
-  secondary: "#4ecdc4",
+  // primary: "#fc5c65",
+  // primary500: "#fc5c6577",
+  // secondary: "#4ecdc4",
+  primary: "#4475b0", //"#24408d", //
+  primary500: "#93d9ff", //"#62adeb", //"#5899f5", //518ee3 //5ca0ff
+  secondary: "#f0c630", //"#e49624", //
   black: "#000",
   white: "#fff",
   medium: "#6e6969",

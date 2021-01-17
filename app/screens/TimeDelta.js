@@ -17,6 +17,7 @@ import colors from "../config/colors";
 import TimeInpuModal from "../components/TimeInputModal";
 
 import { Entypo } from "@expo/vector-icons";
+import SectionHeader from "../components/SectionHeader";
 
 let listItemHeight = 0;
 
@@ -82,7 +83,7 @@ function TimeDelta(props) {
 
   return (
     <Screen style={styles.container}>
-      <Text style={styles.header}>Time Delta</Text>
+      <SectionHeader title="Time Delta" />
       <View style={styles.timeInputContainer}>
         <View
           style={{
@@ -159,13 +160,6 @@ const styles = StyleSheet.create({
     paddingLeft: 4,
     paddingRight: 4,
     paddingTop: 16,
-  },
-  header: {
-    alignSelf: "center",
-    fontSize: 18,
-    marginBottom: 16,
-    fontWeight: "600",
-    color: colors.text,
   },
   timeInputContainer: {
     flexDirection: "row",
