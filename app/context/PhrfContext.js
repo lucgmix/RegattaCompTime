@@ -22,21 +22,7 @@ export function PhrfProvider({ children }) {
 }
 
 export function usePHRF() {
-  const {
-    getBoats,
-    getElapsedDiff,
-    secondsToHms,
-    isAlternatePHRF,
-    setIsAlternatePHRF,
-  } = useContext(PhrfContext);
-
-  return {
-    getBoats,
-    getElapsedDiff,
-    secondsToHms,
-    isAlternatePHRF,
-    setIsAlternatePHRF,
-  };
+  return useContext(PhrfContext);
 }
 
 export default PhrfContext;
