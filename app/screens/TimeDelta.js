@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   FlatList,
   StyleSheet,
@@ -12,7 +12,7 @@ import Text from "../components/Text";
 import Button from "../components/Button";
 import ListItem from "../components/lists/ListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
-import PhrfContext from "../context/PhrfContext";
+import PhrfContext, { usePHRF } from "../context/PhrfContext";
 import colors from "../config/colors";
 import TimeInpuModal from "../components/TimeInputModal";
 
@@ -29,12 +29,7 @@ function TimeDelta(props) {
   const [isTimeModalVisible, setIsTimeModalVisible] = useState(false);
   const resultListRef = useRef();
 
-  const {
-    getBoats,
-    getElapsedDiff,
-    secondsToHms,
-    isAlternatePHRF,
-  } = useContext(PhrfContext);
+  const { getBoats, getElapsedDiff, secondsToHms, isAlternatePHRF } = usePHRF();
 
   const handleOnSelectedBoat = (item) => {
     updateBoatList(item);

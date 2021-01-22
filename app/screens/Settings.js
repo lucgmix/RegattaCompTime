@@ -1,11 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { RadioButton } from "react-native-paper";
 import Screen from "../components/Screen";
 import color from "../config/colors";
 import Text from "../components/Text";
 
-import PhrfContext from "../context/PhrfContext";
+import { usePHRF } from "../context/PhrfContext";
 import SectionHeader from "../components/SectionHeader";
 
 const PHRF_FORMULA = {
@@ -14,7 +14,7 @@ const PHRF_FORMULA = {
 };
 
 function Settings(props) {
-  const { isAlternatePHRF, setIsAlternatePHRF } = useContext(PhrfContext);
+  const { isAlternatePHRF, setIsAlternatePHRF } = usePHRF();
   const [value, setValue] = useState(
     isAlternatePHRF ? PHRF_FORMULA.ALTERNATE : PHRF_FORMULA.STANDARD
   );
