@@ -32,6 +32,24 @@
       "rating": 126
     },
     {
+      "name": "Fantome",
+      "type": "Laser 28",
+      "sail": "165",
+      "rating": 126
+    },
+    {
+      "name": "Cavale",
+      "type": "Laser 28",
+      "sail": "211",
+      "rating": 126
+    },
+    {
+      "name": "Stella",
+      "type": "Laser 28",
+      "sail": "160",
+      "rating": 126
+    },
+    {
       "name": "Shady Lady",
       "type": "CS 33",
       "sail": "3330",

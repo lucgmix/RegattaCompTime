@@ -9,6 +9,7 @@ import {
   FirebaseProvider,
   useFirebaseContext,
 } from "./app/context/FirebaseContext";
+import { getBoatList } from "./app/api/FirebaseApi";
 //For full spash screen implementation,
 //See https://medium.com/@darshancc23/how-to-add-a-splash-screen-on-react-native-and-expo-dddfd44772f3
 
@@ -17,20 +18,20 @@ export default function App() {
   //console.log(useFirebaseContext());
   //const { boatList } = useFirebaseContext();
 
-  // if (!isReady) {
-  //   return (
-  //     <FirebaseProvider>
-  //       <AppLoading
-  //         startAsync={Promise.resolve(boatList)}
-  //         onFinish={() => setIsReady(true)}
-  //         onError={() => {
-  //           console.log("on ERROR");
-  //         }}
-  //         autoHideSplash={true}
-  //       />
-  //     </FirebaseProvider>
-  //   );
-  // }
+  if (!isReady) {
+    return (
+      <FirebaseProvider>
+        <AppLoading
+          startAsync={getBoatList}
+          onFinish={() => setIsReady(true)}
+          onError={(error) => {
+            console.log("on ERROR", error);
+          }}
+          autoHideSplash={true}
+        />
+      </FirebaseProvider>
+    );
+  }
 
   return (
     <FirebaseProvider>
@@ -42,12 +43,3 @@ export default function App() {
     </FirebaseProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
