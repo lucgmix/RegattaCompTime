@@ -84,7 +84,7 @@ export function getElapsedDiff(
     .sort((a, b) => (a.diff > b.diff ? 1 : -1));
 }
 
-export function secondsToHms(seconds, allowZero = true) {
+export function secondsToHms(seconds, allowZeroSeconds = true) {
   const isNegative = seconds < 0;
   const duration = moment.duration(Math.abs(seconds * 1000));
 
@@ -95,7 +95,7 @@ export function secondsToHms(seconds, allowZero = true) {
   const hourString = hour !== 0 ? `${hour}h ` : "";
 
   const minuteString = minute !== 0 ? `${minute}m ` : "";
-  const secondString = second !== 0 || allowZero ? `${second}s` : "";
+  const secondString = second !== 0 || allowZeroSeconds ? `${second}s` : "";
 
   const negativePrefix = isNegative ? "-" : "";
   const durationString = `${negativePrefix}${hourString}${minuteString}${secondString}`;
