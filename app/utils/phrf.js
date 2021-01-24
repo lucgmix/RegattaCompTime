@@ -1,6 +1,8 @@
 // https://phrf-lo.org/index.php/handicapping/races-analysis/time-on-time/tot-scoring/538-nsc-time-on-time-explained
 // https://phrf-lo.org/index.php/handicapping/races-analysis/time-on-time/tot-scoring
 
+import moment from "moment";
+
 //export default function phrfUtils() {
 /**
  * Returns the standard (evening racing) Time on Time factor based on the PHRF rating.
@@ -82,35 +84,23 @@ export function getElapsedDiff(
     .sort((a, b) => (a.diff > b.diff ? 1 : -1));
 }
 
-export function secondsToHms(seconds) {
-  if (!seconds) return "";
-
+export function secondsToHms(seconds, allowZero = true) {
   const isNegative = seconds < 0;
+  const duration = moment.duration(Math.abs(seconds * 1000));
 
-  let duration = Math.abs(seconds);
-  let hours = duration / 3600;
-  duration = duration % 3600;
+  const hour = duration.get("hours");
+  const minute = duration.get("minutes");
+  const second = duration.get("seconds");
 
-  let min = parseInt(duration / 60);
-  duration = duration % 60;
+  const hourString = hour !== 0 ? `${hour}h ` : "";
 
-  let sec = parseInt(duration);
-  if (sec < 10) {
-    sec = `${sec}`;
-  }
-  if (min < 10) {
-    min = `${min}`;
-  }
+  const minuteString = minute !== 0 ? `${minute}m ` : "";
+  const secondString = second !== 0 || allowZero ? `${second}s` : "";
 
-  if (parseInt(hours, 10) > 0) {
-    return isNegative
-      ? `-${parseInt(hours, 10)}h ${min}m ${sec}s`
-      : `${parseInt(hours, 10)}h ${min}m ${sec}s`;
-  } else if (min == 0) {
-    return isNegative ? `-${sec}s` : `${sec}s`;
-  } else {
-    return isNegative ? `-${min}m ${sec}s` : `${min}m ${sec}s`;
-  }
+  const negativePrefix = isNegative ? "-" : "";
+  const durationString = `${negativePrefix}${hourString}${minuteString}${secondString}`;
+
+  return durationString;
 }
 
 function printResults(isAlternate = false) {

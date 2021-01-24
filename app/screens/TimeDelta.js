@@ -12,7 +12,7 @@ import Text from "../components/Text";
 import Button from "../components/Button";
 import ListItem from "../components/lists/ListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
-import PhrfContext, { usePHRF } from "../context/PhrfContext";
+import { usePHRF } from "../context/PhrfContext";
 import colors from "../config/colors";
 import TimeInpuModal from "../components/TimeInputModal";
 
@@ -87,7 +87,9 @@ function TimeDelta(props) {
           }}
         >
           <Entypo name="stopwatch" size={24} color={colors.primary} />
-          <Text style={styles.timeDisplay}>{secondsToHms(raceDuration)}</Text>
+          <Text style={styles.timeDisplay}>
+            {secondsToHms(raceDuration, false)}
+          </Text>
         </View>
         <Button title="Set" onPress={handleSetRaceDuration}></Button>
       </View>

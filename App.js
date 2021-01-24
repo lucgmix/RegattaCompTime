@@ -17,18 +17,18 @@ export default function App() {
     return Promise.resolve(console.log("loadAppData"));
   };
 
-  if (!isReady) {
-    return (
-      <AppLoading
-        startAsync={loadAppData}
-        onFinish={() => setIsReady(true)}
-        onError={() => {
-          console.log("on ERROR");
-        }}
-        autoHideSplash={true}
-      />
-    );
-  }
+  // if (!isReady) {
+  //   return (
+  //     <AppLoading
+  //       startAsync={loadAppData}
+  //       onFinish={() => setIsReady(true)}
+  //       onError={() => {
+  //         console.log("on ERROR");
+  //       }}
+  //       autoHideSplash={true}
+  //     />
+  //   );
+  // }
 
   return (
     <PhrfProvider>
