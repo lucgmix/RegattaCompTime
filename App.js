@@ -16,20 +16,20 @@ import { getBoatList } from "./app/api/FirebaseApi";
 export default function App() {
   const [isReady, setIsReady] = useState(false);
 
-  if (!isReady) {
-    return (
-      <FirebaseProvider>
-        <AppLoading
-          startAsync={getBoatList}
-          onFinish={() => setIsReady(true)}
-          onError={(error) => {
-            console.log("on ERROR", error);
-          }}
-          autoHideSplash={true}
-        />
-      </FirebaseProvider>
-    );
-  }
+  // if (!isReady) {
+  //   return (
+  //     <FirebaseProvider>
+  //       <AppLoading
+  //         startAsync={getBoatList}
+  //         onFinish={() => setIsReady(true)}
+  //         onError={(error) => {
+  //           console.log("on ERROR", error);
+  //         }}
+  //         autoHideSplash={true}
+  //       />
+  //     </FirebaseProvider>
+  //   );
+  // }
 
   return (
     <FirebaseProvider>

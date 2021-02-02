@@ -86,11 +86,13 @@ export function getElapsedDiff(
 
 export function secondsToHms(seconds, allowZeroSeconds = true) {
   const isNegative = seconds < 0;
-  const duration = moment.duration(Math.abs(seconds * 1000));
+  let duration = moment.duration(Math.abs(seconds * 1000));
 
   const hour = duration.get("hours");
   const minute = duration.get("minutes");
   const second = duration.get("seconds");
+
+  duration = null;
 
   const hourString = hour !== 0 ? `${hour}h ` : "";
 
