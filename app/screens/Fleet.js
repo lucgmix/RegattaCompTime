@@ -18,7 +18,7 @@ import { useData } from "../context/DataContext";
 let listItemHeight = 0;
 
 function Fleet(props) {
-  const [selectedBoat, setSelectedBoat] = useState();
+  const [selectedBoat, setSelectedBoat] = useState(null);
   const [isCreateBoatModalVisible, setIsCreateBoatModalVisible] = useState(
     false
   );
@@ -53,7 +53,7 @@ function Fleet(props) {
       <View style={styles.buttonContainer}>
         <Button title="Add Boat" onPress={handleAddBoatButtonPress} />
         <Button
-          disabled={selectedBoat === null}
+          disabled={!selectedBoat}
           buttonStyle={styles.editBoatButton}
           title="Edit Boat"
           onPress={handleEditBoatButtonPress}
