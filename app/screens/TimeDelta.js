@@ -10,10 +10,10 @@ import Picker from "../components/Picker";
 import Screen from "../components/Screen";
 import Text from "../components/Text";
 import Button from "../components/Button";
-import ListItem from "../components/lists/ListItem";
+import TimeDeltaListItem from "../components/lists/TimeDeltaListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
 import { usePHRF } from "../context/PhrfContext";
-import { useFirebase } from "../context/FirebaseContext";
+import { useData } from "../context/DataContext";
 import colors from "../config/colors";
 import TimeInpuModal from "../components/TimeInputModal";
 
@@ -30,7 +30,7 @@ function TimeDelta(props) {
   const [raceDuration, setRaceDuration] = useState(3600);
   const [isTimeModalVisible, setIsTimeModalVisible] = useState(false);
   const resultListRef = useRef();
-  const { getBoatList } = useFirebase();
+  const { getBoatList } = useData();
 
   const { getElapsedDiff, secondsToHms, isAlternatePHRF } = usePHRF();
 
@@ -94,7 +94,11 @@ function TimeDelta(props) {
             {secondsToHms(raceDuration, false)}
           </Text>
         </View>
-        <Button title="Set" onPress={handleSetRaceDuration}></Button>
+        <Button
+          buttonStyle={styles.setTimeButton}
+          title="Set"
+          onPress={handleSetRaceDuration}
+        ></Button>
       </View>
       <TimeInpuModal
         isModalVisible={isTimeModalVisible}
@@ -124,7 +128,7 @@ function TimeDelta(props) {
         keyExtractor={(resultItem) => resultItem.boat.name}
         ItemSeparatorComponent={() => <ListItemSeparator />}
         ListHeaderComponent={() => (
-          <ListItem
+          <TimeDeltaListItem
             name="Boat"
             rating="Rating"
             type="Type"
@@ -141,7 +145,7 @@ function TimeDelta(props) {
                 listItemHeight = height;
               }}
             >
-              <ListItem
+              <TimeDeltaListItem
                 name={item.boat.name}
                 rating={item.boat.rating}
                 type={item.boat.type}
@@ -158,7 +162,6 @@ function TimeDelta(props) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
     paddingLeft: 4,
     paddingRight: 4,
     paddingTop: 16,
@@ -181,6 +184,9 @@ const styles = StyleSheet.create({
     marginLeft: 12,
     paddingTop: 2,
     alignItems: "center",
+  },
+  setTimeButton: {
+    marginRight: 8,
   },
 });
 

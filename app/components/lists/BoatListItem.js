@@ -3,11 +3,11 @@ import { View, StyleSheet } from "react-native";
 import Text from "../Text";
 import defaultStyles from "../../config/styles";
 
-function ListItem({
+function BoatListItem({
   name,
   type,
-  rating,
-  correctedTime,
+  rating_fs,
+  rating_nfs,
   isSelectedItem,
   isHeader,
 }) {
@@ -31,11 +31,17 @@ function ListItem({
       >
         {type}
       </Text>
-      <Text style={[styles.rating, isHeader && headerStyles.label]}>
-        {rating}
+      <Text
+        numberOfLines={1}
+        style={[styles.rating_fs, isHeader && headerStyles.label]}
+      >
+        {rating_fs}
       </Text>
-      <Text style={[styles.time, isHeader && headerStyles.label]}>
-        {correctedTime}
+      <Text
+        numberOfLines={1}
+        style={[styles.rating_nfs, isHeader && headerStyles.label]}
+      >
+        {rating_nfs}
       </Text>
     </View>
   );
@@ -66,27 +72,27 @@ const styles = StyleSheet.create({
     padding: 14,
   },
   name: {
-    flex: 0.5,
+    flex: 0.4,
     flexDirection: "row",
     fontSize: 14,
   },
   type: {
-    flex: 0.3,
+    flex: 0.25,
     flexDirection: "row",
     fontSize: 14,
   },
-  rating: {
-    flex: 0.2,
+  rating_fs: {
+    flex: 0.3,
     flexDirection: "row",
     textAlign: "right",
     fontSize: 14,
   },
-  time: {
-    flex: 0.4,
+  rating_nfs: {
+    flex: 0.3,
     flexDirection: "row",
     textAlign: "right",
     fontSize: 14,
   },
 });
 
-export default ListItem;
+export default BoatListItem;
