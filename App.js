@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useContext } from "react";
+import React, { useMemo, useState, useContext, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { PhrfProvider } from "./app/context/PhrfContext";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
@@ -9,6 +9,8 @@ import { DataProvider, useDataContext } from "./app/context/DataContext";
 import { getBoatList } from "./app/api/FirebaseApi";
 //For full spash screen implementation,
 //See https://medium.com/@darshancc23/how-to-add-a-splash-screen-on-react-native-and-expo-dddfd44772f3
+
+import storage from "./app/utils/storage";
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
@@ -27,6 +29,14 @@ export default function App() {
   //     </FirebaseProvider>
   //   );
   // }
+
+  // const clear = async () => {
+  //   await storage.clearAll();
+  // };
+
+  // useEffect(() => {
+  //   clear();
+  // }, []);
 
   return (
     <DataProvider>

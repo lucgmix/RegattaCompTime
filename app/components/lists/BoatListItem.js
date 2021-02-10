@@ -6,8 +6,9 @@ import defaultStyles from "../../config/styles";
 function BoatListItem({
   name,
   type,
-  rating_fs,
-  rating_nfs,
+  ratingFS,
+  ratingNFS,
+  defaultRating,
   isSelectedItem,
   isHeader,
 }) {
@@ -33,15 +34,21 @@ function BoatListItem({
       </Text>
       <Text
         numberOfLines={1}
-        style={[styles.rating_fs, isHeader && headerStyles.label]}
+        style={[styles.rating, isHeader && headerStyles.label]}
       >
-        {rating_fs}
+        {ratingFS}
       </Text>
       <Text
         numberOfLines={1}
-        style={[styles.rating_nfs, isHeader && headerStyles.label]}
+        style={[styles.rating, isHeader && headerStyles.label]}
       >
-        {rating_nfs}
+        {ratingNFS}
+      </Text>
+      <Text
+        numberOfLines={1}
+        style={[styles.default_rating, isHeader && headerStyles.label]}
+      >
+        {defaultRating}
       </Text>
     </View>
   );
@@ -60,7 +67,7 @@ const headerStyles = StyleSheet.create({
   label: {
     color: "white",
     fontWeight: "600",
-    fontSize: 16,
+    fontSize: 15,
   },
 });
 
@@ -81,13 +88,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     fontSize: 14,
   },
-  rating_fs: {
+  rating: {
     flex: 0.3,
     flexDirection: "row",
     textAlign: "right",
     fontSize: 14,
   },
-  rating_nfs: {
+  default_rating: {
     flex: 0.3,
     flexDirection: "row",
     textAlign: "right",

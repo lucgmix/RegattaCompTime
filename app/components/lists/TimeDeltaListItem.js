@@ -4,8 +4,8 @@ import Text from "../Text";
 import defaultStyles from "../../config/styles";
 
 function TimeDeltaListItem({
-  name,
-  type,
+  boatName,
+  boatType,
   rating,
   correctedTime,
   isSelectedItem,
@@ -23,13 +23,13 @@ function TimeDeltaListItem({
         numberOfLines={1}
         style={[styles.name, isHeader && headerStyles.label]}
       >
-        {name}
+        {boatName}
       </Text>
       <Text
         numberOfLines={1}
         style={[styles.type, isHeader && headerStyles.label]}
       >
-        {type}
+        {boatType}
       </Text>
       <Text style={[styles.rating, isHeader && headerStyles.label]}>
         {rating}

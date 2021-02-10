@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   FlatList,
   Modal,
@@ -17,18 +17,20 @@ import { useData } from "../context/DataContext";
 
 let listItemHeight = 0;
 
+function arrayRemove(arr, value) {
+  return arr.filter((boat) => boat.id != value.id);
+}
+
 function Fleet(props) {
   const [selectedBoat, setSelectedBoat] = useState(null);
   const [isCreateBoatModalVisible, setIsCreateBoatModalVisible] = useState(
     false
   );
-  const [boatList, setBoatList] = useState([]);
-  const { getBoatList } = useData();
+  const { boatList, storeBoatList } = useData();
   const boatListRef = useRef();
 
   const handleBoatItemClicked = (item) => {
     setSelectedBoat(item);
-    console.log("handleBoatItemClicked", item);
   };
 
   const handleAddBoatButtonPress = () => {
@@ -40,12 +42,10 @@ function Fleet(props) {
     setIsCreateBoatModalVisible(true);
   };
 
-  useEffect(() => {
-    getBoatList().then((boatList) => {
-      console.log(boatList);
-      setBoatList(boatList);
-    });
-  }, []);
+  const handleDeleteBoatButtonPress = () => {
+    const removedBoatArray = arrayRemove(boatList, selectedBoat);
+    storeBoatList(removedBoatArray).then(setSelectedBoat(null));
+  };
 
   return (
     <Screen style={styles.container}>
@@ -58,6 +58,12 @@ function Fleet(props) {
           title="Edit Boat"
           onPress={handleEditBoatButtonPress}
         />
+        <Button
+          disabled={!selectedBoat}
+          buttonStyle={styles.editBoatButton}
+          title="Delete Boat"
+          onPress={handleDeleteBoatButtonPress}
+        />
       </View>
       <FlatList
         ref={boatListRef}
@@ -69,14 +75,15 @@ function Fleet(props) {
             index,
           };
         }}
-        keyExtractor={(boatItem) => boatItem.name}
+        keyExtractor={(boatItem) => boatItem.id}
         ItemSeparatorComponent={() => <ListItemSeparator />}
         ListHeaderComponent={() => (
           <BoatListItem
             name="Boat"
             type="Type"
-            rating_fs="Rating FS"
-            rating_nfs="Rating NFS"
+            ratingFS="HR-FS"
+            ratingNFS="HR-NFS"
+            defaultRating="FS/NFS"
             isHeader
           />
         )}
@@ -90,10 +97,12 @@ function Fleet(props) {
               }}
             >
               <BoatListItem
-                name={item.name}
-                rating={item.rating}
-                type={item.type}
-                isSelectedItem={selectedBoat && selectedBoat === item}
+                name={item.boatName}
+                ratingFS={item.ratingFS}
+                ratingNFS={item.ratingNFS}
+                type={item.boatType}
+                defaultRating={item.defaultRating}
+                isSelectedItem={selectedBoat && selectedBoat.id === item.id}
               />
             </View>
           </TouchableWithoutFeedback>
@@ -122,7 +131,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginBottom: 8,
     flexDirection: "row",
-    justifyContent: "flex-start",
+    justifyContent: "space-around",
     alignItems: "center",
   },
   editBoatButton: {

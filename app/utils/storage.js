@@ -5,8 +5,10 @@ const prefix = "cache";
 const store = async (key, value) => {
   try {
     await AsyncStorage.setItem(key, JSON.stringify(value));
+    return "success";
   } catch (error) {
-    console.log(error);
+    //console.log(error);
+    return "error";
   }
 };
 
@@ -19,7 +21,7 @@ const get = async (key) => {
 
     return item;
   } catch (error) {
-    console.log(error);
+    //console.log(error);
   }
 };
 
@@ -48,7 +50,7 @@ const clearAll = async () => {
     // clear error
   }
 
-  console.log("Done.");
+  //console.log("Done.");
 };
 
 export default {

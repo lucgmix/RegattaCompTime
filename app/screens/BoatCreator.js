@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal, View, StyleSheet } from "react-native";
+import { Modal, View, StyleSheet, Switch } from "react-native";
 import Screen from "../components/Screen";
 import SectionHeader from "../components/SectionHeader";
 import Button from "../components/Button";
@@ -13,47 +13,89 @@ import * as Yup from "yup";
 
 import storage from "../utils/storage";
 import { getBoats } from "../utils/phrf";
+import Text from "../components/Text";
+import { useData } from "../context/DataContext";
+
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
+
+import defaultStyles from "../config/styles";
+
+// Object {
+//     "boatName": "Stella",
+//     "boatType": "Laser 28",
+//     "defaultRating": "FS",
+//     "id": "8050f1e3-03a3-41f3-9cb2-1b4ceb559f7f",
+//     "ratingFS": "126",
+//     "ratingNFS": "141",
+//     "sailNumber": "160",
+//   },
+
+const FIELD_LABEL = {
+  BOAT_NAME: "Boat Name",
+  BOAT_TYPE: "Boat Type",
+  SAIL_NUMBER: "Sail Number",
+  FS: "Flying Spinnaker Handicap Rating",
+  NFS: "Non Flying Spinnaker Handicap Rating",
+};
+
+const DEFAULT_RATING = {
+  FS: "FS",
+  NFS: "NSF",
+};
 
 const validationSchema = Yup.object().shape({
-  boatName: Yup.string().required().min(1).label("Boat Name"),
-  boatType: Yup.string().min(1).label("Boat Type"),
-  sailNumber: Yup.string().min(1).label("Sail Number"),
-  ratingFS: Yup.number().required().min(1).label("Rating Flying Spinnaker"),
-  ratingNFS: Yup.number()
+  boatName: Yup.string()
+    .typeError("Boat name is required")
     .required()
     .min(1)
-    .label("Rating Non Flying Spinnaker"),
+    .label(FIELD_LABEL.BOAT_NAME),
+  //   boatType: Yup.string().min(1).label("Boat Type"),
+  sailNumber: Yup.string().min(1).label(FIELD_LABEL.SAIL_NUMBER),
+  ratingFS: Yup.number()
+    .typeError("Non Flying Spinnaker Rating is required")
+    .notRequired()
+    .label(FIELD_LABEL.FS),
+  ratingNFS: Yup.number()
+    .notRequired()
+    .label(FIELD_LABEL.NFS)
+    .when("ratingFS", {
+      is: (val) => val === NaN,
+      then: Yup.number()
+        .required("FS or NFS Handicap Rating required")
+        .typeError("Flying Spinnaker Rating is required"),
+      otherwise: Yup.number().notRequired(),
+    }),
 });
 
-function BoatCreator({ selectedBoat, isModalVisible, onModalButtonPress }) {
-  const getStorageContent = async () => {
-    const boats = getBoats();
-    const storedValue = await storage.get("@boat_list");
-    //console.log("getStorageContent", storedValue);
+function arrayRemove(arr, value) {
+  return arr.filter((boat) => boat.id != value.id);
+}
+
+function BoatCreator({ selectedBoat, onModalButtonPress }) {
+  //console.log("BoatCreator", selectedBoat);
+  const { boatList, storeBoatList } = useData();
+  const [editableBoat, setEditableBoat] = useState(selectedBoat);
+  const ratingSelectChoice =
+    (editableBoat && editableBoat.defaultRating) || DEFAULT_RATING.FS;
+  const [defaultRating, setDefaultRating] = useState(ratingSelectChoice);
+
+  const toggleDefaultRatingSwitch = () => {
+    if (defaultRating === DEFAULT_RATING.FS) {
+      setDefaultRating(DEFAULT_RATING.NFS);
+    } else if (defaultRating === DEFAULT_RATING.NFS) {
+      setDefaultRating(DEFAULT_RATING.FS);
+    }
   };
 
-  const storeData = async () => {
-    //await storage.clearAll();
-    const boats = getBoats();
-    const storedValue = await storage.store("@boat_list", boats);
+  const clearAllData = async (boat) => {
+    await storage.clearAll();
+    const storedValue = await storage.store("@boat_list", boat);
     //console.log("storeData", storedValue);
   };
 
-  const getAllStorage = async () => {
-    const storedValue = await storage.listStorageData();
-    //console.log("getAllStorage", storedValue);
-  };
-
-  useEffect(() => {
-    // storeData();
-    // getStorageContent();
-    getAllStorage();
-
-    //getStorageContent();
-    //storage.listStorageData().then((value) => console.log(value));
-  }, []);
-
-  const handleSubmit = async (listing, { resetForm }) => {
+  const handleSubmit = async (boat, { resetForm }) => {
+    console.log("handleSubmit called", boat);
     // setProgress(0);
     // setUploadVisible(true);
     // const result = await listingsApi.addListing(
@@ -64,14 +106,39 @@ function BoatCreator({ selectedBoat, isModalVisible, onModalButtonPress }) {
     //   setUploadVisible(false);
     //   return alert("Could not save the listing");
     // }
-    console.log("handleSubmit");
-    resetForm();
+
+    storeData(boat, resetForm);
   };
 
-  //const { name, type, rating_fs, rating_nfs } = selectedBoat && selectedBoat;
-  console.log("SELECTED BOAT", selectedBoat);
+  const storeData = async (boat, resetForm) => {
+    let updatedArray = boatList || [];
+    boat.defaultRating = defaultRating;
+    if (!editableBoat) {
+      // New boat
+      boat.id = uuidv4();
+    } else {
+      //If in edit mode, remove item and re-add the updated one.
+      updatedArray = arrayRemove(boatList, editableBoat);
+      setEditableBoat(boat);
+    }
+    updatedArray.push(boat);
+    storeBoatList(populateRating(updatedArray));
+  };
 
-  const actionButtonLabel = selectedBoat ? " Update Boat" : "Create Boat";
+  function populateRating(boatArray) {
+    if (Array.isArray(boatArray)) {
+      return boatArray.map((item) => {
+        if (item.defaultRating === DEFAULT_RATING.FS) {
+          item.rating = Number(item.ratingFS);
+        } else {
+          item.rating = Number(item.ratingNFS);
+        }
+        return item;
+      });
+    }
+  }
+
+  const actionButtonLabel = editableBoat ? " Update" : "Save";
 
   return (
     <Screen style={styles.container}>
@@ -81,37 +148,69 @@ function BoatCreator({ selectedBoat, isModalVisible, onModalButtonPress }) {
         progress={progress}
         visible={uploadVisible}
       /> */}
+
       <Form
         initialValues={{
-          boatName: selectedBoat && selectedBoat.name,
-          boatType: selectedBoat && selectedBoat.type,
-          sailNumber: "",
-          ratingFS: selectedBoat && selectedBoat.rating_fs,
-          ratingNFS: selectedBoat && selectedBoat.rating_nfs,
+          boatName: (editableBoat && editableBoat.boatName) || "",
+          boatType: (editableBoat && editableBoat.boatType) || "",
+          sailNumber: (editableBoat && editableBoat.sailNumber) || "",
+          ratingFS: (editableBoat && editableBoat.ratingFS) || "",
+          ratingNFS: (editableBoat && editableBoat.ratingNFS) || "",
+          defaultRating: editableBoat && editableBoat.defaultRating,
         }}
-        onSubmit={handleSubmit}
         validationSchema={validationSchema}
+        onSubmit={handleSubmit}
       >
         {/* <FormImagePicker name="images" /> */}
-        <FormField maxLength={255} name="boatName" placeholder="Boat Name" />
-        <FormField maxLength={255} name="boatType" placeholder="Boat Type" />
         <FormField
           maxLength={255}
+          label="Boat Name"
+          name="boatName"
+          placeholder={FIELD_LABEL.BOAT_NAME}
+        />
+        <FormField
+          maxLength={255}
+          label="Boat Type"
+          name="boatType"
+          placeholder={FIELD_LABEL.BOAT_TYPE}
+        />
+        <FormField
+          maxLength={255}
+          label="Sail Number"
           name="sailNumber"
-          placeholder="Sail Number"
+          placeholder={FIELD_LABEL.SAIL_NUMBER}
         />
         <FormField
           keyboardType="numeric"
           maxLength={3}
+          label="Handicap Rating FS"
           name="ratingFS"
-          placeholder="Rating - Flying Spinnaker"
+          placeholder={FIELD_LABEL.FS}
         />
         <FormField
           keyboardType="numeric"
           maxLength={3}
+          label="Handicap Rating NFS"
           name="ratingNFS"
-          placeholder="Rating - Non Flying Spinnaker"
+          placeholder={FIELD_LABEL.NFS}
         />
+        <View style={styles.defaultRating}>
+          <Text style={styles.defaultRatingText}>Default Rating</Text>
+          <View style={styles.defaultRatingSwicthText}>
+            <Switch
+              name="defaultRating"
+              trackColor={{
+                false: defaultStyles.colors.secondary,
+                true: defaultStyles.colors.primary500,
+              }}
+              thumbColor={defaultStyles.colors.primary}
+              ios_backgroundColor={defaultStyles.colors.mediumlight}
+              onValueChange={toggleDefaultRatingSwitch}
+              value={defaultRating === DEFAULT_RATING.NFS}
+            />
+            <Text style={styles.defaultRatingValue}>{defaultRating}</Text>
+          </View>
+        </View>
         {/* <Picker
           items={categories}
           name="category"
@@ -129,6 +228,11 @@ function BoatCreator({ selectedBoat, isModalVisible, onModalButtonPress }) {
           />
         </View>
       </Form>
+      <Button
+        buttonStyle={{ marginTop: 40 }}
+        title="Clear All"
+        onPress={clearAllData}
+      />
     </Screen>
   );
 }
@@ -142,13 +246,26 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   buttonContainer: {
-    marginTop: 24,
+    marginTop: 32,
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
   },
   cancelButton: {
     marginLeft: 8,
+  },
+  defaultRating: {
+    marginTop: 8,
+  },
+  defaultRatingText: {
+    marginBottom: 4,
+  },
+  defaultRatingSwicthText: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  defaultRatingValue: {
+    marginLeft: 12,
   },
 });
 

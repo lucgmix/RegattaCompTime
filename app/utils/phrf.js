@@ -69,6 +69,7 @@ export function getElapsedDiff(
     referencePHRF,
     isAlternate
   );
+
   return results
     .map((result) => {
       const correctedTime = getCorrectedTime(
@@ -76,6 +77,9 @@ export function getElapsedDiff(
         result.boat.rating,
         isAlternate
       );
+      console.log("results", results);
+      console.log("referenceCorrectedTime", referenceCorrectedTime);
+      console.log("correctedTime", correctedTime);
       result.diff = referenceCorrectedTime - correctedTime;
       return result;
     })
@@ -83,7 +87,7 @@ export function getElapsedDiff(
 }
 
 export function secondsToHms(seconds) {
-  if (!seconds) return "";
+  //if (!seconds) return "";
 
   const isNegative = seconds < 0;
 
@@ -122,6 +126,14 @@ function printResults(isAlternate = false) {
 
 export function getBoats() {
   return [
+    // {
+    //   boatName: "Colibri",
+    //   boatType: "Laser 28",
+    //   defaultRating: "FS",
+    //   ratingFS: "126",
+    //   ratingNFS: "141",
+    //   sailNumber: "224",
+    // },
     {
       name: "Busted Flush",
       type: "B 32",

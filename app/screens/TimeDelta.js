@@ -30,7 +30,7 @@ function TimeDelta(props) {
   const [raceDuration, setRaceDuration] = useState(3600);
   const [isTimeModalVisible, setIsTimeModalVisible] = useState(false);
   const resultListRef = useRef();
-  const { getBoatList } = useData();
+  const { boatList } = useData();
 
   const { getElapsedDiff, secondsToHms, isAlternatePHRF } = usePHRF();
 
@@ -44,24 +44,31 @@ function TimeDelta(props) {
 
   const updateBoatList = (item) => {
     setSelectedBoat(item);
+    console.log("updateBoatList", boatResultsList);
     setBoatResultsList(
       getElapsedDiff(boatSelectList, item.rating, raceDuration, isAlternatePHRF)
     );
   };
 
   useEffect(() => {
+    // console.log("******* TIMEDELATA useEffect selectedBoat", selectedBoat);
+    // console.log("******* TIMEDELATA useEffect boatList", boatList);
+    // console.log("******* TIMEDELATA useEffect raceDuration", raceDuration);
     selectedBoat && updateBoatList(selectedBoat);
-  }, [isAlternatePHRF, raceDuration]);
+  }, [isAlternatePHRF, raceDuration, boatList]);
 
+  // Update dropdown otpions when boatList changes
   useEffect(() => {
-    getBoatList().then((boatList) => setBoatSelectList(boatList));
-  }, []);
+    console.log("TIME DELTA", boatList);
+    boatList && setBoatSelectList(boatList);
+  }, [boatList]);
 
+  //
   useEffect(() => {
     if (!selectedBoat) return;
 
     const indexOfSelectedBoat = boatResultsList.findIndex(
-      (item) => item.boat.name === selectedBoat.name
+      (item) => item.boat.id === selectedBoat.id
     );
 
     resultListRef &&
@@ -69,7 +76,7 @@ function TimeDelta(props) {
         animated: true,
         index: indexOfSelectedBoat,
       });
-  }, [selectedBoat]);
+  }, [selectedBoat, boatList]);
 
   const onRaceDurationChanged = (time) => {
     setRaceDuration(time);
@@ -125,13 +132,13 @@ function TimeDelta(props) {
             index,
           };
         }}
-        keyExtractor={(resultItem) => resultItem.boat.name}
+        keyExtractor={(resultItem) => resultItem.boat.id}
         ItemSeparatorComponent={() => <ListItemSeparator />}
         ListHeaderComponent={() => (
           <TimeDeltaListItem
-            name="Boat"
+            boatName="Boat"
             rating="Rating"
-            type="Type"
+            boatType="Type"
             correctedTime="Time Delta"
             isHeader
           />
@@ -146,11 +153,13 @@ function TimeDelta(props) {
               }}
             >
               <TimeDeltaListItem
-                name={item.boat.name}
+                boatName={item.boat.boatName}
                 rating={item.boat.rating}
-                type={item.boat.type}
+                boatType={item.boat.boatType}
                 correctedTime={secondsToHms(item.diff)}
-                isSelectedItem={selectedBoat && selectedBoat === item.boat}
+                isSelectedItem={
+                  selectedBoat && selectedBoat.id === item.boat.id
+                }
               />
             </View>
           </TouchableWithoutFeedback>

@@ -102,7 +102,7 @@ function TimeDigits({ timeValue, timeUnit, size = 8, onChange }) {
             onChangeText={(text) => handleOnTextChange(text)}
             selectTextOnFocus={true}
             contextMenuHidden={true}
-            selectionColor={defaultStyles.colors.secondary}
+            selectionColor={defaultStyles.colors.primary500}
           />
         </View>
       </View>
