@@ -129,11 +129,12 @@ function BoatCreator({ selectedBoat, onModalButtonPress }) {
     }
   }
 
+  const headerTitle = editableBoat ? " Update Boat" : "Add Boat";
   const actionButtonLabel = editableBoat ? " Update" : "Save";
 
   return (
     <Screen style={styles.container}>
-      <SectionHeader title="Boat Creator" />
+      <SectionHeader title={headerTitle} />
       {/* <UploadScreen
         onDone={() => setUploadVisible(false)}
         progress={progress}
