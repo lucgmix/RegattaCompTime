@@ -22,7 +22,7 @@ const Tab = createBottomTabNavigator();
 const AppNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName={SECTIONS.TIMEDELTA.name}
+      initialRouteName={SECTIONS.FLEET.name}
       tabBarOptions={{
         showLabel: true,
         showIcon: true,
@@ -32,26 +32,6 @@ const AppNavigator = () => {
         },
       }}
     >
-      <Tab.Screen
-        name={SECTIONS.RACE.name}
-        component={Race}
-        options={{
-          tabBarIcon: ({ size, color }) => (
-            <Feather name="flag" size={size} color={color} />
-          ),
-          title: SECTIONS.RACE.title,
-        }}
-      />
-      <Tab.Screen
-        name={SECTIONS.TIMEDELTA.name}
-        component={TimeDelta}
-        options={{
-          tabBarIcon: ({ size, color }) => (
-            <Entypo name="stopwatch" size={size} color={color} />
-          ),
-          title: SECTIONS.TIMEDELTA.title,
-        }}
-      />
       <Tab.Screen
         name={SECTIONS.FLEET.name}
         component={Fleet}
@@ -66,6 +46,27 @@ const AppNavigator = () => {
           title: SECTIONS.FLEET.title,
         }}
       />
+      <Tab.Screen
+        name={SECTIONS.TIMEDELTA.name}
+        component={TimeDelta}
+        options={{
+          tabBarIcon: ({ size, color }) => (
+            <Entypo name="stopwatch" size={size} color={color} />
+          ),
+          title: SECTIONS.TIMEDELTA.title,
+        }}
+      />
+      <Tab.Screen
+        name={SECTIONS.RACE.name}
+        component={Race}
+        options={{
+          tabBarIcon: ({ size, color }) => (
+            <Feather name="flag" size={size} color={color} />
+          ),
+          title: SECTIONS.RACE.title,
+        }}
+      />
+
       <Tab.Screen
         name={SECTIONS.SETTINGS.name}
         component={Settings}

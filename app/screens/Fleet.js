@@ -91,8 +91,8 @@ function Fleet(props) {
           <BoatListItem
             name="Boat"
             type="Type"
-            ratingFS="HR-FS"
-            ratingNFS="HR-NFS"
+            ratingFS="FS"
+            ratingNFS="NFS"
             defaultRating="FS/NFS"
             isHeader
           />

@@ -77,9 +77,6 @@ export function getElapsedDiff(
         result.boat.rating,
         isAlternate
       );
-      console.log("results", results);
-      console.log("referenceCorrectedTime", referenceCorrectedTime);
-      console.log("correctedTime", correctedTime);
       result.diff = referenceCorrectedTime - correctedTime;
       return result;
     })

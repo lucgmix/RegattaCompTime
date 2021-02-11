@@ -28,16 +28,10 @@ const get = async (key) => {
 const listStorageData = async () => {
   try {
     const keys = await AsyncStorage.getAllKeys();
-    //console.log("KEYS", keys);
-
     const result = await AsyncStorage.multiGet(keys);
-    console.log("RESULT", result);
-
     return result.map((req) => {
-      //console.log("PARSING", JSON.parse(req));
       return req;
-    }); //.forEach(console.log);
-    //return JSON.parse(result);
+    });
   } catch (error) {
     console.error(error);
   }
@@ -49,8 +43,6 @@ const clearAll = async () => {
   } catch (e) {
     // clear error
   }
-
-  //console.log("Done.");
 };
 
 export default {

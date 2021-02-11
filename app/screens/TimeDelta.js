@@ -50,11 +50,16 @@ function TimeDelta(props) {
   };
 
   useEffect(() => {
+    console.log("FIRST");
+    console.log("selectedBoat", selectedBoat);
     selectedBoat && updateBoatList(selectedBoat);
+
+    console.log("boatList", boatList);
   }, [isAlternatePHRF, raceDuration, boatList]);
 
   // Update dropdown otpions when boatList changes
   useEffect(() => {
+    console.log("SECOND");
     if (boatList) {
       const sortedBoats = Array.from(boatList);
       setBoatSelectList(
@@ -65,6 +70,7 @@ function TimeDelta(props) {
 
   //
   useEffect(() => {
+    console.log("THIRD");
     if (!selectedBoat) return;
 
     const indexOfSelectedBoat = boatResultsList.findIndex(

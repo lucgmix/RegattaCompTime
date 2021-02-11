@@ -63,7 +63,6 @@ function arrayRemove(arr, value) {
 }
 
 function BoatCreator({ selectedBoat, onModalButtonPress }) {
-  console.log("BoatCreator", selectedBoat);
   const { boatList, storeBoatList } = useData();
   const [editableBoat, setEditableBoat] = useState(selectedBoat);
   const ratingSelectChoice =
