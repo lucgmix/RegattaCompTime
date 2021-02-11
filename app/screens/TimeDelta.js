@@ -44,23 +44,23 @@ function TimeDelta(props) {
 
   const updateBoatList = (item) => {
     setSelectedBoat(item);
-    console.log("updateBoatList", boatResultsList);
     setBoatResultsList(
       getElapsedDiff(boatSelectList, item.rating, raceDuration, isAlternatePHRF)
     );
   };
 
   useEffect(() => {
-    // console.log("******* TIMEDELATA useEffect selectedBoat", selectedBoat);
-    // console.log("******* TIMEDELATA useEffect boatList", boatList);
-    // console.log("******* TIMEDELATA useEffect raceDuration", raceDuration);
     selectedBoat && updateBoatList(selectedBoat);
   }, [isAlternatePHRF, raceDuration, boatList]);
 
   // Update dropdown otpions when boatList changes
   useEffect(() => {
-    console.log("TIME DELTA", boatList);
-    boatList && setBoatSelectList(boatList);
+    if (boatList) {
+      const sortedBoats = Array.from(boatList);
+      setBoatSelectList(
+        sortedBoats.sort((a, b) => (a.boatName > b.boatName ? 1 : -1))
+      );
+    }
   }, [boatList]);
 
   //
@@ -72,6 +72,7 @@ function TimeDelta(props) {
     );
 
     resultListRef &&
+      indexOfSelectedBoat > -1 &&
       resultListRef.current.scrollToIndex({
         animated: true,
         index: indexOfSelectedBoat,
@@ -132,7 +133,9 @@ function TimeDelta(props) {
             index,
           };
         }}
-        keyExtractor={(resultItem) => resultItem.boat.id}
+        keyExtractor={(resultItem) => {
+          return resultItem.boat.id;
+        }}
         ItemSeparatorComponent={() => <ListItemSeparator />}
         ListHeaderComponent={() => (
           <TimeDeltaListItem

@@ -126,13 +126,15 @@ function printResults(isAlternate = false) {
 
 export function getBoats() {
   return [
-    // {
-    //   boatName: "Colibri",
-    //   boatType: "Laser 28",
-    //   defaultRating: "FS",
-    //   ratingFS: "126",
-    //   ratingNFS: "141",
-    //   sailNumber: "224",
+    // Object {
+    //   "boatName": "Colibri",
+    //   "boatType": "Laser 28",
+    //   "defaultRating": "FS",
+    //   "id": "b7402591-4fcb-4aac-bcf0-bdd8b08f9fbd",
+    //   "rating": 126,
+    //   "ratingFS": "126",
+    //   "ratingNFS": "141",
+    //   "sailNumber": "224",
     // },
     {
       name: "Busted Flush",

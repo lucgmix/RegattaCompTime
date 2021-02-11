@@ -2,11 +2,6 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 //import { getBoatList } from "../api/FirebaseApi";
 import storage from "../utils/storage";
 
-const RATING = {
-  FS: "FS",
-  NFS: "NFS",
-};
-
 const DataContext = createContext();
 
 export function DataProvider({ children }) {
@@ -18,11 +13,17 @@ export function DataProvider({ children }) {
   };
 
   const storeBoatList = (value) => {
-    return storage.store("@boat_list", value).then((response) => {
-      if (value && response === "success") {
-        setBoatList(value);
-      }
-    });
+    return storage
+      .store("@boat_list", value)
+      .then((response) => {
+        if (value && response === "success") {
+          setBoatList(value);
+          return { ok: true };
+        }
+      })
+      .catch((error) => {
+        return { ok: false, error };
+      });
   };
 
   useEffect(() => {
@@ -35,19 +36,6 @@ export function DataProvider({ children }) {
     </DataContext.Provider>
   );
 }
-
-// function populateRating(boatArray) {
-//   if (Array.isArray(boatArray)) {
-//     return boatArray.map((item) => {
-//       if (item.defaultRating === RATING.FS) {
-//         item.rating = item.ratingFS;
-//       } else {
-//         item.rating = item.ratingNFS;
-//       }
-//       return item;
-//     });
-//   }
-// }
 
 export function useData() {
   return useContext(DataContext);

@@ -21,7 +21,6 @@ function getFirebase() {
 }
 
 export function getBoatList() {
-  console.log("getBoatList CALLED");
   return new Promise((resolve, reject) => {
     getFirebase()
       .database()

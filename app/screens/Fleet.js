@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   FlatList,
   Modal,
@@ -26,6 +26,7 @@ function Fleet(props) {
   const [isCreateBoatModalVisible, setIsCreateBoatModalVisible] = useState(
     false
   );
+  const [viewBoatList, setViewBoatList] = useState([]);
   const { boatList, storeBoatList } = useData();
   const boatListRef = useRef();
 
@@ -47,6 +48,13 @@ function Fleet(props) {
     storeBoatList(removedBoatArray).then(setSelectedBoat(null));
   };
 
+  useEffect(() => {
+    const sortedBoats = Array.from(boatList).sort((a, b) =>
+      a.boatType > b.boatType ? 1 : -1
+    );
+    setViewBoatList(sortedBoats);
+  }, [boatList]);
+
   return (
     <Screen style={styles.container}>
       <SectionHeader title="Fleet" />
@@ -67,7 +75,7 @@ function Fleet(props) {
       </View>
       <FlatList
         ref={boatListRef}
-        data={boatList}
+        data={viewBoatList}
         getItemLayout={(_, index) => {
           return {
             length: listItemHeight,
@@ -75,7 +83,9 @@ function Fleet(props) {
             index,
           };
         }}
-        keyExtractor={(boatItem) => boatItem.id}
+        keyExtractor={(boatItem) => {
+          return boatItem.id;
+        }}
         ItemSeparatorComponent={() => <ListItemSeparator />}
         ListHeaderComponent={() => (
           <BoatListItem
@@ -131,7 +141,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginBottom: 8,
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignItems: "center",
   },
   editBoatButton: {

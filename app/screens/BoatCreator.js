@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Modal, View, StyleSheet, Switch } from "react-native";
 import Screen from "../components/Screen";
 import SectionHeader from "../components/SectionHeader";
@@ -20,16 +20,6 @@ import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 
 import defaultStyles from "../config/styles";
-
-// Object {
-//     "boatName": "Stella",
-//     "boatType": "Laser 28",
-//     "defaultRating": "FS",
-//     "id": "8050f1e3-03a3-41f3-9cb2-1b4ceb559f7f",
-//     "ratingFS": "126",
-//     "ratingNFS": "141",
-//     "sailNumber": "160",
-//   },
 
 const FIELD_LABEL = {
   BOAT_NAME: "Boat Name",
@@ -73,7 +63,7 @@ function arrayRemove(arr, value) {
 }
 
 function BoatCreator({ selectedBoat, onModalButtonPress }) {
-  //console.log("BoatCreator", selectedBoat);
+  console.log("BoatCreator", selectedBoat);
   const { boatList, storeBoatList } = useData();
   const [editableBoat, setEditableBoat] = useState(selectedBoat);
   const ratingSelectChoice =
@@ -86,12 +76,6 @@ function BoatCreator({ selectedBoat, onModalButtonPress }) {
     } else if (defaultRating === DEFAULT_RATING.NFS) {
       setDefaultRating(DEFAULT_RATING.FS);
     }
-  };
-
-  const clearAllData = async (boat) => {
-    await storage.clearAll();
-    const storedValue = await storage.store("@boat_list", boat);
-    //console.log("storeData", storedValue);
   };
 
   const handleSubmit = async (boat, { resetForm }) => {
@@ -113,16 +97,24 @@ function BoatCreator({ selectedBoat, onModalButtonPress }) {
   const storeData = async (boat, resetForm) => {
     let updatedArray = boatList || [];
     boat.defaultRating = defaultRating;
-    if (!editableBoat) {
-      // New boat
+    if (!boat.id) {
       boat.id = uuidv4();
-    } else {
+    }
+
+    if (editableBoat) {
       //If in edit mode, remove item and re-add the updated one.
       updatedArray = arrayRemove(boatList, editableBoat);
       setEditableBoat(boat);
     }
     updatedArray.push(boat);
-    storeBoatList(populateRating(updatedArray));
+    storeBoatList(populateRating(updatedArray)).then((result) => {
+      if (result.ok) {
+        resetForm();
+        onModalButtonPress();
+      } else {
+        console.log(result.error);
+      }
+    });
   };
 
   function populateRating(boatArray) {
@@ -151,6 +143,7 @@ function BoatCreator({ selectedBoat, onModalButtonPress }) {
 
       <Form
         initialValues={{
+          id: null,
           boatName: (editableBoat && editableBoat.boatName) || "",
           boatType: (editableBoat && editableBoat.boatType) || "",
           sailNumber: (editableBoat && editableBoat.sailNumber) || "",
@@ -228,11 +221,6 @@ function BoatCreator({ selectedBoat, onModalButtonPress }) {
           />
         </View>
       </Form>
-      <Button
-        buttonStyle={{ marginTop: 40 }}
-        title="Clear All"
-        onPress={clearAllData}
-      />
     </Screen>
   );
 }

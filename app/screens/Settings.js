@@ -41,7 +41,7 @@ function Settings(props) {
               color={color.primary}
               styles={styles.radio}
             />
-            <Text style={styles.radioText}>Standard</Text>
+            <Text style={styles.radioText}>Primary</Text>
           </View>
           <Text style={styles.radioDescription}>
             Recommended formula designed to address the larger rating spread
