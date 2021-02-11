@@ -14,4 +14,5 @@ export default {
   danger: "#ff5252",
   gray: "#ccc",
   text: "#303030",
+  disabledText: "#aaa",
 };

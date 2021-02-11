@@ -14,6 +14,9 @@ import { ScrollView } from "react-native-gesture-handler";
 import BoatListItem from "../components/lists/BoatListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
 import { useData } from "../context/DataContext";
+import { Ionicons, AntDesign } from "@expo/vector-icons";
+
+import defaultStyles from "../config/styles";
 
 let listItemHeight = 0;
 
@@ -59,18 +62,51 @@ function Fleet(props) {
     <Screen style={styles.container}>
       <SectionHeader title="Fleet" />
       <View style={styles.buttonContainer}>
-        <Button title="Add Boat" onPress={handleAddBoatButtonPress} />
         <Button
-          disabled={!selectedBoat}
-          buttonStyle={styles.editBoatButton}
-          title="Edit Boat"
-          onPress={handleEditBoatButtonPress}
+          titleStyle={{ marginHorizontal: 8 }}
+          title="Add"
+          onPress={handleAddBoatButtonPress}
+          icon={
+            <Ionicons
+              name="md-add-sharp"
+              size={18}
+              color={defaultStyles.colors.white}
+            />
+          }
         />
         <Button
+          titleStyle={{ marginHorizontal: 8 }}
           disabled={!selectedBoat}
-          buttonStyle={styles.editBoatButton}
-          title="Delete Boat"
+          title="Edit"
+          onPress={handleEditBoatButtonPress}
+          icon={
+            <AntDesign
+              name="edit"
+              size={16}
+              color={
+                !selectedBoat
+                  ? defaultStyles.colors.disabledText
+                  : defaultStyles.colors.white
+              }
+            />
+          }
+        />
+        <Button
+          titleStyle={{ marginHorizontal: 8 }}
+          disabled={!selectedBoat}
+          title="Delete"
           onPress={handleDeleteBoatButtonPress}
+          icon={
+            <AntDesign
+              name="delete"
+              size={16}
+              color={
+                !selectedBoat
+                  ? defaultStyles.colors.disabledText
+                  : defaultStyles.colors.white
+              }
+            />
+          }
         />
       </View>
       <FlatList
@@ -143,9 +179,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-  },
-  editBoatButton: {
-    marginLeft: 8,
   },
 });
 
