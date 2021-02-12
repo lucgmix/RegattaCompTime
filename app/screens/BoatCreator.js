@@ -78,7 +78,6 @@ function BoatCreator({ selectedBoat, onModalButtonPress }) {
   };
 
   const handleSubmit = async (boat, { resetForm }) => {
-    console.log("handleSubmit called", boat);
     // setProgress(0);
     // setUploadVisible(true);
     // const result = await listingsApi.addListing(
@@ -111,7 +110,7 @@ function BoatCreator({ selectedBoat, onModalButtonPress }) {
         resetForm();
         onModalButtonPress();
       } else {
-        console.log(result.error);
+        console.warn(result.error);
       }
     });
   };

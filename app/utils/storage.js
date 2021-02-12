@@ -5,10 +5,9 @@ const prefix = "cache";
 const store = async (key, value) => {
   try {
     await AsyncStorage.setItem(key, JSON.stringify(value));
-    return "success";
+    return { ok: true };
   } catch (error) {
-    //console.log(error);
-    return "error";
+    return { ok: false, error };
   }
 };
 
@@ -19,9 +18,9 @@ const get = async (key) => {
 
     if (!item) return null;
 
-    return item;
+    return { ok: true, data: item };
   } catch (error) {
-    //console.log(error);
+    return { ok: false, error };
   }
 };
 
@@ -40,6 +39,7 @@ const listStorageData = async () => {
 const clearAll = async () => {
   try {
     return await AsyncStorage.clear();
+    return { ok: true };
   } catch (e) {
     // clear error
   }

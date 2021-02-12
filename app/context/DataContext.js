@@ -8,15 +8,19 @@ export function DataProvider({ children }) {
   const [boatList, setBoatList] = useState([]);
 
   const fetchStoredBoatList = async () => {
-    const storedBoatList = await storage.get("@boat_list");
-    setBoatList(storedBoatList);
+    const storedBoatListResult = await storage.get("@boat_list");
+    if (storedBoatListResult.ok) {
+      setBoatList(storedBoatListResult.data);
+    } else {
+      console.warn(response.error);
+    }
   };
 
   const storeBoatList = (value) => {
     return storage
       .store("@boat_list", value)
       .then((response) => {
-        if (value && response === "success") {
+        if (value && response.ok) {
           setBoatList(value);
           return { ok: true };
         }
