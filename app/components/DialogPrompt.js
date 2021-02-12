@@ -27,21 +27,21 @@ function DialogPrompt({
         <View style={styles.buttonContainer}>
           {neutral && (
             <Button
-              style={styles.button}
+              buttonStyle={styles.button}
               title={neutral}
               onPress={onNeutralButtonPress}
             />
           )}
           {negative && (
             <Button
-              style={styles.button}
+              buttonStyle={styles.button}
               title={negative}
               onPress={onNegativeButtonPress}
             />
           )}
           {positive && (
             <Button
-              style={styles.button}
+              buttonStyle={styles.button}
               title={positive}
               onPress={onPositiveButtonPress}
             />
