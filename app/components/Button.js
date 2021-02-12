@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingTop: 10,
     paddingBottom: 10,
+    minWidth: 80,
   },
   text: {
     color: defaultStyles.colors.white,

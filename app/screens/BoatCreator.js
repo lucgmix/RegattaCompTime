@@ -187,7 +187,7 @@ function BoatCreator({ selectedBoat, onModalButtonPress }) {
           placeholder={FIELD_LABEL.NFS}
         />
         <View style={styles.defaultRating}>
-          <Text style={styles.defaultRatingText}>Default Rating</Text>
+          <Text style={styles.defaultRatingLabel}>Default Rating</Text>
           <View style={styles.defaultRatingSwicthText}>
             <Switch
               name="defaultRating"
@@ -244,8 +244,9 @@ const styles = StyleSheet.create({
   defaultRating: {
     marginTop: 8,
   },
-  defaultRatingText: {
+  defaultRatingLabel: {
     marginBottom: 4,
+    fontSize: 13,
   },
   defaultRatingSwicthText: {
     flexDirection: "row",
