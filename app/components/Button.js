@@ -19,16 +19,14 @@ function AppButton({ title, onPress, buttonStyle, ...otherProps }) {
 const styles = StyleSheet.create({
   button: {
     backgroundColor: defaultStyles.colors.primary,
-    paddingLeft: 24,
-    paddingRight: 24,
+    paddingLeft: 20,
+    paddingRight: 20,
     paddingTop: 10,
     paddingBottom: 10,
   },
   text: {
     color: defaultStyles.colors.white,
-    fontSize: 14,
-    textTransform: "uppercase",
-    fontWeight: "600",
+    fontSize: 16,
   },
 });
 

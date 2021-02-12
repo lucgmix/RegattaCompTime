@@ -213,12 +213,12 @@ function BoatCreator({ selectedBoat, onModalButtonPress }) {
           width="50%"
         /> */}
         <View style={styles.buttonContainer}>
-          <SubmitButton title={actionButtonLabel} />
           <Button
             buttonStyle={styles.cancelButton}
             title="Cancel"
             onPress={onModalButtonPress}
           />
+          <SubmitButton style={styles.submitButton} title={actionButtonLabel} />
         </View>
       </Form>
     </Screen>
@@ -236,11 +236,11 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginTop: 32,
     flexDirection: "row",
-    justifyContent: "flex-start",
+    justifyContent: "flex-end",
     alignItems: "center",
   },
   cancelButton: {
-    marginLeft: 8,
+    marginRight: 8,
   },
   defaultRating: {
     marginTop: 8,
@@ -254,6 +254,9 @@ const styles = StyleSheet.create({
   },
   defaultRatingValue: {
     marginLeft: 12,
+  },
+  submitButton: {
+    minWidth: 100,
   },
 });
 

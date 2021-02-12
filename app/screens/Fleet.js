@@ -15,6 +15,7 @@ import BoatListItem from "../components/lists/BoatListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
 import { useData } from "../context/DataContext";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
+import DialogPrompt from "../components/DialogPrompt";
 
 import defaultStyles from "../config/styles";
 
@@ -33,6 +34,13 @@ function Fleet(props) {
   const { boatList, storeBoatList } = useData();
   const boatListRef = useRef();
 
+  const [promptVisible, setPromptVisible] = useState(false);
+
+  const toggleDeleteConfirmPrompt = () => {
+    console.trace();
+    setPromptVisible(!promptVisible);
+  };
+
   const handleBoatItemClicked = (item) => {
     setSelectedBoat(item);
   };
@@ -46,9 +54,20 @@ function Fleet(props) {
     setIsCreateBoatModalVisible(true);
   };
 
-  const handleDeleteBoatButtonPress = () => {
+  const handleDeleteBoatButtonPress = (boat) => {
+    toggleDeleteConfirmPrompt();
+  };
+
+  const handleConfirmDeleteBoat = () => {
     const removedBoatArray = arrayRemove(boatList, selectedBoat);
-    storeBoatList(removedBoatArray).then(setSelectedBoat(null));
+    storeBoatList(removedBoatArray).then((result) => {
+      if (result.ok) {
+        setSelectedBoat(null);
+        toggleDeleteConfirmPrompt();
+      } else {
+        // Error prompt here?
+      }
+    });
   };
 
   useEffect(() => {
@@ -60,6 +79,18 @@ function Fleet(props) {
 
   return (
     <Screen style={styles.container}>
+      {selectedBoat && (
+        <DialogPrompt
+          title="Delete Boat"
+          message="Are you sure you want to delete this boat?"
+          content={`${selectedBoat.boatType} ${selectedBoat.boatName}`}
+          positive="OK"
+          neutral="Cancel"
+          isVisible={promptVisible}
+          onNeutralButtonPress={toggleDeleteConfirmPrompt}
+          onPositiveButtonPress={handleConfirmDeleteBoat}
+        />
+      )}
       <SectionHeader title="Fleet" />
       <View style={styles.buttonContainer}>
         <Button
