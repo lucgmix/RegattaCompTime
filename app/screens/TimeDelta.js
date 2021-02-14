@@ -30,7 +30,7 @@ function TimeDelta(props) {
   const [raceDuration, setRaceDuration] = useState(3600);
   const [isTimeModalVisible, setIsTimeModalVisible] = useState(false);
   const resultListRef = useRef();
-  const { boatList } = useData();
+  const { storeBoatList, getBoatList, dataChanged } = useData();
 
   const { getElapsedDiff, secondsToHms, isAlternatePHRF } = usePHRF();
 
@@ -42,49 +42,6 @@ function TimeDelta(props) {
     updateBoatList(item.boat);
   };
 
-  const updateBoatList = (item) => {
-    setSelectedBoat(item);
-    setBoatResultsList(
-      getElapsedDiff(boatSelectList, item.rating, raceDuration, isAlternatePHRF)
-    );
-  };
-
-  useEffect(() => {
-    console.log("FIRST");
-    console.log("selectedBoat", selectedBoat);
-    selectedBoat && updateBoatList(selectedBoat);
-
-    console.log("boatList", boatList);
-  }, [isAlternatePHRF, raceDuration, boatList]);
-
-  // Update dropdown otpions when boatList changes
-  useEffect(() => {
-    console.log("SECOND");
-    if (boatList) {
-      const sortedBoats = Array.from(boatList);
-      setBoatSelectList(
-        sortedBoats.sort((a, b) => (a.boatName > b.boatName ? 1 : -1))
-      );
-    }
-  }, [boatList]);
-
-  //
-  useEffect(() => {
-    console.log("THIRD");
-    if (!selectedBoat) return;
-
-    const indexOfSelectedBoat = boatResultsList.findIndex(
-      (item) => item.boat.id === selectedBoat.id
-    );
-
-    resultListRef &&
-      indexOfSelectedBoat > -1 &&
-      resultListRef.current.scrollToIndex({
-        animated: true,
-        index: indexOfSelectedBoat,
-      });
-  }, [selectedBoat, boatList]);
-
   const onRaceDurationChanged = (time) => {
     setRaceDuration(time);
   };
@@ -92,6 +49,48 @@ function TimeDelta(props) {
   const handleSetRaceDuration = () => {
     setIsTimeModalVisible(true);
   };
+
+  const updateBoatList = (item) => {
+    getBoatList().then(({ data }) => {
+      setBoatResultsList(
+        getElapsedDiff(data, item.rating, raceDuration, isAlternatePHRF)
+      );
+      const boatWithMatchingId = data.find((boat) => boat.id === item.id);
+      setSelectedBoat(boatWithMatchingId);
+    });
+  };
+
+  // Update dropdown otpions and viewBoatList when viewBoatList changes.
+  useEffect(() => {
+    getBoatList().then(({ data }) => {
+      if (data) {
+        const sortedBoats = Array.from(data);
+        setBoatSelectList(
+          sortedBoats.sort((a, b) => (a.boatName > b.boatName ? 1 : -1))
+        );
+      }
+    });
+  }, [dataChanged]);
+
+  useEffect(() => {
+    selectedBoat && updateBoatList(selectedBoat);
+  }, [isAlternatePHRF, raceDuration, dataChanged]);
+
+  // Scroll to selected boat result
+  useEffect(() => {
+    if (!selectedBoat) return;
+
+    const indexOfSelectedBoatResult = boatResultsList.findIndex(
+      (resultItem) => resultItem.boat.id === selectedBoat.id
+    );
+
+    resultListRef &&
+      indexOfSelectedBoatResult > -1 &&
+      resultListRef.current.scrollToIndex({
+        animated: true,
+        index: indexOfSelectedBoatResult,
+      });
+  }, [selectedBoat, boatSelectList, dataChanged]);
 
   return (
     <Screen style={styles.container}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, View, StyleSheet, Switch } from "react-native";
 import Screen from "../components/Screen";
 import SectionHeader from "../components/SectionHeader";
@@ -20,6 +20,11 @@ import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 
 import defaultStyles from "../config/styles";
+
+export const BOAT_CREATOR_MODE = {
+  ADD: "add",
+  UPDATE: "update",
+};
 
 const FIELD_LABEL = {
   BOAT_NAME: "Boat Name",
@@ -62,8 +67,9 @@ function arrayRemove(arr, value) {
   return arr.filter((boat) => boat.id != value.id);
 }
 
-function BoatCreator({ selectedBoat, onModalButtonPress }) {
-  const { boatList, storeBoatList } = useData();
+function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
+  const { storeBoatList, getBoatList } = useData();
+  const [viewBoatList, setViewBoatList] = useState([]);
   const [editableBoat, setEditableBoat] = useState(selectedBoat);
   const ratingSelectChoice =
     (editableBoat && editableBoat.defaultRating) || DEFAULT_RATING.FS;
@@ -93,22 +99,22 @@ function BoatCreator({ selectedBoat, onModalButtonPress }) {
   };
 
   const storeData = async (boat, resetForm) => {
-    let updatedArray = boatList || [];
+    let updatedArray = viewBoatList || [];
     boat.defaultRating = defaultRating;
-    if (!boat.id) {
-      boat.id = uuidv4();
-    }
 
-    if (editableBoat) {
+    if (viewMode === BOAT_CREATOR_MODE.ADD) {
+      boat.id = uuidv4();
+    } else {
       //If in edit mode, remove item and re-add the updated one.
-      updatedArray = arrayRemove(boatList, editableBoat);
+      updatedArray = arrayRemove(viewBoatList, editableBoat);
       setEditableBoat(boat);
     }
+
     updatedArray.push(boat);
     storeBoatList(populateRating(updatedArray)).then((result) => {
       if (result.ok) {
         resetForm();
-        onModalButtonPress();
+        onSubmitButtonPress(boat);
       } else {
         console.warn(result.error);
       }
@@ -128,6 +134,16 @@ function BoatCreator({ selectedBoat, onModalButtonPress }) {
     }
   }
 
+  const populateBoatList = () => {
+    getBoatList().then(({ data }) => {
+      setViewBoatList(data);
+    });
+  };
+
+  useEffect(() => {
+    populateBoatList();
+  }, []);
+
   const headerTitle = editableBoat ? " Update Boat" : "Add Boat";
   const actionButtonLabel = editableBoat ? " Update" : "Save";
 
@@ -142,7 +158,7 @@ function BoatCreator({ selectedBoat, onModalButtonPress }) {
 
       <Form
         initialValues={{
-          id: null,
+          id: (editableBoat && editableBoat.id) || "",
           boatName: (editableBoat && editableBoat.boatName) || "",
           boatType: (editableBoat && editableBoat.boatType) || "",
           sailNumber: (editableBoat && editableBoat.sailNumber) || "",
@@ -215,7 +231,7 @@ function BoatCreator({ selectedBoat, onModalButtonPress }) {
           <Button
             buttonStyle={styles.cancelButton}
             title="Cancel"
-            onPress={onModalButtonPress}
+            onPress={onSubmitButtonPress}
           />
           <SubmitButton style={styles.submitButton} title={actionButtonLabel} />
         </View>

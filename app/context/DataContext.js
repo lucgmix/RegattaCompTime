@@ -1,19 +1,32 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
 //import { getBoatList } from "../api/FirebaseApi";
 import storage from "../utils/storage";
 
 const DataContext = createContext();
 
 export function DataProvider({ children }) {
-  const [boatList, setBoatList] = useState([]);
+  // const [boatList, setBoatList] = useState([]);
+  //const onDataChanged = useCallback();
+  const [dataChanged, setDataChanged] = useState(false);
 
   const fetchStoredBoatList = async () => {
     const storedBoatListResult = await storage.get("@boat_list");
     if (storedBoatListResult.ok) {
-      setBoatList(storedBoatListResult.data);
+      return { ok: true, data: storedBoatListResult.data };
     } else {
       console.warn(response.error);
+      return { ok: true, error: response.error };
     }
+  };
+
+  const getBoatList = () => {
+    return fetchStoredBoatList();
   };
 
   const storeBoatList = (value) => {
@@ -21,7 +34,9 @@ export function DataProvider({ children }) {
       .store("@boat_list", value)
       .then((response) => {
         if (value && response.ok) {
-          setBoatList(value);
+          //setBoatList(value);
+          //onDataChanged();
+          setDataChanged(!dataChanged);
           return { ok: true };
         }
       })
@@ -35,7 +50,7 @@ export function DataProvider({ children }) {
   }, []);
 
   return (
-    <DataContext.Provider value={{ boatList, storeBoatList }}>
+    <DataContext.Provider value={{ storeBoatList, getBoatList, dataChanged }}>
       {children}
     </DataContext.Provider>
   );

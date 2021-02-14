@@ -16,6 +16,7 @@ import ListItemSeparator from "../components/lists/ListItemSeparator";
 import { useData } from "../context/DataContext";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 import DialogPrompt from "../components/DialogPrompt";
+import { BOAT_CREATOR_MODE } from "./BoatCreator";
 
 import defaultStyles from "../config/styles";
 
@@ -30,14 +31,19 @@ function Fleet(props) {
   const [isCreateBoatModalVisible, setIsCreateBoatModalVisible] = useState(
     false
   );
+  const [boatCreatorMode, setBoatCreatorMode] = useState();
   const [viewBoatList, setViewBoatList] = useState([]);
-  const { boatList, storeBoatList } = useData();
+  const { storeBoatList, getBoatList } = useData();
   const boatListRef = useRef();
 
   const [promptVisible, setPromptVisible] = useState(false);
 
+  const updateFleetWithBoat = () => {
+    setIsCreateBoatModalVisible(false);
+    populateBoatList();
+  };
+
   const toggleDeleteConfirmPrompt = () => {
-    console.trace();
     setPromptVisible(!promptVisible);
   };
 
@@ -46,11 +52,13 @@ function Fleet(props) {
   };
 
   const handleAddBoatButtonPress = () => {
+    setBoatCreatorMode(BOAT_CREATOR_MODE.ADD);
     setSelectedBoat(null);
     setIsCreateBoatModalVisible(true);
   };
 
   const handleEditBoatButtonPress = () => {
+    setBoatCreatorMode(BOAT_CREATOR_MODE.UPDATE);
     setIsCreateBoatModalVisible(true);
   };
 
@@ -59,23 +67,34 @@ function Fleet(props) {
   };
 
   const handleConfirmDeleteBoat = () => {
-    const removedBoatArray = arrayRemove(boatList, selectedBoat);
+    const removedBoatArray = arrayRemove(viewBoatList, selectedBoat);
     storeBoatList(removedBoatArray).then((result) => {
       if (result.ok) {
         setSelectedBoat(null);
         toggleDeleteConfirmPrompt();
+        populateBoatList();
       } else {
         // Error prompt here?
       }
     });
   };
 
+  const populateBoatList = () => {
+    getBoatList().then(({ data }) => {
+      const sortedBoats = Array.from(data).sort((a, b) =>
+        a.boatType > b.boatType ? 1 : -1
+      );
+      setViewBoatList(sortedBoats);
+      selectedBoat &&
+        setSelectedBoat(
+          sortedBoats.find((boat) => boat.id === selectedBoat.id)
+        );
+    });
+  };
+
   useEffect(() => {
-    const sortedBoats = Array.from(boatList).sort((a, b) =>
-      a.boatType > b.boatType ? 1 : -1
-    );
-    setViewBoatList(sortedBoats);
-  }, [boatList]);
+    populateBoatList();
+  }, []);
 
   return (
     <Screen style={styles.container}>
@@ -189,8 +208,9 @@ function Fleet(props) {
         <ScrollView>
           <BoatCreator
             isModalVisible={isCreateBoatModalVisible}
-            onModalButtonPress={() => setIsCreateBoatModalVisible(false)}
+            onSubmitButtonPress={updateFleetWithBoat}
             selectedBoat={selectedBoat}
+            viewMode={boatCreatorMode}
           />
         </ScrollView>
       </Modal>
