@@ -12,6 +12,7 @@ import Text from "./Text";
 import defaultStyles from "../config/styles";
 import PickerItem from "./PickerItem";
 import Screen from "./Screen";
+import { isEmpty } from "lodash";
 
 function Picker({
   icon,
@@ -27,7 +28,10 @@ function Picker({
 
   return (
     <>
-      <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
+      <TouchableWithoutFeedback
+        onPress={() => setModalVisible(true)}
+        disabled={isEmpty(items)}
+      >
         <View style={[styles.container, { width }]}>
           {icon && (
             <MaterialCommunityIcons
