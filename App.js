@@ -22,7 +22,6 @@ export default function App() {
   //         startAsync={getBoatList}
   //         onFinish={() => setIsReady(true)}
   //         onError={(error) => {
-  //           console.log("on ERROR", error);
   //         }}
   //         autoHideSplash={true}
   //       />

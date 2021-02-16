@@ -3,11 +3,11 @@ import { StyleSheet } from "react-native";
 
 import Text from "../Text";
 
-function ErrorMessage({ error, visible, ...otherProps }) {
+function ErrorMessage({ error, visible, style, ...otherProps }) {
   if (!visible || !error) return null;
 
   return (
-    <Text {...otherProps} style={styles.error}>
+    <Text {...otherProps} style={[styles.error, style]}>
       {error}
     </Text>
   );

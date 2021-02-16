@@ -19,7 +19,6 @@ import TimeInpuModal from "../components/TimeInputModal";
 
 import { Entypo } from "@expo/vector-icons";
 import SectionHeader from "../components/SectionHeader";
-import { isEmpty } from "lodash";
 
 let listItemHeight = 0;
 
@@ -30,7 +29,7 @@ function TimeDelta(props) {
   const [raceDuration, setRaceDuration] = useState(3600);
   const [isTimeModalVisible, setIsTimeModalVisible] = useState(false);
   const resultListRef = useRef();
-  const { storeBoatList, getBoatList, dataChanged } = useData();
+  const { getBoatList, dataChanged } = useData();
 
   const { getElapsedDiff, secondsToHms, isAlternatePHRF } = usePHRF();
 
