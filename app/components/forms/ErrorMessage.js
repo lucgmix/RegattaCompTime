@@ -4,6 +4,8 @@ import { StyleSheet, View } from "react-native";
 import Text from "../Text";
 
 function ErrorMessage({ error, visible, style, ...otherProps }) {
+  if (!visible || !error) return null;
+
   return (
     <View style={styles.container}>
       {visible && (

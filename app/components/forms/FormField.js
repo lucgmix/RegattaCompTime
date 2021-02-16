@@ -21,42 +21,41 @@ function AppFormField({ label, name, width, ...otherProps }) {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
-      {/* <Input
-       style={styles.input}
-       onBlur={() => setFieldTouched(name)}
-       onChangeText={(text) => setFieldValue(name, text)}
-       value={values[name]}
-       width={width}
-       errorMessage={touched[name] && errors[name]}
-      {...otherProps}
-     /> */}
-      <TextInput
+      <Input
+        style={styles.input}
+        onBlur={() => setFieldTouched(name)}
+        onChangeText={(text) => setFieldValue(name, text)}
+        value={values[name]}
+        width={width}
+        errorMessage={touched[name] && errors[name]}
+        {...otherProps}
+      />
+      {/* <TextInput
         onBlur={() => setFieldTouched(name)}
         onChangeText={(text) => setFieldValue(name, text)}
         value={values[name]}
         width={width}
         {...otherProps}
-      />
-      <ErrorMessage
+      /> */}
+      {/* <ErrorMessage
         style={styles.errorMessage}
         error={errors[name]}
         visible={touched[name]}
-      />
+      /> */}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  // input: {
-  //   color: defaultStyles.colors.text,
-  //   fontSize: 16,
-  //   marginTop: 10,
-  // },
+  input: {
+    color: defaultStyles.colors.text,
+    fontSize: 14,
+  },
   container: {
-    marginBottom: 12,
+    marginBottom: 8,
   },
   label: {
-    fontSize: 13,
+    fontSize: 14,
     color: defaultStyles.colors.text,
   },
   errorMessage: {

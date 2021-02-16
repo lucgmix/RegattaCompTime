@@ -54,7 +54,7 @@ function AppFormSwitch({
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 8,
+    marginTop: 0,
   },
   titleLabel: {
     marginBottom: 4,
