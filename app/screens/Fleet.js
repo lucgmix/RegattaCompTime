@@ -31,6 +31,16 @@ function arrayRemove(arr, value) {
   return arr.filter((boat) => boat.id != value.id);
 }
 
+function sortBoatArray(boatList) {
+  return Array.from(boatList).sort((a, b) => {
+    if (a.boatType === b.boatType) {
+      return a.boatName > b.boatName ? 1 : -1;
+    } else {
+      return a.boatType > b.boatType ? 1 : -1;
+    }
+  });
+}
+
 function Fleet(props) {
   const [selectedBoat, setSelectedBoat] = useState(null);
   const [isCreateBoatModalVisible, setIsCreateBoatModalVisible] = useState(
@@ -72,11 +82,8 @@ function Fleet(props) {
       const boatList = data;
       const selectedBoatCopy = { ...selectedBoat, id: uuidv4() };
       boatList.push(selectedBoatCopy);
-      const sortedBoats = Array.from(boatList).sort((a, b) =>
-        a.boatType > b.boatType ? 1 : -1
-      );
 
-      storeBoatList(sortedBoats).then((result) => {
+      storeBoatList(sortBoatArray(boatList)).then((result) => {
         if (result.ok) {
           populateBoatList();
         } else {
@@ -105,14 +112,9 @@ function Fleet(props) {
 
   const populateBoatList = () => {
     getBoatList().then(({ data }) => {
-      const sortedBoats = Array.from(data).sort((a, b) =>
-        a.boatType > b.boatType ? 1 : -1
-      );
-      setViewBoatList(sortedBoats);
+      setViewBoatList(sortBoatArray(data));
       selectedBoat &&
-        setSelectedBoat(
-          sortedBoats.find((boat) => boat.id === selectedBoat.id)
-        );
+        setSelectedBoat(data.find((boat) => boat.id === selectedBoat.id));
     });
   };
 
