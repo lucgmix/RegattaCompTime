@@ -83,7 +83,7 @@ function Fleet(props) {
       const selectedBoatCopy = { ...selectedBoat, id: uuidv4() };
       boatList.push(selectedBoatCopy);
 
-      storeBoatList(sortBoatArray(boatList)).then((result) => {
+      storeBoatList(boatList).then((result) => {
         if (result.ok) {
           populateBoatList();
         } else {
