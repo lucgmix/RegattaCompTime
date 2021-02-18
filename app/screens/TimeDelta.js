@@ -59,6 +59,21 @@ function TimeDelta(props) {
     });
   };
 
+  const selectBoatInList = () => {
+    if (!selectedBoat) return;
+
+    const indexOfSelectedBoatResult = boatResultsList.findIndex(
+      (resultItem) => resultItem.boat.id === selectedBoat.id
+    );
+
+    resultListRef &&
+      indexOfSelectedBoatResult > -1 &&
+      resultListRef.current.scrollToIndex({
+        animated: true,
+        index: indexOfSelectedBoatResult,
+      });
+  };
+
   // Update dropdown otpions and viewBoatList when viewBoatList changes.
   useEffect(() => {
     getBoatList().then(({ data }) => {
@@ -77,18 +92,7 @@ function TimeDelta(props) {
 
   // Scroll to selected boat result
   useEffect(() => {
-    if (!selectedBoat) return;
-
-    const indexOfSelectedBoatResult = boatResultsList.findIndex(
-      (resultItem) => resultItem.boat.id === selectedBoat.id
-    );
-
-    resultListRef &&
-      indexOfSelectedBoatResult > -1 &&
-      resultListRef.current.scrollToIndex({
-        animated: true,
-        index: indexOfSelectedBoatResult,
-      });
+    selectBoatInList();
   }, [selectedBoat, boatSelectList, dataChanged]);
 
   return (
@@ -128,6 +132,7 @@ function TimeDelta(props) {
         onSelectItem={handleOnSelectedBoat}
       />
       <FlatList
+        onContentSizeChange={selectBoatInList}
         ref={resultListRef}
         data={boatResultsList}
         getItemLayout={(_, index) => {
