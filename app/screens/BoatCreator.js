@@ -48,22 +48,6 @@ const validationSchema = Yup.object().shape({
     .label(FIELD_LABEL.BOAT_NAME),
   boatType: Yup.string().required().min(1).label(FIELD_LABEL.BOAT_TYPE),
   sailNumber: Yup.string().min(1).label(FIELD_LABEL.SAIL_NUMBER),
-  // ratingFS: Yup.number()
-  //   .typeError("FS Rating needs to be a number")
-  //   .notRequired()
-  //   .label(FIELD_LABEL.FS),
-  // ratingNFS: Yup.number()
-  //   .typeError("FS Rating needs to be a number")
-  //   .label(FIELD_LABEL.NFS)
-  //   .notRequired()
-  //   .when("ratingFS", (ratingFS, field) => {
-  //     return ratingFS
-  //       ? field
-  //       : field
-  //           .required("FS or NFS Rating is required ")
-  //           .typeError("NFS Rating needs to be a number");
-  //   }),
-
   ratingFS: Yup.number()
     .typeError("FS Rating needs to be a number")
     .nullable()
@@ -199,7 +183,7 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
     populateBoatList();
   }, []);
 
-  const headerTitle = editableBoat ? " Update Boat" : "Add Boat";
+  const headerTitle = editableBoat ? " Edit Boat" : "Add Boat";
   const actionButtonLabel = editableBoat ? " Update" : "Save";
 
   return (

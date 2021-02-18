@@ -28,7 +28,7 @@ const AppNavigator = () => {
         showIcon: true,
         labelStyle: {
           fontWeight: "600",
-          fontSize: 12,
+          fontSize: 13,
         },
       }}
     >

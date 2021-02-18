@@ -11,6 +11,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Text from "./Text";
 import defaultStyles from "../config/styles";
 import PickerItem from "./PickerItem";
+import Button from "../components/Button";
 import Screen from "./Screen";
 import { isEmpty } from "lodash";
 
@@ -56,6 +57,11 @@ function Picker({
       </TouchableWithoutFeedback>
       <Modal visible={modalVisible} animationType="fade">
         <Screen>
+          <Button
+            buttonStyle={styles.doneButton}
+            title="Done"
+            onPress={() => setModalVisible(false)}
+          ></Button>
           <FlatList
             data={items}
             keyExtractor={(item) => item.id.toString()}
@@ -86,6 +92,11 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginBottom: 12,
     alignItems: "center",
+  },
+  doneButton: {
+    marginTop: 12,
+    maxWidth: 80,
+    alignSelf: "center",
   },
   icon: {
     marginRight: 10,

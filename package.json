@@ -28,7 +28,7 @@
     "react-native-reanimated": "~1.13.0",
     "react-native-safe-area-context": "3.1.9",
     "react-native-screens": "~2.15.0",
-    "react-native-web": "~0.13.12",
+    "react-native-web": "^0.15.0",
     "react-native-windows": "^0.63.16",
     "uuid": "^8.3.2",
     "yup": "^0.32.8"

@@ -19,15 +19,14 @@ function AppButton({ title, onPress, buttonStyle, ...otherProps }) {
 const styles = StyleSheet.create({
   button: {
     backgroundColor: defaultStyles.colors.primary,
-    paddingLeft: 20,
-    paddingRight: 20,
     paddingTop: 10,
     paddingBottom: 10,
     minWidth: 80,
   },
   text: {
     color: defaultStyles.colors.white,
-    fontSize: 16,
+    fontSize: 15,
+    marginHorizontal: 6,
   },
 });
 

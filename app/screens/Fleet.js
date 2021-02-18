@@ -14,9 +14,14 @@ import { ScrollView } from "react-native-gesture-handler";
 import BoatListItem from "../components/lists/BoatListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
 import { useData } from "../context/DataContext";
-import { Ionicons, AntDesign } from "@expo/vector-icons";
+import {
+  Ionicons,
+  AntDesign,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import DialogPrompt from "../components/DialogPrompt";
 import { BOAT_CREATOR_MODE } from "./BoatCreator";
+import { v4 as uuidv4 } from "uuid";
 
 import defaultStyles from "../config/styles";
 
@@ -60,6 +65,25 @@ function Fleet(props) {
   const handleEditBoatButtonPress = () => {
     setBoatCreatorMode(BOAT_CREATOR_MODE.UPDATE);
     setIsCreateBoatModalVisible(true);
+  };
+
+  const handleDuplicateBoatButtonPress = () => {
+    getBoatList().then(({ data }) => {
+      const boatList = data;
+      const selectedBoatCopy = { ...selectedBoat, id: uuidv4() };
+      boatList.push(selectedBoatCopy);
+      const sortedBoats = Array.from(boatList).sort((a, b) =>
+        a.boatType > b.boatType ? 1 : -1
+      );
+
+      storeBoatList(sortedBoats).then((result) => {
+        if (result.ok) {
+          populateBoatList();
+        } else {
+          // Error prompt here?
+        }
+      });
+    });
   };
 
   const handleDeleteBoatButtonPress = (boat) => {
@@ -112,52 +136,73 @@ function Fleet(props) {
       )}
       <SectionHeader title="Fleet" />
       <View style={styles.buttonContainer}>
-        <Button
-          titleStyle={{ marginHorizontal: 8 }}
-          title="Add"
-          onPress={handleAddBoatButtonPress}
-          icon={
-            <Ionicons
-              name="md-add-sharp"
-              size={18}
-              color={defaultStyles.colors.white}
-            />
-          }
-        />
-        <Button
-          titleStyle={{ marginHorizontal: 8 }}
-          disabled={!selectedBoat}
-          title="Edit"
-          onPress={handleEditBoatButtonPress}
-          icon={
-            <AntDesign
-              name="edit"
-              size={16}
-              color={
-                !selectedBoat
-                  ? defaultStyles.colors.disabledText
-                  : defaultStyles.colors.white
-              }
-            />
-          }
-        />
-        <Button
-          titleStyle={{ marginHorizontal: 8 }}
-          disabled={!selectedBoat}
-          title="Delete"
-          onPress={handleDeleteBoatButtonPress}
-          icon={
-            <AntDesign
-              name="delete"
-              size={16}
-              color={
-                !selectedBoat
-                  ? defaultStyles.colors.disabledText
-                  : defaultStyles.colors.white
-              }
-            />
-          }
-        />
+        <View style={styles.buttonGroup}>
+          <Button
+            buttonStyle={styles.buttonStyleLeft}
+            title="Add"
+            onPress={handleAddBoatButtonPress}
+            icon={
+              <Ionicons
+                name="md-add-sharp"
+                size={18}
+                color={defaultStyles.colors.white}
+              />
+            }
+          />
+          <Button
+            buttonStyle={styles.buttonStyleLeft}
+            disabled={!selectedBoat}
+            title="Edit"
+            onPress={handleEditBoatButtonPress}
+            icon={
+              <AntDesign
+                name="edit"
+                size={16}
+                color={
+                  !selectedBoat
+                    ? defaultStyles.colors.disabledText
+                    : defaultStyles.colors.white
+                }
+              />
+            }
+          />
+        </View>
+        <View style={styles.buttonGroup}>
+          <Button
+            buttonStyle={styles.buttonStyleRight}
+            disabled={!selectedBoat}
+            title="Duplicate"
+            onPress={handleDuplicateBoatButtonPress}
+            icon={
+              <MaterialCommunityIcons
+                name="content-duplicate"
+                size={16}
+                color={
+                  !selectedBoat
+                    ? defaultStyles.colors.disabledText
+                    : defaultStyles.colors.white
+                }
+              />
+            }
+          />
+          <Button
+            buttonStyle={styles.buttonStyleRight}
+            disabled={!selectedBoat}
+            title="Delete"
+            onPress={handleDeleteBoatButtonPress}
+            icon={
+              <AntDesign
+                name="delete"
+                size={16}
+                color={
+                  !selectedBoat
+                    ? defaultStyles.colors.disabledText
+                    : defaultStyles.colors.white
+                }
+              />
+            }
+          />
+        </View>
       </View>
       <FlatList
         ref={boatListRef}
@@ -229,7 +274,15 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
+  },
+  buttonGroup: {
+    flexDirection: "row",
+  },
+  buttonStyleLeft: {
+    marginRight: 4,
+  },
+  buttonStyleRight: {
+    marginLeft: 4,
   },
 });
 
