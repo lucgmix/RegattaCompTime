@@ -107,7 +107,7 @@ function TimeDelta(props) {
       <DialogPrompt
         title="Time Delta Help"
         message="The Time Delta section is were you can compare the time difference between boats based on the race duration and the boat handicap."
-        content="Set the race duration using the Set button and then choose the reference boat to compare against. Tip: Select any boat in the list by clicking on it to change the reference boat."
+        content={`Set the race duration using the Set button and then choose the reference boat to compare against.\n\nTip: Select any boat in the list by clicking on it to change the reference boat.`}
         positive="Got it"
         isVisible={helpPromptVisible}
         onPositiveButtonPress={() => setHelpPromptVisible(false)}
