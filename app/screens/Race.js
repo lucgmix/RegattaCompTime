@@ -14,7 +14,6 @@ function Race(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
     paddingLeft: 4,
     paddingRight: 4,
     paddingTop: 16,

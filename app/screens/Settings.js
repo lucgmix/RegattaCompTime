@@ -27,7 +27,7 @@ function Settings(props) {
 
   return (
     <Screen style={styles.container}>
-      <SectionHeader title="Settings" />
+      <SectionHeader title="Settings" helpVisible={false} />
       <Text>PHRF-LO Formula</Text>
       <RadioButton.Group
         onValueChange={(value) => updatePhrfFormula(value)}
