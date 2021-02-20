@@ -188,7 +188,7 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
 
   return (
     <Screen style={styles.container}>
-      <SectionHeader title={headerTitle} />
+      <SectionHeader title={headerTitle} helpVisible={false} />
       <Form
         initialValues={{
           id: (editableBoat && editableBoat.id) || "",

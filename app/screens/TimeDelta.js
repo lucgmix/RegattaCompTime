@@ -16,6 +16,7 @@ import { usePHRF } from "../context/PhrfContext";
 import { useData } from "../context/DataContext";
 import colors from "../config/colors";
 import TimeInpuModal from "../components/TimeInputModal";
+import DialogPrompt from "../components/DialogPrompt";
 
 import { Entypo } from "@expo/vector-icons";
 import SectionHeader from "../components/SectionHeader";
@@ -28,6 +29,8 @@ function TimeDelta(props) {
   const [boatResultsList, setBoatResultsList] = useState([]);
   const [raceDuration, setRaceDuration] = useState(3600);
   const [isTimeModalVisible, setIsTimeModalVisible] = useState(false);
+  const [helpPromptVisible, setHelpPromptVisible] = useState(false);
+
   const resultListRef = useRef();
   const { getBoatList, dataChanged } = useData();
 
@@ -47,6 +50,10 @@ function TimeDelta(props) {
 
   const handleSetRaceDuration = () => {
     setIsTimeModalVisible(true);
+  };
+
+  const handleHelpPress = () => {
+    setHelpPromptVisible(true);
   };
 
   const updateBoatList = (item) => {
@@ -97,7 +104,15 @@ function TimeDelta(props) {
 
   return (
     <Screen style={styles.container}>
-      <SectionHeader title="Time Delta" />
+      <DialogPrompt
+        title="Time Delta Help"
+        message="The Time Delta section is were you can compare the time difference between boats based on the race duration and the boat handicap."
+        content="Set the race duration using the Set button and then choose the reference boat to compare against. Tip: Select any boat in the list by clicking on it to change the reference boat."
+        positive="Got it"
+        isVisible={helpPromptVisible}
+        onPositiveButtonPress={() => setHelpPromptVisible(false)}
+      />
+      <SectionHeader title="Time Delta" onHelpPress={handleHelpPress} />
       <View style={styles.timeInputContainer}>
         <View
           style={{

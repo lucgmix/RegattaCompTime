@@ -52,6 +52,7 @@ function Fleet(props) {
   const boatListRef = useRef();
 
   const [promptVisible, setPromptVisible] = useState(false);
+  const [helpPromptVisible, setHelpPromptVisible] = useState(false);
 
   const updateFleetWithBoat = () => {
     setIsCreateBoatModalVisible(false);
@@ -110,6 +111,10 @@ function Fleet(props) {
     });
   };
 
+  const handleHelpPress = () => {
+    setHelpPromptVisible(true);
+  };
+
   const populateBoatList = () => {
     getBoatList().then(({ data }) => {
       setViewBoatList(sortBoatArray(data));
@@ -136,7 +141,17 @@ function Fleet(props) {
           onPositiveButtonPress={handleConfirmDeleteBoat}
         />
       )}
-      <SectionHeader title="Fleet" />
+
+      <DialogPrompt
+        title="Fleet Help"
+        message="The Fleet section is were you manage the boats that will be used in the TimeDelta and Race sections."
+        content="Use the Add, Edit, Duplicate or Delete button to manage the boats of the fleet."
+        positive="Got it"
+        isVisible={helpPromptVisible}
+        onPositiveButtonPress={() => setHelpPromptVisible(false)}
+      />
+
+      <SectionHeader title="Fleet" onHelpPress={handleHelpPress} />
       <View style={styles.buttonContainer}>
         <View style={styles.buttonGroup}>
           <Button
