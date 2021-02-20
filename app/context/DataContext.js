@@ -11,8 +11,6 @@ import storage from "../utils/storage";
 const DataContext = createContext();
 
 export function DataProvider({ children }) {
-  // const [boatList, setBoatList] = useState([]);
-  //const onDataChanged = useCallback();
   const [dataChanged, setDataChanged] = useState(false);
 
   const fetchStoredBoatList = async () => {
@@ -34,8 +32,6 @@ export function DataProvider({ children }) {
       .store("@boat_list", value)
       .then((response) => {
         if (value && response.ok) {
-          //setBoatList(value);
-          //onDataChanged();
           setDataChanged(!dataChanged);
           return { ok: true };
         }

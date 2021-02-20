@@ -4,6 +4,8 @@ export default {
   // secondary: "#4ecdc4",
   primary: "#4475b0", //"#24408d", //
   primary500: "#93d9ff", //"#62adeb", //"#5899f5", //518ee3 //5ca0ff
+  primary300: "#93d9ff55",
+  primary100: "#93d9ff22",
   secondary: "#f0c630", //"#e49624", //
   black: "#000",
   white: "#fff",

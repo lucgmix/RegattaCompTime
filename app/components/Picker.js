@@ -13,6 +13,7 @@ import defaultStyles from "../config/styles";
 import PickerItem from "./PickerItem";
 import Button from "../components/Button";
 import Screen from "./Screen";
+import ListItemSeparator from "../components/lists/ListItemSeparator";
 import { isEmpty } from "lodash";
 
 function Picker({
@@ -65,10 +66,12 @@ function Picker({
           <FlatList
             data={items}
             keyExtractor={(item) => item.id.toString()}
+            ItemSeparatorComponent={() => <ListItemSeparator />}
             numColumns={numberOfColumns}
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
               <PickerItemComponent
                 item={item}
+                index={index}
                 label={item.boatName}
                 onPress={() => {
                   setModalVisible(false);
@@ -95,6 +98,7 @@ const styles = StyleSheet.create({
   },
   doneButton: {
     marginTop: 12,
+    marginBottom: 24,
     maxWidth: 80,
     alignSelf: "center",
   },
