@@ -134,8 +134,8 @@ function Fleet(props) {
           title="Delete Boat"
           message="Are you sure you want to delete this boat?"
           content={`${selectedBoat.boatType} ${selectedBoat.boatName}`}
-          positive="OK"
-          neutral="Cancel"
+          positive="Yes"
+          neutral="No"
           isVisible={promptVisible}
           onNeutralButtonPress={toggleDeleteConfirmPrompt}
           onPositiveButtonPress={handleConfirmDeleteBoat}
