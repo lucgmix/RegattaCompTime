@@ -1,12 +1,13 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import colors from "../../config/colors";
+import { Divider } from "react-native-elements";
 
 function ListItemSeparator(props) {
-  return <View style={styles.container}></View>;
+  return <Divider style={styles.container} />;
 }
 const styles = StyleSheet.create({
-  container: { backgroundColor: colors.mediumlight, height: 1 },
+  container: { backgroundColor: colors.darkgray },
 });
 
 export default ListItemSeparator;

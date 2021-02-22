@@ -15,6 +15,7 @@ export default {
   dark: "#0c0c0c",
   danger: "#ff5252",
   gray: "#ccc",
+  darkgray: "#aaa",
   text: "#303030",
   disabledText: "#aaa",
 };
