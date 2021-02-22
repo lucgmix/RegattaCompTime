@@ -4,10 +4,10 @@ import { TouchableOpacity, StyleSheet, View } from "react-native";
 import Text from "./Text";
 import defaultStyles from "../config/styles";
 
-function PickerItem({ item, index, onPress }) {
+function PickerItem({ item, onPress }) {
   return (
     <TouchableOpacity onPress={onPress}>
-      <View style={styles.container(index)}>
+      <View style={styles.container}>
         <Text style={styles.text}>{item.boatName}</Text>
       </View>
     </TouchableOpacity>
@@ -15,14 +15,12 @@ function PickerItem({ item, index, onPress }) {
 }
 
 const styles = StyleSheet.create({
-  container: (indexValue) => ({
-    backgroundColor:
-      indexValue % 2 === 0
-        ? defaultStyles.colors.primary300
-        : defaultStyles.colors.primary100,
-  }),
+  container: {
+    backgroundColor: defaultStyles.colors.light,
+  },
   text: {
     padding: 14,
+    fontSize: 14,
   },
 });
 

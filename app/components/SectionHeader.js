@@ -3,6 +3,7 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import Text from "../components/Text";
 import defaultStyles from "../config/styles";
 import { Ionicons } from "@expo/vector-icons";
+import Button from "../components/Button";
 
 function SectionHeader({ title, onHelpPress, helpVisible = true }) {
   return (
@@ -10,14 +11,19 @@ function SectionHeader({ title, onHelpPress, helpVisible = true }) {
       {helpVisible && <View style={styles.spacer}></View>}
       <Text style={[styles.headerText]}>{title}</Text>
       {helpVisible && (
-        <View style={styles.helpIcon}>
-          <TouchableOpacity onPress={onHelpPress}>
-            <Ionicons
-              name="ios-help-circle-outline"
-              size={24}
-              color={defaultStyles.colors.primary}
-            />
-          </TouchableOpacity>
+        <View style={styles.helpButton}>
+          <Button
+            type="clear"
+            onPress={onHelpPress}
+            buttonStyle={{ justifyContent: "flex-end" }}
+            icon={
+              <Ionicons
+                name="ios-help-circle-outline"
+                size={24}
+                color={defaultStyles.colors.primary}
+              />
+            }
+          />
         </View>
       )}
     </View>
@@ -27,28 +33,23 @@ function SectionHeader({ title, onHelpPress, helpVisible = true }) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    height: 40,
+    justifyContent: "center",
     alignItems: "center",
     marginBottom: 16,
-    height: 40,
   },
   helpNotVisible: {
     justifyContent: "center",
   },
   headerText: {
+    alignSelf: "center",
     fontSize: 18,
     fontWeight: "600",
     color: defaultStyles.colors.primary,
   },
-  helpIcon: {
-    width: 40,
-    height: 40,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  spacer: {
-    width: 40,
-    height: 40,
+  helpButton: {
+    position: "absolute",
+    right: 0,
   },
 });
 

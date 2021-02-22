@@ -208,33 +208,29 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
           maxLength={255}
           label={FIELD_LABEL.BOAT_NAME}
           name="boatName"
-          placeholder={FIELD_LABEL.BOAT_NAME}
         />
         <FormField
           maxLength={255}
           label={FIELD_LABEL.BOAT_TYPE}
           name="boatType"
-          placeholder={FIELD_LABEL.BOAT_TYPE}
         />
         <FormField
           maxLength={255}
           label={FIELD_LABEL.SAIL_NUMBER}
           name="sailNumber"
-          placeholder={FIELD_LABEL.SAIL_NUMBER}
+          placeholder="Optional"
         />
         <FormField
           keyboardType="numeric"
           maxLength={3}
           label={FIELD_LABEL.FS}
           name="ratingFS"
-          placeholder={FIELD_LABEL.FS}
         />
         <FormField
           keyboardType="numeric"
           maxLength={3}
           label={FIELD_LABEL.NFS}
           name="ratingNFS"
-          placeholder={FIELD_LABEL.NFS}
         />
         <FormSwitch
           name="useNFSRating"

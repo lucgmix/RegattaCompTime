@@ -4,10 +4,16 @@ import { Button } from "react-native-elements";
 
 import defaultStyles from "../config/styles";
 
-function AppButton({ title, onPress, buttonStyle, ...otherProps }) {
+function AppButton({ title, type, onPress, buttonStyle, ...otherProps }) {
+  const isClearButton = type === "clear";
+
   return (
     <Button
-      buttonStyle={[styles.button, buttonStyle]}
+      buttonStyle={[
+        styles.button,
+        buttonStyle,
+        isClearButton && styleClear.button,
+      ]}
       title={title}
       onPress={onPress}
       titleStyle={styles.text}
@@ -15,6 +21,12 @@ function AppButton({ title, onPress, buttonStyle, ...otherProps }) {
     />
   );
 }
+
+const styleClear = StyleSheet.create({
+  button: {
+    backgroundColor: defaultStyles.colors.white,
+  },
+});
 
 const styles = StyleSheet.create({
   button: {
