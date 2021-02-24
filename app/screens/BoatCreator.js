@@ -13,7 +13,7 @@ import {
 import * as Yup from "yup";
 
 import Text from "../components/Text";
-import { useData } from "../context/DataContext";
+import { useStorage } from "../context/StorageContext";
 import { isEmpty } from "lodash";
 
 import "react-native-get-random-values";
@@ -108,7 +108,7 @@ function arrayRemove(arr, value) {
 }
 
 function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
-  const { storeBoatList, getBoatList } = useData();
+  const { storeBoatList, getBoatList } = useStorage();
   const [viewBoatList, setViewBoatList] = useState([]);
   const [editableBoat, setEditableBoat] = useState(selectedBoat);
   const defaultRatingValue =

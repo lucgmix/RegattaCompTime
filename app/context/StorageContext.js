@@ -8,9 +8,9 @@ import React, {
 //import { getBoatList } from "../api/FirebaseApi";
 import storage from "../utils/storage";
 
-const DataContext = createContext();
+const StorageContext = createContext();
 
-export function DataProvider({ children }) {
+export function StorageDataContext({ children }) {
   const [dataChanged, setDataChanged] = useState(false);
 
   const fetchStoredBoatList = async () => {
@@ -46,14 +46,16 @@ export function DataProvider({ children }) {
   }, []);
 
   return (
-    <DataContext.Provider value={{ storeBoatList, getBoatList, dataChanged }}>
+    <StorageContext.Provider
+      value={{ storeBoatList, getBoatList, dataChanged }}
+    >
       {children}
-    </DataContext.Provider>
+    </StorageContext.Provider>
   );
 }
 
-export function useData() {
-  return useContext(DataContext);
+export function useStorage() {
+  return useContext(StorageContext);
 }
 
-export default DataContext;
+export default StorageContext;

@@ -13,7 +13,7 @@ import BoatCreator from "./BoatCreator";
 import { ScrollView } from "react-native-gesture-handler";
 import BoatListItem from "../components/lists/BoatListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
-import { useData } from "../context/DataContext";
+import { useStorage } from "../context/StorageContext";
 import {
   Ionicons,
   AntDesign,
@@ -48,7 +48,7 @@ function Fleet(props) {
   );
   const [boatCreatorMode, setBoatCreatorMode] = useState();
   const [viewBoatList, setViewBoatList] = useState([]);
-  const { storeBoatList, getBoatList } = useData();
+  const { storeBoatList, getBoatList } = useStorage();
   const boatListRef = useRef();
 
   const [promptVisible, setPromptVisible] = useState(false);

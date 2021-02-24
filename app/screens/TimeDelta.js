@@ -13,7 +13,7 @@ import Button from "../components/Button";
 import TimeDeltaListItem from "../components/lists/TimeDeltaListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
 import { usePHRF } from "../context/PhrfContext";
-import { useData } from "../context/DataContext";
+import { useStorage } from "../context/StorageContext";
 import colors from "../config/colors";
 import TimeInpuModal from "../components/TimeInputModal";
 import DialogPrompt from "../components/DialogPrompt";
@@ -32,7 +32,7 @@ function TimeDelta(props) {
   const [helpPromptVisible, setHelpPromptVisible] = useState(false);
 
   const resultListRef = useRef();
-  const { getBoatList, dataChanged } = useData();
+  const { getBoatList, dataChanged } = useStorage();
 
   const { getElapsedDiff, secondsToHms, isAlternatePHRF } = usePHRF();
 

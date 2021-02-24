@@ -5,7 +5,10 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import AppNavigator from "./app/navigation/AppNavigator";
 import navigationTheme from "./app/navigation/navigationTheme";
 import AppLoading from "expo-app-loading";
-import { DataProvider, useDataContext } from "./app/context/DataContext";
+import {
+  StorageDataContext,
+  useStorageContext,
+} from "./app/context/StorageContext";
 import { getBoatList } from "./app/api/FirebaseApi";
 //For full spash screen implementation,
 //See https://medium.com/@darshancc23/how-to-add-a-splash-screen-on-react-native-and-expo-dddfd44772f3
@@ -38,12 +41,12 @@ export default function App() {
   // }, []);
 
   return (
-    <DataProvider>
+    <StorageDataContext>
       <PhrfProvider>
         <NavigationContainer theme={navigationTheme}>
           <AppNavigator />
         </NavigationContainer>
       </PhrfProvider>
-    </DataProvider>
+    </StorageDataContext>
   );
 }
