@@ -7,7 +7,6 @@ import defaultStyles from "../../config/styles";
 function BoatRaceListItem({
   name,
   type,
-  rating,
   correctedTime,
   isHeader,
   onFinishClick,
@@ -80,6 +79,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   name: {
+    fontWeight: "600",
     flex: 1,
     fontSize: 14,
   },
