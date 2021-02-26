@@ -61,7 +61,8 @@ const headerStyles = StyleSheet.create({
   correctedTime: {
     flex: 1,
     color: "white",
-    fontSize: 14,
+    fontWeight: "600",
+    fontSize: 15,
     alignSelf: "center",
   },
   name: {
