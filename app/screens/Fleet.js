@@ -32,11 +32,12 @@ function arrayRemove(arr, value) {
 }
 
 function sortBoatArray(boatList) {
+  console.log(boatList);
   return Array.from(boatList).sort((a, b) => {
-    if (a.boatType === b.boatType) {
+    if (a.rating === b.rating) {
       return a.boatName > b.boatName ? 1 : -1;
     } else {
-      return a.boatType > b.boatType ? 1 : -1;
+      return a.rating > b.rating ? 1 : -1;
     }
   });
 }

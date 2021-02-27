@@ -1,55 +1,52 @@
 import React, { useState } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Button from "../components/Button";
 import Text from "../components/Text";
+import { timeToString } from "../utils/phrf";
 
-function padToTwo(number) {
-  return number <= 9 ? `0${number}` : number;
-}
-
-function StopWatch(props) {
-  const [hour, setHour] = useState(0);
-  const [minute, setMinute] = useState(0);
-  const [second, setSecond] = useState(0);
-
-  const [startTime, setStartTime] = useState(0);
-  const [elaspedTime, setElapsedTime] = useState(0);
+function StopWatch({ onElapsedChange }) {
   const [timerInterval, setTimerInterval] = useState(0);
+  const [timeDisplay, setTimeDisplay] = useState("00:00:00");
+
+  let startTime;
+  let elapsedTime = 0;
 
   const handleStart = () => {
-    setTimerInterval(setInterval(timer, 1000));
-    console.log("handleStart intervalId", timerInterval);
+    startTime = Date.now() - elapsedTime;
+    setTimerInterval(
+      setInterval(function printTime() {
+        elapsedTime = Date.now() - startTime + 3600000;
+        onElapsedChange(elapsedTime);
+        setTimeDisplay(timeToString(elapsedTime));
+      }, 100)
+    );
   };
 
   const handleStop = () => {
-    console.log("handleStop - intervalId", timerInterval);
     clearInterval(timerInterval);
+    setTimerInterval(0);
   };
 
-  const handleReset = () => {};
-
-  const timer = () => {
-    const now = new Date();
-    setHour(now.getHours());
-    setMinute(now.getMinutes());
-    setSecond(now.getSeconds());
+  const handleReset = () => {
+    clearInterval(timerInterval);
+    setTimeDisplay("00:00:00");
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.timeContainer}>
-        <Text style={styles.timeLabel}>{padToTwo(hour)}:</Text>
-        <Text style={styles.timeLabel}>{padToTwo(minute)}:</Text>
-        <Text style={styles.timeLabel}>{padToTwo(second)}</Text>
+        <Text style={styles.timeLabel}>{timeDisplay}</Text>
       </View>
       <View style={styles.buttonContainer}>
         <Button
-          buttonsStyle={styles.button}
+          disabled={timerInterval !== 0}
+          buttonStyle={styles.button}
           title="Start"
           onPress={handleStart}
         ></Button>
         <Button
-          buttonsStyle={styles.button}
+          disabled={timerInterval === 0}
+          buttonStyle={styles.button}
           title="Stop"
           onPress={handleStop}
         ></Button>

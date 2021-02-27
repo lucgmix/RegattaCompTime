@@ -3,6 +3,7 @@ import { FlatList, StyleSheet, View } from "react-native";
 import Screen from "../components/Screen";
 import SectionHeader from "../components/SectionHeader";
 import Button from "../components/Button";
+import { usePHRF } from "../context/PhrfContext";
 import { useStorage } from "../context/StorageContext";
 import BoatRaceListItem from "../components/lists/BoatRaceListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
@@ -16,11 +17,12 @@ import defaultStyles from "../config/styles";
 import StopWatch from "../components/StopWatch";
 
 function sortBoatArray(boatList) {
+  console.log(boatList);
   return Array.from(boatList).sort((a, b) => {
-    if (a.boatType === b.boatType) {
+    if (a.rating === b.rating) {
       return a.boatName > b.boatName ? 1 : -1;
     } else {
-      return a.boatType > b.boatType ? 1 : -1;
+      return a.rating > b.rating ? 1 : -1;
     }
   });
 }
@@ -28,33 +30,17 @@ function sortBoatArray(boatList) {
 function Race(props) {
   const [helpPromptVisible, setHelpPromptVisible] = useState(false);
   const [viewBoatList, setViewBoatList] = useState([]);
-  const { storeBoatList, getBoatList, dataChanged } = useStorage();
+  const { getBoatList, dataChanged } = useStorage();
 
-  const [timerStart, setTimerStart] = useState(false);
-  const [stopwatchStart, setStopwatchStart] = useState(false);
-  const [totalDuration, setTotalDuration] = useState(0);
-  const [timerReset, setTimerReset] = useState(false);
-  const [stopwatchReset, setStopwatchReset] = useState(false);
+  const [elapsedTime, setElapsedTime] = useState(0);
 
-  const toggleTimer = () => {
-    setTimerStart(!timerStart);
-    setTimerReset(false);
-  };
-
-  const resetTimer = () => {
-    setTimerStart(false);
-    setTimerReset(true);
-  };
-
-  const toggleStopwatch = () => {
-    setStopwatchStart(!stopwatchStart);
-    setStopwatchReset(false);
-  };
-
-  resetStopwatch = () => {
-    setStopwatchStart(false);
-    setStopwatchReset(true);
-  };
+  const {
+    getCorrectedTime,
+    getElapsedDiff,
+    secondsToHms,
+    isAlternatePHRF,
+    timeToString,
+  } = usePHRF();
 
   const handleHelpPress = () => {
     setHelpPromptVisible(true);
@@ -70,18 +56,14 @@ function Race(props) {
     });
   };
 
-  const options = {
-    container: {
-      backgroundColor: "#000",
-      padding: 5,
-      borderRadius: 5,
-      width: 220,
-    },
-    text: {
-      fontSize: 30,
-      color: "#FFF",
-      marginLeft: 7,
-    },
+  const handleElapsedChange = (elapsed) => {
+    setElapsedTime(elapsed);
+  };
+
+  const formatBoatCorrectedTime = (boat, elapsed) => {
+    return timeToString(
+      getCorrectedTime(elapsed, boat.rating, isAlternatePHRF)
+    );
   };
 
   useEffect(() => {
@@ -91,7 +73,7 @@ function Race(props) {
   return (
     <Screen style={styles.container}>
       <SectionHeader title="Race" onHelpPress={handleHelpPress} />
-      <StopWatch />
+      <StopWatch onElapsedChange={handleElapsedChange} />
       <FlatList
         data={viewBoatList}
         keyExtractor={(boatItem) => {
@@ -114,8 +96,7 @@ function Race(props) {
               name={item.boatName}
               type={item.boatType}
               rating={item.rating}
-              // correctedTime={item.correctedTime}
-              correctedTime="01:25:34"
+              correctedTime={formatBoatCorrectedTime(item, elapsedTime)}
               onFinishClick={() => handleFinishClick(item)}
             />
           </View>

@@ -1,5 +1,11 @@
 import React, { createContext, useContext, useState } from "react";
-import { getBoats, getElapsedDiff, secondsToHms } from "../utils/phrf";
+import {
+  getBoats,
+  getElapsedDiff,
+  secondsToHms,
+  getCorrectedTime,
+  timeToString,
+} from "../utils/phrf";
 
 const RATING = {
   FS: "FS",
@@ -16,7 +22,9 @@ export function PhrfProvider({ children }) {
       value={{
         getBoats,
         getElapsedDiff,
+        getCorrectedTime,
         secondsToHms,
+        timeToString,
         isAlternatePHRF,
         setIsAlternatePHRF,
         // getSelectedRating,

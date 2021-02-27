@@ -19,19 +19,6 @@ function getAlternateTOT(phrf) {
 }
 
 /**
- * Return the corrected time for the specified PHRF rating and elapsed race time.
- * @param {*} elapsedSeconds Seconds since the start of the race.
- * @param {*} phrfRating Rating of the boat.
- * @param {*} isAlternate true to use alternate PHRF system (daytime racing), otherwise use standard for evening racing.
- */
-function getCorrectedTime(elapsedSeconds, phrfRating, isAlternate) {
-  return Math.round(
-    elapsedSeconds *
-      (isAlternate ? getAlternateTOT(phrfRating) : getTOT(phrfRating))
-  );
-}
-
-/**
  * Returns a sorted array of results based on the PHRF rating of boats and race duration.
  * @param {*} boats Array of boats to compute the corrected time.
  * @param {*} elaspedSeconds Seconds since the start of the race.
@@ -48,6 +35,19 @@ function getResults(boats, elaspedSeconds, isAlternate) {
       return { correctedTime, boat };
     })
     .sort((a, b) => (a.correctedTime > b.correctedTime ? 1 : -1));
+}
+
+/**
+ * Return the corrected time for the specified PHRF rating and elapsed race time.
+ * @param {*} elapsedSeconds Seconds since the start of the race.
+ * @param {*} phrfRating Rating of the boat.
+ * @param {*} isAlternate true to use alternate PHRF system (daytime racing), otherwise use standard for evening racing.
+ */
+export function getCorrectedTime(elapsedSeconds, phrfRating, isAlternate) {
+  return Math.round(
+    elapsedSeconds *
+      (isAlternate ? getAlternateTOT(phrfRating) : getTOT(phrfRating))
+  );
 }
 
 /**
@@ -112,6 +112,27 @@ export function secondsToHms(seconds) {
   } else {
     return isNegative ? `-${min}m ${sec}s` : `${min}m ${sec}s`;
   }
+}
+
+export function timeToString(time) {
+  const diffInHrs = time / 3600000;
+  const hh = Math.floor(diffInHrs);
+
+  const diffInMin = (diffInHrs - hh) * 60;
+  const mm = Math.floor(diffInMin);
+
+  const diffInSec = (diffInMin - mm) * 60;
+  const ss = Math.floor(diffInSec);
+
+  const diffInMs = (diffInSec - ss) * 100;
+  const ms = Math.floor(diffInMs);
+
+  const formattedHH = hh.toString().padStart(2, "0");
+  const formattedMM = mm.toString().padStart(2, "0");
+  const formattedSS = ss.toString().padStart(2, "0");
+  // const formattedMS = ms.toString().padStart(2, "0");
+
+  return `${formattedHH}:${formattedMM}:${formattedSS}`;
 }
 
 function printResults(isAlternate = false) {
