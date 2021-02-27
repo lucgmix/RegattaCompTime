@@ -2,9 +2,18 @@ import React, { useEffect, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import Screen from "../components/Screen";
 import SectionHeader from "../components/SectionHeader";
+import Button from "../components/Button";
 import { useStorage } from "../context/StorageContext";
 import BoatRaceListItem from "../components/lists/BoatRaceListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
+import {
+  Entypo,
+  Ionicons,
+  AntDesign,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
+import defaultStyles from "../config/styles";
+import StopWatch from "../components/StopWatch";
 
 function sortBoatArray(boatList) {
   return Array.from(boatList).sort((a, b) => {
@@ -19,7 +28,33 @@ function sortBoatArray(boatList) {
 function Race(props) {
   const [helpPromptVisible, setHelpPromptVisible] = useState(false);
   const [viewBoatList, setViewBoatList] = useState([]);
-  const { storeBoatList, getBoatList } = useStorage();
+  const { storeBoatList, getBoatList, dataChanged } = useStorage();
+
+  const [timerStart, setTimerStart] = useState(false);
+  const [stopwatchStart, setStopwatchStart] = useState(false);
+  const [totalDuration, setTotalDuration] = useState(0);
+  const [timerReset, setTimerReset] = useState(false);
+  const [stopwatchReset, setStopwatchReset] = useState(false);
+
+  const toggleTimer = () => {
+    setTimerStart(!timerStart);
+    setTimerReset(false);
+  };
+
+  const resetTimer = () => {
+    setTimerStart(false);
+    setTimerReset(true);
+  };
+
+  const toggleStopwatch = () => {
+    setStopwatchStart(!stopwatchStart);
+    setStopwatchReset(false);
+  };
+
+  resetStopwatch = () => {
+    setStopwatchStart(false);
+    setStopwatchReset(true);
+  };
 
   const handleHelpPress = () => {
     setHelpPromptVisible(true);
@@ -35,13 +70,28 @@ function Race(props) {
     });
   };
 
+  const options = {
+    container: {
+      backgroundColor: "#000",
+      padding: 5,
+      borderRadius: 5,
+      width: 220,
+    },
+    text: {
+      fontSize: 30,
+      color: "#FFF",
+      marginLeft: 7,
+    },
+  };
+
   useEffect(() => {
     populateBoatList();
-  }, []);
+  }, [dataChanged]);
 
   return (
     <Screen style={styles.container}>
       <SectionHeader title="Race" onHelpPress={handleHelpPress} />
+      <StopWatch />
       <FlatList
         data={viewBoatList}
         keyExtractor={(boatItem) => {
