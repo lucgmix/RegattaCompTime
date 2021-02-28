@@ -27,12 +27,15 @@ function sortBoatArray(boatList) {
   });
 }
 
+const elapsedOffset = 3600000;
+const boatFinishMap = new Map();
+
 function Race(props) {
   const [helpPromptVisible, setHelpPromptVisible] = useState(false);
   const [viewBoatList, setViewBoatList] = useState([]);
   const { getBoatList, dataChanged } = useStorage();
 
-  const [elapsedTime, setElapsedTime] = useState(0);
+  const [elapsedTime, setElapsedTime] = useState(elapsedOffset);
 
   const {
     getCorrectedTime,
@@ -46,10 +49,6 @@ function Race(props) {
     setHelpPromptVisible(true);
   };
 
-  const handleFinishClick = (boat) => {
-    console.log(boat);
-  };
-
   const populateBoatList = () => {
     getBoatList().then(({ data }) => {
       setViewBoatList(sortBoatArray(data));
@@ -60,10 +59,30 @@ function Race(props) {
     setElapsedTime(elapsed);
   };
 
-  const formatBoatCorrectedTime = (boat, elapsed) => {
+  const getBoatCorrectedTime = (boat, elapsed) => {
+    const elapsedFinishTime = boatFinishMap.get(boat.id);
     return timeToString(
-      getCorrectedTime(elapsed, boat.rating, isAlternatePHRF)
+      getCorrectedTime(
+        elapsedFinishTime || elapsed,
+        boat.rating,
+        isAlternatePHRF
+      )
     );
+  };
+
+  const handleFinishClick = (boat) => {
+    if (elapsedTime > elapsedOffset) {
+      boatFinishMap.set(boat.id, elapsedTime);
+    }
+  };
+
+  const handleOnStopRace = () => {
+    console.log("handleOnStopRace");
+  };
+
+  const handleReset = () => {
+    boatFinishMap.clear();
+    setElapsedTime(elapsedOffset);
   };
 
   useEffect(() => {
@@ -73,7 +92,12 @@ function Race(props) {
   return (
     <Screen style={styles.container}>
       <SectionHeader title="Race" onHelpPress={handleHelpPress} />
-      <StopWatch onElapsedChange={handleElapsedChange} />
+      <StopWatch
+        startTimeOffset={elapsedOffset}
+        onElapsedChange={handleElapsedChange}
+        onStop={handleOnStopRace}
+        onReset={handleReset}
+      />
       <FlatList
         data={viewBoatList}
         keyExtractor={(boatItem) => {
@@ -82,10 +106,11 @@ function Race(props) {
         ItemSeparatorComponent={() => <ListItemSeparator />}
         ListHeaderComponent={() => (
           <BoatRaceListItem
+            rank="Rank"
             name="Boat"
             rating="Rating"
             boatType="Type"
-            correctedTime="Corrected Time"
+            correctedTime="Corrected"
             isHeader
           />
         )}
@@ -93,11 +118,13 @@ function Race(props) {
         renderItem={({ item }) => (
           <View>
             <BoatRaceListItem
+              rank={item.rank}
               name={item.boatName}
               type={item.boatType}
               rating={item.rating}
-              correctedTime={formatBoatCorrectedTime(item, elapsedTime)}
+              correctedTime={getBoatCorrectedTime(item, elapsedTime)}
               onFinishClick={() => handleFinishClick(item)}
+              finishDisabled={boatFinishMap.get(item.id) !== undefined}
             />
           </View>
         )}

@@ -4,18 +4,21 @@ import Button from "../components/Button";
 import Text from "../components/Text";
 import { timeToString } from "../utils/phrf";
 
-function StopWatch({ onElapsedChange }) {
-  const [timerInterval, setTimerInterval] = useState(0);
-  const [timeDisplay, setTimeDisplay] = useState("00:00:00");
+let startTime = 0;
+let elapsedTime = 0;
+let startDT = 0;
 
-  let startTime;
-  let elapsedTime = 0;
+function StopWatch({ onElapsedChange, onStop, onReset, startTimeOffset }) {
+  const [timerInterval, setTimerInterval] = useState(0);
+  const [timeDisplay, setTimeDisplay] = useState(timeToString(startTimeOffset));
+
+  startDT = elapsedTime === 0 ? startTimeOffset : 0;
 
   const handleStart = () => {
-    startTime = Date.now() - elapsedTime;
+    startTime = Date.now() - elapsedTime - startDT;
     setTimerInterval(
       setInterval(function printTime() {
-        elapsedTime = Date.now() - startTime + 3600000;
+        elapsedTime = Date.now() - startTime;
         onElapsedChange(elapsedTime);
         setTimeDisplay(timeToString(elapsedTime));
       }, 100)
@@ -25,11 +28,16 @@ function StopWatch({ onElapsedChange }) {
   const handleStop = () => {
     clearInterval(timerInterval);
     setTimerInterval(0);
+    startDT = 0;
+    onStop();
   };
 
   const handleReset = () => {
     clearInterval(timerInterval);
-    setTimeDisplay("00:00:00");
+    startTime = 0;
+    elapsedTime = 0;
+    setTimeDisplay(timeToString(startTimeOffset));
+    onReset();
   };
 
   return (
@@ -50,7 +58,11 @@ function StopWatch({ onElapsedChange }) {
           title="Stop"
           onPress={handleStop}
         ></Button>
-        <Button title="Reset" onPress={handleReset}></Button>
+        <Button
+          disabled={timerInterval !== 0}
+          title="Reset"
+          onPress={handleReset}
+        ></Button>
       </View>
     </View>
   );

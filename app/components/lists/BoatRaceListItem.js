@@ -5,14 +5,27 @@ import Button from "../Button";
 import defaultStyles from "../../config/styles";
 
 function BoatRaceListItem({
+  rank = "-",
   name,
   type,
   correctedTime,
   isHeader,
   onFinishClick,
+  finishDisabled,
 }) {
   return (
-    <View style={[styles.container, isHeader && headerStyles.container]}>
+    <View
+      style={[
+        styles.container(finishDisabled),
+        isHeader && headerStyles.container,
+      ]}
+    >
+      <Text
+        numberOfLines={1}
+        style={[styles.rank, isHeader && headerStyles.label]}
+      >
+        {rank}
+      </Text>
       <View style={[styles.name, isHeader && headerStyles.nameContainer]}>
         <Text
           numberOfLines={1}
@@ -37,6 +50,7 @@ function BoatRaceListItem({
       </Text>
       {!isHeader && (
         <Button
+          disabled={finishDisabled}
           buttonStyle={styles.finishButton}
           onPress={onFinishClick}
           title="Finish"
@@ -49,34 +63,46 @@ function BoatRaceListItem({
 const headerStyles = StyleSheet.create({
   container: {
     backgroundColor: defaultStyles.colors.primary,
+    flex: 1,
   },
   nameContainer: { flex: 0.66 },
   label: {
-    flex: 1,
     color: "white",
     fontWeight: "600",
     fontSize: 15,
   },
   correctedTime: {
-    flex: 1,
+    flex: 1.1,
     color: "white",
     fontWeight: "600",
     fontSize: 15,
     alignSelf: "center",
   },
+  rank: {
+    fontSize: 14,
+  },
   name: {
-    flex: 0.33,
     fontSize: 14,
   },
 });
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: defaultStyles.colors.light,
-    borderRadius: 0,
-    flexDirection: "row",
-    padding: 14,
-    justifyContent: "space-between",
+  container: function (finishDisabled) {
+    return {
+      backgroundColor: finishDisabled
+        ? defaultStyles.colors.primary500
+        : defaultStyles.colors.light,
+      borderRadius: 0,
+      flexDirection: "row",
+      padding: 14,
+      justifyContent: "space-between",
+    };
+  },
+  rank: {
+    flex: 0.33,
+    alignSelf: "center",
+    fontWeight: "600",
+    fontSize: 14,
   },
   name: {
     fontWeight: "600",

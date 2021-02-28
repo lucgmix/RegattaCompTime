@@ -127,10 +127,9 @@ export function timeToString(time) {
   const diffInMs = (diffInSec - ss) * 100;
   const ms = Math.floor(diffInMs);
 
-  const formattedHH = hh.toString().padStart(2, "0");
+  const formattedHH = hh.toString();
   const formattedMM = mm.toString().padStart(2, "0");
   const formattedSS = ss.toString().padStart(2, "0");
-  // const formattedMS = ms.toString().padStart(2, "0");
 
   return `${formattedHH}:${formattedMM}:${formattedSS}`;
 }

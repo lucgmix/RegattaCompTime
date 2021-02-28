@@ -7,7 +7,7 @@ function ListItemSeparator(props) {
   return <Divider style={styles.container} />;
 }
 const styles = StyleSheet.create({
-  container: { backgroundColor: colors.darkgray },
+  container: { backgroundColor: colors.gray, height: 1 },
 });
 
 export default ListItemSeparator;
