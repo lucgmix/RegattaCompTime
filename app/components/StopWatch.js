@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import Button from "../components/Button";
 import Text from "../components/Text";
@@ -8,7 +8,16 @@ let startTime = 0;
 let elapsedTime = 0;
 let startDT = 0;
 
-function StopWatch({ onElapsedChange, onStop, onReset, startTimeOffset }) {
+function StopWatch({
+  startLabel,
+  stopLabel,
+  resetLabel,
+  onElapsedChange,
+  onStart,
+  onStop,
+  onReset,
+  startTimeOffset,
+}) {
   const [timerInterval, setTimerInterval] = useState(0);
   const [timeDisplay, setTimeDisplay] = useState(timeToString(startTimeOffset));
 
@@ -23,6 +32,7 @@ function StopWatch({ onElapsedChange, onStop, onReset, startTimeOffset }) {
         setTimeDisplay(timeToString(elapsedTime));
       }, 100)
     );
+    onStart();
   };
 
   const handleStop = () => {
@@ -49,18 +59,18 @@ function StopWatch({ onElapsedChange, onStop, onReset, startTimeOffset }) {
         <Button
           disabled={timerInterval !== 0}
           buttonStyle={styles.button}
-          title="Start"
+          title={startLabel}
           onPress={handleStart}
         ></Button>
         <Button
           disabled={timerInterval === 0}
           buttonStyle={styles.button}
-          title="Stop"
+          title={stopLabel}
           onPress={handleStop}
         ></Button>
         <Button
           disabled={timerInterval !== 0}
-          title="Reset"
+          title={resetLabel}
           onPress={handleReset}
         ></Button>
       </View>

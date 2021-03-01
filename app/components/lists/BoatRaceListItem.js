@@ -4,6 +4,12 @@ import Text from "../Text";
 import Button from "../Button";
 import defaultStyles from "../../config/styles";
 
+export const RACE_ITEM_MODE = {
+  IDLE: "idle",
+  RACING: "racing",
+  FINISHED: "finished",
+};
+
 function BoatRaceListItem({
   rank = "-",
   name,
@@ -12,6 +18,7 @@ function BoatRaceListItem({
   isHeader,
   onFinishClick,
   finishDisabled,
+  mode = RACE_ITEM_MODE.IDLE,
 }) {
   return (
     <View
