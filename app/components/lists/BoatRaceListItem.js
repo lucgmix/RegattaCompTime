@@ -22,6 +22,7 @@ function BoatRaceListItem({
   renderMode,
 }) {
   const finishDisabled =
+    renderMode === RACE_ITEM_MODE.DEFAULT ||
     renderMode === RACE_ITEM_MODE.BOAT_FINISHED ||
     renderMode === RACE_ITEM_MODE.RACE_FINISHED ||
     renderMode === RACE_ITEM_MODE.BOAT_DNF;

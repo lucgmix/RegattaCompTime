@@ -121,8 +121,6 @@ function Race(props) {
   };
 
   const handleFinishClick = (result) => {
-    if (raceState !== RACE_STATE.STARTED_AND_RUNNING) return;
-
     result.elapsedTime = elapsedTime;
     result.correctedTime = getCorrectedTime(
       elapsedTime,
@@ -194,6 +192,8 @@ function Race(props) {
     // Boat did not finish and race finished
     else if (result.elapsedTime === 0 && raceState === RACE_STATE.FINISHED) {
       return RACE_ITEM_MODE.BOAT_DNF;
+    } else if (raceState === RACE_STATE.STARTED_AND_RUNNING) {
+      return RACE_ITEM_MODE.RACING;
     } else {
       return RACE_ITEM_MODE.DEFAULT;
     }
