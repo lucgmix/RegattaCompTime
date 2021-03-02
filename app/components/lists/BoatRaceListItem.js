@@ -5,9 +5,11 @@ import Button from "../Button";
 import defaultStyles from "../../config/styles";
 
 export const RACE_ITEM_MODE = {
-  IDLE: "idle",
+  DEFAULT: "default",
   RACING: "racing",
-  FINISHED: "finished",
+  BOAT_FINISHED: "boat_finished",
+  RACE_FINISHED: "race_finished",
+  BOAT_DNF: "boat_did_not_finish",
 };
 
 function BoatRaceListItem({
@@ -17,15 +19,16 @@ function BoatRaceListItem({
   correctedTime,
   isHeader,
   onFinishClick,
-  finishDisabled,
-  mode = RACE_ITEM_MODE.IDLE,
+  renderMode,
 }) {
+  const finishDisabled =
+    renderMode === RACE_ITEM_MODE.BOAT_FINISHED ||
+    renderMode === RACE_ITEM_MODE.RACE_FINISHED ||
+    renderMode === RACE_ITEM_MODE.BOAT_DNF;
+
   return (
     <View
-      style={[
-        styles.container(finishDisabled),
-        isHeader && headerStyles.container,
-      ]}
+      style={[styles.container(renderMode), isHeader && headerStyles.container]}
     >
       <Text
         numberOfLines={1}
@@ -67,38 +70,16 @@ function BoatRaceListItem({
   );
 }
 
-const headerStyles = StyleSheet.create({
-  container: {
-    backgroundColor: defaultStyles.colors.primary,
-    flex: 1,
-  },
-  nameContainer: { flex: 0.66 },
-  label: {
-    color: "white",
-    fontWeight: "600",
-    fontSize: 15,
-  },
-  correctedTime: {
-    flex: 1.1,
-    color: "white",
-    fontWeight: "600",
-    fontSize: 15,
-    alignSelf: "center",
-  },
-  rank: {
-    fontSize: 14,
-  },
-  name: {
-    fontSize: 14,
-  },
-});
-
 const styles = StyleSheet.create({
-  container: function (finishDisabled) {
+  container: function (renderMode) {
     return {
-      backgroundColor: finishDisabled
-        ? defaultStyles.colors.primary500
-        : defaultStyles.colors.light,
+      backgroundColor:
+        renderMode === RACE_ITEM_MODE.DEFAULT
+          ? defaultStyles.colors.light
+          : renderMode === RACE_ITEM_MODE.BOAT_FINISHED ||
+            renderMode === RACE_ITEM_MODE.RACE_FINISHED
+          ? defaultStyles.colors.green
+          : defaultStyles.colors.light,
       borderRadius: 0,
       flexDirection: "row",
       padding: 14,
@@ -125,6 +106,32 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   finishButton: {},
+});
+
+const headerStyles = StyleSheet.create({
+  container: {
+    backgroundColor: defaultStyles.colors.primary,
+    flex: 1,
+  },
+  nameContainer: { flex: 0.66 },
+  label: {
+    color: "white",
+    fontWeight: "600",
+    fontSize: 15,
+  },
+  correctedTime: {
+    flex: 1.1,
+    color: "white",
+    fontWeight: "600",
+    fontSize: 15,
+    alignSelf: "center",
+  },
+  rank: {
+    fontSize: 14,
+  },
+  name: {
+    fontSize: 14,
+  },
 });
 
 export default BoatRaceListItem;

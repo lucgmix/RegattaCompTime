@@ -5,7 +5,9 @@ import SectionHeader from "../components/SectionHeader";
 import Button from "../components/Button";
 import { usePHRF } from "../context/PhrfContext";
 import { useStorage } from "../context/StorageContext";
-import BoatRaceListItem from "../components/lists/BoatRaceListItem";
+import BoatRaceListItem, {
+  RACE_ITEM_MODE,
+} from "../components/lists/BoatRaceListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
 import {
   Entypo,
@@ -20,7 +22,7 @@ import DialogPrompt from "../components/DialogPrompt";
 const RACE_STATE = {
   NOT_STARTED: "not_started",
   STARTED_AND_RUNNING: "started",
-  STOPPED_FINISHED: "finished",
+  FINISHED: "race_finished",
   RESET_CLEARED: "reset",
 };
 
@@ -53,7 +55,6 @@ function Race(props) {
 
   const [elapsedTime, setElapsedTime] = useState(elapsedOffset);
   const [raceState, setRaceState] = useState(RACE_STATE.NOT_STARTED);
-
   const { getBoatList, dataChanged } = useStorage();
 
   const {
@@ -92,7 +93,7 @@ function Race(props) {
   };
 
   const updateResultRanking = () => {
-    if (raceState === RACE_STATE.STOPPED_FINISHED) {
+    if (raceState === RACE_STATE.FINISHED) {
       const updatedCorrectedTime = viewBoatResultList.map((result) => {
         result.correctedTime = getCorrectedTime(
           result.elapsedTime,
@@ -144,12 +145,10 @@ function Race(props) {
 
   const handleOnStartRace = () => {
     setRaceState(RACE_STATE.STARTED_AND_RUNNING);
-    console.log("handleOnStartRace Called");
   };
 
   const handleOnStopRace = () => {
-    setRaceState(RACE_STATE.STOPPED_FINISHED);
-    console.log("handleOnStopRace Called");
+    setRaceState(RACE_STATE.FINISHED);
     const hasAtLeastOneFinish = viewBoatResultList.filter(
       (result) => result.rank > 0
     );
@@ -166,7 +165,6 @@ function Race(props) {
   const handleClearRace = () => {
     setClearRacePromptVisible(false);
     setRaceState(RACE_STATE.RESET_CLEARED);
-    console.log("handleReset Called");
     const resetBoatResults = viewBoatResultList.map((result) => {
       result.elapsedTime = 0;
       result.correctedTime = 0;
@@ -181,14 +179,23 @@ function Race(props) {
     setClearRacePromptVisible(true);
   };
 
-  const getResultItemMode = () => {
-    switch (raceState) {
-      case RACE_STATE.RESET_CLEARED:
-        return BoatRaceListItem.RACE_ITEM_MODE.IDLE;
-      case RACE_STATE.STARTED_AND_RUNNING:
-        return BoatRaceListItem.RACE_ITEM_MODE.RACING;
-      case RACE_STATE.STOPPED_FINISHED:
-        return BoatRaceListItem.RACE_ITEM_MODE.FINISHED;
+  const getRenderMode = (result) => {
+    // Boat finished and race is still running
+    if (
+      result.elapsedTime !== 0 &&
+      raceState === RACE_STATE.STARTED_AND_RUNNING
+    ) {
+      return RACE_ITEM_MODE.BOAT_FINISHED;
+    }
+    //  Boat finished and race is finished
+    else if (result.elapsedTime !== 0 && raceState === RACE_STATE.FINISHED) {
+      return RACE_ITEM_MODE.RACE_FINISHED;
+    }
+    // Boat did not finish and race finished
+    else if (result.elapsedTime === 0 && raceState === RACE_STATE.FINISHED) {
+      return RACE_ITEM_MODE.BOAT_DNF;
+    } else {
+      return RACE_ITEM_MODE.DEFAULT;
     }
   };
 
@@ -217,7 +224,7 @@ function Race(props) {
         startLabel="Start Race"
         stopLabel="Stop Race"
         resetLabel="Clear Race"
-        startTimeOffset={elapsedTime > 0 ? elapsedTime : elapsedOffset}
+        startTimeOffset={elapsedTime}
         onElapsedChange={handleElapsedChange}
         onStart={handleOnStartRace}
         onStop={handleOnStopRace}
@@ -249,8 +256,8 @@ function Race(props) {
               rating={item.boat.rating}
               correctedTime={getBoatCorrectedTime(item, elapsedTime)}
               onFinishClick={() => handleFinishClick(item)}
-              finishDisabled={item.elapsedTime !== 0}
-              mode={() => getResultItemMode()}
+              // finishDisabled={item.elapsedTime !== 0}
+              renderMode={getRenderMode(item)}
             />
           </View>
         )}

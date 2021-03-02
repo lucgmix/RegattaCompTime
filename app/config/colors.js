@@ -18,4 +18,5 @@ export default {
   darkgray: "#aaa",
   text: "#303030",
   disabledText: "#aaa",
+  green: "#90f09b",
 };
