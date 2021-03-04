@@ -18,6 +18,7 @@ import {
 import defaultStyles from "../config/styles";
 import StopWatch from "../components/StopWatch";
 import DialogPrompt from "../components/DialogPrompt";
+import { isEmpty } from "lodash";
 
 const RACE_STATE = {
   NOT_STARTED: "not_started",
@@ -27,6 +28,7 @@ const RACE_STATE = {
 };
 
 function ratingSortResults(resultList) {
+  if (isEmpty(resultList)) return;
   return Array.from(resultList).sort((a, b) => {
     if (a.boat.rating === b.boat.rating) {
       return a.boat.boatName > b.boat.boatName ? 1 : -1;
@@ -37,6 +39,7 @@ function ratingSortResults(resultList) {
 }
 
 function rankSortResults(resultList) {
+  if (isEmpty(resultList)) return;
   return Array.from(resultList).sort((a, b) => {
     if (a.rank === b.rank) {
       return a.boat.boatName > b.boat.boatName ? 1 : -1;
@@ -57,13 +60,7 @@ function Race(props) {
   const [raceState, setRaceState] = useState(RACE_STATE.NOT_STARTED);
   const { getBoatList, dataChanged } = useStorage();
 
-  const {
-    getCorrectedTime,
-    getElapsedDiff,
-    secondsToHms,
-    isAlternatePHRF,
-    timeToString,
-  } = usePHRF();
+  const { getCorrectedTime, isAlternatePHRF, timeToString } = usePHRF();
 
   const handleHelpPress = () => {
     setHelpPromptVisible(true);
@@ -78,8 +75,52 @@ function Race(props) {
     });
   };
 
-  const handleElapsedChange = (elapsed) => {
-    setElapsedTime(elapsed);
+  const updateResultList = () => {
+    if (isEmpty(viewBoatResultList)) return;
+    getBoatList().then(({ data }) => {
+      // Iterate fleet boat list
+      const updatedBoatResultList = data.map((boat) => {
+        // Find a result for the current boat
+        const resultOfBoat = viewBoatResultList.find(
+          (result) => result.boat.id === boat.id
+        );
+        // We have a result so we update the boat and the results data.
+        if (resultOfBoat) {
+          const newResult = {
+            ...resultOfBoat,
+            boat: boat,
+            correctedTime: getCorrectedTime(
+              resultOfBoat.elapsedTime,
+              boat.rating,
+              isAlternatePHRF
+            ),
+          };
+
+          return newResult;
+        } else {
+          // Boat was not in results so we create the result object
+          return {
+            boat: boat,
+            rank: "-",
+            elapsedTime: 0,
+            correctedTime: 0,
+          };
+        }
+      });
+
+      if (
+        raceState === RACE_STATE.STARTED_AND_RUNNING ||
+        raceState === RACE_STATE.FINISHED
+      ) {
+        setViewBoatResultList(
+          rankSortResults(getUpdatedResultRanking(updatedBoatResultList))
+        );
+      } else {
+        setViewBoatResultList(
+          ratingSortResults(getUpdatedResultRanking(updatedBoatResultList))
+        );
+      }
+    });
   };
 
   const getBoatCorrectedTime = (result, elapsed) => {
@@ -92,9 +133,14 @@ function Race(props) {
     );
   };
 
-  const updateResultRanking = () => {
-    if (raceState === RACE_STATE.FINISHED) {
-      const updatedCorrectedTime = viewBoatResultList.map((result) => {
+  const getUpdatedResultRanking = (resultList) => {
+    if (isEmpty(resultList)) return;
+
+    if (
+      raceState === RACE_STATE.STARTED_AND_RUNNING ||
+      raceState === RACE_STATE.FINISHED
+    ) {
+      const updatedCorrectedTime = Array.from(resultList).map((result) => {
         result.correctedTime = getCorrectedTime(
           result.elapsedTime,
           result.boat.rating,
@@ -115,9 +161,12 @@ function Race(props) {
       for (let i = 0; i < finishedBoatResults.length; i++) {
         finishedBoatResults[i].rank = i + 1;
       }
-
-      setViewBoatResultList(rankSortResults(viewBoatResultList));
+      return resultList;
     }
+  };
+
+  const handleElapsedChange = (elapsed) => {
+    setElapsedTime(elapsed);
   };
 
   const handleFinishClick = (result) => {
@@ -204,8 +253,16 @@ function Race(props) {
   }, []);
 
   useEffect(() => {
-    updateResultRanking();
-  }, [dataChanged, isAlternatePHRF]);
+    updateResultList();
+  }, [dataChanged]);
+
+  useEffect(() => {
+    if (!isEmpty(viewBoatResultList)) {
+      setViewBoatResultList(
+        rankSortResults(getUpdatedResultRanking(viewBoatResultList))
+      );
+    }
+  }, [isAlternatePHRF]);
 
   return (
     <Screen style={styles.container}>

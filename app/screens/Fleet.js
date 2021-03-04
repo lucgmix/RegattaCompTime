@@ -32,7 +32,6 @@ function arrayRemove(arr, value) {
 }
 
 function sortBoatArray(boatList) {
-  console.log(boatList);
   return Array.from(boatList).sort((a, b) => {
     if (a.rating === b.rating) {
       return a.boatName > b.boatName ? 1 : -1;
