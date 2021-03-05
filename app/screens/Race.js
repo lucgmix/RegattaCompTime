@@ -67,6 +67,7 @@ function Race(props) {
   };
 
   const populateResultList = () => {
+    console.log("populateResultList");
     getBoatList().then(({ data }) => {
       const resultList = data.map((boat) => {
         return { boat, rank: "-", elapsedTime: 0, correctedTime: 0 };
@@ -76,7 +77,7 @@ function Race(props) {
   };
 
   const updateResultList = () => {
-    if (isEmpty(viewBoatResultList)) return;
+    console.log("updateResultList");
     getBoatList().then(({ data }) => {
       // Iterate fleet boat list
       const updatedBoatResultList = data.map((boat) => {
@@ -135,6 +136,8 @@ function Race(props) {
 
   const getUpdatedResultRanking = (resultList) => {
     if (isEmpty(resultList)) return;
+
+    console.log("getUpdatedResultRanking");
 
     if (
       raceState === RACE_STATE.STARTED_AND_RUNNING ||
@@ -254,15 +257,7 @@ function Race(props) {
 
   useEffect(() => {
     updateResultList();
-  }, [dataChanged]);
-
-  useEffect(() => {
-    if (!isEmpty(viewBoatResultList)) {
-      setViewBoatResultList(
-        rankSortResults(getUpdatedResultRanking(viewBoatResultList))
-      );
-    }
-  }, [isAlternatePHRF]);
+  }, [dataChanged, isAlternatePHRF]);
 
   return (
     <Screen style={styles.container}>
