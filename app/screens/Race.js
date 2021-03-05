@@ -42,7 +42,7 @@ function rankSortResults(resultList) {
   if (isEmpty(resultList)) return;
   return Array.from(resultList).sort((a, b) => {
     if (a.rank === b.rank) {
-      return a.boat.boatName > b.boat.boatName ? 1 : -1;
+      return a.correctedTime > b.correctedTime ? 1 : -1;
     } else {
       return a.rank > b.rank ? 1 : -1;
     }
@@ -67,7 +67,6 @@ function Race(props) {
   };
 
   const populateResultList = () => {
-    console.log("populateResultList");
     getBoatList().then(({ data }) => {
       const resultList = data.map((boat) => {
         return { boat, rank: "-", elapsedTime: 0, correctedTime: 0 };
@@ -77,7 +76,8 @@ function Race(props) {
   };
 
   const updateResultList = () => {
-    console.log("updateResultList");
+    if (isEmpty(viewBoatResultList)) return;
+
     getBoatList().then(({ data }) => {
       // Iterate fleet boat list
       const updatedBoatResultList = data.map((boat) => {
@@ -137,8 +137,6 @@ function Race(props) {
   const getUpdatedResultRanking = (resultList) => {
     if (isEmpty(resultList)) return;
 
-    console.log("getUpdatedResultRanking");
-
     if (
       raceState === RACE_STATE.STARTED_AND_RUNNING ||
       raceState === RACE_STATE.FINISHED
@@ -164,6 +162,8 @@ function Race(props) {
       for (let i = 0; i < finishedBoatResults.length; i++) {
         finishedBoatResults[i].rank = i + 1;
       }
+      return updatedCorrectedTime;
+    } else {
       return resultList;
     }
   };
@@ -308,7 +308,6 @@ function Race(props) {
               rating={item.boat.rating}
               correctedTime={getBoatCorrectedTime(item, elapsedTime)}
               onFinishClick={() => handleFinishClick(item)}
-              // finishDisabled={item.elapsedTime !== 0}
               renderMode={getRenderMode(item)}
             />
           </View>

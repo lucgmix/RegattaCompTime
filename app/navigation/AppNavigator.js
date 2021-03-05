@@ -47,16 +47,6 @@ const AppNavigator = () => {
         }}
       />
       <Tab.Screen
-        name={SECTIONS.TIMEDELTA.name}
-        component={TimeDelta}
-        options={{
-          tabBarIcon: ({ size, color }) => (
-            <Entypo name="stopwatch" size={size} color={color} />
-          ),
-          title: SECTIONS.TIMEDELTA.title,
-        }}
-      />
-      <Tab.Screen
         name={SECTIONS.RACE.name}
         component={Race}
         options={{
@@ -64,6 +54,16 @@ const AppNavigator = () => {
             <Feather name="flag" size={size} color={color} />
           ),
           title: SECTIONS.RACE.title,
+        }}
+      />
+      <Tab.Screen
+        name={SECTIONS.TIMEDELTA.name}
+        component={TimeDelta}
+        options={{
+          tabBarIcon: ({ size, color }) => (
+            <Entypo name="stopwatch" size={size} color={color} />
+          ),
+          title: SECTIONS.TIMEDELTA.title,
         }}
       />
 

@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
           : defaultStyles.colors.light,
       borderRadius: 0,
       flexDirection: "row",
-      padding: 14,
+      padding: 12,
       justifyContent: "space-between",
     };
   },

@@ -81,7 +81,11 @@ function Fleet(props) {
   const handleDuplicateBoatButtonPress = () => {
     getBoatList().then(({ data }) => {
       const boatList = data;
-      const selectedBoatCopy = { ...selectedBoat, id: uuidv4() };
+      const selectedBoatCopy = {
+        ...selectedBoat,
+        boatName: `${selectedBoat.boatName} Copy`,
+        id: uuidv4(),
+      };
       boatList.push(selectedBoatCopy);
 
       storeBoatList(boatList).then((result) => {
