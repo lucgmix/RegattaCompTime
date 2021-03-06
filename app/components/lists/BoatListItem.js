@@ -22,19 +22,28 @@ function BoatListItem({
     >
       <Text
         numberOfLines={1}
-        style={[styles.name, isHeader && headerStyles.label]}
+        style={[
+          defaultStyles.text,
+          styles.name,
+          isHeader && headerStyles.label,
+        ]}
       >
         {name}
       </Text>
       <Text
         numberOfLines={1}
-        style={[styles.type, isHeader && headerStyles.label]}
+        style={[
+          defaultStyles.text,
+          styles.type,
+          isHeader && headerStyles.label,
+        ]}
       >
         {type}
       </Text>
       <Text
         numberOfLines={1}
         style={[
+          defaultStyles.text,
           styles.rating(defaultRating === "FS"),
           isHeader && headerStyles.label,
         ]}
@@ -44,6 +53,7 @@ function BoatListItem({
       <Text
         numberOfLines={1}
         style={[
+          defaultStyles.text,
           styles.rating(defaultRating === "NFS"),
           isHeader && headerStyles.label,
         ]}
@@ -52,7 +62,11 @@ function BoatListItem({
       </Text>
       <Text
         numberOfLines={1}
-        style={[styles.default_rating, isHeader && headerStyles.label]}
+        style={[
+          defaultStyles.text,
+          styles.default_rating,
+          isHeader && headerStyles.label,
+        ]}
       >
         {defaultRating}
       </Text>
@@ -87,13 +101,11 @@ const styles = StyleSheet.create({
   name: {
     flex: 0.5,
     flexDirection: "row",
-    fontSize: 15,
   },
   type: {
     flex: 0.33,
     flexDirection: "row",
     justifyContent: "center",
-    fontSize: 15,
   },
   rating: function (isDefaultRating) {
     return {

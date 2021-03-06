@@ -44,9 +44,13 @@ function Picker({
             />
           )}
           {selectedItem ? (
-            <Text style={styles.text}>{selectedItem.boatName}</Text>
+            <Text style={[defaultStyles.text, styles.text]}>
+              {selectedItem.boatName}
+            </Text>
           ) : (
-            <Text style={styles.placeholder}>{placeholder}</Text>
+            <Text style={[defaultStyles.text, styles.placeholde]}>
+              {placeholder}
+            </Text>
           )}
 
           <MaterialCommunityIcons

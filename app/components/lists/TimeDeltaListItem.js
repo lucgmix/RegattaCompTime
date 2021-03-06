@@ -14,6 +14,7 @@ function TimeDeltaListItem({
   return (
     <View
       style={[
+        defaultStyles.text,
         styles.container,
         isSelectedItem && seletedStyles.container,
         isHeader && headerStyles.container,
@@ -21,20 +22,40 @@ function TimeDeltaListItem({
     >
       <Text
         numberOfLines={1}
-        style={[styles.name, isHeader && headerStyles.label]}
+        style={[
+          defaultStyles.text,
+          styles.name,
+          isHeader && headerStyles.label,
+        ]}
       >
         {boatName}
       </Text>
       <Text
         numberOfLines={1}
-        style={[styles.type, isHeader && headerStyles.label]}
+        style={[
+          defaultStyles.text,
+          styles.type,
+          isHeader && headerStyles.label,
+        ]}
       >
         {boatType}
       </Text>
-      <Text style={[styles.rating, isHeader && headerStyles.label]}>
+      <Text
+        style={[
+          defaultStyles.text,
+          styles.rating,
+          isHeader && headerStyles.label,
+        ]}
+      >
         {rating}
       </Text>
-      <Text style={[styles.time, isHeader && headerStyles.label]}>
+      <Text
+        style={[
+          defaultStyles.text,
+          styles.time,
+          isHeader && headerStyles.label,
+        ]}
+      >
         {correctedTime}
       </Text>
     </View>
@@ -68,7 +89,6 @@ const styles = StyleSheet.create({
   name: {
     flex: 0.5,
     flexDirection: "row",
-    fontSize: 14,
   },
   type: {
     flex: 0.3,
@@ -85,8 +105,8 @@ const styles = StyleSheet.create({
     flex: 0.4,
     flexDirection: "row",
     textAlign: "right",
-    fontSize: 14,
     fontWeight: "700",
+    fontSize: 14,
   },
 });
 

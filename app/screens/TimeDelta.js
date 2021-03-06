@@ -20,6 +20,7 @@ import DialogPrompt from "../components/DialogPrompt";
 
 import { Entypo } from "@expo/vector-icons";
 import SectionHeader from "../components/SectionHeader";
+import defaultStyles from "../config/styles";
 
 let listItemHeight = 0;
 
@@ -121,7 +122,7 @@ function TimeDelta(props) {
           }}
         >
           <Entypo name="stopwatch" size={24} color={colors.primary} />
-          <Text style={styles.timeDisplay}>
+          <Text style={[defaultStyles.text, styles.timeDisplay]}>
             {secondsToHms(raceDuration, false)}
           </Text>
         </View>

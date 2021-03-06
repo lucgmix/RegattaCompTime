@@ -8,7 +8,7 @@ function PickerItem({ item, onPress }) {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
-        <Text style={styles.text}>{item.boatName}</Text>
+        <Text style={[defaultStyles.text, styles.text]}>{item.boatName}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
   },
   text: {
     padding: 14,
-    fontSize: 14,
   },
 });
 

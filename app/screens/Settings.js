@@ -7,6 +7,7 @@ import Text from "../components/Text";
 
 import { usePHRF } from "../context/PhrfContext";
 import SectionHeader from "../components/SectionHeader";
+import defaultStyles from "../config/styles";
 
 const PHRF_FORMULA = {
   STANDARD: "standard",
@@ -28,7 +29,7 @@ function Settings(props) {
   return (
     <Screen style={styles.container}>
       <SectionHeader title="Settings" helpVisible={false} />
-      <Text>PHRF-LO Formula</Text>
+      <Text style={defaultStyles.text}>PHRF-LO Formula</Text>
       <RadioButton.Group
         onValueChange={(value) => updatePhrfFormula(value)}
         value={value}
@@ -41,9 +42,9 @@ function Settings(props) {
               color={color.primary}
               styles={styles.radio}
             />
-            <Text style={styles.radioText}>Primary</Text>
+            <Text style={[defaultStyles.text, styles.radioText]}>Primary</Text>
           </View>
-          <Text style={styles.radioDescription}>
+          <Text style={[defaultStyles.text, styles.radioDescription]}>
             Recommended formula designed to address the larger rating spread
             usually found in club events as well as the effects of diminishing
             wind due to sunset.
@@ -57,10 +58,12 @@ function Settings(props) {
               color={color.primary}
               styles={styles.radio}
             />
-            <Text style={styles.radioText}>Alternate</Text>
+            <Text style={[defaultStyles.text, styles.radioText]}>
+              Alternate
+            </Text>
           </View>
 
-          <Text style={styles.radioDescription}>
+          <Text style={[defaultStyles.text, styles.radioDescription]}>
             This alternate formula may be appropriate for use in Day Races and
             Interclub events. NOTE: When being used, this "Alternate" SHALL be
             stated in the Notice of Race and Sailing Instructions, in order to
@@ -86,7 +89,6 @@ const styles = StyleSheet.create({
   },
   radioText: {
     marginLeft: 20,
-    fontSize: 14,
   },
   radioDescription: {
     marginLeft: 56,

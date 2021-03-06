@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     marginTop: 0,
   },
   titleLabel: {
-    marginBottom: 4,
+    marginBottom: 12,
     fontSize: 13,
   },
   switchContainer: {
@@ -65,7 +65,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   label: {
-    fontSize: 13,
     color: defaultStyles.colors.text,
   },
   errorMessage: {
@@ -74,9 +73,11 @@ const styles = StyleSheet.create({
   },
   valueFalseLabel: {
     marginRight: 8,
+    fontSize: 15,
   },
   valueTrueLabel: {
     marginLeft: 8,
+    fontSize: 15,
   },
 });
 

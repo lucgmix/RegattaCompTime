@@ -33,21 +33,39 @@ function BoatRaceListItem({
     >
       <Text
         numberOfLines={1}
-        style={[styles.rank, isHeader && headerStyles.label]}
+        style={[
+          defaultStyles.text,
+          styles.rank,
+          isHeader && headerStyles.label,
+        ]}
       >
         {rank}
       </Text>
-      <View style={[styles.name, isHeader && headerStyles.nameContainer]}>
+      <View
+        style={[
+          defaultStyles.text,
+          styles.name,
+          isHeader && headerStyles.nameContainer,
+        ]}
+      >
         <Text
           numberOfLines={1}
-          style={[styles.name, isHeader && headerStyles.label]}
+          style={[
+            defaultStyles.text,
+            styles.name,
+            isHeader && headerStyles.label,
+          ]}
         >
           {name}
         </Text>
         {!isHeader && (
           <Text
             numberOfLines={1}
-            style={[styles.type, isHeader && headerStyles.label]}
+            style={[
+              defaultStyles.text,
+              styles.type,
+              isHeader && headerStyles.label,
+            ]}
           >
             {type}
           </Text>
@@ -55,7 +73,11 @@ function BoatRaceListItem({
       </View>
       <Text
         numberOfLines={1}
-        style={[styles.correctedTime, isHeader && headerStyles.correctedTime]}
+        style={[
+          defaultStyles.text,
+          styles.correctedTime,
+          isHeader && headerStyles.correctedTime,
+        ]}
       >
         {correctedTime}
       </Text>
@@ -91,20 +113,16 @@ const styles = StyleSheet.create({
     flex: 0.33,
     alignSelf: "center",
     fontWeight: "700",
-    fontSize: 14,
   },
   name: {
     fontWeight: "700",
     flex: 1,
-    fontSize: 14,
-    letterSpacing: 0.6,
   },
   type: {
     fontSize: 13,
   },
   correctedTime: {
     flex: 0.7,
-    fontSize: 14,
     alignSelf: "center",
     fontWeight: "700",
   },
@@ -119,13 +137,10 @@ const headerStyles = StyleSheet.create({
   nameContainer: { flex: 0.66 },
   label: {
     color: "white",
-    fontWeight: "700",
-    fontSize: 15,
   },
   correctedTime: {
     flex: 1.1,
     color: "white",
-    fontSize: 15,
     alignSelf: "center",
   },
   rank: {
