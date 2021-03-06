@@ -53,7 +53,7 @@ const headerStyles = StyleSheet.create({
   },
   label: {
     color: "white",
-    fontWeight: "600",
+    fontWeight: "700",
     fontSize: 16,
   },
 });
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     textAlign: "right",
     fontSize: 14,
-    fontWeight: "500",
+    fontWeight: "700",
   },
 });
 

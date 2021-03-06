@@ -85,29 +85,30 @@ const styles = StyleSheet.create({
     padding: 14,
   },
   name: {
-    flex: 0.4,
+    flex: 0.5,
     flexDirection: "row",
-    fontSize: 14,
+    fontSize: 15,
   },
   type: {
-    flex: 0.25,
+    flex: 0.33,
     flexDirection: "row",
-    fontSize: 14,
+    justifyContent: "center",
+    fontSize: 15,
   },
   rating: function (isDefaultRating) {
     return {
       flex: 0.3,
       flexDirection: "row",
       textAlign: "right",
-      fontSize: 14,
-      fontWeight: isDefaultRating ? "500" : "400",
+      fontSize: 15,
+      fontWeight: isDefaultRating ? "700" : "400",
     };
   },
   default_rating: {
     flex: 0.3,
     flexDirection: "row",
     textAlign: "right",
-    fontSize: 14,
+    fontSize: 15,
   },
 });
 

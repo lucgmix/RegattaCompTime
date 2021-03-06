@@ -90,22 +90,23 @@ const styles = StyleSheet.create({
   rank: {
     flex: 0.33,
     alignSelf: "center",
-    fontWeight: "600",
+    fontWeight: "700",
     fontSize: 14,
   },
   name: {
-    fontWeight: "600",
+    fontWeight: "700",
     flex: 1,
     fontSize: 14,
+    letterSpacing: 0.6,
   },
   type: {
-    fontSize: 14,
+    fontSize: 13,
   },
   correctedTime: {
     flex: 0.7,
     fontSize: 14,
     alignSelf: "center",
-    fontWeight: "500",
+    fontWeight: "700",
   },
   finishButton: {},
 });
@@ -118,13 +119,12 @@ const headerStyles = StyleSheet.create({
   nameContainer: { flex: 0.66 },
   label: {
     color: "white",
-    fontWeight: "600",
+    fontWeight: "700",
     fontSize: 15,
   },
   correctedTime: {
     flex: 1.1,
     color: "white",
-    fontWeight: "600",
     fontSize: 15,
     alignSelf: "center",
   },
