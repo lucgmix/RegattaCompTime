@@ -38,14 +38,39 @@ function ratingSortResults(resultList) {
   });
 }
 
-function rankSortResults(resultList) {
+function rankRatingSortResults(
+  resultList,
+  elapsedTime,
+  isAlternatePHRF,
+  getCorrectedTime
+) {
   if (isEmpty(resultList)) return;
   return Array.from(resultList).sort((a, b) => {
-    if (a.rank === b.rank) {
-      return a.correctedTime > b.correctedTime ? 1 : -1;
-    } else {
-      return a.rank > b.rank ? 1 : -1;
-    }
+    const boatACorrectedTime =
+      a.correctedTime ||
+      getCorrectedTime(elapsedTime, a.boat.rating, isAlternatePHRF);
+    const boatBCorrectedTime =
+      b.correctedTime ||
+      getCorrectedTime(elapsedTime, b.boat.rating, isAlternatePHRF);
+    return boatACorrectedTime > boatBCorrectedTime ? 1 : -1;
+  });
+}
+
+function correctTimeSortResults(
+  resultList,
+  elapsedTime,
+  isAlternatePHRF,
+  getCorrectedTime
+) {
+  if (isEmpty(resultList)) return;
+  return Array.from(resultList).sort((a, b) => {
+    const boatACorrectedTime =
+      a.correctedTime ||
+      getCorrectedTime(elapsedTime, a.boat.rating, isAlternatePHRF);
+    const boatBCorrectedTime =
+      b.correctedTime ||
+      getCorrectedTime(elapsedTime, b.boat.rating, isAlternatePHRF);
+    return boatACorrectedTime > boatBCorrectedTime ? 1 : -1;
   });
 }
 
@@ -82,7 +107,7 @@ function Race(props) {
       // Iterate fleet boat list
       const updatedBoatResultList = data.map((boat) => {
         // Find a result for the current boat
-        const resultOfBoat = viewBoatResultList.find(
+        const resultOfBoat = Array.from(viewBoatResultList).find(
           (result) => result.boat.id === boat.id
         );
         // We have a result so we update the boat and the results data.
@@ -114,12 +139,14 @@ function Race(props) {
         raceState === RACE_STATE.FINISHED
       ) {
         setViewBoatResultList(
-          rankSortResults(getUpdatedResultRanking(updatedBoatResultList))
+          correctTimeSortResults(
+            getUpdatedResultRanking(updatedBoatResultList),
+            elapsedTime,
+            isAlternatePHRF,
+            getCorrectedTime
+          )
         );
       } else {
-        setViewBoatResultList(
-          ratingSortResults(getUpdatedResultRanking(updatedBoatResultList))
-        );
       }
     });
   };
@@ -172,50 +199,56 @@ function Race(props) {
     setElapsedTime(elapsed);
   };
 
-  const handleFinishClick = (result) => {
-    result.elapsedTime = elapsedTime;
-    result.correctedTime = getCorrectedTime(
+  const handleBoatFinishClick = (result) => {
+    const resultCopy = { ...result };
+    resultCopy.elapsedTime = elapsedTime;
+    resultCopy.correctedTime = getCorrectedTime(
       elapsedTime,
-      result.boat.rating,
+      resultCopy.boat.rating,
       isAlternatePHRF
     );
 
-    const finishedBoatResults = viewBoatResultList.filter((result) => {
+    const allBoats = Array.from(viewBoatResultList);
+    const originalResultIndex = allBoats.findIndex(
+      (result) => result.boat.id === resultCopy.boat.id
+    );
+    allBoats[originalResultIndex] = resultCopy;
+
+    const finishedBoatResults = Array.from(allBoats).filter((result) => {
       return result.elapsedTime > 0;
     });
-
     finishedBoatResults.sort((a, b) => {
       return a.correctedTime > b.correctedTime ? 1 : -1;
     });
-
     for (let i = 0; i < finishedBoatResults.length; i++) {
       finishedBoatResults[i].rank = i + 1;
     }
-  };
 
-  const handleOnStartRace = () => {
-    setRaceState(RACE_STATE.STARTED_AND_RUNNING);
+    setViewBoatResultList(allBoats);
   };
 
   const handleOnStopRace = () => {
     setRaceState(RACE_STATE.FINISHED);
-    const hasAtLeastOneFinish = viewBoatResultList.filter(
+    const resultList = Array.from(viewBoatResultList);
+    const hasAtLeastOneFinish = Array.from(viewBoatResultList).filter(
       (result) => result.rank > 0
     );
 
     if (hasAtLeastOneFinish.length === 0) return;
 
-    const finalResults = Array.from(viewBoatResultList).sort((a, b) => {
-      return a.rank > b.rank ? 1 : -1;
-    });
-
-    setViewBoatResultList(finalResults);
+    const sortedArray = rankRatingSortResults(
+      resultList,
+      elapsedTime,
+      isAlternatePHRF,
+      getCorrectedTime
+    );
+    setViewBoatResultList(sortedArray);
   };
 
   const handleClearRace = () => {
     setClearRacePromptVisible(false);
     setRaceState(RACE_STATE.RESET_CLEARED);
-    const resetBoatResults = viewBoatResultList.map((result) => {
+    const resetBoatResults = Array.from(viewBoatResultList).map((result) => {
       result.elapsedTime = 0;
       result.correctedTime = 0;
       result.rank = "-";
@@ -223,6 +256,10 @@ function Race(props) {
     });
     setViewBoatResultList(ratingSortResults(resetBoatResults));
     setElapsedTime(elapsedOffset);
+  };
+
+  const handleOnStartRace = () => {
+    setRaceState(RACE_STATE.STARTED_AND_RUNNING);
   };
 
   const handleReset = () => {
@@ -307,7 +344,7 @@ function Race(props) {
               type={item.boat.boatType}
               rating={item.boat.rating}
               correctedTime={getBoatCorrectedTime(item, elapsedTime)}
-              onFinishClick={() => handleFinishClick(item)}
+              onFinishClick={() => handleBoatFinishClick(item)}
               renderMode={getRenderMode(item)}
             />
           </View>

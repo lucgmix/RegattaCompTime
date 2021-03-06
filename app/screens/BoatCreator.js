@@ -37,7 +37,7 @@ const FIELD_LABEL = {
 
 const DEFAULT_RATING = {
   FS: "FS",
-  NFS: "NSF",
+  NFS: "NFS",
 };
 
 const validationSchema = Yup.object().shape({

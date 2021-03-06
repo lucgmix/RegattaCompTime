@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     textAlign: "right",
     fontSize: 14,
+    fontWeight: "500",
   },
 });
 

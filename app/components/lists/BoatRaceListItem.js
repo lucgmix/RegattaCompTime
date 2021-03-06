@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
     flex: 0.7,
     fontSize: 14,
     alignSelf: "center",
+    fontWeight: "500",
   },
   finishButton: {},
 });
