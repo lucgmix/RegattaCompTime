@@ -38,24 +38,6 @@ function ratingSortResults(resultList) {
   });
 }
 
-function rankRatingSortResults(
-  resultList,
-  elapsedTime,
-  isAlternatePHRF,
-  getCorrectedTime
-) {
-  if (isEmpty(resultList)) return;
-  return Array.from(resultList).sort((a, b) => {
-    const boatACorrectedTime =
-      a.correctedTime ||
-      getCorrectedTime(elapsedTime, a.boat.rating, isAlternatePHRF);
-    const boatBCorrectedTime =
-      b.correctedTime ||
-      getCorrectedTime(elapsedTime, b.boat.rating, isAlternatePHRF);
-    return boatACorrectedTime > boatBCorrectedTime ? 1 : -1;
-  });
-}
-
 function correctTimeSortResults(
   resultList,
   elapsedTime,
@@ -236,7 +218,7 @@ function Race(props) {
 
     if (hasAtLeastOneFinish.length === 0) return;
 
-    const sortedArray = rankRatingSortResults(
+    const sortedArray = correctTimeSortResults(
       resultList,
       elapsedTime,
       isAlternatePHRF,
