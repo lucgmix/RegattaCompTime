@@ -3,6 +3,7 @@ import { View, StyleSheet } from "react-native";
 import Text from "../Text";
 import Button from "../Button";
 import defaultStyles from "../../config/styles";
+import colors from "../../config/colors";
 
 export const RACE_ITEM_MODE = {
   DEFAULT: "default",
@@ -17,6 +18,7 @@ function BoatRaceListItem({
   name,
   type,
   correctedTime,
+  elapsedTime,
   isHeader,
   onFinishClick,
   renderMode,
@@ -44,7 +46,7 @@ function BoatRaceListItem({
       <View
         style={[
           defaultStyles.text,
-          styles.name,
+          styles.nameContainer,
           isHeader && headerStyles.nameContainer,
         ]}
       >
@@ -71,16 +73,28 @@ function BoatRaceListItem({
           </Text>
         )}
       </View>
-      <Text
-        numberOfLines={1}
-        style={[
-          defaultStyles.text,
-          styles.correctedTime,
-          isHeader && headerStyles.correctedTime,
-        ]}
+      <View
+        style={[styles.timeContainer, isHeader && headerStyles.timeContainer]}
       >
-        {correctedTime}
-      </Text>
+        <Text
+          numberOfLines={1}
+          style={[
+            defaultStyles.text,
+            styles.correctedTime,
+            isHeader && headerStyles.correctedTime,
+          ]}
+        >
+          {correctedTime}
+        </Text>
+        {!isHeader && (
+          <Text
+            numberOfLines={1}
+            style={[defaultStyles.text, styles.elapsedTime]}
+          >
+            {elapsedTime}
+          </Text>
+        )}
+      </View>
       {!isHeader && (
         <Button
           disabled={finishDisabled}
@@ -114,17 +128,26 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontWeight: "700",
   },
+  nameContainer: { flex: 0.7 },
   name: {
     fontWeight: "700",
     flex: 1,
   },
   type: {
     fontSize: 13,
+    color: colors.subText,
+  },
+  timeContainer: {
+    flex: 0.5,
+    justifyContent: "space-between",
   },
   correctedTime: {
-    flex: 0.7,
-    alignSelf: "center",
     fontWeight: "700",
+  },
+  elapsedTime: {
+    color: colors.subText,
+    letterSpacing: 1.9,
+    fontSize: 13,
   },
   finishButton: {},
 });
@@ -134,14 +157,17 @@ const headerStyles = StyleSheet.create({
     backgroundColor: defaultStyles.colors.primary,
     flex: 1,
   },
-  nameContainer: { flex: 0.66 },
+  nameContainer: { flex: 0.7 },
   label: {
-    color: "white",
+    color: colors.white,
+  },
+  timeContainer: {
+    flex: 0.9,
+    alignItems: "flex-start",
   },
   correctedTime: {
-    flex: 1.1,
-    color: "white",
-    alignSelf: "center",
+    fontWeight: "700",
+    color: colors.white,
   },
   rank: {
     fontSize: 14,

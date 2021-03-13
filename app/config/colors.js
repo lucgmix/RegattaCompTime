@@ -17,6 +17,7 @@ export default {
   gray: "#ccc",
   darkgray: "#aaa",
   text: "#303030",
+  subText: "#707070",
   disabledText: "#aaa",
   green: "#90f09b",
 };

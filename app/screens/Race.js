@@ -143,6 +143,12 @@ function Race(props) {
     );
   };
 
+  const getBoatElapsedTime = (result, elapsed) => {
+    return result.elapsedTime > 0
+      ? timeToString(result.elapsedTime)
+      : timeToString(elapsed);
+  };
+
   const getUpdatedResultRanking = (resultList) => {
     if (isEmpty(resultList)) return;
 
@@ -313,7 +319,7 @@ function Race(props) {
             name="Boat"
             rating="Rating"
             boatType="Type"
-            correctedTime="Corrected"
+            correctedTime="Time"
             isHeader
           />
         )}
@@ -326,6 +332,7 @@ function Race(props) {
               type={item.boat.boatType}
               rating={item.boat.rating}
               correctedTime={getBoatCorrectedTime(item, elapsedTime)}
+              elapsedTime={getBoatElapsedTime(item, elapsedTime)}
               onFinishClick={() => handleBoatFinishClick(item)}
               renderMode={getRenderMode(item)}
             />
