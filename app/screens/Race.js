@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import Screen from "../components/Screen";
 import SectionHeader from "../components/SectionHeader";
-import Button from "../components/Button";
 import { usePHRF } from "../context/PhrfContext";
 import { useStorage } from "../context/StorageContext";
 import BoatRaceListItem, {
@@ -19,6 +18,8 @@ import defaultStyles from "../config/styles";
 import StopWatch from "../components/StopWatch";
 import DialogPrompt from "../components/DialogPrompt";
 import { isEmpty } from "lodash";
+import RaceTimer from "../components/RaceTimer";
+import { date } from "yup";
 
 const RACE_STATE = {
   NOT_STARTED: "not_started",
@@ -56,30 +57,31 @@ function correctTimeSortResults(
   });
 }
 
-const elapsedOffset = 3600000;
-
 function Race(props) {
   const [helpPromptVisible, setHelpPromptVisible] = useState(false);
   const [viewBoatResultList, setViewBoatResultList] = useState([]);
   const [clearRacePromptVisible, setClearRacePromptVisible] = useState(false);
 
-  const [elapsedTime, setElapsedTime] = useState(elapsedOffset);
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const [raceTimerStartDate, setRaceTimerStartDate] = useState(new Date());
+
   const [raceState, setRaceState] = useState(RACE_STATE.NOT_STARTED);
-  const { getBoatList, dataChanged } = useStorage();
+  const {
+    getBoatList,
+    getRaceResults,
+    storeRaceResults,
+    dataChanged,
+  } = useStorage();
+
+  const [stopWatchStartTime, setStopWatchStartTime] = useState(0);
+  const [runStopWatch, setRunStopWatch] = useState(false);
+  const [endStopWatch, setEndStopWatch] = useState(false);
+  const [resetStopWatch, setResetStopWatch] = useState(false);
 
   const { getCorrectedTime, isAlternatePHRF, timeToString } = usePHRF();
 
   const handleHelpPress = () => {
     setHelpPromptVisible(true);
-  };
-
-  const populateResultList = () => {
-    getBoatList().then(({ data }) => {
-      const resultList = data.map((boat) => {
-        return { boat, rank: "-", elapsedTime: 0, correctedTime: 0 };
-      });
-      setViewBoatResultList(ratingSortResults(resultList));
-    });
   };
 
   const updateResultList = () => {
@@ -97,6 +99,7 @@ function Race(props) {
           const newResult = {
             ...resultOfBoat,
             boat: boat,
+            // elapsedTime: resultOfBoat.elapsedTime + stopWatchStartTime,
             correctedTime: getCorrectedTime(
               resultOfBoat.elapsedTime,
               boat.rating,
@@ -213,10 +216,25 @@ function Race(props) {
     }
 
     setViewBoatResultList(allBoats);
+
+    storeRaceResults({
+      raceStartTime: raceTimerStartDate.getTime(),
+      raceElapsedTime: elapsedTime,
+      boatResults: allBoats,
+    }).then((response) => {
+      if (!response.ok) {
+        console.warn(response.error);
+      }
+    });
   };
 
   const handleOnStopRace = () => {
     setRaceState(RACE_STATE.FINISHED);
+
+    setRunStopWatch(false);
+    setEndStopWatch(true);
+    setResetStopWatch(false);
+
     const resultList = Array.from(viewBoatResultList);
     const hasAtLeastOneFinish = Array.from(viewBoatResultList).filter(
       (result) => result.rank > 0
@@ -242,16 +260,96 @@ function Race(props) {
       result.rank = "-";
       return result;
     });
-    setViewBoatResultList(ratingSortResults(resetBoatResults));
-    setElapsedTime(elapsedOffset);
-  };
 
-  const handleOnStartRace = () => {
-    setRaceState(RACE_STATE.STARTED_AND_RUNNING);
+    storeRaceResults({
+      raceStartTime: raceTimerStartDate.getTime(),
+      raceElapsedTime: 0,
+      boatResults: resetBoatResults,
+    }).then((response) => {
+      if (response && response.ok) {
+        setViewBoatResultList(ratingSortResults(resetBoatResults));
+        setElapsedTime(0);
+
+        setRunStopWatch(false);
+        setEndStopWatch(false);
+        setResetStopWatch(true);
+      }
+    });
   };
 
   const handleReset = () => {
     setClearRacePromptVisible(true);
+  };
+
+  const handleStartNow = (date) => {
+    setRaceState(RACE_STATE.STARTED_AND_RUNNING);
+    setElapsedTime(0);
+
+    setRunStopWatch(true);
+    setEndStopWatch(false);
+    setResetStopWatch(false);
+  };
+
+  const handleStartTimeChange = (date) => {
+    //updateResultList();
+    setRaceTimerStartDate(date);
+
+    storeRaceResults({ raceStartTime: date.getTime() }).then((response) => {
+      if (response && response.ok) {
+        raceStartTimeAction(date.getTime());
+      }
+    });
+  };
+
+  const raceStartTimeAction = (time) => {
+    setRaceTimerStartDate(new Date(time));
+
+    const elapsedSinceStartTime = new Date().getTime() - time;
+
+    // Current time is later than race start time, start stopwatch
+    if (elapsedSinceStartTime > 0) {
+      startRaceTimer(elapsedSinceStartTime);
+    } else {
+      setTimeout(startRaceTimer, Math.abs(elapsedSinceStartTime));
+    }
+  };
+
+  const populateResultList = () => {
+    getRaceResults().then((response) => {
+      if (response && response.ok) {
+        const raceResults = response.data;
+        if (raceResults) {
+          setViewBoatResultList(ratingSortResults(raceResults.boatResults));
+          raceStartTimeAction(raceResults.raceStartTime);
+        } else {
+          getBoatList().then(({ data }) => {
+            const resultList = data.map((boat) => {
+              return { boat, rank: "-", elapsedTime: 0, correctedTime: 0 };
+            });
+            setViewBoatResultList(ratingSortResults(resultList));
+          });
+        }
+      }
+    });
+  };
+
+  useEffect(() => {
+    populateResultList();
+  }, []);
+
+  useEffect(() => {
+    updateResultList();
+  }, [dataChanged, isAlternatePHRF]);
+
+  const startRaceTimer = (stopWatchTime = 0) => {
+    setRaceState(RACE_STATE.STARTED_AND_RUNNING);
+
+    setStopWatchStartTime(stopWatchTime);
+    setElapsedTime(0);
+
+    setRunStopWatch(true);
+    setEndStopWatch(false);
+    setResetStopWatch(false);
   };
 
   const getRenderMode = (result) => {
@@ -276,13 +374,12 @@ function Race(props) {
     }
   };
 
-  useEffect(() => {
-    populateResultList();
-  }, []);
-
-  useEffect(() => {
-    updateResultList();
-  }, [dataChanged, isAlternatePHRF]);
+  // const RACE_STATE = {
+  //   NOT_STARTED: "not_started",
+  //   STARTED_AND_RUNNING: "started",
+  //   FINISHED: "race_finished",
+  //   RESET_CLEARED: "reset",
+  // };
 
   return (
     <Screen style={styles.container}>
@@ -297,15 +394,32 @@ function Race(props) {
         onPositiveButtonPress={handleClearRace}
       />
       <SectionHeader title="Race" onHelpPress={handleHelpPress} />
+      <RaceTimer
+        startDate={raceTimerStartDate}
+        onTimeChange={handleStartTimeChange}
+        onStartNow={handleStartNow}
+        startTimeDisabled={
+          raceState === RACE_STATE.STARTED_AND_RUNNING ||
+          raceState === RACE_STATE.FINISHED
+        }
+        startNowDisabled={
+          raceState === RACE_STATE.STARTED_AND_RUNNING ||
+          raceState === RACE_STATE.FINISHED
+        }
+      />
       <StopWatch
         startLabel="Start Race"
         stopLabel="Stop Race"
         resetLabel="Clear Race"
-        startTimeOffset={elapsedTime}
+        startTimeOffset={stopWatchStartTime}
         onElapsedChange={handleElapsedChange}
-        onStart={handleOnStartRace}
         onStop={handleOnStopRace}
         onReset={handleReset}
+        endRaceDisabled={raceState !== RACE_STATE.STARTED_AND_RUNNING}
+        resetRaceDisabled={raceState !== RACE_STATE.FINISHED}
+        start={runStopWatch}
+        stop={endStopWatch}
+        reset={resetStopWatch}
       />
       <FlatList
         data={viewBoatResultList}

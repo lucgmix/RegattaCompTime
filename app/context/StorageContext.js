@@ -18,8 +18,8 @@ export function StorageDataContext({ children }) {
     if (storedBoatListResult.ok) {
       return { ok: true, data: storedBoatListResult.data };
     } else {
-      console.warn(response.error);
-      return { ok: true, error: response.error };
+      console.warn(storedBoatListResult.error);
+      return { ok: false, error: storedBoatListResult.error };
     }
   };
 
@@ -41,13 +41,49 @@ export function StorageDataContext({ children }) {
       });
   };
 
+  const getRaceResults = async () => {
+    const storedRaceResult = await storage.get("@race_results");
+    //console.log("storage getRaceResults", storedRaceResult);
+    if (storedRaceResult && storedRaceResult.ok) {
+      console.log("storage getRaceResult !!!!!!!!");
+      return { ok: true, data: storedRaceResult.data };
+    } else {
+      if (storedRaceResult) {
+        console.warn(storedRaceResult.error);
+        return { ok: false, error: storedRaceResult.error };
+      } else {
+        return { ok: false, error: "An unknown error occured" };
+      }
+    }
+  };
+
+  const storeRaceResults = (value) => {
+    return storage
+      .store("@race_results", value)
+      .then((response) => {
+        if (value && response.ok) {
+          setDataChanged(!dataChanged);
+          return { ok: true };
+        }
+      })
+      .catch((error) => {
+        return { ok: false, error };
+      });
+  };
+
   useEffect(() => {
     fetchStoredBoatList();
   }, []);
 
   return (
     <StorageContext.Provider
-      value={{ storeBoatList, getBoatList, dataChanged }}
+      value={{
+        storeBoatList,
+        storeRaceResults,
+        getBoatList,
+        getRaceResults,
+        dataChanged,
+      }}
     >
       {children}
     </StorageContext.Provider>
