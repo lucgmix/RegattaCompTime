@@ -27,15 +27,10 @@ function StopWatch({
 }) {
   const [timerInterval, setTimerInterval] = useState(0);
   const [timeDisplay, setTimeDisplay] = useState(timeToString(startTimeOffset));
-  // const [isStarted, setIsStarted] = useState(start);
-  // const [isReset, setIsReset] = useState(reset);
 
   startDT = elapsedTime === 0 ? startTimeOffset : 0;
 
   const handleStart = () => {
-    // setIsStarted(true);
-    // setIsReset(false);
-    //console.log("handleStart called");
     startTime = Date.now() - elapsedTime - startDT;
     setTimerInterval(
       setInterval(function printTime() {
@@ -44,48 +39,37 @@ function StopWatch({
         setTimeDisplay(timeToString(elapsedTime));
       }, 100)
     );
-    //onStart();
   };
 
   const handleStop = () => {
-    // setIsStarted(false);
-    //console.log("handleStop called");
     clearInterval(timerInterval);
     setTimerInterval(0);
     startDT = 0;
     startTime = 0;
     elapsedTime = 0;
-    // onStop();
   };
 
   const handleReset = () => {
-    // setIsStarted(false);
-    // setIsReset(true);
-    //console.log("handleReset called");
     clearInterval(timerInterval);
     startTime = 0;
     elapsedTime = 0;
     setTimeDisplay(timeToString(0));
-    //onReset();
   };
 
   useEffect(() => {
     if (start) {
-      console.log("useEffect START called", start);
       handleStart();
     }
   }, [start]);
 
   useEffect(() => {
     if (stop) {
-      console.log("useEffect STOP called", stop);
       handleStop();
     }
   }, [stop]);
 
   useEffect(() => {
     if (reset) {
-      console.log("useEffect RESET called", reset);
       handleReset();
     }
   }, [reset]);

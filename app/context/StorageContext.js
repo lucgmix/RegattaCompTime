@@ -43,9 +43,7 @@ export function StorageDataContext({ children }) {
 
   const getRaceResults = async () => {
     const storedRaceResult = await storage.get("@race_results");
-    //console.log("storage getRaceResults", storedRaceResult);
     if (storedRaceResult && storedRaceResult.ok) {
-      console.log("storage getRaceResult !!!!!!!!");
       return { ok: true, data: storedRaceResult.data };
     } else {
       if (storedRaceResult) {
@@ -62,7 +60,6 @@ export function StorageDataContext({ children }) {
       .store("@race_results", value)
       .then((response) => {
         if (value && response.ok) {
-          setDataChanged(!dataChanged);
           return { ok: true };
         }
       })

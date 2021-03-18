@@ -124,16 +124,6 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
   };
 
   const handleSubmit = async (boat, { resetForm }) => {
-    // setProgress(0);
-    // setUploadVisible(true);
-    // const result = await listingsApi.addListing(
-    //   { ...listing, location },
-    //   (progress) => setProgress(progress)
-    // );
-    // if (!result.ok) {
-    //   setUploadVisible(false);
-    //   return alert("Could not save the listing");
-    // }
     storeData(boat, resetForm);
   };
 
