@@ -35,23 +35,25 @@ function Picker({
         disabled={isEmpty(items)}
       >
         <View style={[styles.container, { width }]}>
-          {icon && (
-            <MaterialCommunityIcons
-              name={icon}
-              size={24}
-              color={defaultStyles.colors.primary}
-              style={styles.icon}
-            />
-          )}
-          {selectedItem ? (
-            <Text style={[defaultStyles.text, styles.text]}>
-              {selectedItem.boatName}
-            </Text>
-          ) : (
-            <Text style={[defaultStyles.text, styles.placeholde]}>
-              {placeholder}
-            </Text>
-          )}
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            {icon && (
+              <MaterialCommunityIcons
+                name={icon}
+                size={24}
+                color={defaultStyles.colors.primary}
+                style={styles.icon}
+              />
+            )}
+            {selectedItem ? (
+              <Text style={[defaultStyles.text, styles.text]}>
+                {selectedItem.boatName}
+              </Text>
+            ) : (
+              <Text style={[defaultStyles.text, styles.placeholde]}>
+                {placeholder}
+              </Text>
+            )}
+          </View>
 
           <MaterialCommunityIcons
             name="chevron-down"
@@ -99,6 +101,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginBottom: 12,
     alignItems: "center",
+    justifyContent: "space-between",
   },
   doneButton: {
     marginTop: 12,
@@ -114,7 +117,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   text: {
-    flex: 1,
     fontWeight: "400",
     marginLeft: 4,
     paddingTop: 2,
