@@ -49,7 +49,7 @@ function Picker({
                 {selectedItem.boatName}
               </Text>
             ) : (
-              <Text style={[defaultStyles.text, styles.placeholde]}>
+              <Text style={[defaultStyles.text, styles.placeholder]}>
                 {placeholder}
               </Text>
             )}
@@ -114,13 +114,14 @@ const styles = StyleSheet.create({
   },
   placeholder: {
     color: defaultStyles.colors.medium,
-    flex: 1,
+    fontSize: 16,
   },
   text: {
     fontWeight: "400",
     marginLeft: 4,
     paddingTop: 2,
     alignItems: "center",
+    fontSize: 16,
   },
 });
 

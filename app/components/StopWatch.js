@@ -110,7 +110,6 @@ function StopWatch({
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    marginRight: 8,
     marginTop: 8,
     marginBottom: 8,
     alignItems: "center",
@@ -124,9 +123,14 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     alignItems: "center",
+    marginRight: 8,
   },
   timeContainer: { flexDirection: "row", margin: 8 },
-  timeLabel: { fontSize: 20, marginLeft: 10 },
+  timeLabel: {
+    fontSize: 16,
+    marginLeft: 8,
+    alignSelf: "center",
+  },
 });
 
 export default StopWatch;

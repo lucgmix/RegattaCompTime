@@ -20,6 +20,7 @@ import DialogPrompt from "../components/DialogPrompt";
 import { isEmpty } from "lodash";
 import RaceTimer from "../components/RaceTimer";
 import { date } from "yup";
+import { secondsToHms } from "../utils/phrf";
 
 const RACE_STATE = {
   NOT_STARTED: "not_started",
@@ -82,6 +83,40 @@ function Race(props) {
 
   const handleHelpPress = () => {
     setHelpPromptVisible(true);
+  };
+
+  const populateResultList = () => {
+    getRaceResults().then(({ ok, data }) => {
+      const raceResults = data;
+      if (ok && !isEmpty(raceResults.boatResults)) {
+        const boats = raceResults.boatResults || viewBoatResultList;
+        if (raceResults.raceState && Array.isArray(boats)) {
+          setViewBoatResultList(
+            correctTimeSortResults(
+              boats,
+              raceResults.elapsedTime,
+              isAlternatePHRF,
+              getCorrectedTime
+            )
+          );
+          setRaceState(raceResults.raceState);
+
+          if (raceResults.raceState !== RACE_STATE.FINISHED) {
+            raceStartTimeAction(new Date(raceResults.raceStartTime));
+          } else {
+            setRaceTimerStartDate(new Date(raceResults.raceStartTime));
+            setStopWatchStartTime(raceResults.raceElapsedTime);
+          }
+        }
+      } else {
+        getBoatList().then(({ data }) => {
+          const boatResultList = data.map((boat) => {
+            return { boat, rank: "-", elapsedTime: 0, correctedTime: 0 };
+          });
+          setViewBoatResultList(ratingSortResults(boatResultList));
+        });
+      }
+    });
   };
 
   const updateResultList = () => {
@@ -238,28 +273,31 @@ function Race(props) {
 
     if (!viewBoatResultList) return;
 
-    const resultList = Array.from(viewBoatResultList);
-    const hasAtLeastOneFinish = Array.from(viewBoatResultList).filter(
+    const allBoatResultList = Array.from(viewBoatResultList);
+    const boatThatFinished = Array.from(allBoatResultList).filter(
       (result) => result.rank > 0
     );
 
-    if (hasAtLeastOneFinish.length === 0) return;
-
-    const sortedArray = correctTimeSortResults(
-      resultList,
-      elapsedTime,
-      isAlternatePHRF,
-      getCorrectedTime
-    );
+    let sortedBoatResultList = allBoatResultList;
+    // If no boats finished, skip sorting.
+    if (boatThatFinished.length > 0) {
+      // Update all boats with elapedTime and corrected time and save
+      sortedBoatResultList = correctTimeSortResults(
+        allBoatResultList,
+        elapsedTime,
+        isAlternatePHRF,
+        getCorrectedTime
+      );
+    }
 
     storeRaceResults({
       raceStartTime: raceTimerStartDate.getTime(),
       raceElapsedTime: elapsedTime,
-      boatResults: sortedArray,
+      boatResults: sortedBoatResultList,
       raceState: RACE_STATE.FINISHED,
     }).then((response) => {
       if (response.ok) {
-        setViewBoatResultList(sortedArray);
+        setViewBoatResultList(sortedBoatResultList);
       }
     });
   };
@@ -298,12 +336,13 @@ function Race(props) {
     setClearRacePromptVisible(true);
   };
 
-  const handleStartNow = (date) => {
+  const handleStartNow = () => {
     setRaceState(RACE_STATE.STARTED_AND_RUNNING);
     setElapsedTime(0);
+    setStopWatchStartTime(0);
 
     storeRaceResults({
-      raceStartTime: raceTimerStartDate.getTime(),
+      raceStartTime: new Date().getTime(),
       raceElapsedTime: elapsedTime,
       boatResults: viewBoatResultList,
       raceState: RACE_STATE.STARTED_AND_RUNNING,
@@ -317,22 +356,29 @@ function Race(props) {
   };
 
   const handleStartTimeChange = (date) => {
+    const previousTimeDate = new Date(date.getTime());
+    const newTimeDate = new Date();
+
+    newTimeDate.setHours(previousTimeDate.getHours());
+    newTimeDate.setMinutes(previousTimeDate.getMinutes());
+    newTimeDate.setSeconds(0);
+
     storeRaceResults({
       boatResults: viewBoatResultList,
-      raceStartTime: date.getTime(),
+      raceStartTime: newTimeDate,
       raceElapsedTime: elapsedTime,
       raceState: RACE_STATE.STARTED_AND_RUNNING,
     }).then((response) => {
       if (response.ok) {
-        raceStartTimeAction(date.getTime());
+        raceStartTimeAction(newTimeDate);
       }
     });
   };
 
-  const raceStartTimeAction = (time) => {
-    setRaceTimerStartDate(new Date(time));
+  const raceStartTimeAction = (timeDate) => {
+    setRaceTimerStartDate(timeDate);
 
-    const elapsedSinceStartTime = new Date().getTime() - time;
+    const elapsedSinceStartTime = new Date().getTime() - timeDate.getTime();
 
     // Current time is later than race start time, start stopwatch
     if (elapsedSinceStartTime > 0) {
@@ -340,35 +386,6 @@ function Race(props) {
     } else {
       setTimeout(startRaceTimer, Math.abs(elapsedSinceStartTime));
     }
-  };
-
-  const populateResultList = () => {
-    getRaceResults().then(({ ok, data }) => {
-      const raceResults = data;
-      if (ok && !isEmpty(raceResults.boatResults)) {
-        const boats = raceResults.boatResults || viewBoatResultList;
-        if (raceResults && raceResults.raceState && Array.isArray(boats)) {
-          setViewBoatResultList(ratingSortResults(boats));
-          setRaceState(raceResults.raceState);
-
-          if (
-            raceResults.raceState &&
-            raceResults.raceState !== RACE_STATE.FINISHED
-          ) {
-            raceStartTimeAction(raceResults.raceStartTime);
-          } else {
-            setStopWatchStartTime(raceResults.raceElapsedTime);
-          }
-        }
-      } else {
-        getBoatList().then(({ data }) => {
-          const boatResultList = data.map((boat) => {
-            return { boat, rank: "-", elapsedTime: 0, correctedTime: 0 };
-          });
-          setViewBoatResultList(ratingSortResults(boatResultList));
-        });
-      }
-    });
   };
 
   const startRaceTimer = (stopWatchTime = 0) => {

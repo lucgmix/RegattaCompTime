@@ -39,7 +39,6 @@ function RaceTimer({
   const handleStartNow = () => {
     const nowDate = new Date();
     setDate(nowDate);
-    onTimeChange(nowDate);
     onStartNow(nowDate);
   };
 
@@ -63,17 +62,22 @@ function RaceTimer({
           >{`${date
             .getHours()
             .toString()
-            .padStart(2, "0")}:${date
+            .padStart(2, "0")}h ${date
             .getMinutes()
             .toString()
-            .padStart(2, "0")}`}</Text>
+            .padStart(2, "0")}m ${date
+            .getSeconds()
+            .toString()
+            .padStart(2, "0")}s`}</Text>
         </View>
 
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View
+          style={{ flexDirection: "row", alignItems: "center", marginRight: 8 }}
+        >
           <Button
             disabled={startTimeDisabled}
             buttonStyle={styles.button}
-            title="Set Start Time"
+            title="Start Time..."
             onPress={handleShowTimepicker}
           />
           <Button
@@ -104,7 +108,6 @@ const styles = StyleSheet.create({
   container: {},
   controls: {
     flexDirection: "row",
-    marginRight: 8,
     alignItems: "center",
     paddingLeft: 8,
     backgroundColor: colors.light,
@@ -118,8 +121,9 @@ const styles = StyleSheet.create({
     margin: 8,
   },
   timeLabel: {
-    marginLeft: 8,
-    fontSize: 20,
+    marginLeft: 6,
+    fontSize: 16,
+    alignSelf: "center",
   },
 });
 

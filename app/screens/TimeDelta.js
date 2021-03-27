@@ -221,6 +221,7 @@ const styles = StyleSheet.create({
     marginLeft: 12,
     paddingTop: 2,
     alignItems: "center",
+    fontSize: 16,
   },
   setTimeButton: {
     marginRight: 8,

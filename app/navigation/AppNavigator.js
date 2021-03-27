@@ -22,7 +22,7 @@ const Tab = createBottomTabNavigator();
 const AppNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName={SECTIONS.FLEET.name}
+      initialRouteName={SECTIONS.RACE.name}
       tabBarOptions={{
         showLabel: true,
         showIcon: true,
