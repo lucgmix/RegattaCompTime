@@ -10,6 +10,12 @@ let startTime = 0;
 let elapsedTime = 0;
 let startDT = 0;
 
+export const STOPWATCH_STATE = {
+  STARTED: "started",
+  STOPPED: "stopped",
+  RESET: "reset",
+};
+
 function StopWatch({
   startLabel,
   stopLabel,
@@ -21,9 +27,7 @@ function StopWatch({
   startTimeOffset,
   endRaceDisabled,
   resetRaceDisabled,
-  start,
-  stop,
-  reset,
+  state,
 }) {
   const [timerInterval, setTimerInterval] = useState(0);
   const [timeDisplay, setTimeDisplay] = useState(timeToString(startTimeOffset));
@@ -57,22 +61,17 @@ function StopWatch({
   };
 
   useEffect(() => {
-    if (start) {
-      handleStart();
+    switch (state) {
+      case STOPWATCH_STATE.STARTED:
+        handleStart();
+        break;
+      case STOPWATCH_STATE.STOPPED:
+        handleStop();
+        break;
+      case STOPWATCH_STATE.RESET:
+        handleReset();
     }
-  }, [start]);
-
-  useEffect(() => {
-    if (stop) {
-      handleStop();
-    }
-  }, [stop]);
-
-  useEffect(() => {
-    if (reset) {
-      handleReset();
-    }
-  }, [reset]);
+  }, [state]);
 
   useEffect(() => {
     setTimeDisplay(timeToString(startTimeOffset));

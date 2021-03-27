@@ -15,7 +15,7 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import defaultStyles from "../config/styles";
-import StopWatch from "../components/StopWatch";
+import StopWatch, { STOPWATCH_STATE } from "../components/StopWatch";
 import DialogPrompt from "../components/DialogPrompt";
 import { isEmpty } from "lodash";
 import RaceTimer from "../components/RaceTimer";
@@ -62,6 +62,7 @@ function Race(props) {
   const [helpPromptVisible, setHelpPromptVisible] = useState(false);
   const [viewBoatResultList, setViewBoatResultList] = useState([]);
   const [clearRacePromptVisible, setClearRacePromptVisible] = useState(false);
+  const [stopRacePromptVisible, setStopRacePromptVisible] = useState(false);
 
   const [elapsedTime, setElapsedTime] = useState(0);
   const [raceTimerStartDate, setRaceTimerStartDate] = useState(new Date());
@@ -75,9 +76,7 @@ function Race(props) {
   } = useStorage();
 
   const [stopWatchStartTime, setStopWatchStartTime] = useState(0);
-  const [runStopWatch, setRunStopWatch] = useState(false);
-  const [endStopWatch, setEndStopWatch] = useState(true);
-  const [resetStopWatch, setResetStopWatch] = useState(false);
+  const [stopWatchState, setStopWatchState] = useState();
 
   const { getCorrectedTime, isAlternatePHRF, timeToString } = usePHRF();
 
@@ -264,12 +263,10 @@ function Race(props) {
     });
   };
 
-  const handleOnStopRace = () => {
+  const handleStopRaceConfirm = () => {
+    setStopRacePromptVisible(false);
     setRaceState(RACE_STATE.FINISHED);
-
-    setRunStopWatch(false);
-    setEndStopWatch(true);
-    setResetStopWatch(false);
+    setStopWatchState(STOPWATCH_STATE.STOPPED);
 
     if (!viewBoatResultList) return;
 
@@ -302,6 +299,10 @@ function Race(props) {
     });
   };
 
+  const handleStopRace = () => {
+    setStopRacePromptVisible(true);
+  };
+
   const handleClearRace = () => {
     setClearRacePromptVisible(false);
     setRaceState(RACE_STATE.RESET_CLEARED);
@@ -324,10 +325,7 @@ function Race(props) {
       if (response.ok) {
         setViewBoatResultList(ratingSortResults(resetBoatResults));
         setElapsedTime(0);
-
-        setRunStopWatch(false);
-        setEndStopWatch(false);
-        setResetStopWatch(true);
+        setStopWatchState(STOPWATCH_STATE.RESET);
       }
     });
   };
@@ -348,9 +346,7 @@ function Race(props) {
       raceState: RACE_STATE.STARTED_AND_RUNNING,
     }).then((response) => {
       if (response.ok) {
-        setRunStopWatch(true);
-        setEndStopWatch(false);
-        setResetStopWatch(false);
+        setStopWatchState(STOPWATCH_STATE.STARTED);
       }
     });
   };
@@ -393,10 +389,7 @@ function Race(props) {
 
     setStopWatchStartTime(stopWatchTime);
     setElapsedTime(stopWatchTime);
-
-    setRunStopWatch(true);
-    setEndStopWatch(false);
-    setResetStopWatch(false);
+    setStopWatchState(STOPWATCH_STATE.STARTED);
   };
 
   const getRenderMode = (result) => {
@@ -429,13 +422,6 @@ function Race(props) {
     updateResultList();
   }, [dataChanged, isAlternatePHRF]);
 
-  // const RACE_STATE = {
-  //   NOT_STARTED: "not_started",
-  //   STARTED_AND_RUNNING: "started",
-  //   FINISHED: "race_finished",
-  //   RESET_CLEARED: "reset",
-  // };
-
   return (
     <Screen style={styles.container}>
       <DialogPrompt
@@ -447,6 +433,16 @@ function Race(props) {
         isVisible={clearRacePromptVisible}
         onNegativeButtonPress={() => setClearRacePromptVisible(false)}
         onPositiveButtonPress={handleClearRace}
+      />
+      <DialogPrompt
+        title="Stop Race"
+        message="Are you sure you want to stop this race?"
+        content="This will stop the race timer and sort final results."
+        positive="Yes"
+        negative="Cancel"
+        isVisible={stopRacePromptVisible}
+        onNegativeButtonPress={() => setStopRacePromptVisible(false)}
+        onPositiveButtonPress={handleStopRaceConfirm}
       />
       <SectionHeader title="Race" onHelpPress={handleHelpPress} />
       <RaceTimer
@@ -468,13 +464,11 @@ function Race(props) {
         resetLabel="Clear Race"
         startTimeOffset={stopWatchStartTime}
         onElapsedChange={handleElapsedChange}
-        onStop={handleOnStopRace}
+        onStop={handleStopRace}
         onReset={handleReset}
         endRaceDisabled={raceState !== RACE_STATE.STARTED_AND_RUNNING}
         resetRaceDisabled={raceState !== RACE_STATE.FINISHED}
-        start={runStopWatch}
-        stop={endStopWatch}
-        reset={resetStopWatch}
+        state={stopWatchState}
       />
       <FlatList
         data={viewBoatResultList}
