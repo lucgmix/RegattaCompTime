@@ -6,6 +6,32 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
+const getTimeString = (date) => {
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+
+  const hourString = `${hours.toString()}`;
+  const minuteString = `:${minutes.toString().padStart(2, "0")}`;
+  const secondsString = `:${seconds.toString().padStart(2, "0")}`;
+
+  let timeString = hourString;
+
+  if (hours >= 13) {
+    timeString = `${(hours - 12).toString()}`;
+  } else if (hours === 0) {
+    timeString = `12`;
+  }
+
+  const timeSuffix = hours >= 12 ? "PM" : "AM";
+  timeString += minuteString;
+
+  if (seconds > 0) {
+    timeString += secondsString;
+  }
+  return `${timeString} ${timeSuffix}`;
+};
+
 function RaceTimer({
   onTimeChange,
   onStartNow,
@@ -57,18 +83,7 @@ function RaceTimer({
             size={24}
             color={colors.primary}
           />
-          <Text
-            style={styles.timeLabel}
-          >{`${date
-            .getHours()
-            .toString()
-            .padStart(2, "0")}h ${date
-            .getMinutes()
-            .toString()
-            .padStart(2, "0")}m ${date
-            .getSeconds()
-            .toString()
-            .padStart(2, "0")}s`}</Text>
+          <Text style={styles.timeLabel}>{getTimeString(date)}</Text>
         </View>
 
         <View

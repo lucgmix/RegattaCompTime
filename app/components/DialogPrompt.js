@@ -55,7 +55,6 @@ function DialogPrompt({
 const styles = StyleSheet.create({
   container: {
     padding: 8,
-    flexDirection: "column",
     marginLeft: 24,
     marginRight: 24,
   },

@@ -59,10 +59,11 @@ function correctTimeSortResults(
 }
 
 function Race(props) {
-  const [helpPromptVisible, setHelpPromptVisible] = useState(false);
   const [viewBoatResultList, setViewBoatResultList] = useState([]);
+
   const [clearRacePromptVisible, setClearRacePromptVisible] = useState(false);
   const [stopRacePromptVisible, setStopRacePromptVisible] = useState(false);
+  const [helpPromptVisible, setHelpPromptVisible] = useState(false);
 
   const [elapsedTime, setElapsedTime] = useState(0);
   const [raceTimerStartDate, setRaceTimerStartDate] = useState(new Date());
@@ -424,6 +425,14 @@ function Race(props) {
 
   return (
     <Screen style={styles.container}>
+      <DialogPrompt
+        title="Race Help"
+        message={`The Race section allows you to track realtime results (Corrected Time and Elapsed race time) for boats in a race.`}
+        content={`Controls\n\nStart Time... - Allows to enter the race start time for the current day.\n\nStart Now - Allows to start the race timer at the current time.\n\nStop Race - Stops the race timer and gives corrected time sorted results\n\nClear Race - Clears the race results and sorts the boats by rating.\n\nFinish - Click a boat Finish when they cross the finish line.`}
+        positive="Got it"
+        isVisible={helpPromptVisible}
+        onPositiveButtonPress={() => setHelpPromptVisible(false)}
+      />
       <DialogPrompt
         title="Clear Race"
         message="Are you sure you want to clear this race?"
