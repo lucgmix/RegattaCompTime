@@ -8,19 +8,11 @@ import BoatRaceListItem, {
   RACE_ITEM_MODE,
 } from "../components/lists/BoatRaceListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
-import {
-  Entypo,
-  Ionicons,
-  AntDesign,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
-import defaultStyles from "../config/styles";
+
 import StopWatch, { STOPWATCH_STATE } from "../components/StopWatch";
 import DialogPrompt from "../components/DialogPrompt";
 import { isEmpty } from "lodash";
 import RaceTimer from "../components/RaceTimer";
-import { date } from "yup";
-import { secondsToHms } from "../utils/phrf";
 
 const RACE_STATE = {
   NOT_STARTED: "not_started",
