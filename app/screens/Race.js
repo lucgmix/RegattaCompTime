@@ -91,19 +91,21 @@ function Race(props) {
       if (ok && !isEmpty(raceResults.boatResults)) {
         const boats = raceResults.boatResults || viewBoatResultList;
         if (raceResults.raceState && Array.isArray(boats)) {
-          setViewBoatResultList(
-            correctTimeSortResults(
-              boats,
-              raceResults.elapsedTime,
-              isAlternatePHRF,
-              getCorrectedTime
-            )
-          );
           setRaceState(raceResults.raceState);
 
           if (raceResults.raceState !== RACE_STATE.FINISHED) {
+            setViewBoatResultList(ratingSortResults(boats));
             raceStartTimeAction(new Date(raceResults.raceStartTime));
           } else {
+            setViewBoatResultList(
+              correctTimeSortResults(
+                boats,
+                elapsedTime,
+                isAlternatePHRF,
+                getCorrectedTime
+              )
+            );
+            setElapsedTime(raceResults.raceElapsedTime);
             setRaceTimerStartDate(new Date(raceResults.raceStartTime));
             setStopWatchStartTime(raceResults.raceElapsedTime);
           }
