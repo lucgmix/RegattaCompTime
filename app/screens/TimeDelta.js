@@ -58,11 +58,11 @@ function TimeDelta(props) {
   };
 
   const updateBoatList = (item) => {
-    getBoatList().then(({ data }) => {
+    getBoatList().then(({ boatData }) => {
       setBoatResultsList(
-        getElapsedDiff(data, item.rating, raceDuration, isAlternatePHRF)
+        getElapsedDiff(boatData, item.rating, raceDuration, isAlternatePHRF)
       );
-      const boatWithMatchingId = data.find((boat) => boat.id === item.id);
+      const boatWithMatchingId = boatData.find((boat) => boat.id === item.id);
       setSelectedBoat(boatWithMatchingId);
     });
   };
@@ -84,9 +84,9 @@ function TimeDelta(props) {
 
   // Update dropdown otpions and viewBoatList when viewBoatList changes.
   useEffect(() => {
-    getBoatList().then(({ data }) => {
-      if (data) {
-        const sortedBoats = Array.from(data);
+    getBoatList().then(({ boatData }) => {
+      if (boatData) {
+        const sortedBoats = Array.from(boatData);
         setBoatSelectList(
           sortedBoats.sort((a, b) => (a.boatName > b.boatName ? 1 : -1))
         );

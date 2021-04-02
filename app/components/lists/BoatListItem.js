@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
   },
-  rating: function (isDefaultRating) {
+  rating(isDefaultRating) {
     return {
       flex: 0.3,
       flexDirection: "row",
