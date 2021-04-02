@@ -482,10 +482,11 @@ function Race(props) {
         ListHeaderComponent={() => (
           <BoatRaceListItem
             rank="Rank"
-            name="Boat"
+            name="Boat Name"
             rating="Rating"
-            boatType="Type"
-            correctedTime="Time"
+            boatType="Boat Type"
+            correctedTime="Comp Time"
+            elapsedTime="Elapsed Time"
             isHeader
           />
         )}
@@ -495,7 +496,7 @@ function Race(props) {
             <BoatRaceListItem
               rank={item.rank}
               name={item.boat.boatName}
-              type={item.boat.boatType}
+              boatType={item.boat.boatType}
               rating={item.boat.rating}
               correctedTime={getBoatCorrectedTime(item, elapsedTime)}
               elapsedTime={getBoatElapsedTime(item, elapsedTime)}

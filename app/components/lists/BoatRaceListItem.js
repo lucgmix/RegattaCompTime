@@ -16,7 +16,7 @@ export const RACE_ITEM_MODE = {
 function BoatRaceListItem({
   rank = "-",
   name,
-  type,
+  boatType,
   correctedTime,
   elapsedTime,
   isHeader,
@@ -51,14 +51,14 @@ function BoatRaceListItem({
         ]}
       >
         <Text
-          numberOfLines={1}
+          numberOfLines={2}
           style={[
             defaultStyles.text,
             styles.name,
             isHeader && headerStyles.label,
           ]}
         >
-          {name}
+          {isHeader ? `${name}\n\n${boatType}` : name}
         </Text>
         {!isHeader && (
           <Text
@@ -69,7 +69,7 @@ function BoatRaceListItem({
               isHeader && headerStyles.label,
             ]}
           >
-            {type}
+            {boatType}
           </Text>
         )}
       </View>
@@ -77,14 +77,14 @@ function BoatRaceListItem({
         style={[styles.timeContainer, isHeader && headerStyles.timeContainer]}
       >
         <Text
-          numberOfLines={1}
+          numberOfLines={2}
           style={[
             defaultStyles.text,
             styles.correctedTime,
             isHeader && headerStyles.correctedTime,
           ]}
         >
-          {correctedTime}
+          {isHeader ? `${correctedTime}\n\n${elapsedTime}` : correctedTime}
         </Text>
         {!isHeader && (
           <Text
@@ -108,21 +108,19 @@ function BoatRaceListItem({
 }
 
 const styles = StyleSheet.create({
-  container: function (renderMode) {
-    return {
-      backgroundColor:
-        renderMode === RACE_ITEM_MODE.DEFAULT
-          ? defaultStyles.colors.light
-          : renderMode === RACE_ITEM_MODE.BOAT_FINISHED ||
-            renderMode === RACE_ITEM_MODE.RACE_FINISHED
-          ? defaultStyles.colors.green
-          : defaultStyles.colors.light,
-      borderRadius: 0,
-      flexDirection: "row",
-      padding: 12,
-      justifyContent: "space-between",
-    };
-  },
+  container: (renderMode) => ({
+    backgroundColor:
+      renderMode === RACE_ITEM_MODE.DEFAULT
+        ? defaultStyles.colors.light
+        : renderMode === RACE_ITEM_MODE.BOAT_FINISHED ||
+          renderMode === RACE_ITEM_MODE.RACE_FINISHED
+        ? defaultStyles.colors.green
+        : defaultStyles.colors.light,
+    borderRadius: 0,
+    flexDirection: "row",
+    padding: 12,
+    justifyContent: "space-between",
+  }),
   rank: {
     flex: 0.33,
     alignSelf: "center",
@@ -138,7 +136,7 @@ const styles = StyleSheet.create({
     color: colors.subText,
   },
   timeContainer: {
-    flex: 0.5,
+    flex: 0.6,
     justifyContent: "space-between",
   },
   correctedTime: {
@@ -162,7 +160,7 @@ const headerStyles = StyleSheet.create({
     color: colors.white,
   },
   timeContainer: {
-    flex: 0.9,
+    flex: 1.03,
     alignItems: "flex-start",
   },
   correctedTime: {
