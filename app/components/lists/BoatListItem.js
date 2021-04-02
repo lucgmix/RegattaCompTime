@@ -60,16 +60,6 @@ function BoatListItem({
       >
         {ratingNFS}
       </Text>
-      <Text
-        numberOfLines={1}
-        style={[
-          defaultStyles.text,
-          styles.default_rating,
-          isHeader && headerStyles.label,
-        ]}
-      >
-        {defaultRating}
-      </Text>
     </View>
   );
 }

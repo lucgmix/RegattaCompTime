@@ -139,8 +139,8 @@ function TimeDelta(props) {
         onModalButtonPress={() => setIsTimeModalVisible(false)}
         buttonLabel="Done"
       />
-
       <Picker
+        style={{ marginBottom: 10 }}
         icon="sail-boat"
         placeholder="Select Reference Boat"
         items={boatSelectList}
@@ -206,6 +206,7 @@ const styles = StyleSheet.create({
   timeInputContainer: {
     flexDirection: "row",
     backgroundColor: colors.light,
+    marginBottom: 8,
     paddingTop: 8,
     paddingBottom: 8,
     paddingLeft: 12,
