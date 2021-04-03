@@ -24,7 +24,7 @@ import defaultStyles from "../config/styles";
 
 let listItemHeight = 0;
 
-function TimeDelta(props) {
+function TimeDelta() {
   const [selectedBoat, setSelectedBoat] = useState();
   const [boatSelectList, setBoatSelectList] = useState([]);
   const [boatResultsList, setBoatResultsList] = useState([]);
@@ -33,7 +33,7 @@ function TimeDelta(props) {
   const [helpPromptVisible, setHelpPromptVisible] = useState(false);
 
   const resultListRef = useRef();
-  const { getBoatList, dataChanged } = useStorage();
+  const { getBoatList, boatDataChanged } = useStorage();
 
   const { getElapsedDiff, secondsToHms, isAlternatePHRF } = usePHRF();
 
@@ -92,16 +92,16 @@ function TimeDelta(props) {
         );
       }
     });
-  }, [dataChanged]);
+  }, [boatDataChanged]);
 
   useEffect(() => {
     selectedBoat && updateBoatList(selectedBoat);
-  }, [isAlternatePHRF, raceDuration, dataChanged]);
+  }, [isAlternatePHRF, raceDuration, boatDataChanged]);
 
   // Scroll to selected boat result
   useEffect(() => {
     selectBoatInList();
-  }, [selectedBoat, boatSelectList, dataChanged]);
+  }, [selectedBoat, boatSelectList, boatDataChanged]);
 
   return (
     <Screen style={styles.container}>

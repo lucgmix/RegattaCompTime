@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormikContext } from "formik";
 import { StyleSheet, View } from "react-native";
 
@@ -9,7 +9,7 @@ import Text from "../Text";
 
 import { Input } from "react-native-elements";
 
-function AppFormField({ label, name, width, ...otherProps }) {
+function AppFormField({ label, name, width, value, ...otherProps }) {
   const {
     setFieldTouched,
     setFieldValue,
@@ -17,6 +17,12 @@ function AppFormField({ label, name, width, ...otherProps }) {
     touched,
     values,
   } = useFormikContext();
+
+  useEffect(() => {
+    if (value) {
+      setFieldValue(name, value);
+    }
+  }, [value]);
 
   return (
     <View style={styles.container}>
@@ -52,7 +58,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   container: {
-    marginBottom: 8,
+    marginBottom: 6,
   },
   label: {
     fontSize: 14,

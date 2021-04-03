@@ -25,6 +25,7 @@ function Picker({
   placeholder,
   selectedItem,
   width = "100%",
+  style,
 }) {
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -34,7 +35,7 @@ function Picker({
         onPress={() => setModalVisible(true)}
         disabled={isEmpty(items)}
       >
-        <View style={[styles.container, { width }]}>
+        <View style={[styles.container, { width }, style]}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             {icon && (
               <MaterialCommunityIcons
@@ -98,10 +99,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     flexDirection: "row",
     padding: 12,
-    marginVertical: 10,
-    marginBottom: 12,
     alignItems: "center",
     justifyContent: "space-between",
+    alignSelf: "center",
   },
   doneButton: {
     marginTop: 12,

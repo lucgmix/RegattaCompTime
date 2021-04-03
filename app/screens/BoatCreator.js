@@ -1,25 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import Screen from "../components/Screen";
 import SectionHeader from "../components/SectionHeader";
 import Button from "../components/Button";
-import {
-  Form,
-  FormField,
-  FormPicker as Picker,
-  SubmitButton,
-  FormSwitch,
-} from "../components/forms";
+import DropDownPicker from "react-native-dropdown-picker";
+import Text from "../components/Text";
+
+import defaultStyles from "../config/styles";
+import { Form, FormField, SubmitButton, FormSwitch } from "../components/forms";
 import * as Yup from "yup";
 
-import Text from "../components/Text";
 import { useStorage } from "../context/StorageContext";
 import { isEmpty } from "lodash";
 
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
-
-import defaultStyles from "../config/styles";
 
 export const BOAT_CREATOR_MODE = {
   ADD: "add",
@@ -104,7 +99,7 @@ const validationSchema = Yup.object().shape({
 });
 
 function arrayRemove(arr, value) {
-  return arr.filter((boat) => boat.id != value.id);
+  return arr.filter((boat) => boat.id !== value.id);
 }
 
 function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
@@ -114,6 +109,9 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
   const defaultRatingValue =
     editableBoat && editableBoat.defaultRating === DEFAULT_RATING.NFS; // false = FS, true = NFS
   const [useNFSRating, setUseNFSRating] = useState(defaultRatingValue);
+  const [boatTypeValue, setBoatTypeValue] = useState();
+  const [boatFSValue, setBoatFSValue] = useState();
+  const [boatNFSValue, setBoatNFSValue] = useState();
 
   const toggleDefaultRatingSwitch = (isNFSRating) => {
     setUseNFSRating(isNFSRating);
@@ -164,9 +162,15 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
   }
 
   const populateBoatList = () => {
-    getBoatList().then(({ data }) => {
-      setViewBoatList(data);
+    getBoatList().then(({ boatData }) => {
+      setViewBoatList(boatData);
     });
+  };
+
+  const onBoatTypeChange = (item) => {
+    setBoatTypeValue(item.value.boatType);
+    setBoatFSValue(item.value.ratingFS);
+    setBoatNFSValue(item.value.ratingNFS);
   };
 
   useEffect(() => {
@@ -175,6 +179,63 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
 
   const headerTitle = editableBoat ? " Edit Boat" : "Add Boat";
   const actionButtonLabel = editableBoat ? " Update" : "Save";
+
+  const boatTypeItems = [
+    {
+      boatType: "Laser 28",
+      ratingFS: "126",
+      ratingNFS: "141",
+    },
+    {
+      boatType: "C&C 115",
+      ratingFS: "63",
+      ratingNFS: "93",
+    },
+    {
+      boatType: "Laser 28",
+      ratingFS: "126",
+      ratingNFS: "141",
+    },
+    {
+      boatType: "C&C 115",
+      ratingFS: "63",
+      ratingNFS: "93",
+    },
+    {
+      boatType: "Laser 28",
+      ratingFS: "126",
+      ratingNFS: "141",
+    },
+    {
+      boatType: "C&C 115",
+      ratingFS: "63",
+      ratingNFS: "93",
+    },
+    {
+      boatType: "Laser 28",
+      ratingFS: "126",
+      ratingNFS: "141",
+    },
+    {
+      boatType: "C&C 115",
+      ratingFS: "63",
+      ratingNFS: "93",
+    },
+    {
+      boatType: "Laser 28",
+      ratingFS: "126",
+      ratingNFS: "141",
+    },
+    {
+      boatType: "C&C 115",
+      ratingFS: "63",
+      ratingNFS: "93",
+    },
+  ];
+
+  const dropDownItems = boatTypeItems.map((item) => {
+    return { label: item.boatType, value: item };
+  });
 
   return (
     <Screen style={styles.container}>
@@ -201,26 +262,55 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
         />
         <FormField
           maxLength={255}
-          label={FIELD_LABEL.BOAT_TYPE}
-          name="boatType"
-        />
-        <FormField
-          maxLength={255}
           label={FIELD_LABEL.SAIL_NUMBER}
           name="sailNumber"
           placeholder="Optional"
+        />
+        {!editableBoat && (
+          <DropDownPicker
+            items={dropDownItems}
+            placeholder="Select a Boat Type (Optional)"
+            containerStyle={styles.dropdownContainer}
+            style={styles.dropdown}
+            itemStyle={{
+              justifyContent: "flex-start",
+            }}
+            dropDownStyle={{ backgroundColor: defaultStyles.colors.light }}
+            onChangeItem={onBoatTypeChange}
+            searchable={true}
+            searchablePlaceholder="Search for an item"
+            searchablePlaceholderTextColor={defaultStyles.colors.subText}
+            seachableStyle={{}}
+            searchableError={() => <Text>Not Found</Text>}
+            labelStyle={{
+              color: defaultStyles.colors.text,
+            }}
+            activeLabelStyle={{
+              color: defaultStyles.colors.medium,
+              fontWeight: "700",
+            }}
+            dropDownMaxHeight={270}
+          />
+        )}
+        <FormField
+          maxLength={255}
+          label={FIELD_LABEL.BOAT_TYPE}
+          name="boatType"
+          value={boatTypeValue}
         />
         <FormField
           keyboardType="numeric"
           maxLength={3}
           label={FIELD_LABEL.FS}
           name="ratingFS"
+          value={boatFSValue}
         />
         <FormField
           keyboardType="numeric"
           maxLength={3}
           label={FIELD_LABEL.NFS}
           name="ratingNFS"
+          value={boatNFSValue}
         />
         <FormSwitch
           name="useNFSRating"
@@ -231,14 +321,6 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
             toggleDefaultRatingSwitch(isNFSRating)
           }
         />
-        {/* <Picker
-          items={categories}
-          name="category"
-          numberOfColumns={3}
-          PickerItemComponent={CategoryPickerItem}
-          placeholder="Category"
-          width="50%"
-        /> */}
         <View style={styles.buttonContainer}>
           <Button
             buttonStyle={styles.cancelButton}
@@ -258,6 +340,7 @@ const styles = StyleSheet.create({
     paddingLeft: 4,
     paddingRight: 4,
     paddingTop: 16,
+    paddingBottom: 16,
     backgroundColor: defaultStyles.colors.white,
   },
   buttonContainer: {
@@ -271,6 +354,15 @@ const styles = StyleSheet.create({
   },
   submitButton: {
     minWidth: 100,
+  },
+  dropdown: {
+    backgroundColor: defaultStyles.colors.light,
+    borderWidth: 0,
+    color: "red",
+  },
+  dropdownContainer: {
+    height: 50,
+    marginBottom: 8,
   },
 });
 

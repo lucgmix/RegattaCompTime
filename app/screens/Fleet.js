@@ -9,7 +9,6 @@ import {
 import Screen from "../components/Screen";
 import SectionHeader from "../components/SectionHeader";
 import Button from "../components/Button";
-import BoatCreator from "./BoatCreator";
 import { ScrollView } from "react-native-gesture-handler";
 import BoatListItem from "../components/lists/BoatListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
@@ -20,7 +19,7 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import DialogPrompt from "../components/DialogPrompt";
-import { BOAT_CREATOR_MODE } from "./BoatCreator";
+import BoatCreator, { BOAT_CREATOR_MODE } from "./BoatCreator";
 import { v4 as uuidv4 } from "uuid";
 
 import defaultStyles from "../config/styles";
@@ -41,7 +40,7 @@ function sortBoatArray(boatList) {
   });
 }
 
-function Fleet(props) {
+function Fleet() {
   const [selectedBoat, setSelectedBoat] = useState(null);
   const [isCreateBoatModalVisible, setIsCreateBoatModalVisible] = useState(
     false
@@ -79,8 +78,7 @@ function Fleet(props) {
   };
 
   const handleDuplicateBoatButtonPress = () => {
-    getBoatList().then(({ data }) => {
-      const boatList = data;
+    getBoatList().then(({ boatData: boatList }) => {
       const selectedBoatCopy = {
         ...selectedBoat,
         boatName: `${selectedBoat.boatName} Copy`,
@@ -90,7 +88,7 @@ function Fleet(props) {
 
       storeBoatList(boatList).then((result) => {
         if (result.ok) {
-          populateBoatList();
+          populateBoatList(boatList);
         } else {
           // Error prompt here?
         }
@@ -119,12 +117,20 @@ function Fleet(props) {
     setHelpPromptVisible(true);
   };
 
-  const populateBoatList = () => {
-    getBoatList().then(({ data }) => {
-      setViewBoatList(sortBoatArray(data));
+  const populateBoatList = (boatList) => {
+    if (boatList) {
+      setBoatList(boatList);
+    } else {
+      getBoatList().then(({ boatData }) => {
+        setBoatList(boatData);
+      });
+    }
+
+    function setBoatList(boatData) {
+      setViewBoatList(sortBoatArray(boatData));
       selectedBoat &&
-        setSelectedBoat(data.find((boat) => boat.id === selectedBoat.id));
-    });
+        setSelectedBoat(boatData.find((boat) => boat.id === selectedBoat.id));
+    }
   };
 
   useEffect(() => {
@@ -156,6 +162,7 @@ function Fleet(props) {
       />
 
       <SectionHeader title="Fleet" onHelpPress={handleHelpPress} />
+
       <View style={styles.buttonContainer}>
         <View style={styles.buttonGroup}>
           <Button
@@ -245,7 +252,6 @@ function Fleet(props) {
             type="Type"
             ratingFS="FS"
             ratingNFS="NFS"
-            defaultRating="FS/NFS"
             isHeader
           />
         )}

@@ -90,7 +90,7 @@ function Race() {
     getBoatList,
     getRaceResults,
     storeRaceResults,
-    dataChanged,
+    boatDataChanged,
   } = useStorage();
 
   const [stopWatchStartTime, setStopWatchStartTime] = useState(0);
@@ -119,7 +119,7 @@ function Race() {
                 elapsedTime,
                 isAlternatePHRF,
                 getCorrectedTime,
-                raceState
+                resultsData.raceState
               )
             );
             setElapsedTime(resultsData.raceElapsedTime);
@@ -442,7 +442,7 @@ function Race() {
 
   useEffect(() => {
     updateResultList();
-  }, [dataChanged, isAlternatePHRF]);
+  }, [boatDataChanged, isAlternatePHRF]);
 
   return (
     <Screen style={styles.container}>
