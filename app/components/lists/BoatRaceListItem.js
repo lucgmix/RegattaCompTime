@@ -58,7 +58,7 @@ function BoatRaceListItem({
             isHeader && headerStyles.label,
           ]}
         >
-          {isHeader ? `${name}\n\n${boatType}` : name}
+          {isHeader ? `${name}\n${boatType}` : name}
         </Text>
         {!isHeader && (
           <Text
@@ -84,7 +84,7 @@ function BoatRaceListItem({
             isHeader && headerStyles.correctedTime,
           ]}
         >
-          {isHeader ? `${correctedTime}\n\n${elapsedTime}` : correctedTime}
+          {isHeader ? `${correctedTime}\n${elapsedTime}` : correctedTime}
         </Text>
         {!isHeader && (
           <Text
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     color: colors.subText,
   },
   timeContainer: {
-    flex: 0.6,
+    flex: 0.56,
     justifyContent: "space-between",
   },
   correctedTime: {
@@ -158,13 +158,14 @@ const headerStyles = StyleSheet.create({
   nameContainer: { flex: 0.7 },
   label: {
     color: colors.white,
+    fontWeight: "600",
   },
   timeContainer: {
     flex: 1.03,
     alignItems: "flex-start",
   },
   correctedTime: {
-    fontWeight: "700",
+    fontWeight: "600",
     color: colors.white,
   },
   rank: {
