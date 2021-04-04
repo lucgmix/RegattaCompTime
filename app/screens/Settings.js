@@ -6,6 +6,8 @@ import color from "../config/colors";
 import Text from "../components/Text";
 
 import { usePHRF } from "../context/PhrfContext";
+import { useStorage } from "../context/StorageContext";
+
 import SectionHeader from "../components/SectionHeader";
 import defaultStyles from "../config/styles";
 
@@ -20,10 +22,13 @@ function Settings(props) {
     isAlternatePHRF ? PHRF_FORMULA.ALTERNATE : PHRF_FORMULA.STANDARD
   );
 
+  const { storeValueForKey } = useStorage();
+
   const updatePhrfFormula = (value) => {
     setValue(value);
     const isAlternate = value === PHRF_FORMULA.ALTERNATE;
     setIsAlternatePHRF(isAlternate);
+    storeValueForKey("@phrf_formula", isAlternate);
   };
 
   return (

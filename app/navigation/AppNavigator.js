@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import TimeDelta from "../screens/TimeDelta";
 import Race from "../screens/Race";
 import Settings from "../screens/Settings";
-import BoatCreator from "../screens/BoatCreator";
 import Fleet from "../screens/Fleet";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
+import { usePHRF } from "../context/PhrfContext";
+import { useStorage } from "../context/StorageContext";
+
 //Icons https://icons.expo.fyi/
 import { Entypo, Feather } from "@expo/vector-icons";
-import TabBarButton from "./TabBarButton";
 
 const SECTIONS = {
   RACE: { name: "race", title: "Race" },
@@ -19,10 +20,25 @@ const SECTIONS = {
 };
 
 const Tab = createBottomTabNavigator();
+
 const AppNavigator = () => {
+  const { storeValueForKey, getValueForKey } = useStorage();
+  const { setIsAlternatePHRF } = usePHRF();
+
+  const saveCurrentScreen = (screenName) => {
+    storeValueForKey("@current_screen", screenName);
+  };
+
+  useEffect(() => {
+    getValueForKey("@phrf_formula").then((result) => {
+      setIsAlternatePHRF(result.data);
+    });
+  }, []);
+
   return (
     <Tab.Navigator
-      initialRouteName={SECTIONS.RACE.name}
+      initialRouteName={SECTIONS.FLEET.name}
+      navigation={{ type: "NAVIGATE", target: "settings" }}
       tabBarOptions={{
         showLabel: true,
         showIcon: true,
@@ -45,6 +61,11 @@ const AppNavigator = () => {
           ),
           title: SECTIONS.FLEET.title,
         }}
+        listeners={({ navigation, route }) => ({
+          tabPress: (e) => {
+            saveCurrentScreen(route.name);
+          },
+        })}
       />
       <Tab.Screen
         name={SECTIONS.RACE.name}
@@ -55,6 +76,11 @@ const AppNavigator = () => {
           ),
           title: SECTIONS.RACE.title,
         }}
+        listeners={({ navigation, route }) => ({
+          tabPress: (e) => {
+            saveCurrentScreen(route.name);
+          },
+        })}
       />
       <Tab.Screen
         name={SECTIONS.TIMEDELTA.name}
@@ -65,6 +91,11 @@ const AppNavigator = () => {
           ),
           title: SECTIONS.TIMEDELTA.title,
         }}
+        listeners={({ navigation, route }) => ({
+          tabPress: (e) => {
+            saveCurrentScreen(route.name);
+          },
+        })}
       />
 
       <Tab.Screen
@@ -76,6 +107,11 @@ const AppNavigator = () => {
           ),
           title: SECTIONS.SETTINGS.title,
         }}
+        listeners={({ navigation, route }) => ({
+          tabPress: (e) => {
+            saveCurrentScreen(route.name);
+          },
+        })}
       />
     </Tab.Navigator>
   );

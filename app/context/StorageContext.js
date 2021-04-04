@@ -62,6 +62,33 @@ export function StorageDataContext({ children }) {
       });
   };
 
+  const storeValueForKey = (key, value) => {
+    return storage
+      .store(key, value)
+      .then((response) => {
+        if (value && response.ok) {
+          return { ok: true };
+        }
+      })
+      .catch((error) => {
+        return { ok: false, error };
+      });
+  };
+
+  const getValueForKey = async (key) => {
+    const storedValueResult = await storage.get(key);
+    if (storedValueResult && storedValueResult.ok) {
+      return { ok: true, data: storedValueResult.data };
+    } else {
+      if (storedValueResult) {
+        console.warn(storedValueResult.error);
+        return { ok: false, error: storedValueResult.error };
+      } else {
+        return { ok: false, error: "An unknown error occured" };
+      }
+    }
+  };
+
   useEffect(() => {
     fetchStoredBoatList();
   }, []);
@@ -74,6 +101,8 @@ export function StorageDataContext({ children }) {
         getBoatList,
         getRaceResults,
         boatDataChanged,
+        storeValueForKey,
+        getValueForKey,
       }}
     >
       {children}
