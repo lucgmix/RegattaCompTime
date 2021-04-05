@@ -38,7 +38,7 @@ function RaceTimer({
   startTimeDisabled,
   startNowDisabled,
   startDate,
-  editMode,
+  editMode = false,
 }) {
   const [date, setDate] = useState(startDate);
   const [show, setShow] = useState(false);
@@ -96,11 +96,14 @@ function RaceTimer({
             title={editMode ? "Edit Start Time..." : "Start Time..."}
             onPress={handleShowTimepicker}
           />
-          <Button
-            disabled={startNowDisabled}
-            title="Start Now"
-            onPress={handleStartNow}
-          />
+          {!editMode && (
+            <Button
+              buttonStyle={styles.button}
+              disabled={startNowDisabled}
+              title="Start Now"
+              onPress={handleStartNow}
+            />
+          )}
         </View>
       </View>
       {show && (
@@ -134,7 +137,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   button: {
-    margin: 8,
+    marginLeft: 8,
+    marginTop: 8,
+    marginBottom: 8,
   },
   timeLabel: {
     marginLeft: 6,
