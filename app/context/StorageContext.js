@@ -89,6 +89,14 @@ export function StorageDataContext({ children }) {
     }
   };
 
+  const storePHRFIsAlternateFormula = (value) => {
+    return storeValueForKey("@phrf_formula", value);
+  };
+
+  const getPHRFIsAlternateFormula = () => {
+    return getValueForKey("@phrf_formula");
+  };
+
   useEffect(() => {
     fetchStoredBoatList();
   }, []);
@@ -101,8 +109,8 @@ export function StorageDataContext({ children }) {
         getBoatList,
         getRaceResults,
         boatDataChanged,
-        storeValueForKey,
-        getValueForKey,
+        storePHRFIsAlternateFormula,
+        getPHRFIsAlternateFormula,
       }}
     >
       {children}

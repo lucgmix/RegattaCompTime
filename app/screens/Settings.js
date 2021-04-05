@@ -22,13 +22,13 @@ function Settings(props) {
     isAlternatePHRF ? PHRF_FORMULA.ALTERNATE : PHRF_FORMULA.STANDARD
   );
 
-  const { storeValueForKey } = useStorage();
+  const { storePHRFIsAlternateFormula } = useStorage();
 
   const updatePhrfFormula = (value) => {
     setValue(value);
     const isAlternate = value === PHRF_FORMULA.ALTERNATE;
     setIsAlternatePHRF(isAlternate);
-    storeValueForKey("@phrf_formula", isAlternate);
+    storePHRFIsAlternateFormula(isAlternate);
   };
 
   return (

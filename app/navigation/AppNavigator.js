@@ -22,16 +22,18 @@ const SECTIONS = {
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
-  const { storeValueForKey, getValueForKey } = useStorage();
+  const { getPHRFIsAlternateFormula } = useStorage();
   const { setIsAlternatePHRF } = usePHRF();
 
   const saveCurrentScreen = (screenName) => {
-    storeValueForKey("@current_screen", screenName);
+    //storeValueForKey("@current_screen", screenName);
   };
 
   useEffect(() => {
-    getValueForKey("@phrf_formula").then((result) => {
-      setIsAlternatePHRF(result.data);
+    getPHRFIsAlternateFormula().then((result) => {
+      if (result.ok) {
+        setIsAlternatePHRF(result.data);
+      }
     });
   }, []);
 
