@@ -38,6 +38,7 @@ function RaceTimer({
   startTimeDisabled,
   startNowDisabled,
   startDate,
+  editMode,
 }) {
   const [date, setDate] = useState(startDate);
   const [show, setShow] = useState(false);
@@ -69,10 +70,10 @@ function RaceTimer({
   };
 
   useEffect(() => {
-    if (startDate) {
+    if (date) {
       setDate(startDate);
     }
-  }, [startDate]);
+  }, [date, startDate]);
 
   return (
     <View style={styles.container}>
@@ -92,7 +93,7 @@ function RaceTimer({
           <Button
             disabled={startTimeDisabled}
             buttonStyle={styles.button}
-            title="Start Time..."
+            title={editMode ? "Edit Start Time..." : "Start Time..."}
             onPress={handleShowTimepicker}
           />
           <Button

@@ -42,13 +42,13 @@ function correctTimeSortResults(
   if (isEmpty(resultList)) return;
 
   const raceResults = Array.from(resultList);
-  const finishItems = raceResults.filter((item) => item.rank !== "-");
+  const finishItems = raceResults.filter((item) => item && item.rank !== "-");
   const notFinishItems = raceResults.filter((item) => item.rank === "-");
 
   if (raceState === RACE_STATE.FINISHED) {
     let rankCount = finishItems.length + 1;
     raceResults.map((item) => {
-      if (item.rank === "-") {
+      if (item && item.rank === "-") {
         item.rank = rankCount;
         rankCount++;
         return item;
@@ -96,7 +96,12 @@ function Race() {
   const [stopWatchStartTime, setStopWatchStartTime] = useState(0);
   const [stopWatchState, setStopWatchState] = useState();
 
-  const { getCorrectedTime, isAlternatePHRF, timeToString } = usePHRF();
+  const {
+    getCorrectedTime,
+    isAlternatePHRF,
+    timeToString,
+    secondsToHms,
+  } = usePHRF();
 
   const handleHelpPress = () => {
     setHelpPromptVisible(true);
@@ -247,7 +252,9 @@ function Race() {
 
   const handleBoatFinishClick = (result) => {
     const resultCopy = { ...result };
-    resultCopy.elapsedTime = elapsedTime;
+    resultCopy.originalStartTime = raceTimerStartDate.getTime();
+    (resultCopy.originalElapsedTime = elapsedTime),
+      (resultCopy.elapsedTime = elapsedTime);
     resultCopy.correctedTime = getCorrectedTime(
       elapsedTime,
       resultCopy.boat.rating,
@@ -374,23 +381,62 @@ function Race() {
   };
 
   const handleStartTimeChange = (date) => {
-    const previousTimeDate = new Date(date.getTime());
-    const newTimeDate = new Date();
+    const selectedTimeDate = new Date(date.getTime());
 
-    newTimeDate.setHours(previousTimeDate.getHours());
-    newTimeDate.setMinutes(previousTimeDate.getMinutes());
-    newTimeDate.setSeconds(0);
+    // Race Finished, allow edit of race start time
+    if (raceState === RACE_STATE.FINISHED) {
+      const startDateMilliSeconds = raceTimerStartDate.getTime();
+      const newStartDateMilliseconds = selectedTimeDate.getTime();
+      const elapsedDiff = startDateMilliSeconds - newStartDateMilliseconds;
+      const newElapsedTime = elapsedDiff + elapsedTime;
 
-    storeRaceResults({
-      boatResults: viewBoatResultList,
-      raceStartTime: newTimeDate,
-      raceElapsedTime: elapsedTime,
-      raceState: RACE_STATE.STARTED_AND_RUNNING,
-    }).then((response) => {
-      if (response.ok) {
-        raceStartTimeAction(newTimeDate);
+      // Don't allow negative newElapsedTime
+      if (newElapsedTime <= 0) {
+        setRaceTimerStartDate(raceTimerStartDate);
+        return;
       }
-    });
+
+      const updatedBoatsElapsed = viewBoatResultList.map((boatResult) => {
+        if (boatResult.elapsedTime !== 0) {
+          const boatCorrectedElapsedTime =
+            boatResult.originalStartTime -
+            newStartDateMilliseconds +
+            boatResult.originalElapsedTime;
+          boatResult.elapsedTime = boatCorrectedElapsedTime;
+        }
+        return boatResult;
+      });
+
+      storeRaceResults({
+        boatResults: updatedBoatsElapsed,
+        raceStartTime: selectedTimeDate,
+        raceElapsedTime: newElapsedTime,
+        raceState: raceState,
+      }).then((response) => {
+        if (response.ok) {
+          setElapsedTime(newElapsedTime);
+          setRaceTimerStartDate(selectedTimeDate);
+          setStopWatchStartTime(newElapsedTime);
+          updateResultList();
+        }
+      });
+    } else {
+      const newTimeDate = new Date();
+      newTimeDate.setHours(selectedTimeDate.getHours());
+      newTimeDate.setMinutes(selectedTimeDate.getMinutes());
+      newTimeDate.setSeconds(0);
+
+      storeRaceResults({
+        boatResults: viewBoatResultList,
+        raceStartTime: newTimeDate,
+        raceElapsedTime: elapsedTime,
+        raceState: RACE_STATE.STARTED_AND_RUNNING,
+      }).then((response) => {
+        if (response.ok) {
+          raceStartTimeAction(newTimeDate);
+        }
+      });
+    }
   };
 
   const raceStartTimeAction = (timeDate) => {
@@ -479,14 +525,12 @@ function Race() {
         startDate={raceTimerStartDate}
         onTimeChange={handleStartTimeChange}
         onStartNow={handleStartNow}
-        startTimeDisabled={
-          raceState === RACE_STATE.STARTED_AND_RUNNING ||
-          raceState === RACE_STATE.FINISHED
-        }
+        startTimeDisabled={raceState === RACE_STATE.STARTED_AND_RUNNING}
         startNowDisabled={
           raceState === RACE_STATE.STARTED_AND_RUNNING ||
           raceState === RACE_STATE.FINISHED
         }
+        editMode={raceState === RACE_STATE.FINISHED}
       />
       <StopWatch
         startLabel="Start Race"
