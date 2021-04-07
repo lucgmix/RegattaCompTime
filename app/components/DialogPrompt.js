@@ -21,8 +21,8 @@ function DialogPrompt({
     <Overlay isVisible={isVisible}>
       <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
-        <Text style={styles.message}>{message}</Text>
-        <Text style={styles.content}>{content}</Text>
+        {message && <Text style={styles.message}>{message}</Text>}
+        {content && <Text style={styles.content}>{content}</Text>}
 
         <View style={styles.buttonContainer}>
           {neutral && (
@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
     marginLeft: 24,
     marginRight: 24,
   },
-  content: { alignSelf: "center", marginTop: 24, marginBottom: 24 },
-  button: { minWidth: 100, margin: 4 },
+  content: { alignSelf: "center", marginTop: 24 },
+  button: { minWidth: 100, margin: 4, marginTop: 24 },
   buttonContainer: { flexDirection: "row", justifyContent: "center" },
   title: {
     justifyContent: "center",
