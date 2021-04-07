@@ -397,8 +397,18 @@ function Race() {
       const elapsedDiff = startDateMilliSeconds - newStartDateMilliseconds;
       const newElapsedTime = elapsedDiff + elapsedTime;
 
-      // Don't allow negative newElapsedTime
-      if (newElapsedTime <= 0) {
+      let shortestElapsed = raceTimerStartDate.getTime();
+      viewBoatResultList.forEach((boatResult) => {
+        if (boatResult && boatResult.elapsedTime > 0) {
+          if (boatResult.elapsedTime < shortestElapsed) {
+            shortestElapsed = boatResult.elapsedTime;
+          }
+        }
+      });
+      // Don't allow setting the start time to a value
+      // past the shortest elapsed time of a boat that finished.
+      shortestElapsed += elapsedDiff;
+      if (shortestElapsed <= 0) {
         setStartTimePromptVisible(true);
         setRaceTimerStartDate(raceTimerStartDate);
         return;
@@ -530,7 +540,7 @@ function Race() {
     <Screen style={styles.container}>
       <DialogPrompt
         title="Edit Start Time"
-        message={`Oops! Setting a start time after the finish time is not allowed.`}
+        message={`Oops! Setting the start time of the race to be after the shortest elapsed time of a boat is not allowed.`}
         positive="Got it"
         isVisible={startTimePromptVisible}
         onPositiveButtonPress={handleHideStartTimePrompt}
