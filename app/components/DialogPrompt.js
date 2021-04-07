@@ -58,7 +58,12 @@ const styles = StyleSheet.create({
     marginLeft: 24,
     marginRight: 24,
   },
-  content: { alignSelf: "center", marginTop: 24 },
+  content: {
+    alignSelf: "center",
+    marginTop: 24,
+    marginLeft: 28,
+    marginRight: 28,
+  },
   button: { minWidth: 100, margin: 4, marginTop: 24 },
   buttonContainer: { flexDirection: "row", justifyContent: "center" },
   title: {

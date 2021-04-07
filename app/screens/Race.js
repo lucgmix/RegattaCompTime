@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
+import Text from "../components/Text";
 import Screen from "../components/Screen";
 import SectionHeader from "../components/SectionHeader";
 import { usePHRF } from "../context/PhrfContext";
@@ -489,6 +490,36 @@ function Race() {
     }
   };
 
+  const applyBoldStyle = (text) => {
+    let numberOfItemsAdded = 0;
+    const result = text.sentence.split(/\{\d+\}/);
+    text.boldText.forEach((boldText, i) =>
+      result.splice(
+        ++numberOfItemsAdded + i,
+        0,
+        <Text style={{ fontWeight: "bold" }}>{boldText}</Text>
+      )
+    );
+    return <Text>{result}</Text>;
+  };
+
+  const getRaceHelpString = () => {
+    const raceHelp = {
+      sentence:
+        "{0} Allows to enter the race start time for the current day.\n\n{1} Allows to start the race timer at the current time.\n\n{2} Allows to modify the start time of a race that was stopped/finished.\n\n{3} Stops the race timer and gives corrected time sorted results.\n\n{4} Clears the race results and sorts the boats by rating.\n\n{5} Click a boat's Finish button to record their race finish.",
+      boldText: [
+        "Start Time...",
+        "Start Now",
+        "Edit Start Time...",
+        "Stop Race",
+        "Clear Race",
+        "Finish",
+      ],
+    };
+
+    return applyBoldStyle(raceHelp);
+  };
+
   useEffect(() => {
     populateResultList();
   }, []);
@@ -509,7 +540,7 @@ function Race() {
       <DialogPrompt
         title="Race Help"
         message={`The Race section allows you to track realtime results (Corrected Time and Elapsed race time) for boats in a race.`}
-        content={`Start Time... Allows to enter the race start time for the current day.\n\nStart Now - Allows to start the race timer at the current time.\n\nStop Race - Stops the race timer and gives corrected time sorted results\n\nClear Race - Clears the race results and sorts the boats by rating.\n\nFinish - Click a boat Finish when they cross the finish line.`}
+        content={getRaceHelpString()}
         positive="Got it"
         isVisible={helpPromptVisible}
         onPositiveButtonPress={() => setHelpPromptVisible(false)}

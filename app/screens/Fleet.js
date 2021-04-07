@@ -154,7 +154,7 @@ function Fleet() {
 
       <DialogPrompt
         title="Fleet Help"
-        message="The Fleet section is were you manage the boats that will be used in the Time Delta and Race sections."
+        message="The Fleet section is where you manage the boats that will be used in the Time Delta and Race sections."
         content={`Use the Add, Edit, Duplicate or Delete button to manage the boats of the fleet.\n\nTip: To Edit, Duplicate or Delete a boat, you first need to select it in the list by clicking on it.`}
         positive="Got it"
         isVisible={helpPromptVisible}
