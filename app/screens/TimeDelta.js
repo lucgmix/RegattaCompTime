@@ -9,6 +9,7 @@ import {
 import Picker from "../components/Picker";
 import Screen from "../components/Screen";
 import Text from "../components/Text";
+import { applyBoldStyle } from "../utils/stringStyle";
 import Button from "../components/Button";
 import TimeDeltaListItem from "../components/lists/TimeDeltaListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
@@ -82,6 +83,26 @@ function TimeDelta() {
       });
   };
 
+  const getTimeDeltaHelpString = (tag) => {
+    let textToStyle;
+    switch (tag) {
+      case "message":
+        textToStyle = {
+          sentence: `The {0} section is were you can compare the time difference between boats based on the race duration and the boat's handicap.`,
+          boldText: ["Time Delta"],
+        };
+        break;
+      case "content":
+        textToStyle = {
+          sentence: `Use the {0} button to enter the race duration and then choose the reference boat ({1}) to compare the time differences (Time Delta).\n\nTip: Select any boat in the list by clicking on it to change the reference boat.`,
+          boldText: ["Set", "Select Reference Boat"],
+        };
+        break;
+    }
+
+    return applyBoldStyle(textToStyle);
+  };
+
   // Update dropdown otpions and viewBoatList when viewBoatList changes.
   useEffect(() => {
     getBoatList().then(({ boatData }) => {
@@ -107,8 +128,8 @@ function TimeDelta() {
     <Screen style={styles.container}>
       <DialogPrompt
         title="Time Delta Help"
-        message="The Time Delta section is were you can compare the time difference between boats based on the race duration and the boat's handicap."
-        content={`Use the Set button to enter the race duration and then choose the reference boat to compare the time differences (Time Delta).\n\nTip: Select any boat in the list by clicking on it to change the reference boat.`}
+        message={getTimeDeltaHelpString("message")}
+        content={getTimeDeltaHelpString("content")}
         positive="Got it"
         isVisible={helpPromptVisible}
         onPositiveButtonPress={() => setHelpPromptVisible(false)}
