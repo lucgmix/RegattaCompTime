@@ -1,36 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useMemo, useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import Text from "../components/Text";
 import Button from "../components/Button";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
-const getTimeString = (date) => {
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  const seconds = date.getSeconds();
-
-  const hourString = `${hours.toString()}`;
-  const minuteString = `:${minutes.toString().padStart(2, "0")}`;
-  const secondsString = `:${seconds.toString().padStart(2, "0")}`;
-
-  let timeString = hourString;
-
-  if (hours >= 13) {
-    timeString = `${(hours - 12).toString()}`;
-  } else if (hours === 0) {
-    timeString = `12`;
-  }
-
-  const timeSuffix = hours >= 12 ? "PM" : "AM";
-  timeString += minuteString;
-
-  if (seconds > 0) {
-    timeString += secondsString;
-  }
-  return `${timeString} ${timeSuffix}`;
-};
 
 function RaceTimer({
   onTimeChange,
@@ -43,10 +17,40 @@ function RaceTimer({
   const [date, setDate] = useState(startDate);
   const [show, setShow] = useState(false);
 
+  const getTimeString = useCallback(
+    (raceDateTime) => {
+      const hours = raceDateTime.getHours();
+      const minutes = raceDateTime.getMinutes();
+      const seconds = raceDateTime.getSeconds();
+
+      const hourString = `${hours.toString()}`;
+      const minuteString = `:${minutes.toString().padStart(2, "0")}`;
+      const secondsString = `:${seconds.toString().padStart(2, "0")}`;
+
+      let timeString = hourString;
+
+      if (hours >= 13) {
+        timeString = `${(hours - 12).toString()}`;
+      } else if (hours === 0) {
+        timeString = `12`;
+      }
+
+      const timeSuffix = hours >= 12 ? "PM" : "AM";
+      timeString += minuteString;
+
+      if (seconds > 0) {
+        timeString += secondsString;
+      }
+      return `${timeString} ${timeSuffix}`;
+    },
+    [date]
+  );
+
   const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
     // setShow(Platform.OS === "ios");
-    setDate(currentDate);
+    if (selectedDate) {
+      setDate(selectedDate);
+    }
   };
 
   const handleShowTimepicker = () => {

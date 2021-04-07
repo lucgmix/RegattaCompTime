@@ -367,6 +367,7 @@ function Race() {
     setRaceState(RACE_STATE.STARTED_AND_RUNNING);
     setElapsedTime(0);
     setStopWatchStartTime(0);
+    setRaceTimerStartDate(new Date());
 
     storeRaceResults({
       raceStartTime: new Date().getTime(),

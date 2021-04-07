@@ -21,7 +21,6 @@ function StopWatch({
   stopLabel,
   resetLabel,
   onElapsedChange,
-  // onStart,
   onStop,
   onReset,
   startTimeOffset,
