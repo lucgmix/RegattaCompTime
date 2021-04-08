@@ -20,4 +20,7 @@ export default {
   subText: "#707070",
   disabledText: "#aaa",
   green: "#90f09b",
+  darkGreen: "green",
+  orange: "orange",
+  darkRed: "#db0000",
 };

@@ -355,7 +355,7 @@ function Race() {
       raceStartTime: raceTimerStartDate.getTime(),
       raceElapsedTime: 0,
       boatResults: resetBoatResults,
-      raceState: RACE_STATE.RESET_CLEARED,
+      raceState: "",
     }).then((response) => {
       if (response.ok) {
         setViewBoatResultList(ratingSortResults(resetBoatResults));
@@ -365,8 +365,17 @@ function Race() {
     });
   };
 
-  const handleReset = () => {
-    setClearRacePromptVisible(true);
+  const raceStartTimeAction = (timeDate) => {
+    setRaceTimerStartDate(timeDate);
+
+    const elapsedSinceStartTime = new Date().getTime() - timeDate.getTime();
+
+    // Current time is later than race start time, start stopwatch
+    if (elapsedSinceStartTime > 0) {
+      startRaceTimer(elapsedSinceStartTime);
+    } else {
+      setTimeout(startRaceTimer, Math.abs(elapsedSinceStartTime));
+    }
   };
 
   const handleStartNow = () => {
@@ -385,6 +394,10 @@ function Race() {
         setStopWatchState(STOPWATCH_STATE.STARTED);
       }
     });
+  };
+
+  const handleReset = () => {
+    setClearRacePromptVisible(true);
   };
 
   const handleStartTimeChange = (date) => {
@@ -454,19 +467,6 @@ function Race() {
           raceStartTimeAction(newTimeDate);
         }
       });
-    }
-  };
-
-  const raceStartTimeAction = (timeDate) => {
-    setRaceTimerStartDate(timeDate);
-
-    const elapsedSinceStartTime = new Date().getTime() - timeDate.getTime();
-
-    // Current time is later than race start time, start stopwatch
-    if (elapsedSinceStartTime > 0) {
-      startRaceTimer(elapsedSinceStartTime);
-    } else {
-      setTimeout(startRaceTimer, Math.abs(elapsedSinceStartTime));
     }
   };
 
@@ -540,7 +540,7 @@ function Race() {
     <Screen style={styles.container}>
       <DialogPrompt
         title="Edit Start Time"
-        message={`Oops! Setting the start time of the race to be after the shortest elapsed time of a boat is not allowed.`}
+        message={`Oops!\n\nSetting the start time to be after the first boat finish time or after the end of race is not allowed.`}
         positive="Got it"
         isVisible={startTimePromptVisible}
         onPositiveButtonPress={handleHideStartTimePrompt}
@@ -596,6 +596,7 @@ function Race() {
         endRaceDisabled={raceState !== RACE_STATE.STARTED_AND_RUNNING}
         resetRaceDisabled={raceState !== RACE_STATE.FINISHED}
         state={stopWatchState}
+        date={raceTimerStartDate}
       />
       <FlatList
         data={viewBoatResultList}
