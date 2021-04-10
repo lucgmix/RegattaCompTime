@@ -402,6 +402,7 @@ function Race() {
 
   const handleStartTimeChange = (date) => {
     const selectedTimeDate = new Date(date.getTime());
+    selectedTimeDate.setSeconds(0);
 
     // Race Finished, allow edit of race start time
     if (raceState === RACE_STATE.FINISHED) {
