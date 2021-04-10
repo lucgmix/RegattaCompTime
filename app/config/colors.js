@@ -19,7 +19,7 @@ export default {
   text: "#303030",
   subText: "#707070",
   disabledText: "#aaa",
-  green: "#69e069",
+  green: "#5cd65c",
   darkGreen: "#007700",
   orange: "orange",
   darkRed: "#db0000",
