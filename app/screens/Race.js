@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { AppState, FlatList, StyleSheet, View } from "react-native";
 import Screen from "../components/Screen";
 import SectionHeader from "../components/SectionHeader";
 import { applyBoldStyle } from "../utils/stringStyle";
@@ -529,6 +529,12 @@ function Race() {
     return applyBoldStyle(textToStyle);
   };
 
+  const handleAppStateChange = (newState) => {
+    if (newState === "active") {
+      populateResultList();
+    }
+  };
+
   useEffect(() => {
     populateResultList();
   }, []);
@@ -536,6 +542,13 @@ function Race() {
   useEffect(() => {
     updateResultList();
   }, [boatDataChanged, isAlternatePHRF]);
+
+  useEffect(() => {
+    AppState.addEventListener("change", handleAppStateChange);
+    return () => {
+      AppState.removeEventListener("change", handleAppStateChange);
+    };
+  }, []);
 
   return (
     <Screen style={styles.container}>
