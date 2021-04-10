@@ -97,7 +97,7 @@ function RaceTimer({
           <Button
             disabled={startTimeDisabled}
             buttonStyle={styles.button}
-            title={editMode ? "Edit Start Time..." : "Start Time..."}
+            title={editMode ? "Edit Start Time..." : "Start Race..."}
             onPress={handleShowTimepicker}
           />
           {!editMode && (
@@ -144,6 +144,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     marginTop: 8,
     marginBottom: 8,
+    backgroundColor: colors.darkGreen,
   },
   timeLabel: {
     marginLeft: 6,

@@ -182,51 +182,25 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
 
   const boatTypeItems = [
     {
+      id: "1",
       boatType: "Laser 28",
       ratingFS: "126",
       ratingNFS: "141",
     },
     {
+      id: "2",
       boatType: "C&C 115",
       ratingFS: "63",
       ratingNFS: "93",
     },
     {
+      id: "3",
       boatType: "Laser 28",
       ratingFS: "126",
       ratingNFS: "141",
     },
     {
-      boatType: "C&C 115",
-      ratingFS: "63",
-      ratingNFS: "93",
-    },
-    {
-      boatType: "Laser 28",
-      ratingFS: "126",
-      ratingNFS: "141",
-    },
-    {
-      boatType: "C&C 115",
-      ratingFS: "63",
-      ratingNFS: "93",
-    },
-    {
-      boatType: "Laser 28",
-      ratingFS: "126",
-      ratingNFS: "141",
-    },
-    {
-      boatType: "C&C 115",
-      ratingFS: "63",
-      ratingNFS: "93",
-    },
-    {
-      boatType: "Laser 28",
-      ratingFS: "126",
-      ratingNFS: "141",
-    },
-    {
+      id: "4",
       boatType: "C&C 115",
       ratingFS: "63",
       ratingNFS: "93",

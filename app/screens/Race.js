@@ -355,7 +355,7 @@ function Race() {
       raceStartTime: raceTimerStartDate.getTime(),
       raceElapsedTime: 0,
       boatResults: resetBoatResults,
-      raceState: "",
+      raceState: RACE_STATE.RESET_CLEARED,
     }).then((response) => {
       if (response.ok) {
         setViewBoatResultList(ratingSortResults(resetBoatResults));
@@ -410,7 +410,7 @@ function Race() {
       const elapsedDiff = startDateMilliSeconds - newStartDateMilliseconds;
       const newElapsedTime = elapsedDiff + elapsedTime;
 
-      let shortestElapsed = raceTimerStartDate.getTime();
+      let shortestElapsed = newElapsedTime;
       viewBoatResultList.forEach((boatResult) => {
         if (boatResult && boatResult.elapsedTime > 0) {
           if (boatResult.elapsedTime < shortestElapsed) {

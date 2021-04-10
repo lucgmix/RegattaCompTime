@@ -117,7 +117,7 @@ function StopWatch({
         ></Button> */}
           <Button
             disabled={endRaceDisabled}
-            buttonStyle={styles.button}
+            buttonStyle={styles.stopButton}
             title={stopLabel}
             onPress={() => onStop()}
           ></Button>
@@ -158,6 +158,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   button: { margin: 8 },
+  stopButton: {
+    margin: 8,
+    backgroundColor: colors.darkRed,
+  },
   buttonContainer: {
     flexDirection: "row",
     alignItems: "center",
