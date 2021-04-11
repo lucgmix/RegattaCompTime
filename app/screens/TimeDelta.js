@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
     paddingLeft: 12,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#fff",
+    borderColor: colors.white,
     alignItems: "center",
     justifyContent: "space-between",
   },

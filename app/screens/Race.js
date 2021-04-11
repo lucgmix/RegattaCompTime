@@ -98,12 +98,7 @@ function Race() {
   const [stopWatchStartTime, setStopWatchStartTime] = useState(0);
   const [stopWatchState, setStopWatchState] = useState();
 
-  const {
-    getCorrectedTime,
-    isAlternatePHRF,
-    timeToString,
-    secondsToHms,
-  } = usePHRF();
+  const { getCorrectedTime, isAlternatePHRF, timeToString } = usePHRF();
 
   const handleHelpPress = () => {
     setHelpPromptVisible(true);
@@ -348,6 +343,8 @@ function Race() {
       result.elapsedTime = 0;
       result.correctedTime = 0;
       result.rank = "-";
+      result.originalStartTime = 0;
+      result.originalElapsedTime = 0;
       return result;
     });
 
@@ -404,12 +401,23 @@ function Race() {
     const selectedTimeDate = new Date(date.getTime());
     selectedTimeDate.setSeconds(0);
 
+    const resultWithOriginalStartTime = viewBoatResultList.find(
+      (item) => item.originalStartTime > 0
+    );
+
     // Race Finished, allow edit of race start time
     if (raceState === RACE_STATE.FINISHED) {
-      const startDateMilliSeconds = raceTimerStartDate.getTime();
+      const raceStartTimeMilliSeconds =
+        (resultWithOriginalStartTime &&
+          resultWithOriginalStartTime.originalStartTime) ||
+        raceTimerStartDate.getTime();
+      const elapsedToCompare =
+        (resultWithOriginalStartTime &&
+          resultWithOriginalStartTime.originalElapsedTime) ||
+        elapsedTime;
       const newStartDateMilliseconds = selectedTimeDate.getTime();
-      const elapsedDiff = startDateMilliSeconds - newStartDateMilliseconds;
-      const newElapsedTime = elapsedDiff + elapsedTime;
+      const elapsedDiff = raceStartTimeMilliSeconds - newStartDateMilliseconds;
+      const newElapsedTime = elapsedDiff + elapsedToCompare;
 
       let shortestElapsed = newElapsedTime;
       viewBoatResultList.forEach((boatResult) => {
@@ -419,10 +427,11 @@ function Race() {
           }
         }
       });
+
       // Don't allow setting the start time to a value
       // past the shortest elapsed time of a boat that finished.
       shortestElapsed += elapsedDiff;
-      if (shortestElapsed <= 0) {
+      if (elapsedDiff >= shortestElapsed) {
         setStartTimePromptVisible(true);
         setRaceTimerStartDate(raceTimerStartDate);
         return;

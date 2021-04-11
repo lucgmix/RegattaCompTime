@@ -114,6 +114,27 @@ export function secondsToHms(seconds) {
   }
 }
 
+export function millisecondsToHms(timeInMiliseconds) {
+  let h, m, s;
+  h = Math.floor(timeInMiliseconds / 1000 / 60 / 60);
+  m = Math.floor((timeInMiliseconds / 1000 / 60 / 60 - h) * 60);
+  s = Math.floor(((timeInMiliseconds / 1000 / 60 / 60 - h) * 60 - m) * 60);
+
+  s < 10 ? (s = `0${s}`) : (s = `${s}`);
+  m < 10 ? (m = `0${m}`) : (m = `${m}`);
+  h < 10 ? (h = `0${h}`) : (h = `${h}`);
+
+  return `${s}:${m}:${h}`;
+}
+
+const millisecondsToDuration = (milliseconds) => {
+  const seconds = Math.floor(milliseconds / 1000) % 60;
+  const minutes = Math.floor((milliseconds / (1000 * 60)) % 60);
+  const hours = Math.floor((milliseconds / (1000 * 60 * 60)) % 24);
+
+  return `${hours}:${minutes}:${seconds}`;
+};
+
 export function timeToString(time) {
   const diffInHrs = time / 3600000;
   const hh = Math.floor(diffInHrs);
