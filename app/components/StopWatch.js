@@ -93,7 +93,7 @@ function StopWatch({
           setStatus("Racing");
           break;
         case STOPWATCH_STATE.STOPPED:
-          setStatus("Race Stopped");
+          setStatus("Race Finished");
           break;
         case STOPWATCH_STATE.RESET:
           setStatus("Waiting for Start");

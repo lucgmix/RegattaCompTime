@@ -14,6 +14,7 @@ import StopWatch, { STOPWATCH_STATE } from "../components/StopWatch";
 import DialogPrompt from "../components/DialogPrompt";
 import { isEmpty } from "lodash";
 import RaceTimer from "../components/RaceTimer";
+import { toDate, format, set } from "date-fns/";
 
 const RACE_STATE = {
   NOT_STARTED: "not_started",
@@ -117,7 +118,9 @@ function Race() {
 
           if (resultsData.raceState !== RACE_STATE.FINISHED) {
             setViewBoatResultList(ratingSortResults(boats));
-            raceStartTimeAction(new Date(resultsData.raceStartTime));
+            raceStartTimeAction(
+              getDateTimeForCurrentDay(resultsData.raceStartTime)
+            );
           } else {
             setViewBoatResultList(
               correctTimeSortResults(
@@ -401,12 +404,12 @@ function Race() {
     const selectedTimeDate = new Date(date.getTime());
     selectedTimeDate.setSeconds(0);
 
-    const resultWithOriginalStartTime = viewBoatResultList.find(
-      (item) => item.originalStartTime > 0
-    );
-
     // Race Finished, allow edit of race start time
     if (raceState === RACE_STATE.FINISHED) {
+      const resultWithOriginalStartTime = viewBoatResultList.find(
+        (item) => item.originalStartTime > 0
+      );
+
       const raceStartTimeMilliSeconds =
         (resultWithOriginalStartTime &&
           resultWithOriginalStartTime.originalStartTime) ||
@@ -462,10 +465,7 @@ function Race() {
         }
       });
     } else {
-      const newTimeDate = new Date();
-      newTimeDate.setHours(selectedTimeDate.getHours());
-      newTimeDate.setMinutes(selectedTimeDate.getMinutes());
-      newTimeDate.setSeconds(0);
+      const newTimeDate = getDateTimeForCurrentDay(selectedTimeDate, true);
 
       storeRaceResults({
         boatResults: viewBoatResultList,
@@ -478,6 +478,17 @@ function Race() {
         }
       });
     }
+  };
+
+  const getDateTimeForCurrentDay = (date, zeroSeconds = false) => {
+    const originalDate = new Date(date);
+    const newTimeDate = new Date();
+    newTimeDate.setHours(originalDate.getHours());
+    newTimeDate.setMinutes(originalDate.getMinutes());
+    zeroSeconds
+      ? newTimeDate.setSeconds(0)
+      : newTimeDate.setSeconds(originalDate.getSeconds());
+    return newTimeDate;
   };
 
   const startRaceTimer = (stopWatchTime = 0) => {
@@ -522,12 +533,12 @@ function Race() {
       case "content":
         textToStyle = {
           sentence:
-            "{0} Allows to enter the race start time for the current day.\n\n{1} Allows to start the race timer at the current time.\n\n{2} Allows to modify the start time of a race that was stopped/finished.\n\n{3} Stops the race timer and gives corrected time sorted results.\n\n{4} Clears the race results and sorts the boats by rating.\n\n{5} Click a boat's Finish button to record their race finish.",
+            "{0} Allows you to enter the race start time for the current day.\n\n{1} Allows you to start the race timer at the current time.\n\n{2} Allows you to modify the start time of a race that was finished.\n\n{3} Stops the race timer and displays ranking sorted results based on corrected time.\n\n{4} Clears the race results and sorts the boats by rating, faster boats appear higher in the list.\n\n{5} Click a boat's Finish button to record their race finish.",
           boldText: [
             "Start Time...",
             "Start Now",
             "Edit Start Time...",
-            "Stop Race",
+            "Finish Race",
             "Clear Race",
             "Finish",
           ],
@@ -587,8 +598,8 @@ function Race() {
         onPositiveButtonPress={handleClearRace}
       />
       <DialogPrompt
-        title="Stop Race"
-        message="Are you sure you want to stop this race?"
+        title="Finish Race"
+        message="Are you sure you want to finish this race?"
         content="This will stop the race timer and sort final results."
         positive="Yes"
         negative="Cancel"
@@ -610,7 +621,7 @@ function Race() {
       />
       <StopWatch
         startLabel="Start Race"
-        stopLabel="Stop Race"
+        stopLabel="Finish Race"
         resetLabel="Clear Race"
         startTimeOffset={stopWatchStartTime}
         onElapsedChange={handleElapsedChange}

@@ -94,7 +94,7 @@ function TimeDelta() {
         break;
       case "content":
         textToStyle = {
-          sentence: `Use the {0} button to enter the race duration and then choose the reference boat ({1}) to compare the time differences (Time Delta).\n\nTip: Select any boat in the list by clicking on it to change the reference boat.`,
+          sentence: `Use the {0} button to enter the race duration of the reference boat and then choose the reference boat ({1}) to compare the time differences (Time Delta).\n\nTip: Select any boat in the list by clicking on it to change the reference boat.`,
           boldText: ["Set", "Select Reference Boat"],
         };
         break;
