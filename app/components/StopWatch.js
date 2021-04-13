@@ -132,7 +132,7 @@ function StopWatch({
         <Text style={styles.statusBarText}>{status}</Text>
         {state === STOPWATCH_STATE.RESET && (
           <Text style={styles.statusBarDateText}>
-            {format(currentDate, "iiii h:mm:ss a")}
+            {`at next ${format(currentDate, "h:mm:ss a")}`}
           </Text>
         )}
       </View>
