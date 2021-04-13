@@ -21,6 +21,7 @@ export default {
   disabledText: "#aaa",
   green: "#85e085",
   darkGreen: "#007700",
+  mediumGreen: "#009900",
   orange: "orange",
   darkRed: "#db0000",
 };

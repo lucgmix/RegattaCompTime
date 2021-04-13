@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     if (state) {
       switch (state) {
         case STOPWATCH_STATE.STARTED:
-          statusColor = colors.darkGreen;
+          statusColor = colors.mediumGreen;
           break;
         case STOPWATCH_STATE.STOPPED:
           statusColor = colors.darkRed;
