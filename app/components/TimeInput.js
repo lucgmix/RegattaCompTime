@@ -50,7 +50,7 @@ function TimeInput({ duration, onDurationChange }) {
         <View style={digitStyles.colonOffset} />
       </View>
       <TimeDigits
-        timeValue={minute}
+        timeValue={minute.toString().padStart(2, "0")}
         timeUnit="minute"
         onChange={onMinuteDigitsChanged}
       />
@@ -59,7 +59,7 @@ function TimeInput({ duration, onDurationChange }) {
         <View style={digitStyles.colonOffset} />
       </View>
       <TimeDigits
-        timeValue={second}
+        timeValue={second.toString().padStart(2, "0")}
         timeUnit="second"
         onChange={onSecondDigitsChanged}
       />
@@ -85,6 +85,12 @@ function TimeDigits({ timeValue, timeUnit, size = 8, onChange }) {
     onChange(time);
   };
 
+  const padSingleDigit = () => {
+    if (timeUnit !== "hour") {
+      setTimeDigits(timeDigits.toString().padStart(2, "0"));
+    }
+  };
+
   return (
     <View style={digitStyles.container}>
       <View style={digitStyles.inputContainer}>
@@ -103,6 +109,7 @@ function TimeDigits({ timeValue, timeUnit, size = 8, onChange }) {
             selectTextOnFocus={true}
             contextMenuHidden={true}
             selectionColor={defaultStyles.colors.primary500}
+            onBlur={padSingleDigit}
           />
         </View>
       </View>
