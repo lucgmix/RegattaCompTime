@@ -24,4 +24,5 @@ export default {
   mediumGreen: "#009900",
   orange: "orange",
   darkRed: "#db0000",
+  transparent: "#00000000",
 };

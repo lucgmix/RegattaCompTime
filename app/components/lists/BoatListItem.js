@@ -40,26 +40,40 @@ function BoatListItem({
       >
         {type}
       </Text>
-      <Text
-        numberOfLines={1}
+      <View
         style={[
-          defaultStyles.text,
-          styles.rating(defaultRating === "FS"),
-          isHeader && headerStyles.label,
+          styles.selectedField,
+          styles.rating(defaultRating === "FS", isHeader),
         ]}
       >
-        {ratingFS}
-      </Text>
-      <Text
-        numberOfLines={1}
+        <Text
+          numberOfLines={1}
+          style={[
+            defaultStyles.text,
+            styles.ratingText(defaultRating === "FS", isHeader),
+            isHeader && headerStyles.label,
+          ]}
+        >
+          {ratingFS}
+        </Text>
+      </View>
+      <View
         style={[
-          defaultStyles.text,
-          styles.rating(defaultRating === "NFS"),
-          isHeader && headerStyles.label,
+          styles.selectedField,
+          styles.rating(defaultRating === "NFS", isHeader),
         ]}
       >
-        {ratingNFS}
-      </Text>
+        <Text
+          numberOfLines={1}
+          style={[
+            defaultStyles.text,
+            styles.ratingText(defaultRating === "NFS", isHeader),
+            isHeader && headerStyles.label,
+          ]}
+        >
+          {ratingNFS}
+        </Text>
+      </View>
     </View>
   );
 }
@@ -86,7 +100,8 @@ const styles = StyleSheet.create({
     backgroundColor: defaultStyles.colors.light,
     borderRadius: 0,
     flexDirection: "row",
-    padding: 14,
+    minHeight: 50,
+    alignItems: "center",
   },
   name: {
     flex: 0.5,
@@ -97,20 +112,29 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
   },
-  rating(isDefaultRating) {
+  rating(isDefaultRating, isHeader) {
     return {
-      flex: 0.3,
-      flexDirection: "row",
-      textAlign: "right",
-      fontSize: 15,
-      fontWeight: isDefaultRating ? "700" : "400",
+      minHeight: 50,
+      textAlign: "center",
+      backgroundColor: isDefaultRating
+        ? defaultStyles.colors.primary300
+        : isHeader
+        ? defaultStyles.colors.primary
+        : defaultStyles.colors.transparent,
     };
   },
+  ratingText(isDefaultRating) {
+    return { fontSize: 15, fontWeight: isDefaultRating ? "700" : "400" };
+  },
   default_rating: {
-    flex: 0.3,
-    flexDirection: "row",
     textAlign: "right",
     fontSize: 15,
+  },
+  selectedField: {
+    flex: 0.3,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
