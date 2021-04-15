@@ -104,11 +104,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   name: {
+    marginLeft: 12,
     flex: 0.5,
     flexDirection: "row",
   },
   type: {
-    flex: 0.33,
+    flex: 0.4,
     flexDirection: "row",
     justifyContent: "center",
   },
@@ -131,7 +132,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   selectedField: {
-    flex: 0.3,
+    flex: 0.25,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
