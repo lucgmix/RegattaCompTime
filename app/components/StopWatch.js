@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import Button from "../components/Button";
 import Text from "../components/Text";
-import { timeToString } from "../utils/phrf";
+import { timeToString, formatDate } from "../utils/phrf";
 import colors from "../config/colors";
 import { Entypo } from "@expo/vector-icons";
-import { format } from "date-fns";
 
 let startTime = 0;
 let elapsedTime = 0;
@@ -24,6 +23,7 @@ function StopWatch({
   onElapsedChange,
   onStop,
   onReset,
+  onStartToday,
   startTimeOffset,
   endRaceDisabled,
   resetRaceDisabled,
@@ -61,6 +61,15 @@ function StopWatch({
     startTime = 0;
     elapsedTime = 0;
     setTimeDisplay(timeToString(0));
+  };
+
+  const isCurrentDateInThePast = () => {
+    if (currentDate) {
+      const today = new Date();
+      return currentDate.getTime() < today.getTime();
+    } else {
+      return false;
+    }
   };
 
   useEffect(() => {
@@ -101,6 +110,10 @@ function StopWatch({
     }
   }, [state]);
 
+  const raceTime = () => {
+    return formatDate(currentDate, currentDate.getSeconds() !== 0, true);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.stopWatchContainer}>
@@ -120,21 +133,30 @@ function StopWatch({
             buttonStyle={styles.stopButton}
             title={stopLabel}
             onPress={() => onStop()}
-          ></Button>
+          />
           <Button
             disabled={resetRaceDisabled}
             title={resetLabel}
             onPress={() => onReset()}
-          ></Button>
+          />
         </View>
       </View>
       <View style={styles.statusBar(state)}>
-        <Text style={styles.statusBarText}>{status}</Text>
-        {state === STOPWATCH_STATE.RESET && (
-          <Text style={styles.statusBarDateText}>
-            {`at next ${format(currentDate, "h:mm:ss a")}`}
-          </Text>
-        )}
+        <View>
+          <Text style={styles.statusBarText}>{status}</Text>
+          {state === STOPWATCH_STATE.RESET && (
+            <Text style={styles.statusBarDateText}>
+              {`at next ${raceTime()}`}
+            </Text>
+          )}
+          {state === STOPWATCH_STATE.RESET && isCurrentDateInThePast() && (
+            <Button
+              buttonStyle={styles.statusbarButton}
+              title="Start Today's Race"
+              onPress={() => onStartToday()}
+            />
+          )}
+        </View>
       </View>
     </View>
   );
@@ -188,9 +210,10 @@ const styles = StyleSheet.create({
       }
     }
     return {
+      flexDirection: "row",
+      justifyContent: "center",
       marginTop: 8,
       padding: 12,
-      alignItems: "center",
       backgroundColor: statusColor,
       borderRadius: 8,
       borderWidth: 1,
@@ -199,9 +222,14 @@ const styles = StyleSheet.create({
   },
   statusBarText: { color: "white", fontWeight: "900", fontSize: 20 },
   statusBarDateText: {
+    alignSelf: "center",
     color: "white",
     fontWeight: "900",
-    fontSize: 13,
+    fontSize: 15,
+  },
+  statusbarButton: {
+    marginTop: 4,
+    backgroundColor: colors.darkGreen,
   },
 });
 

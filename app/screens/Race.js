@@ -97,7 +97,7 @@ function Race() {
   } = useStorage();
 
   const [stopWatchStartTime, setStopWatchStartTime] = useState(0);
-  const [stopWatchState, setStopWatchState] = useState();
+  const [stopWatchState, setStopWatchState] = useState(STOPWATCH_STATE.RESET);
 
   const { getCorrectedTime, isAlternatePHRF, timeToString } = usePHRF();
 
@@ -182,21 +182,15 @@ function Race() {
         }
       });
 
-      if (
-        raceState === RACE_STATE.STARTED_AND_RUNNING ||
-        raceState === RACE_STATE.FINISHED
-      ) {
-        setViewBoatResultList(
-          correctTimeSortResults(
-            getUpdatedResultRanking(updatedBoatResultList),
-            elapsedTime,
-            isAlternatePHRF,
-            getCorrectedTime,
-            raceState
-          )
-        );
-      } else {
-      }
+      setViewBoatResultList(
+        correctTimeSortResults(
+          getUpdatedResultRanking(updatedBoatResultList),
+          elapsedTime,
+          isAlternatePHRF,
+          getCorrectedTime,
+          raceState
+        )
+      );
     });
   };
 
@@ -627,6 +621,7 @@ function Race() {
         onElapsedChange={handleElapsedChange}
         onStop={handleStopRace}
         onReset={handleReset}
+        onStartToday={() => handleStartTimeChange(raceTimerStartDate)}
         endRaceDisabled={raceState !== RACE_STATE.STARTED_AND_RUNNING}
         resetRaceDisabled={raceState !== RACE_STATE.FINISHED}
         state={stopWatchState}

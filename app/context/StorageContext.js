@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-//import { getBoatList } from "../api/FirebaseApi";
 import storage from "../utils/storage";
 
 const StorageContext = createContext();

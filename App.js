@@ -9,35 +9,29 @@ import {
   StorageDataContext,
   useStorageContext,
 } from "./app/context/StorageContext";
-import { getBoatList } from "./app/api/FirebaseApi";
 //For full spash screen implementation,
 //See https://medium.com/@darshancc23/how-to-add-a-splash-screen-on-react-native-and-expo-dddfd44772f3
+
+import { LogBox } from "react-native";
+import _ from "lodash";
 
 import storage from "./app/utils/storage";
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
 
-  // if (!isReady) {
-  //   return (
-  //     <FirebaseProvider>
-  //       <AppLoading
-  //         startAsync={getBoatList}
-  //         onFinish={() => setIsReady(true)}
-  //         onError={(error) => {
-  //         }}
-  //         autoHideSplash={true}
-  //       />
-  //     </FirebaseProvider>
-  //   );
-  // }
-
   // const clear = async () => {
   //   await storage.clearAll();
   // };
 
   // useEffect(() => {
-  //   clear();
+  //   LogBox.ignoreWarnings(["Setting a timer"]);
+  //   const _console = _.clone(console);
+  //   console.warn = (message) => {
+  //     if (message.indexOf("Setting a timer") <= -1) {
+  //       _console.warn(message);
+  //     }
+  //   };
   // }, []);
 
   return (

@@ -5,6 +5,7 @@ import {
   secondsToHms,
   getCorrectedTime,
   timeToString,
+  formatDate,
 } from "../utils/phrf";
 
 const RATING = {
@@ -25,6 +26,7 @@ export function PhrfProvider({ children }) {
         getCorrectedTime,
         secondsToHms,
         timeToString,
+        formatDate,
         isAlternatePHRF,
         setIsAlternatePHRF,
         // getSelectedRating,

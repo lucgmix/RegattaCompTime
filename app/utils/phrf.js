@@ -1,5 +1,6 @@
 // https://phrf-lo.org/index.php/handicapping/races-analysis/time-on-time/tot-scoring/538-nsc-time-on-time-explained
 // https://phrf-lo.org/index.php/handicapping/races-analysis/time-on-time/tot-scoring
+import { format } from "date-fns";
 
 //export default function phrfUtils() {
 /**
@@ -153,6 +154,18 @@ export function timeToString(time) {
   const formattedSS = ss.toString().padStart(2, "0");
 
   return `${formattedHH}:${formattedMM}:${formattedSS}`;
+}
+
+export function formatDate(date, showZeroSeconds = false, showAmPm = false) {
+  if (showZeroSeconds && showAmPm) {
+    return format(date, "h:mm:ss a");
+  } else if (showZeroSeconds && !showAmPm) {
+    return format(date, "h:mm:ss");
+  } else if (!showZeroSeconds && showAmPm) {
+    return format(date, "h:mm a");
+  }
+
+  return format(date, "h:mm");
 }
 
 function printResults(isAlternate = false) {
