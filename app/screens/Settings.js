@@ -16,17 +16,12 @@ export const PHRF_FORMULA = {
 };
 
 function Settings(props) {
-  const {
-    isAlternatePHRF,
-    setIsAlternatePHRF,
-    ratingOverride,
-    setRatingOverride,
-  } = usePHRF();
+  const { isAlternatePHRF, setIsAlternatePHRF } = usePHRF();
   const [value, setValue] = useState(
     isAlternatePHRF ? PHRF_FORMULA.ALTERNATE : PHRF_FORMULA.STANDARD
   );
 
-  const { storePHRFIsAlternateFormula, storeRatingOverride } = useStorage();
+  const { storePHRFIsAlternateFormula } = useStorage();
 
   const updatePhrfFormula = (value) => {
     setValue(value);
@@ -34,13 +29,6 @@ function Settings(props) {
     setIsAlternatePHRF(isAlternate);
     storePHRFIsAlternateFormula(isAlternate);
   };
-
-  useEffect(() => {
-    const override = "";
-    setRatingOverride(override);
-    storeRatingOverride(override);
-    console.log("ratingOverride", override);
-  }, [ratingOverride]);
 
   return (
     <Screen style={styles.container}>
