@@ -8,7 +8,7 @@ import { format } from "date-fns";
  * @param {*} phrf Rating of the boat.
  */
 function getTOT(phrf) {
-  return 566.431 / (401.431 + phrf);
+  return 566.431 / (401.431 + Number(phrf));
 }
 
 /**
@@ -16,7 +16,7 @@ function getTOT(phrf) {
  * @param {*} phrf Rating of the boat.
  */
 function getAlternateTOT(phrf) {
-  return 650 / (550 + phrf);
+  return 650 / (550 + Number(phrf));
 }
 
 /**
@@ -60,8 +60,8 @@ export function getCorrectedTime(elapsedSeconds, phrfRating, isAlternate) {
  */
 export function getElapsedDiff(
   boatList,
-  referencePHRF = 126,
-  elapsedSeconds = 3600,
+  referencePHRF,
+  elapsedSeconds,
   isAlternate
 ) {
   const results = getResults(boatList, elapsedSeconds, isAlternate);
@@ -173,80 +173,4 @@ function printResults(isAlternate = false) {
     const timeStamp = secondsToHms(result.diff);
     console.log(`${result.boat.rating} ${result.boat.name} ${timeStamp}`);
   });
-}
-
-export function getBoats() {
-  return [
-    // Object {
-    //   "boatName": "Colibri",
-    //   "boatType": "Laser 28",
-    //   "defaultRating": "FS",
-    //   "id": "b7402591-4fcb-4aac-bcf0-bdd8b08f9fbd",
-    //   "rating": 126,
-    //   "ratingFS": "126",
-    //   "ratingNFS": "141",
-    //   "sailNumber": "224",
-    // },
-    {
-      name: "Busted Flush",
-      type: "B 32",
-      sail: "46232",
-      rating: 73,
-    },
-    {
-      name: "Gunsmoke",
-      type: "Beneteau 1st Class 10",
-      sail: "84110",
-      rating: 100,
-    },
-    {
-      name: "Oshunmare",
-      type: "Viper 640",
-      sail: "288",
-      rating: 106,
-    },
-    {
-      name: "Wadjet",
-      type: "Viper 640",
-      sail: "211",
-      rating: 106,
-    },
-
-    {
-      name: "Colibri",
-      type: "Laser 28",
-      sail: "224",
-      rating: 126,
-    },
-    {
-      name: "Shady Lady",
-      type: "CS 33",
-      sail: "3330",
-      rating: 149,
-    },
-    {
-      name: "Organized Chaos",
-      type: "J80",
-      sail: "669",
-      rating: 126,
-    },
-    {
-      name: "HiJinx",
-      type: "J-30",
-      sail: "106",
-      rating: 128,
-    },
-    {
-      name: "Wind Warrior",
-      type: "C&C 115",
-      sail: "11585",
-      rating: 63,
-    },
-    {
-      name: "Gone",
-      type: "J/70",
-      sail: "550",
-      rating: 117,
-    },
-  ];
 }
