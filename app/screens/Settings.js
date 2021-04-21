@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet } from "react-native";
+import { Divider } from "react-native-elements";
 
 import Screen from "../components/Screen";
 import { usePHRF } from "../context/PhrfContext";
@@ -54,8 +55,6 @@ function Settings(props) {
 
   const updateBoatRatings = (value) => {
     getBoatList().then((boatList) => {
-      console.log("boat", boatList);
-
       if (!isEmpty(boatList?.boatData)) {
         const ratingOverrideBoatList = boatList.boatData.map((boat) => {
           switch (value) {
@@ -95,6 +94,7 @@ function Settings(props) {
           value={ratingOverride}
           onUpdateSelection={updateRatingOverride}
         />
+        <Divider style={styles.divider} />
         <PhrfAlternateRadioGroup
           value={alternatePHRFValue}
           onUpdateSelection={updatePhrfFormula}
@@ -110,6 +110,12 @@ const styles = StyleSheet.create({
     paddingLeft: 4,
     paddingRight: 4,
     paddingTop: 16,
+  },
+  divider: {
+    marginLeft: 8,
+    marginRight: 8,
+    marginTop: 12,
+    marginBottom: 12,
   },
 });
 
