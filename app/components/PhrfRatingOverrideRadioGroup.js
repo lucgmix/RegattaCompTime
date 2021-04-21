@@ -1,15 +1,17 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import color from "../config/colors";
-import Text from "../components/Text";
+import Text from "./Text";
 import { RadioButton } from "react-native-paper";
 import defaultStyles from "../config/styles";
-import { PHRF_FORMULA } from "../screens/Settings";
+import { RATING_OVERRIDE } from "../screens/Settings";
 
-function PhrfAlternateRadioGroup({ value, onUpdateSelection }) {
+function PhrfRatingOverrideRadioGroup({ value, onUpdateSelection }) {
   return (
     <View style={styles.container}>
-      <Text style={([defaultStyles.text], styles.title)}>PHRF-LO Formula</Text>
+      <Text style={([defaultStyles.text], styles.title)}>
+        PHRF Rating Override
+      </Text>
       <RadioButton.Group
         onValueChange={(value) => onUpdateSelection(value)}
         value={value}
@@ -18,36 +20,52 @@ function PhrfAlternateRadioGroup({ value, onUpdateSelection }) {
         <View>
           <View style={styles.radioButton}>
             <RadioButton
-              value={PHRF_FORMULA.STANDARD}
+              value={RATING_OVERRIDE.NONE}
               color={color.primary}
               styles={styles.radio}
             />
-            <Text style={[defaultStyles.text, styles.radioText]}>Primary</Text>
+            <Text style={[defaultStyles.text, styles.radioText]}>
+              Default Rating
+            </Text>
           </View>
           <Text style={[defaultStyles.text, styles.radioDescription]}>
-            Recommended formula designed to address the larger rating spread
-            usually found in club events as well as the effects of diminishing
-            wind due to sunset.
+            Use the default rating set in each boat of the Fleet section.
           </Text>
         </View>
 
         <View>
           <View style={styles.radioButton}>
             <RadioButton
-              value={PHRF_FORMULA.ALTERNATE}
+              value={RATING_OVERRIDE.FS}
               color={color.primary}
               styles={styles.radio}
             />
             <Text style={[defaultStyles.text, styles.radioText]}>
-              Alternate
+              FS for all boats
             </Text>
           </View>
 
           <Text style={[defaultStyles.text, styles.radioDescription]}>
-            This alternate formula may be appropriate for use in Day Races and
-            Interclub events. NOTE: When being used, this "Alternate" SHALL be
-            stated in the Notice of Race and Sailing Instructions, in order to
-            be valid.
+            Use the Flying Spinnaker rating for all boats. This overrides the
+            boat's default rating.
+          </Text>
+        </View>
+
+        <View>
+          <View style={styles.radioButton}>
+            <RadioButton
+              value={RATING_OVERRIDE.NFS}
+              color={color.primary}
+              styles={styles.radio}
+            />
+            <Text style={[defaultStyles.text, styles.radioText]}>
+              NFS for all boats
+            </Text>
+          </View>
+
+          <Text style={[defaultStyles.text, styles.radioDescription]}>
+            Use the Non-Flying Spinnaker rating for all boats. This overrides
+            the boat's default rating.
           </Text>
         </View>
       </RadioButton.Group>
@@ -96,4 +114,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PhrfAlternateRadioGroup;
+export default PhrfRatingOverrideRadioGroup;

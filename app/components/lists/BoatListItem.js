@@ -9,6 +9,7 @@ function BoatListItem({
   ratingFS,
   ratingNFS,
   defaultRating,
+  ratingOverride,
   isSelectedItem,
   isHeader,
 }) {
@@ -17,7 +18,7 @@ function BoatListItem({
       style={[
         styles.container,
         isSelectedItem && seletedStyles.container,
-        isHeader && headerStyles.container,
+        isHeader && headerStyles.header,
       ]}
     >
       <Text
@@ -43,14 +44,17 @@ function BoatListItem({
       <View
         style={[
           styles.selectedField,
-          styles.rating(defaultRating === "FS", isHeader),
+          styles.rating((ratingOverride || defaultRating) === "FS", isHeader),
         ]}
       >
         <Text
           numberOfLines={1}
           style={[
             defaultStyles.text,
-            styles.ratingText(defaultRating === "FS", isHeader),
+            styles.ratingText(
+              (ratingOverride || defaultRating) === "FS",
+              isHeader
+            ),
             isHeader && headerStyles.label,
           ]}
         >
@@ -60,14 +64,17 @@ function BoatListItem({
       <View
         style={[
           styles.selectedField,
-          styles.rating(defaultRating === "NFS", isHeader),
+          styles.rating((ratingOverride || defaultRating) === "NFS", isHeader),
         ]}
       >
         <Text
           numberOfLines={1}
           style={[
             defaultStyles.text,
-            styles.ratingText(defaultRating === "NFS", isHeader),
+            styles.ratingText(
+              (ratingOverride || defaultRating) === "NFS",
+              isHeader
+            ),
             isHeader && headerStyles.label,
           ]}
         >
@@ -85,8 +92,17 @@ const seletedStyles = StyleSheet.create({
 });
 
 const headerStyles = StyleSheet.create({
-  container: {
+  header: {
     backgroundColor: defaultStyles.colors.primary,
+  },
+  container(ratingOverride) {
+    // console.log("ratingOverride !!!!!", ratingOverride);
+    return {
+      backgroundColor:
+        ratingOverride === "FS" || ratingOverride === "NFS"
+          ? defaultStyles.colors.primary300
+          : defaultStyles.colors.primary,
+    };
   },
   label: {
     color: "white",

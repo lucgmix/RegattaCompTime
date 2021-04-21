@@ -22,8 +22,8 @@ const SECTIONS = {
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
-  const { getPHRFIsAlternateFormula } = useStorage();
-  const { setIsAlternatePHRF } = usePHRF();
+  const { getPHRFIsAlternateFormula, getRatingOverride } = useStorage();
+  const { setIsAlternatePHRF, setRatingOverride } = usePHRF();
 
   const saveCurrentScreen = (screenName) => {
     //storeValueForKey("@current_screen", screenName);
@@ -33,6 +33,13 @@ const AppNavigator = () => {
     getPHRFIsAlternateFormula().then((result) => {
       if (result.ok) {
         setIsAlternatePHRF(result.data);
+      }
+    });
+
+    getRatingOverride().then((result) => {
+      if (result.ok) {
+        console.log(result);
+        setRatingOverride(result.data);
       }
     });
   }, []);

@@ -14,6 +14,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import BoatListItem from "../components/lists/BoatListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
 import { useStorage } from "../context/StorageContext";
+import { usePHRF } from "../context/PhrfContext";
 import {
   Ionicons,
   AntDesign,
@@ -48,11 +49,13 @@ function Fleet() {
   );
   const [boatCreatorMode, setBoatCreatorMode] = useState();
   const [viewBoatList, setViewBoatList] = useState([]);
-  const { storeBoatList, getBoatList } = useStorage();
+  const { storeBoatList, getBoatList, boatDataChanged } = useStorage();
   const boatListRef = useRef();
 
   const [promptVisible, setPromptVisible] = useState(false);
   const [helpPromptVisible, setHelpPromptVisible] = useState(false);
+
+  const { ratingOverride } = usePHRF();
 
   const updateFleetWithBoat = () => {
     setIsCreateBoatModalVisible(false);
@@ -126,13 +129,19 @@ function Fleet() {
         setBoatList(boatData);
       });
     }
-
-    function setBoatList(boatData) {
-      setViewBoatList(sortBoatArray(boatData));
-      selectedBoat &&
-        setSelectedBoat(boatData.find((boat) => boat.id === selectedBoat.id));
-    }
   };
+
+  const updateBoatList = () => {
+    getBoatList().then(({ boatData }) => {
+      setBoatList(boatData);
+    });
+  };
+
+  function setBoatList(boatData) {
+    setViewBoatList(sortBoatArray(boatData));
+    selectedBoat &&
+      setSelectedBoat(boatData.find((boat) => boat.id === selectedBoat.id));
+  }
 
   const getFleetHelpString = (tag) => {
     let textToStyle;
@@ -156,7 +165,7 @@ function Fleet() {
 
   useEffect(() => {
     populateBoatList();
-  }, []);
+  }, [boatDataChanged]);
 
   return (
     <Screen style={styles.container}>
@@ -273,6 +282,7 @@ function Fleet() {
             type="Type"
             ratingFS="FS"
             ratingNFS="NFS"
+            ratingOverride={ratingOverride}
             isHeader
           />
         )}
@@ -291,6 +301,7 @@ function Fleet() {
                 ratingNFS={item.ratingNFS}
                 type={item.boatType}
                 defaultRating={item.defaultRating}
+                ratingOverride={item.ratingOverride}
                 isSelectedItem={selectedBoat && selectedBoat.id === item.id}
               />
             </View>

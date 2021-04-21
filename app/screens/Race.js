@@ -99,7 +99,12 @@ function Race() {
   const [stopWatchStartTime, setStopWatchStartTime] = useState(0);
   const [stopWatchState, setStopWatchState] = useState(STOPWATCH_STATE.RESET);
 
-  const { getCorrectedTime, isAlternatePHRF, timeToString } = usePHRF();
+  const {
+    getCorrectedTime,
+    isAlternatePHRF,
+    timeToString,
+    ratingOverride,
+  } = usePHRF();
 
   const handleHelpPress = () => {
     setHelpPromptVisible(true);
