@@ -11,16 +11,7 @@ import SectionHeader from "../components/SectionHeader";
 import PhrfAlternateRadioGroup from "../components/PhrfAlternateRadioGroup";
 import PhrfRatingOverrideRadioGroup from "../components/PhrfRatingOverrideRadioGroup";
 
-export const PHRF_FORMULA = {
-  STANDARD: "standard",
-  ALTERNATE: "alternate",
-};
-
-export const RATING_OVERRIDE = {
-  NONE: "",
-  FS: "FS",
-  NFS: "NFS",
-};
+import { RATING_OVERRIDE, PHRF_FORMULA } from "../config/constants";
 
 function Settings(props) {
   const {

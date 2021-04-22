@@ -4,7 +4,7 @@ import color from "../config/colors";
 import Text from "./Text";
 import { RadioButton } from "react-native-paper";
 import defaultStyles from "../config/styles";
-import { RATING_OVERRIDE } from "../screens/Settings";
+import { RATING_OVERRIDE } from "../config/constants";
 
 function PhrfRatingOverrideRadioGroup({ value, onUpdateSelection }) {
   return (

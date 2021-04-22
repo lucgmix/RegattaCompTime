@@ -4,7 +4,7 @@ import color from "../config/colors";
 import Text from "../components/Text";
 import { RadioButton } from "react-native-paper";
 import defaultStyles from "../config/styles";
-import { PHRF_FORMULA } from "../screens/Settings";
+import { PHRF_FORMULA } from "../config/constants";
 
 function PhrfAlternateRadioGroup({ value, onUpdateSelection }) {
   return (
