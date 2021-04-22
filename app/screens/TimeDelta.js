@@ -60,27 +60,37 @@ function TimeDelta() {
 
   const updateBoatList = (item) => {
     getBoatList().then(({ boatData }) => {
-      setBoatResultsList(
-        getElapsedDiff(boatData, item.rating, raceDuration, isAlternatePHRF)
-      );
       const boatWithMatchingId = boatData.find((boat) => boat.id === item.id);
+
+      setBoatResultsList(
+        getElapsedDiff(
+          boatData,
+          boatWithMatchingId.rating,
+          raceDuration,
+          isAlternatePHRF
+        )
+      );
+
       setSelectedBoat(boatWithMatchingId);
     });
   };
 
-  const selectBoatInList = () => {
+  const selectBoatInList = (item) => {
+    const selectedBoat = selectedBoat || item;
     if (!selectedBoat) return;
 
-    const indexOfSelectedBoatResult = boatResultsList.findIndex(
-      (resultItem) => resultItem.boat.id === selectedBoat.id
-    );
+    getBoatList().then(({ boatData }) => {
+      const indexOfSelectedBoatResult = boatData.findIndex(
+        (resultItem) => resultItem.id === (selectedBoat.id || item.id)
+      );
 
-    resultListRef &&
-      indexOfSelectedBoatResult > -1 &&
-      resultListRef.current.scrollToIndex({
-        animated: true,
-        index: indexOfSelectedBoatResult,
-      });
+      resultListRef &&
+        indexOfSelectedBoatResult > -1 &&
+        resultListRef.current.scrollToIndex({
+          animated: true,
+          index: indexOfSelectedBoatResult,
+        });
+    });
   };
 
   const getTimeDeltaHelpString = (tag) => {
@@ -116,12 +126,12 @@ function TimeDelta() {
   }, [boatDataChanged]);
 
   useEffect(() => {
-    selectedBoat && updateBoatList(selectedBoat);
+    updateBoatList(selectedBoat);
   }, [isAlternatePHRF, raceDuration, boatDataChanged]);
 
   // Scroll to selected boat result
   useEffect(() => {
-    selectBoatInList();
+    selectBoatInList(selectedBoat);
   }, [selectedBoat, boatSelectList, boatDataChanged]);
 
   return (

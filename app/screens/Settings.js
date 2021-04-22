@@ -80,6 +80,7 @@ function Settings(props) {
             // PHRF Rating Override Saved!
           } else {
             // Error prompt here?
+            console.warn("An error occured while saving boat list");
           }
         });
       }

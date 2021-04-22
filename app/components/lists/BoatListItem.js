@@ -96,7 +96,6 @@ const headerStyles = StyleSheet.create({
     backgroundColor: defaultStyles.colors.primary,
   },
   container(ratingOverride) {
-    // console.log("ratingOverride !!!!!", ratingOverride);
     return {
       backgroundColor:
         ratingOverride === "FS" || ratingOverride === "NFS"

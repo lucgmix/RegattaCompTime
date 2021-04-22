@@ -38,7 +38,6 @@ const AppNavigator = () => {
 
     getRatingOverride().then((result) => {
       if (result.ok) {
-        console.log(result);
         setRatingOverride(result.data);
       }
     });
