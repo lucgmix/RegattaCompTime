@@ -145,17 +145,21 @@ function StopWatch({
         <View style={styles.statusBar(state)}>
           <View>
             <Text style={styles.statusBarText}>{status}</Text>
-            {state === STOPWATCH_STATE.RESET && (
-              <Text style={styles.statusBarDateText}>
-                {`at next ${raceTime()}`}
-              </Text>
+            {state === STOPWATCH_STATE.RESET && !isCurrentDateInThePast() && (
+              <Text style={styles.statusBarDateText}>{`at ${raceTime()}`}</Text>
             )}
+
             {state === STOPWATCH_STATE.RESET && isCurrentDateInThePast() && (
-              <Button
-                buttonStyle={styles.statusbarButton}
-                title="Start Today's Race"
-                onPress={() => onStartToday()}
-              />
+              <View>
+                <Text
+                  style={styles.statusBarDateText}
+                >{`at next ${raceTime()}`}</Text>
+                <Button
+                  buttonStyle={styles.statusbarButton}
+                  title={`Start Today's Race`}
+                  onPress={() => onStartToday()}
+                />
+              </View>
             )}
           </View>
         </View>
