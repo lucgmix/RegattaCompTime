@@ -22,6 +22,7 @@ import DialogPrompt from "../components/DialogPrompt";
 import { Entypo } from "@expo/vector-icons";
 import SectionHeader from "../components/SectionHeader";
 import defaultStyles from "../config/styles";
+import { isEmpty } from "lodash";
 
 let listItemHeight = 0;
 
@@ -59,19 +60,28 @@ function TimeDelta() {
   };
 
   const updateBoatList = (item) => {
+    if (!item) return;
+
     getBoatList().then(({ boatData }) => {
-      const boatWithMatchingId = boatData.find((boat) => boat.id === item.id);
+      if (!isEmpty(boatData)) {
+        const boatWithMatchingId = boatData.find((boat) => boat.id === item.id);
 
-      setBoatResultsList(
-        getElapsedDiff(
-          boatData,
-          boatWithMatchingId.rating,
-          raceDuration,
-          isAlternatePHRF
-        )
-      );
+        if (boatWithMatchingId) {
+          setBoatResultsList(
+            getElapsedDiff(
+              boatData,
+              boatWithMatchingId.rating,
+              raceDuration,
+              isAlternatePHRF
+            )
+          );
 
-      setSelectedBoat(boatWithMatchingId);
+          setSelectedBoat(boatWithMatchingId);
+        }
+      } else {
+        setBoatResultsList([]);
+        setSelectedBoat(null);
+      }
     });
   };
 

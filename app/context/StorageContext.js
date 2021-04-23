@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import storage from "../utils/storage";
-import { isEmpty } from "lodash";
 
 const RATING_OVERRIDE = {
   NONE: "",

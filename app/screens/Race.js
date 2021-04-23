@@ -44,7 +44,7 @@ function correctTimeSortResults(
   if (isEmpty(resultList)) return;
 
   const raceResults = Array.from(resultList);
-  const finishItems = raceResults.filter((item) => item && item.rank !== "-");
+  const finishItems = raceResults.filter((item) => item.rank !== "-");
   const notFinishItems = raceResults.filter((item) => item.rank === "-");
 
   if (raceState === RACE_STATE.FINISHED) {
@@ -88,7 +88,6 @@ function Race() {
   const [elapsedTime, setElapsedTime] = useState(0);
   const [raceTimerStartDate, setRaceTimerStartDate] = useState(new Date());
 
-  const [raceState, setRaceState] = useState(RACE_STATE.NOT_STARTED);
   const {
     getBoatList,
     getRaceResults,
@@ -97,14 +96,10 @@ function Race() {
   } = useStorage();
 
   const [stopWatchStartTime, setStopWatchStartTime] = useState(0);
-  const [stopWatchState, setStopWatchState] = useState(STOPWATCH_STATE.RESET);
+  const [stopWatchState, setStopWatchState] = useState();
+  const [raceState, setRaceState] = useState(RACE_STATE.NOT_STARTED);
 
-  const {
-    getCorrectedTime,
-    isAlternatePHRF,
-    timeToString,
-    ratingOverride,
-  } = usePHRF();
+  const { getCorrectedTime, isAlternatePHRF, timeToString } = usePHRF();
 
   const handleHelpPress = () => {
     setHelpPromptVisible(true);
@@ -133,12 +128,14 @@ function Race() {
                 elapsedTime,
                 isAlternatePHRF,
                 getCorrectedTime,
-                resultsData.raceState
+                RACE_STATE.FINISHED
               )
             );
             setElapsedTime(resultsData.raceElapsedTime);
             setRaceTimerStartDate(new Date(resultsData.raceStartTime));
             setStopWatchStartTime(resultsData.raceElapsedTime);
+            setRaceState(RACE_STATE.FINISHED);
+            setStopWatchState(STOPWATCH_STATE.STOPPED);
           }
         }
       } else {
@@ -153,15 +150,18 @@ function Race() {
   };
 
   const updateResultList = () => {
+    if (isEmpty(viewBoatResultList)) return;
+
     getBoatList().then(({ boatData }) => {
       // Iterate fleet boat list
       const updatedBoatResultList = boatData.map((boat) => {
         // Find a result for the current boat
-        const resultOfBoat =
-          !isEmpty(viewBoatResultList) &&
-          Array.from(viewBoatResultList).find(
-            (result) => result.boat.id === boat.id
-          );
+        const resultOfBoat = Array.from(viewBoatResultList).find((result) => {
+          if (result.boat.id === boat.id) {
+            return result;
+          }
+        });
+
         // We have a result so we update the boat and the results data.
         if (resultOfBoat) {
           const newResult = {
@@ -556,7 +556,7 @@ function Race() {
 
   useEffect(() => {
     populateResultList();
-  }, []);
+  }, [boatDataChanged]);
 
   useEffect(() => {
     updateResultList();
