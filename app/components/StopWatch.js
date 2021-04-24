@@ -33,7 +33,7 @@ function StopWatch({
   const [timerInterval, setTimerInterval] = useState(0);
   const [timeDisplay, setTimeDisplay] = useState(timeToString(startTimeOffset));
   const [currentDate, setCurrentDate] = useState(date);
-  const [status, setStatus] = useState("Waiting for Start");
+  const [status, setStatus] = useState();
 
   startDT = elapsedTime === 0 ? startTimeOffset : 0;
 
