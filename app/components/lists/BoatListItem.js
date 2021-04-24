@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import Text from "../Text";
 import defaultStyles from "../../config/styles";
+import { RATING_OVERRIDE } from "../../config/constants";
 
 function BoatListItem({
   name,
@@ -44,7 +45,10 @@ function BoatListItem({
       <View
         style={[
           styles.selectedField,
-          styles.rating((ratingOverride || defaultRating) === "FS", isHeader),
+          styles.rating(
+            (ratingOverride || defaultRating) === RATING_OVERRIDE.FS,
+            isHeader
+          ),
         ]}
       >
         <Text
@@ -52,7 +56,7 @@ function BoatListItem({
           style={[
             defaultStyles.text,
             styles.ratingText(
-              (ratingOverride || defaultRating) === "FS",
+              (ratingOverride || defaultRating) === RATING_OVERRIDE.FS,
               isHeader
             ),
             isHeader && headerStyles.label,
@@ -64,7 +68,10 @@ function BoatListItem({
       <View
         style={[
           styles.selectedField,
-          styles.rating((ratingOverride || defaultRating) === "NFS", isHeader),
+          styles.rating(
+            (ratingOverride || defaultRating) === RATING_OVERRIDE.NFS,
+            isHeader
+          ),
         ]}
       >
         <Text
@@ -72,7 +79,7 @@ function BoatListItem({
           style={[
             defaultStyles.text,
             styles.ratingText(
-              (ratingOverride || defaultRating) === "NFS",
+              (ratingOverride || defaultRating) === RATING_OVERRIDE.NFS,
               isHeader
             ),
             isHeader && headerStyles.label,
@@ -98,7 +105,8 @@ const headerStyles = StyleSheet.create({
   container(ratingOverride) {
     return {
       backgroundColor:
-        ratingOverride === "FS" || ratingOverride === "NFS"
+        ratingOverride === RATING_OVERRIDE.FS ||
+        ratingOverride === RATING_OVERRIDE.NFS
           ? defaultStyles.colors.primary300
           : defaultStyles.colors.primary,
     };
