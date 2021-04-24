@@ -117,6 +117,12 @@ function Race() {
           setRaceState(resultsData.raceState);
 
           if (resultsData.raceState !== RACE_STATE.FINISHED) {
+            if (resultsData.raceState === RACE_STATE.RESET_CLEARED) {
+              setRaceState(resultsData.raceState);
+              setStopWatchState(STOPWATCH_STATE.RESET);
+              setRaceTimerStartDate(new Date(resultsData.raceStartTime));
+              setStopWatchStartTime(resultsData.raceElapsedTime);
+            }
             setViewBoatResultList(ratingSortResults(boats));
             raceStartTimeAction(
               getDateTimeForCurrentDay(resultsData.raceStartTime)
@@ -167,7 +173,6 @@ function Race() {
           const newResult = {
             ...resultOfBoat,
             boat,
-            // elapsedTime: resultOfBoat.elapsedTime + stopWatchStartTime,
             correctedTime: getCorrectedTime(
               resultOfBoat.elapsedTime,
               boat.rating,
@@ -465,12 +470,11 @@ function Race() {
       });
     } else {
       const newTimeDate = getDateTimeForCurrentDay(selectedTimeDate, true);
-
       storeRaceResults({
         boatResults: viewBoatResultList,
         raceStartTime: newTimeDate,
         raceElapsedTime: elapsedTime,
-        raceState: RACE_STATE.STARTED_AND_RUNNING,
+        raceState: raceState,
       }).then((response) => {
         if (response.ok) {
           raceStartTimeAction(newTimeDate);
