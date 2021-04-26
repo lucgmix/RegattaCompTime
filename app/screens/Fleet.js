@@ -137,11 +137,11 @@ function Fleet() {
     });
   };
 
-  function setBoatList(boatData) {
+  const setBoatList = (boatData) => {
     setViewBoatList(sortBoatArray(boatData));
     selectedBoat &&
       setSelectedBoat(boatData.find((boat) => boat.id === selectedBoat.id));
-  }
+  };
 
   const getFleetHelpString = (tag) => {
     let textToStyle;
