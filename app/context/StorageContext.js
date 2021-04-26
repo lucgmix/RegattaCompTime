@@ -1,10 +1,16 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import storage from "../utils/storage";
 
+const RATING_OVERRIDE = {
+  NONE: "",
+  FS: "FS",
+  NFS: "NFS",
+};
+
 const StorageContext = createContext();
 
 export function StorageDataContext({ children }) {
-  const [boatDataChanged, setDataChanged] = useState(false);
+  const [boatDataChanged, setBoatDataChanged] = useState(false);
 
   const fetchStoredBoatList = async () => {
     const storedBoatListResult = await storage.get("@boat_list");
@@ -25,7 +31,7 @@ export function StorageDataContext({ children }) {
       .store("@boat_list", value)
       .then((response) => {
         if (value && response.ok) {
-          setDataChanged(!boatDataChanged);
+          setBoatDataChanged(!boatDataChanged);
           return { ok: true };
         }
       })
@@ -88,6 +94,14 @@ export function StorageDataContext({ children }) {
     }
   };
 
+  const storeRatingOverride = async (value) => {
+    return storeValueForKey("@phrf_rating_override", value);
+  };
+
+  const getRatingOverride = () => {
+    return getValueForKey("@phrf_rating_override");
+  };
+
   const storePHRFIsAlternateFormula = (value) => {
     return storeValueForKey("@phrf_formula", value);
   };
@@ -110,6 +124,8 @@ export function StorageDataContext({ children }) {
         boatDataChanged,
         storePHRFIsAlternateFormula,
         getPHRFIsAlternateFormula,
+        storeRatingOverride,
+        getRatingOverride,
       }}
     >
       {children}

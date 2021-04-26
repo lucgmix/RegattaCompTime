@@ -33,7 +33,7 @@ function StopWatch({
   const [timerInterval, setTimerInterval] = useState(0);
   const [timeDisplay, setTimeDisplay] = useState(timeToString(startTimeOffset));
   const [currentDate, setCurrentDate] = useState(date);
-  const [status, setStatus] = useState("Waiting for Start");
+  const [status, setStatus] = useState();
 
   startDT = elapsedTime === 0 ? startTimeOffset : 0;
 
@@ -141,23 +141,29 @@ function StopWatch({
           />
         </View>
       </View>
-      <View style={styles.statusBar(state)}>
-        <View>
-          <Text style={styles.statusBarText}>{status}</Text>
-          {state === STOPWATCH_STATE.RESET && (
-            <Text style={styles.statusBarDateText}>
-              {`at next ${raceTime()}`}
-            </Text>
-          )}
-          {state === STOPWATCH_STATE.RESET && isCurrentDateInThePast() && (
-            <Button
-              buttonStyle={styles.statusbarButton}
-              title="Start Today's Race"
-              onPress={() => onStartToday()}
-            />
-          )}
+      {state && (
+        <View style={styles.statusBar(state)}>
+          <View>
+            <Text style={styles.statusBarText}>{status}</Text>
+            {state === STOPWATCH_STATE.RESET && !isCurrentDateInThePast() && (
+              <Text style={styles.statusBarDateText}>{`at ${raceTime()}`}</Text>
+            )}
+
+            {state === STOPWATCH_STATE.RESET && isCurrentDateInThePast() && (
+              <View>
+                <Text
+                  style={styles.statusBarDateText}
+                >{`at next ${raceTime()}`}</Text>
+                <Button
+                  buttonStyle={styles.statusbarButton}
+                  title={`Start Today's Race`}
+                  onPress={() => onStartToday()}
+                />
+              </View>
+            )}
+          </View>
         </View>
-      </View>
+      )}
     </View>
   );
 }

@@ -17,6 +17,7 @@ const PhrfContext = createContext();
 
 export function PhrfProvider({ children }) {
   const [isAlternatePHRF, setIsAlternatePHRF] = useState(false);
+  const [ratingOverride, setRatingOverride] = useState("");
 
   return (
     <PhrfContext.Provider
@@ -29,6 +30,8 @@ export function PhrfProvider({ children }) {
         formatDate,
         isAlternatePHRF,
         setIsAlternatePHRF,
+        ratingOverride,
+        setRatingOverride,
         // getSelectedRating,
       }}
     >

@@ -1,81 +1,97 @@
-import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
-import { RadioButton } from "react-native-paper";
-import Screen from "../components/Screen";
-import color from "../config/colors";
-import Text from "../components/Text";
+import React, { useEffect, useState } from "react";
+import { ScrollView, StyleSheet } from "react-native";
+import { Divider } from "react-native-elements";
 
+import Screen from "../components/Screen";
 import { usePHRF } from "../context/PhrfContext";
 import { useStorage } from "../context/StorageContext";
+import { isEmpty } from "lodash";
 
 import SectionHeader from "../components/SectionHeader";
-import defaultStyles from "../config/styles";
+import PhrfAlternateRadioGroup from "../components/PhrfAlternateRadioGroup";
+import PhrfRatingOverrideRadioGroup from "../components/PhrfRatingOverrideRadioGroup";
 
-const PHRF_FORMULA = {
-  STANDARD: "standard",
-  ALTERNATE: "alternate",
-};
+import { RATING_OVERRIDE, PHRF_FORMULA } from "../config/constants";
 
 function Settings(props) {
-  const { isAlternatePHRF, setIsAlternatePHRF } = usePHRF();
-  const [value, setValue] = useState(
+  const {
+    isAlternatePHRF,
+    setIsAlternatePHRF,
+    ratingOverride,
+    setRatingOverride,
+  } = usePHRF();
+  const [alternatePHRFValue, setAlternatePHRFValue] = useState(
     isAlternatePHRF ? PHRF_FORMULA.ALTERNATE : PHRF_FORMULA.STANDARD
   );
-
-  const { storePHRFIsAlternateFormula } = useStorage();
+  const {
+    storeBoatList,
+    getBoatList,
+    storePHRFIsAlternateFormula,
+    storeRatingOverride,
+  } = useStorage();
 
   const updatePhrfFormula = (value) => {
-    setValue(value);
+    setAlternatePHRFValue(value);
     const isAlternate = value === PHRF_FORMULA.ALTERNATE;
     setIsAlternatePHRF(isAlternate);
     storePHRFIsAlternateFormula(isAlternate);
   };
 
+  const updateRatingOverride = (value) => {
+    setRatingOverride(value);
+    storeRatingOverride(value);
+
+    updateBoatRatings(value);
+  };
+
+  const updateBoatRatings = (value) => {
+    getBoatList().then((boatList) => {
+      if (!isEmpty(boatList?.boatData)) {
+        const ratingOverrideBoatList = boatList.boatData.map((boat) => {
+          switch (value) {
+            case RATING_OVERRIDE.NONE:
+              boat.rating =
+                boat.defaultRating === "FS" ? boat.ratingFS : boat.ratingNFS;
+              boat.ratingOverride = RATING_OVERRIDE.NONE;
+              break;
+            case RATING_OVERRIDE.FS:
+              boat.rating = boat.ratingFS;
+              boat.ratingOverride = RATING_OVERRIDE.FS;
+              break;
+            case RATING_OVERRIDE.NFS:
+              boat.rating = boat.ratingNFS;
+              boat.ratingOverride = RATING_OVERRIDE.NFS;
+              break;
+          }
+          return boat;
+        });
+
+        storeBoatList(ratingOverrideBoatList).then((result) => {
+          if (result.ok) {
+            // PHRF Rating Override Saved!
+          } else {
+            // Error prompt here?
+            console.warn("An error occured while saving boat list");
+          }
+        });
+      }
+    });
+  }; //
+
   return (
     <Screen style={styles.container}>
       <SectionHeader title="Settings" helpVisible={false} />
-      <Text style={defaultStyles.text}>PHRF-LO Formula</Text>
-      <RadioButton.Group
-        onValueChange={(value) => updatePhrfFormula(value)}
-        value={value}
-        style={styles.radionGroup}
-      >
-        <View>
-          <View style={styles.radioButton}>
-            <RadioButton
-              value={PHRF_FORMULA.STANDARD}
-              color={color.primary}
-              styles={styles.radio}
-            />
-            <Text style={[defaultStyles.text, styles.radioText]}>Primary</Text>
-          </View>
-          <Text style={[defaultStyles.text, styles.radioDescription]}>
-            Recommended formula designed to address the larger rating spread
-            usually found in club events as well as the effects of diminishing
-            wind due to sunset.
-          </Text>
-        </View>
-
-        <View>
-          <View style={styles.radioButton}>
-            <RadioButton
-              value={PHRF_FORMULA.ALTERNATE}
-              color={color.primary}
-              styles={styles.radio}
-            />
-            <Text style={[defaultStyles.text, styles.radioText]}>
-              Alternate
-            </Text>
-          </View>
-
-          <Text style={[defaultStyles.text, styles.radioDescription]}>
-            This alternate formula may be appropriate for use in Day Races and
-            Interclub events. NOTE: When being used, this "Alternate" SHALL be
-            stated in the Notice of Race and Sailing Instructions, in order to
-            be valid.
-          </Text>
-        </View>
-      </RadioButton.Group>
+      <ScrollView>
+        <PhrfRatingOverrideRadioGroup
+          value={ratingOverride}
+          onUpdateSelection={updateRatingOverride}
+        />
+        <Divider style={styles.divider} />
+        <PhrfAlternateRadioGroup
+          value={alternatePHRFValue}
+          onUpdateSelection={updatePhrfFormula}
+        />
+      </ScrollView>
     </Screen>
   );
 }
@@ -87,23 +103,11 @@ const styles = StyleSheet.create({
     paddingRight: 4,
     paddingTop: 16,
   },
-  radioButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 10,
-  },
-  radioText: {
-    marginLeft: 20,
-  },
-  radioDescription: {
-    marginLeft: 56,
-    fontSize: 12,
-  },
-  radionGroup: {
-    flex: 1,
-  },
-  radio: {
-    alignSelf: "flex-start",
+  divider: {
+    marginLeft: 8,
+    marginRight: 8,
+    marginTop: 12,
+    marginBottom: 12,
   },
 });
 

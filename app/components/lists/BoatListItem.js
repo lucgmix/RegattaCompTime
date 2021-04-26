@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import Text from "../Text";
 import defaultStyles from "../../config/styles";
+import { RATING_OVERRIDE } from "../../config/constants";
 
 function BoatListItem({
   name,
@@ -9,6 +10,7 @@ function BoatListItem({
   ratingFS,
   ratingNFS,
   defaultRating,
+  ratingOverride,
   isSelectedItem,
   isHeader,
 }) {
@@ -17,7 +19,7 @@ function BoatListItem({
       style={[
         styles.container,
         isSelectedItem && seletedStyles.container,
-        isHeader && headerStyles.container,
+        isHeader && headerStyles.header,
       ]}
     >
       <Text
@@ -43,14 +45,20 @@ function BoatListItem({
       <View
         style={[
           styles.selectedField,
-          styles.rating(defaultRating === "FS", isHeader),
+          styles.rating(
+            (ratingOverride || defaultRating) === RATING_OVERRIDE.FS,
+            isHeader
+          ),
         ]}
       >
         <Text
           numberOfLines={1}
           style={[
             defaultStyles.text,
-            styles.ratingText(defaultRating === "FS", isHeader),
+            styles.ratingText(
+              (ratingOverride || defaultRating) === RATING_OVERRIDE.FS,
+              isHeader
+            ),
             isHeader && headerStyles.label,
           ]}
         >
@@ -60,14 +68,20 @@ function BoatListItem({
       <View
         style={[
           styles.selectedField,
-          styles.rating(defaultRating === "NFS", isHeader),
+          styles.rating(
+            (ratingOverride || defaultRating) === RATING_OVERRIDE.NFS,
+            isHeader
+          ),
         ]}
       >
         <Text
           numberOfLines={1}
           style={[
             defaultStyles.text,
-            styles.ratingText(defaultRating === "NFS", isHeader),
+            styles.ratingText(
+              (ratingOverride || defaultRating) === RATING_OVERRIDE.NFS,
+              isHeader
+            ),
             isHeader && headerStyles.label,
           ]}
         >
@@ -85,8 +99,17 @@ const seletedStyles = StyleSheet.create({
 });
 
 const headerStyles = StyleSheet.create({
-  container: {
+  header: {
     backgroundColor: defaultStyles.colors.primary,
+  },
+  container(ratingOverride) {
+    return {
+      backgroundColor:
+        ratingOverride === RATING_OVERRIDE.FS ||
+        ratingOverride === RATING_OVERRIDE.NFS
+          ? defaultStyles.colors.primary300
+          : defaultStyles.colors.primary,
+    };
   },
   label: {
     color: "white",
