@@ -175,6 +175,9 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
 
   useEffect(() => {
     populateBoatList();
+    return () => {
+      setViewBoatList([]);
+    };
   }, []);
 
   const headerTitle = editableBoat ? " Edit Boat" : "Add Boat";

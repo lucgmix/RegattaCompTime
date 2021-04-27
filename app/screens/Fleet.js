@@ -165,6 +165,9 @@ function Fleet() {
 
   useEffect(() => {
     populateBoatList();
+    return () => {
+      setBoatList([]);
+    };
   }, [boatDataChanged]);
 
   return (

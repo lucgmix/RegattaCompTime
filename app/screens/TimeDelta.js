@@ -133,10 +133,17 @@ function TimeDelta() {
         );
       }
     });
+    return () => {
+      setBoatSelectList([]);
+    };
   }, [boatDataChanged]);
 
   useEffect(() => {
     updateBoatList(selectedBoat);
+    return () => {
+      setSelectedBoat(null);
+      setBoatResultsList([]);
+    };
   }, [isAlternatePHRF, raceDuration, boatDataChanged]);
 
   // Scroll to selected boat result

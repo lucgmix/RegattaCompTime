@@ -86,7 +86,6 @@ const AppNavigator = () => {
         }}
         listeners={({ navigation, route }) => ({
           tabPress: (e) => {
-            console.log("navigation", navigation);
             saveCurrentScreen(route.name);
           },
         })}
