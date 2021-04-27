@@ -5,14 +5,17 @@ import Race from "../screens/Race";
 import Settings from "../screens/Settings";
 import Fleet from "../screens/Fleet";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { View } from "react-native";
 
 import { usePHRF } from "../context/PhrfContext";
 import { useStorage } from "../context/StorageContext";
 
 //Icons https://icons.expo.fyi/
 import { Entypo, Feather } from "@expo/vector-icons";
+import { CURRENT_SCREEN_KEY } from "../config/constants";
 
 const SECTIONS = {
+  BLANK: { name: "blank", title: "blank" },
   RACE: { name: "race", title: "Race" },
   TIMEDELTA: { name: "timedelta", title: "Time Delta" },
   FLEET: { name: "fleet", title: "Fleet" },
@@ -22,11 +25,15 @@ const SECTIONS = {
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
-  const { getPHRFIsAlternateFormula, getRatingOverride } = useStorage();
+  const {
+    getPHRFIsAlternateFormula,
+    getRatingOverride,
+    storeValueForKey,
+  } = useStorage();
   const { setIsAlternatePHRF, setRatingOverride } = usePHRF();
 
   const saveCurrentScreen = (screenName) => {
-    //storeValueForKey("@current_screen", screenName);
+    storeValueForKey(CURRENT_SCREEN_KEY, screenName);
   };
 
   useEffect(() => {
@@ -45,8 +52,8 @@ const AppNavigator = () => {
 
   return (
     <Tab.Navigator
-      initialRouteName={SECTIONS.FLEET.name}
-      navigation={{ type: "NAVIGATE", target: "settings" }}
+      initialRouteName={SECTIONS.BLANK.name}
+      hiddenTabs={[SECTIONS.BLANK.name]}
       tabBarOptions={{
         showLabel: true,
         showIcon: true,
@@ -55,7 +62,15 @@ const AppNavigator = () => {
           fontSize: 13,
         },
       }}
+      screenOptions={({ route }) => ({
+        tabBarButton: [SECTIONS.BLANK.name].includes(route.name)
+          ? () => {
+              return null;
+            }
+          : undefined,
+      })}
     >
+      <Tab.Screen name={SECTIONS.BLANK.name} component={BlankComponent} />
       <Tab.Screen
         name={SECTIONS.FLEET.name}
         component={Fleet}
@@ -71,6 +86,7 @@ const AppNavigator = () => {
         }}
         listeners={({ navigation, route }) => ({
           tabPress: (e) => {
+            console.log("navigation", navigation);
             saveCurrentScreen(route.name);
           },
         })}
@@ -124,5 +140,25 @@ const AppNavigator = () => {
     </Tab.Navigator>
   );
 };
+
+function BlankComponent({ navigation }) {
+  const { getValueForKey } = useStorage();
+
+  const jumpToLastUsedScreen = () => {
+    getValueForKey(CURRENT_SCREEN_KEY).then((response) => {
+      if (response.ok && response.data) {
+        navigation.jumpTo(response.data);
+      } else {
+        navigation.jumpTo(SECTIONS.FLEET.name);
+      }
+    });
+  };
+
+  useEffect(() => {
+    jumpToLastUsedScreen();
+  }, []);
+
+  return <View />;
+}
 
 export default AppNavigator;

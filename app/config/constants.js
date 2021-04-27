@@ -8,3 +8,5 @@ export const RATING_OVERRIDE = {
   FS: "FS",
   NFS: "NFS",
 };
+
+export const CURRENT_SCREEN_KEY = "@current_screen";

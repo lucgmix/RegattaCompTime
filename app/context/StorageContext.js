@@ -126,6 +126,8 @@ export function StorageDataContext({ children }) {
         getPHRFIsAlternateFormula,
         storeRatingOverride,
         getRatingOverride,
+        storeValueForKey,
+        getValueForKey,
       }}
     >
       {children}
