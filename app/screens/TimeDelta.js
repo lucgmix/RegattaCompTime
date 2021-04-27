@@ -108,7 +108,7 @@ function TimeDelta() {
     switch (tag) {
       case "message":
         textToStyle = {
-          sentence: `The {0} section is were you can compare the time difference between boats based on the race duration and the boat's handicap.\n\nBoats above the selected reference boat (negative time values) owe you time.\n\nThe selected reference boat owes time to boats below it (positive time values)`,
+          sentence: `The {0} section is were you can compare the time difference between boats based on the race duration and the boat's handicap.\n\nBoats above the selected reference boat (negative time values) owe you time.\n\nThe selected reference boat owes time to boats below it (positive time values).`,
           boldText: ["Time Delta"],
         };
         break;
