@@ -71,7 +71,7 @@ function BoatRaceListItem({
               isHeader && headerStyles.label,
             ]}
           >
-            {`${boatType} / `}{" "}
+            {`${boatType} / `}
             <Text style={styles.rating(ratingError)}>{rating}</Text>
           </Text>
         )}
@@ -125,11 +125,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   }),
   rank: {
-    flex: 0.33,
+    flex: 0.28,
     alignSelf: "center",
     fontWeight: "700",
   },
-  nameContainer: { flex: 0.7 },
+  nameContainer: { flex: 1 },
   name: {
     fontWeight: "700",
     flex: 1,
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     color: colors.subText,
   },
   timeContainer: {
-    flex: 0.46,
+    flex: 0.5,
     justifyContent: "space-between",
   },
   rating(ratingError) {
@@ -167,23 +167,19 @@ const headerStyles = StyleSheet.create({
     backgroundColor: defaultStyles.colors.primary,
     flex: 1,
   },
-  nameContainer: { flex: 0.7 },
+  nameContainer: { flex: 0.9 },
   label: {
     color: colors.white,
     fontWeight: "600",
+    fontSize: 14,
   },
   timeContainer: {
-    flex: 0.79,
+    flex: 0.82,
     alignItems: "flex-start",
   },
   correctedTime: {
     fontWeight: "600",
     color: colors.white,
-  },
-  rank: {
-    fontSize: 14,
-  },
-  name: {
     fontSize: 14,
   },
 });

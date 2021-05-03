@@ -16,6 +16,8 @@ import { isEmpty } from "lodash";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 
+import boatTypesList from "../config/boatTypesList.json";
+
 export const BOAT_CREATOR_MODE = {
   ADD: "add",
   UPDATE: "update",
@@ -183,34 +185,34 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
   const headerTitle = editableBoat ? " Edit Boat" : "Add Boat";
   const actionButtonLabel = editableBoat ? " Update" : "Save";
 
-  const boatTypeItems = [
-    {
-      id: "1",
-      boatType: "Laser 28",
-      ratingFS: "126",
-      ratingNFS: "141",
-    },
-    {
-      id: "2",
-      boatType: "C&C 115",
-      ratingFS: "63",
-      ratingNFS: "93",
-    },
-    {
-      id: "3",
-      boatType: "Laser 28",
-      ratingFS: "126",
-      ratingNFS: "141",
-    },
-    {
-      id: "4",
-      boatType: "C&C 115",
-      ratingFS: "63",
-      ratingNFS: "93",
-    },
-  ];
+  // const boatTypeItems = [
+  //   {
+  //     id: "1",
+  //     boatType: "Laser 28",
+  //     ratingFS: "126",
+  //     ratingNFS: "141",
+  //   },
+  //   {
+  //     id: "2",
+  //     boatType: "C&C 115",
+  //     ratingFS: "63",
+  //     ratingNFS: "93",
+  //   },
+  //   {
+  //     id: "3",
+  //     boatType: "Laser 28",
+  //     ratingFS: "126",
+  //     ratingNFS: "141",
+  //   },
+  //   {
+  //     id: "4",
+  //     boatType: "C&C 115",
+  //     ratingFS: "63",
+  //     ratingNFS: "93",
+  //   },
+  // ];
 
-  const dropDownItems = boatTypeItems.map((item) => {
+  const dropDownItems = boatTypesList.boatTypeList.map((item) => {
     return { label: item.boatType, value: item };
   });
 
