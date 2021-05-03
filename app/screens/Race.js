@@ -406,7 +406,6 @@ function Race() {
 
   const handleStartTimeChange = (date) => {
     const selectedTimeDate = new Date(date.getTime());
-    selectedTimeDate.setSeconds(0);
 
     // Race Finished, allow edit of race start time
     if (raceState === RACE_STATE.FINISHED) {
@@ -446,10 +445,11 @@ function Race() {
 
       const updatedBoatsElapsed = viewBoatResultList.map((boatResult) => {
         if (boatResult.elapsedTime !== 0) {
-          const boatCorrectedElapsedTime =
+          const boatCorrectedElapsedTime = Math.round(
             boatResult.originalStartTime -
-            newStartDateMilliseconds +
-            boatResult.originalElapsedTime;
+              newStartDateMilliseconds +
+              boatResult.originalElapsedTime
+          );
           boatResult.elapsedTime = boatCorrectedElapsedTime;
         }
         return boatResult;
