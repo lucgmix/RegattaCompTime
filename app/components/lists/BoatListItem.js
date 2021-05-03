@@ -9,6 +9,7 @@ function BoatListItem({
   type,
   ratingFS,
   ratingNFS,
+  ratingError,
   defaultRating,
   ratingOverride,
   isSelectedItem,
@@ -57,7 +58,7 @@ function BoatListItem({
             defaultStyles.text,
             styles.ratingText(
               (ratingOverride || defaultRating) === RATING_OVERRIDE.FS,
-              isHeader
+              ratingError
             ),
             isHeader && headerStyles.label,
           ]}
@@ -80,7 +81,7 @@ function BoatListItem({
             defaultStyles.text,
             styles.ratingText(
               (ratingOverride || defaultRating) === RATING_OVERRIDE.NFS,
-              isHeader
+              ratingError
             ),
             isHeader && headerStyles.label,
           ]}
@@ -147,8 +148,14 @@ const styles = StyleSheet.create({
         : defaultStyles.colors.transparent,
     };
   },
-  ratingText(isDefaultRating) {
-    return { fontSize: 15, fontWeight: isDefaultRating ? "700" : "400" };
+  ratingText(isDefaultRating, ratingError) {
+    return {
+      fontSize: 15,
+      fontWeight: isDefaultRating || ratingError ? "700" : "400",
+      color: ratingError
+        ? defaultStyles.colors.darkRed
+        : defaultStyles.colors.text,
+    };
   },
   default_rating: {
     textAlign: "right",

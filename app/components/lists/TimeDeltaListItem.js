@@ -7,6 +7,7 @@ function TimeDeltaListItem({
   boatName,
   boatType,
   rating,
+  ratingError,
   correctedTime,
   isSelectedItem,
   isHeader,
@@ -43,7 +44,7 @@ function TimeDeltaListItem({
       <Text
         style={[
           defaultStyles.text,
-          styles.rating,
+          styles.rating(ratingError),
           isHeader && headerStyles.label,
         ]}
       >
@@ -95,11 +96,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     fontSize: 14,
   },
-  rating: {
-    flex: 0.25,
-    flexDirection: "row",
-    textAlign: "right",
-    fontSize: 14,
+  rating(ratingError) {
+    return {
+      flex: 0.25,
+      flexDirection: "row",
+      textAlign: "right",
+      fontSize: 14,
+      color: ratingError
+        ? defaultStyles.colors.darkRed
+        : defaultStyles.colors.text,
+      fontWeight: ratingError ? "700" : "400",
+    };
   },
   time: {
     flex: 0.4,

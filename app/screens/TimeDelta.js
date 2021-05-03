@@ -214,7 +214,7 @@ function TimeDelta() {
           <TimeDeltaListItem
             boatName="Boat"
             rating="Rating"
-            boatType="Type"
+            boatType="Class"
             correctedTime="Time Delta"
             isHeader
           />
@@ -231,6 +231,7 @@ function TimeDelta() {
               <TimeDeltaListItem
                 boatName={item.boat.boatName}
                 rating={item.boat.rating}
+                ratingError={item.boat.ratingError}
                 boatType={item.boat.boatType}
                 correctedTime={secondsToHms(item.diff)}
                 isSelectedItem={
@@ -274,6 +275,7 @@ const styles = StyleSheet.create({
   },
   setTimeButton: {
     marginRight: 8,
+    minWidth: 80,
   },
 });
 

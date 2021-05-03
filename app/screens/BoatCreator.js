@@ -23,7 +23,7 @@ export const BOAT_CREATOR_MODE = {
 
 const FIELD_LABEL = {
   BOAT_NAME: "Boat Name",
-  BOAT_TYPE: "Boat Type",
+  BOAT_TYPE: "Boat Class",
   SAIL_NUMBER: "Sail Number",
   FS: "FS (Flying Spinnaker Handicap Rating)",
   NFS: "NFS (Non Flying Spinnaker Handicap Rating)",
@@ -246,7 +246,7 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
         {!editableBoat && (
           <DropDownPicker
             items={dropDownItems}
-            placeholder="Select a Boat Type (Optional)"
+            placeholder="Select a Boat Class (Optional)"
             containerStyle={styles.dropdownContainer}
             style={styles.dropdown}
             itemStyle={{

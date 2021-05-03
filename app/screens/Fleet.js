@@ -282,7 +282,7 @@ function Fleet() {
         ListHeaderComponent={() => (
           <BoatListItem
             name="Boat"
-            type="Type"
+            type="Class"
             ratingFS="FS"
             ratingNFS="NFS"
             ratingOverride={ratingOverride}
@@ -302,6 +302,7 @@ function Fleet() {
                 name={item.boatName}
                 ratingFS={item.ratingFS}
                 ratingNFS={item.ratingNFS}
+                ratingError={item.ratingError}
                 type={item.boatType}
                 defaultRating={item.defaultRating}
                 ratingOverride={item.ratingOverride}

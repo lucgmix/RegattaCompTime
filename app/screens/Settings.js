@@ -51,16 +51,21 @@ function Settings(props) {
           switch (value) {
             case RATING_OVERRIDE.NONE:
               boat.rating =
-                boat.defaultRating === "FS" ? boat.ratingFS : boat.ratingNFS;
+                boat.defaultRating === "FS"
+                  ? useRating(boat.ratingFS, boat.ratingNFS)
+                  : useRating(boat.ratingNFS, boat.ratingFS);
               boat.ratingOverride = RATING_OVERRIDE.NONE;
+              boat.ratingError = false;
               break;
             case RATING_OVERRIDE.FS:
-              boat.rating = boat.ratingFS;
+              boat.rating = useRating(boat.ratingFS, boat.ratingNFS);
               boat.ratingOverride = RATING_OVERRIDE.FS;
+              boat.ratingError = boat.rating !== boat.ratingFS;
               break;
             case RATING_OVERRIDE.NFS:
-              boat.rating = boat.ratingNFS;
+              boat.rating = useRating(boat.ratingNFS, boat.ratingFS);
               boat.ratingOverride = RATING_OVERRIDE.NFS;
+              boat.ratingError = boat.rating !== boat.ratingNFS;
               break;
           }
           return boat;
@@ -77,6 +82,14 @@ function Settings(props) {
       }
     });
   }; //
+
+  const useRating = (preferedRating, otherRating) => {
+    if (!isEmpty(preferedRating)) {
+      return preferedRating;
+    } else {
+      return otherRating;
+    }
+  };
 
   return (
     <Screen style={styles.container}>

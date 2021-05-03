@@ -17,6 +17,8 @@ function BoatRaceListItem({
   rank = "-",
   name,
   boatType,
+  rating,
+  ratingError,
   correctedTime,
   elapsedTime,
   isHeader,
@@ -58,7 +60,7 @@ function BoatRaceListItem({
             isHeader && headerStyles.label,
           ]}
         >
-          {isHeader ? `${name}\n${boatType}` : name}
+          {isHeader ? `${name}\n${boatType} / ${rating}` : name}
         </Text>
         {!isHeader && (
           <Text
@@ -69,7 +71,8 @@ function BoatRaceListItem({
               isHeader && headerStyles.label,
             ]}
           >
-            {boatType}
+            {`${boatType} / `}{" "}
+            <Text style={styles.rating(ratingError)}>{rating}</Text>
           </Text>
         )}
       </View>
@@ -136,8 +139,17 @@ const styles = StyleSheet.create({
     color: colors.subText,
   },
   timeContainer: {
-    flex: 0.56,
+    flex: 0.46,
     justifyContent: "space-between",
+  },
+  rating(ratingError) {
+    return {
+      fontSize: 13,
+      fontWeight: ratingError ? "700" : "400",
+      color: ratingError
+        ? defaultStyles.colors.darkRed
+        : defaultStyles.colors.text,
+    };
   },
   correctedTime: {
     fontWeight: "700",
@@ -161,7 +173,7 @@ const headerStyles = StyleSheet.create({
     fontWeight: "600",
   },
   timeContainer: {
-    flex: 1.03,
+    flex: 0.79,
     alignItems: "flex-start",
   },
   correctedTime: {

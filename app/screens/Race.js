@@ -653,7 +653,7 @@ function Race() {
             rank="Rank"
             name="Boat Name"
             rating="Rating"
-            boatType="Boat Type"
+            boatType="Boat Class"
             correctedTime="Comp Time"
             elapsedTime="Elapsed Time"
             isHeader
@@ -667,6 +667,7 @@ function Race() {
               name={item.boat.boatName}
               boatType={item.boat.boatType}
               rating={item.boat.rating}
+              ratingError={item.boat.ratingError}
               correctedTime={getBoatCorrectedTime(item, elapsedTime)}
               elapsedTime={getBoatElapsedTime(item, elapsedTime)}
               onFinishClick={() => handleBoatFinishClick(item)}
