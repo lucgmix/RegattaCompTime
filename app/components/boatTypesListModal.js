@@ -16,7 +16,7 @@ function BoatTypesListModal({
   const [open, setOpen] = useState(true);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState();
-  const windowHeight = useWindowDimensions().height;
+  const windowHeight = useWindowDimensions().height - 230;
 
   useEffect(() => {
     const boatTypeItems = boatTypesList.boatTypeList.map((item) => {
