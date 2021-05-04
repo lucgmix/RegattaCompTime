@@ -53,7 +53,7 @@ function BoatTypesListModal({
             maxHeight={windowHeight}
             key="id"
             placeholder="Select Boat Class"
-            searchPlaceholder="Type a Boat Class"
+            searchPlaceholder="Search a Boat Class"
             schema={{
               label: "label",
               value: "value",

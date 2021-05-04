@@ -170,13 +170,14 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
   };
 
   const onBoatTypeChange = (item) => {
-    console.log(JSON.parse(item));
-
-    const boatData = JSON.parse(item);
-
-    setBoatTypeValue(boatData.boatType);
-    setBoatFSValue(boatData.ratingFS);
-    setBoatNFSValue(boatData.ratingNFS);
+    try {
+      const boatTypeData = JSON.parse(item);
+      setBoatTypeValue(boatTypeData.boatType);
+      setBoatFSValue(boatTypeData.ratingFS);
+      setBoatNFSValue(boatTypeData.ratingNFS);
+    } catch (error) {
+      console.warn("Error prsong json");
+    }
   };
 
   const openBoatTypeList = () => {
