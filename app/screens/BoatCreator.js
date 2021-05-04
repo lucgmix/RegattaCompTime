@@ -3,8 +3,6 @@ import { View, StyleSheet } from "react-native";
 import Screen from "../components/Screen";
 import SectionHeader from "../components/SectionHeader";
 import Button from "../components/Button";
-import DropDownPicker from "react-native-dropdown-picker";
-import Text from "../components/Text";
 
 import defaultStyles from "../config/styles";
 import { Form, FormField, SubmitButton, FormSwitch } from "../components/forms";
@@ -16,7 +14,7 @@ import { isEmpty } from "lodash";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 
-import boatTypesList from "../config/boatTypesList.json";
+import BoatTypesListModal from "../components/BoatTypesListModal";
 
 export const BOAT_CREATOR_MODE = {
   ADD: "add",
@@ -115,6 +113,8 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
   const [boatFSValue, setBoatFSValue] = useState();
   const [boatNFSValue, setBoatNFSValue] = useState();
 
+  const [showBoatListPicker, setShowBoatListPicker] = useState(false);
+
   const toggleDefaultRatingSwitch = (isNFSRating) => {
     setUseNFSRating(isNFSRating);
   };
@@ -170,9 +170,21 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
   };
 
   const onBoatTypeChange = (item) => {
-    setBoatTypeValue(item.value.boatType);
-    setBoatFSValue(item.value.ratingFS);
-    setBoatNFSValue(item.value.ratingNFS);
+    console.log(JSON.parse(item));
+
+    const boatData = JSON.parse(item);
+
+    setBoatTypeValue(boatData.boatType);
+    setBoatFSValue(boatData.ratingFS);
+    setBoatNFSValue(boatData.ratingNFS);
+  };
+
+  const openBoatTypeList = () => {
+    setShowBoatListPicker(true);
+  };
+
+  const closeBoatTypePicker = () => {
+    setShowBoatListPicker(false);
   };
 
   useEffect(() => {
@@ -185,12 +197,14 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
   const headerTitle = editableBoat ? " Edit Boat" : "Add Boat";
   const actionButtonLabel = editableBoat ? " Update" : "Save";
 
-  const dropDownItems = boatTypesList.boatTypeList.map((item) => {
-    return { label: item.boatType, value: item };
-  });
-
   return (
     <Screen style={styles.container}>
+      <BoatTypesListModal
+        buttonTitle="Done"
+        isModalVisible={showBoatListPicker}
+        onModalButtonPress={closeBoatTypePicker}
+        onBoatTypeChange={onBoatTypeChange}
+      />
       <SectionHeader title={headerTitle} helpVisible={false} />
       <Form
         initialValues={{
@@ -218,38 +232,22 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
           name="sailNumber"
           placeholder="Optional"
         />
-        {!editableBoat && (
-          <DropDownPicker
-            items={dropDownItems}
-            placeholder="Select a Boat Class (Optional)"
-            containerStyle={styles.dropdownContainer}
-            style={styles.dropdown}
-            itemStyle={{
-              justifyContent: "flex-start",
-            }}
-            dropDownStyle={{ backgroundColor: defaultStyles.colors.light }}
-            onChangeItem={onBoatTypeChange}
-            searchable={true}
-            searchablePlaceholder="Search for an item"
-            searchablePlaceholderTextColor={defaultStyles.colors.subText}
-            seachableStyle={{}}
-            searchableError={() => <Text>Not Found</Text>}
-            labelStyle={{
-              color: defaultStyles.colors.text,
-            }}
-            activeLabelStyle={{
-              color: defaultStyles.colors.medium,
-              fontWeight: "700",
-            }}
-            dropDownMaxHeight={270}
+        <View style={styles.boatClassContainer}>
+          <FormField
+            maxLength={255}
+            label={FIELD_LABEL.BOAT_TYPE}
+            name="boatType"
+            value={boatTypeValue}
+            style={styles.boatTypeInput}
+            placeholder="Type or select a Boat Class"
           />
-        )}
-        <FormField
-          maxLength={255}
-          label={FIELD_LABEL.BOAT_TYPE}
-          name="boatType"
-          value={boatTypeValue}
-        />
+          <Button
+            buttonStyle={styles.openBoatTypeListButton}
+            title="Select Boat Class"
+            onPress={openBoatTypeList}
+          />
+        </View>
+
         <FormField
           keyboardType="numeric"
           maxLength={3}
@@ -307,14 +305,19 @@ const styles = StyleSheet.create({
   submitButton: {
     minWidth: 100,
   },
-  dropdown: {
-    backgroundColor: defaultStyles.colors.light,
-    borderWidth: 0,
-    color: "red",
+  boatClassContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
-  dropdownContainer: {
-    height: 50,
-    marginBottom: 8,
+  openBoatTypeListButton: {
+    alignSelf: "flex-end",
+    alignItems: "flex-end",
+    marginBottom: 10,
+  },
+  boatTypeInput: {
+    flex: 1,
   },
 });
 
