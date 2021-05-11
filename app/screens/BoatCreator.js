@@ -24,7 +24,6 @@ export const BOAT_CREATOR_MODE = {
 const FIELD_LABEL = {
   BOAT_NAME: "Boat Name",
   BOAT_TYPE: "Boat Class",
-  SAIL_NUMBER: "Sail Number",
   FS: "FS (Flying Spinnaker Handicap Rating)",
   NFS: "NFS (Non Flying Spinnaker Handicap Rating)",
   DEFAULT_RATING: "Default Rating",
@@ -42,7 +41,6 @@ const validationSchema = Yup.object().shape({
     .min(1)
     .label(FIELD_LABEL.BOAT_NAME),
   boatType: Yup.string().required().min(1).label(FIELD_LABEL.BOAT_TYPE),
-  sailNumber: Yup.string().min(1).label(FIELD_LABEL.SAIL_NUMBER),
   ratingFS: Yup.number()
     .typeError("FS Rating needs to be a number")
     .nullable()
@@ -212,7 +210,6 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
           id: (editableBoat && editableBoat.id) || "",
           boatName: (editableBoat && editableBoat.boatName) || "",
           boatType: (editableBoat && editableBoat.boatType) || "",
-          sailNumber: (editableBoat && editableBoat.sailNumber) || "",
           ratingFS: (editableBoat && editableBoat.ratingFS) || null,
           ratingNFS: (editableBoat && editableBoat.ratingNFS) || null,
           useNFSRating: (editableBoat && editableBoat.useNFSRating) || false,
@@ -226,12 +223,6 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
           maxLength={255}
           label={FIELD_LABEL.BOAT_NAME}
           name="boatName"
-        />
-        <FormField
-          maxLength={255}
-          label={FIELD_LABEL.SAIL_NUMBER}
-          name="sailNumber"
-          placeholder="Optional"
         />
         <View style={styles.boatClassContainer}>
           <FormField
