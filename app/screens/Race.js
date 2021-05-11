@@ -344,16 +344,16 @@ function Race() {
     setClearRacePromptVisible(false);
     setRaceState(RACE_STATE.RESET_CLEARED);
 
-    if (!viewBoatResultList) return;
-
-    const resetBoatResults = Array.from(viewBoatResultList).map((result) => {
-      result.elapsedTime = 0;
-      result.correctedTime = 0;
-      result.rank = "-";
-      result.originalStartTime = 0;
-      result.originalElapsedTime = 0;
-      return result;
-    });
+    const resetBoatResults = Array.from(viewBoatResultList || []).map(
+      (result) => {
+        result.elapsedTime = 0;
+        result.correctedTime = 0;
+        result.rank = "-";
+        result.originalStartTime = 0;
+        result.originalElapsedTime = 0;
+        return result;
+      }
+    );
 
     storeRaceResults({
       raceStartTime: raceTimerStartDate.getTime(),
