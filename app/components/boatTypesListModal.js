@@ -6,6 +6,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import boatTypesList from "../config/boatTypesList.json";
 import defaultStyles from "../config/styles";
 import { useWindowDimensions } from "react-native";
+import Text from "../components/Text";
 
 function BoatTypesListModal({
   buttonTitle,
@@ -72,6 +73,12 @@ function BoatTypesListModal({
               borderRadius: 4,
             }}
           />
+          {!open && (
+            <Text style={styles.warningText}>
+              Warning, the PHRF ratings of a Class are average ratings. Consult
+              your handicaper or club results for accurate ratings.
+            </Text>
+          )}
         </View>
       </Screen>
     </Modal>
@@ -89,6 +96,15 @@ const styles = StyleSheet.create({
   dropdownContainer: {
     backgroundColor: defaultStyles.colors.light,
     borderColor: defaultStyles.colors.mediumlight,
+  },
+  warningText: {
+    justifyContent: "center",
+    backgroundColor: defaultStyles.colors.light,
+    paddingLeft: 32,
+    paddingRight: 32,
+    paddingTop: 16,
+    paddingBottom: 16,
+    margin: 16,
   },
 });
 

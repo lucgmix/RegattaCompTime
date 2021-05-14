@@ -47,7 +47,12 @@ function PhrfRatingOverrideRadioGroup({ value, onUpdateSelection }) {
 
           <Text style={[defaultStyles.text, styles.radioDescription]}>
             Use the Flying Spinnaker rating for all boats. This overrides the
-            boat's default rating.
+            boat's default rating.{" "}
+            <Text style={styles.italic}>
+              If the FS rating is missing for a boat, the NFS rating will be
+              used instead but displayed in red color to indicate that the
+              incorrect rating is being used.
+            </Text>
           </Text>
         </View>
 
@@ -65,7 +70,12 @@ function PhrfRatingOverrideRadioGroup({ value, onUpdateSelection }) {
 
           <Text style={[defaultStyles.text, styles.radioDescription]}>
             Use the Non-Flying Spinnaker rating for all boats. This overrides
-            the boat's default rating.
+            the boat's default rating.{" "}
+            <Text style={styles.italic}>
+              If the NFS rating is missing for a boat, the FS rating will be
+              used instead but displayed in red color to indicate that the
+              incorrect rating is being used.
+            </Text>
           </Text>
         </View>
       </RadioButton.Group>
@@ -79,7 +89,7 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
     paddingRight: 8,
     paddingTop: 16,
-    paddingBottom: 16,
+    paddingBottom: 12,
     borderRadius: 8,
     margin: 4,
   },
@@ -109,6 +119,10 @@ const styles = StyleSheet.create({
   },
   title: {
     marginLeft: 4,
+  },
+  italic: {
+    fontSize: 12,
+    fontStyle: "italic",
   },
 });
 
