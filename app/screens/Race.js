@@ -90,7 +90,7 @@ const getRaceHelpString = (tag) => {
     case "content":
       textToStyle = {
         sentence:
-          "{0} Allows you to enter the race start time for the current day.\n\n{1} Allows you to start the race timer at the current time.\n\n{2} Allows you to modify the start time of a race that was finished.\n\n{3} Stops the race timer and displays ranking sorted results based on corrected time.\n\n{4} Clears the race results and sorts the boats by rating, faster boats appear higher in the list.\n\n{5} Click a boat's Finish button to record their race finish.",
+          "{0} Allows you to enter the race start time for the current day.\n\n{1} Allows you to start the race timer at the current time.\n\n{2} Allows you to modify the start time of a race that was finished.\n\n{3} Stops the race timer and displays ranking sorted results based on corrected time.\n\n{4} Clears the race results and sorts the boats by rating, faster boats appear higher in the list.\n\n{5} Click a boat's Finish button to record their race finish.\n\n{6} This button will replace the Finish button of a boat after you have finished a boat and the race (Finish Race). Clicking on it dislays a window that allows to edit the elapsed time of a boat. Corrected Time and Ranking will be recalculated automatically.",
         boldText: [
           "Start Time...",
           "Start Now",
@@ -98,6 +98,7 @@ const getRaceHelpString = (tag) => {
           "Finish Race",
           "Clear Race",
           "Finish",
+          "Edit...",
         ],
       };
       break;
@@ -546,7 +547,7 @@ function Race() {
       (item) => item.boat.id === boatEditResult.boat.id
     );
 
-    if (boatElapsedTime <= elapsedTime || boatElapsedTime === 0) {
+    if (boatElapsedTime <= elapsedTime && boatElapsedTime > 0) {
       resultWithOriginalElapsedTime.elapsedTime = boatElapsedTime;
       storeRaceResults({
         raceStartTime: raceTimerStartDate.getTime(),
@@ -557,6 +558,8 @@ function Race() {
         if (response.ok) {
           setViewBoatResultList(updatedElapsedTimeResults);
           updateResultList();
+          setBoatElapsedTime(0);
+          setBoatEditResult(null);
         }
       });
     } else {
@@ -628,7 +631,7 @@ function Race() {
       />
       <DialogPrompt
         title="Edit Elapsed Time"
-        message={`Oops!\n\nSetting the elapsed time of a boat to be longer than the race's elapsed time is not allowed.`}
+        message={`Oops!\n\nSetting the elapsed time of a boat to be 0 or longer than the race's elapsed time is not allowed.`}
         positive="Got it"
         isVisible={elapsedTimePromptVisible}
         onPositiveButtonPress={() => setElapsedTimePromptVisible(false)}

@@ -26,10 +26,10 @@ function ElapsedTimeInputModal({
             <Text style={styles.boatMeta}>
               {boatEditResult && boatEditResult.boat.boatType}
             </Text>
+            <Text style={styles.timeHeader}>Elapsed Time</Text>
           </View>
 
           <View style={styles.timeInputContainer}>
-            <Text style={styles.timeHeader}>Elapsed Time</Text>
             <TimeInput
               duration={
                 (boatEditResult &&
@@ -54,15 +54,19 @@ const styles = StyleSheet.create({
   container: {
     marginLeft: 12,
     marginRight: 12,
+    justifyContent: "center",
+    alignItems: "center",
   },
   boatMeta: {
-    fontSize: 20,
+    fontSize: 22,
   },
   boatMetaContainer: {
     marginTop: 12,
+    justifyContent: "center",
+    alignItems: "center",
   },
   timeHeader: {
-    fontSize: 24,
+    fontSize: 22,
     marginTop: 12,
     fontWeight: "600",
     alignItems: "flex-start",
