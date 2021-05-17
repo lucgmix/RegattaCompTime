@@ -21,6 +21,7 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import DialogPrompt from "../components/DialogPrompt";
+import HelpDialogPrompt from "../components/HelpDialogPrompt";
 import BoatCreator, { BOAT_CREATOR_MODE } from "./BoatCreator";
 import { v4 as uuidv4 } from "uuid";
 
@@ -44,9 +45,8 @@ function sortBoatArray(boatList) {
 
 function Fleet() {
   const [selectedBoat, setSelectedBoat] = useState(null);
-  const [isCreateBoatModalVisible, setIsCreateBoatModalVisible] = useState(
-    false
-  );
+  const [isCreateBoatModalVisible, setIsCreateBoatModalVisible] =
+    useState(false);
   const [boatCreatorMode, setBoatCreatorMode] = useState();
   const [viewBoatList, setViewBoatList] = useState([]);
   const { storeBoatList, getBoatList, boatDataChanged } = useStorage();
@@ -185,7 +185,7 @@ function Fleet() {
         />
       )}
 
-      <DialogPrompt
+      <HelpDialogPrompt
         title="Fleet Help"
         message={getFleetHelpString("message")}
         content={getFleetHelpString("content")}

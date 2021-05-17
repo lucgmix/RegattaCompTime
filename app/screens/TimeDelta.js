@@ -18,6 +18,7 @@ import { useStorage } from "../context/StorageContext";
 import colors from "../config/colors";
 import TimeInpuModal from "../components/TimeInputModal";
 import DialogPrompt from "../components/DialogPrompt";
+import HelpDialogPrompt from "../components/HelpDialogPrompt";
 
 import { Entypo } from "@expo/vector-icons";
 import SectionHeader from "../components/SectionHeader";
@@ -153,7 +154,7 @@ function TimeDelta() {
 
   return (
     <Screen style={styles.container}>
-      <DialogPrompt
+      <HelpDialogPrompt
         title="Time Delta Help"
         message={getTimeDeltaHelpString("message")}
         content={getTimeDeltaHelpString("content")}

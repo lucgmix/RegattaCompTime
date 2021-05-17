@@ -12,6 +12,7 @@ import ListItemSeparator from "../components/lists/ListItemSeparator";
 
 import StopWatch, { STOPWATCH_STATE } from "../components/StopWatch";
 import DialogPrompt from "../components/DialogPrompt";
+import HelpDialogPrompt from "../components/HelpDialogPrompt";
 import { isEmpty } from "lodash";
 import RaceTimer from "../components/RaceTimer";
 import ElapsedTimeInputModal from "../components/ElapsedTimeInputModal";
@@ -643,7 +644,7 @@ function Race() {
         isVisible={startTimePromptVisible}
         onPositiveButtonPress={handleHideStartTimePrompt}
       />
-      <DialogPrompt
+      <HelpDialogPrompt
         title="Race Help"
         message={getRaceHelpString("message")}
         content={getRaceHelpString("content")}
