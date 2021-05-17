@@ -113,10 +113,13 @@ function Race() {
   const [stopRacePromptVisible, setStopRacePromptVisible] = useState(false);
   const [editElapsedTimePromptVisible, setEditElapsedTimePromptVisible] =
     useState(false);
+  const [elapsedTimePromptVisible, setElapsedTimePromptVisible] =
+    useState(false);
   const [helpPromptVisible, setHelpPromptVisible] = useState(false);
   const [startTimePromptVisible, setStartTimePromptVisible] = useState(false);
 
   const [elapsedTime, setElapsedTime] = useState(0);
+  const [boatElapsedTime, setBoatElapsedTime] = useState(0);
   const [boatEditResult, setBoatEditResult] = useState(null);
   const [raceTimerStartDate, setRaceTimerStartDate] = useState(new Date());
 
@@ -530,6 +533,41 @@ function Race() {
     setStopWatchState(STOPWATCH_STATE.STARTED);
   };
 
+  const handleEditElapsedTime = (result) => {
+    setBoatEditResult(result);
+    setEditElapsedTimePromptVisible(true);
+  };
+
+  const handleBoatElapsedTimeEdit = () => {
+    setEditElapsedTimePromptVisible(false);
+
+    const updatedElapsedTimeResults = Array.from(viewBoatResultList);
+    const resultWithOriginalElapsedTime = updatedElapsedTimeResults.find(
+      (item) => item.boat.id === boatEditResult.boat.id
+    );
+
+    if (boatElapsedTime <= elapsedTime || boatElapsedTime === 0) {
+      resultWithOriginalElapsedTime.elapsedTime = boatElapsedTime;
+      storeRaceResults({
+        raceStartTime: raceTimerStartDate.getTime(),
+        raceElapsedTime: elapsedTime,
+        boatResults: updatedElapsedTimeResults,
+        raceState: raceState,
+      }).then((response) => {
+        if (response.ok) {
+          setViewBoatResultList(updatedElapsedTimeResults);
+          updateResultList();
+        }
+      });
+    } else {
+      setElapsedTimePromptVisible(true);
+    }
+  };
+
+  const onElapsedTimeChanged = (time) => {
+    setBoatElapsedTime(time * 1000);
+  };
+
   const getRenderMode = (result) => {
     // Boat finished and race is still running
     if (
@@ -550,32 +588,6 @@ function Race() {
     } else {
       return RACE_ITEM_MODE.DEFAULT;
     }
-  };
-
-  const handleEditElapsedTime = (result) => {
-    setBoatEditResult(result);
-    setEditElapsedTimePromptVisible(true);
-  };
-
-  const onElapsedTimeChanged = (time) => {
-    const updatedElapsedTimeResults = Array.from(viewBoatResultList);
-    const resultWithOriginalElapsedTime = updatedElapsedTimeResults.find(
-      (item) => item.boat.id === boatEditResult.boat.id
-    );
-
-    resultWithOriginalElapsedTime.elapsedTime = time * 1000;
-
-    storeRaceResults({
-      raceStartTime: raceTimerStartDate.getTime(),
-      raceElapsedTime: elapsedTime,
-      boatResults: updatedElapsedTimeResults,
-      raceState: raceState,
-    }).then((response) => {
-      if (response.ok) {
-        setViewBoatResultList(updatedElapsedTimeResults);
-        updateResultList();
-      }
-    });
   };
 
   const handleAppStateChange = (newState) => {
@@ -611,8 +623,15 @@ function Race() {
         isModalVisible={editElapsedTimePromptVisible}
         boatEditResult={boatEditResult}
         onElapsedTimeChange={onElapsedTimeChanged}
-        onModalButtonPress={() => setEditElapsedTimePromptVisible(false)}
+        onModalButtonPress={handleBoatElapsedTimeEdit}
         buttonLabel="Done"
+      />
+      <DialogPrompt
+        title="Edit Elapsed Time"
+        message={`Oops!\n\nSetting the elapsed time of a boat to be longer than the race's elapsed time is not allowed.`}
+        positive="Got it"
+        isVisible={elapsedTimePromptVisible}
+        onPositiveButtonPress={() => setElapsedTimePromptVisible(false)}
       />
       <DialogPrompt
         title="Edit Start Time"
