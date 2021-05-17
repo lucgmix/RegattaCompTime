@@ -23,6 +23,7 @@ function BoatRaceListItem({
   elapsedTime,
   isHeader,
   onFinishClick,
+  onEditClick,
   renderMode,
 }) {
   const finishDisabled =
@@ -98,13 +99,26 @@ function BoatRaceListItem({
           </Text>
         )}
       </View>
-      {!isHeader && (
+
+      {(!isHeader && renderMode === RACE_ITEM_MODE.RACING) ||
+      renderMode === RACE_ITEM_MODE.DEFAULT ||
+      renderMode === RACE_ITEM_MODE.BOAT_FINISHED ||
+      renderMode === RACE_ITEM_MODE.BOAT_DNF ? (
         <Button
           disabled={finishDisabled}
           buttonStyle={styles.finishButton}
           onPress={onFinishClick}
           title="Finish"
         ></Button>
+      ) : (
+        !isHeader &&
+        renderMode === RACE_ITEM_MODE.RACE_FINISHED && (
+          <Button
+            buttonStyle={styles.finishButton}
+            onPress={onEditClick}
+            title="Edit..."
+          ></Button>
+        )
       )}
     </View>
   );

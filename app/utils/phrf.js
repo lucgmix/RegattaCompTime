@@ -144,7 +144,7 @@ export function timeToString(time) {
   const mm = Math.floor(diffInMin);
 
   const diffInSec = (diffInMin - mm) * 60;
-  const ss = Math.floor(diffInSec);
+  const ss = Math.round(diffInSec);
 
   const diffInMs = (diffInSec - ss) * 100;
   const ms = Math.floor(diffInMs);

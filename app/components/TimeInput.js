@@ -19,10 +19,12 @@ function getSecond(time) {
 function TimeInput({ duration, onDurationChange }) {
   const [hour, setHour] = useState(Number(getHour(duration)));
   const [minute, setMinute] = useState(Number(getMinute(duration)));
-  const [second, setSecond] = useState(Number(getSecond(duration)));
+  const [second, setSecond] = useState(Math.round(Number(getSecond(duration))));
 
   useEffect(() => {
-    const duration = Math.round(hour * 60 * 60 + minute * 60 + Number(second));
+    const duration = Math.round(
+      hour * 60 * 60 + minute * 60 + Math.round(Number(second))
+    );
     onDurationChange(duration);
   }, [hour, minute, second]);
 
