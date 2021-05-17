@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   boatMetaContainer: {
-    marginTop: 24,
+    marginTop: 12,
   },
   timeHeader: {
     fontSize: 24,
