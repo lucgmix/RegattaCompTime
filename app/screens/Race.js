@@ -567,12 +567,13 @@ function Race() {
 
     storeRaceResults({
       raceStartTime: raceTimerStartDate.getTime(),
-      raceElapsedTime: Math.round(elapsedTime),
+      raceElapsedTime: elapsedTime,
       boatResults: updatedElapsedTimeResults,
       raceState: raceState,
     }).then((response) => {
       if (response.ok) {
         setViewBoatResultList(updatedElapsedTimeResults);
+        updateResultList();
       }
     });
   };
