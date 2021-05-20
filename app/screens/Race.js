@@ -16,7 +16,7 @@ import HelpDialogPrompt from "../components/HelpDialogPrompt";
 import { isEmpty } from "lodash";
 import RaceTimer from "../components/RaceTimer";
 import ElapsedTimeInputModal from "../components/ElapsedTimeInputModal";
-import { toDate, format, set } from "date-fns/";
+import { differenceInMilliseconds, toDate, format, set } from "date-fns/";
 
 const RACE_STATE = {
   NOT_STARTED: "not_started",
@@ -123,16 +123,18 @@ function Race() {
   const [elapsedTime, setElapsedTime] = useState(0);
   const [boatElapsedTime, setBoatElapsedTime] = useState(0);
   const [boatEditResult, setBoatEditResult] = useState(null);
+
   const [raceTimerStartDate, setRaceTimerStartDate] = useState(new Date());
+  const [stopWatchStartTime, setStopWatchStartTime] = useState(0);
+
+  const [stopWatchState, setStopWatchState] = useState();
+  const [raceState, setRaceState] = useState(RACE_STATE.NOT_STARTED);
 
   const { getBoatList, getRaceResults, storeRaceResults, boatDataChanged } =
     useStorage();
 
-  const [stopWatchStartTime, setStopWatchStartTime] = useState(0);
-  const [stopWatchState, setStopWatchState] = useState();
-  const [raceState, setRaceState] = useState(RACE_STATE.NOT_STARTED);
-
-  const { getCorrectedTime, isAlternatePHRF, timeToString } = usePHRF();
+  const { getCorrectedTime, isAlternatePHRF, millisecondsToDuration } =
+    usePHRF();
 
   const handleHelpPress = () => {
     setHelpPromptVisible(true);
@@ -238,7 +240,7 @@ function Race() {
   };
 
   const getBoatCorrectedTime = (result, elapsed) => {
-    return timeToString(
+    return millisecondsToDuration(
       getCorrectedTime(
         result.elapsedTime || elapsed,
         result.boat.rating,
@@ -249,8 +251,8 @@ function Race() {
 
   const getBoatElapsedTime = (result, elapsed) => {
     return result.elapsedTime > 0
-      ? timeToString(Math.round(result.elapsedTime))
-      : timeToString(Math.round(elapsed));
+      ? millisecondsToDuration(result.elapsedTime)
+      : millisecondsToDuration(elapsed);
   };
 
   const getUpdatedResultRanking = (resultList) => {
@@ -437,26 +439,43 @@ function Race() {
     setClearRacePromptVisible(true);
   };
 
+  const getDateTimeForCurrentDay = (date, zeroSeconds = false) => {
+    const originalDate = new Date(date);
+    const newTimeDate = new Date();
+    newTimeDate.setHours(originalDate.getHours());
+    newTimeDate.setMinutes(originalDate.getMinutes());
+    zeroSeconds
+      ? newTimeDate.setSeconds(0)
+      : newTimeDate.setSeconds(originalDate.getSeconds());
+    return newTimeDate;
+  };
+
+  const startRaceTimer = (stopWatchTime = 0) => {
+    setRaceState(RACE_STATE.STARTED_AND_RUNNING);
+
+    setStopWatchStartTime(stopWatchTime);
+    setElapsedTime(stopWatchTime);
+    setStopWatchState(STOPWATCH_STATE.STARTED);
+  };
+
+  const handleEditElapsedTime = (result) => {
+    setBoatEditResult(result);
+    setEditElapsedTimePromptVisible(true);
+  };
+
   const handleStartTimeChange = (date) => {
     const selectedTimeDate = new Date(date.getTime());
+    selectedTimeDate.setMilliseconds(0);
 
     // Race Finished, allow edit of race start time
     if (raceState === RACE_STATE.FINISHED) {
-      const resultWithOriginalStartTime = viewBoatResultList.find(
-        (item) => item.originalStartTime > 0
+      const newStartDateMilliseconds = selectedTimeDate.getTime();
+      const elapsedDiff = differenceInMilliseconds(
+        raceTimerStartDate.getTime(),
+        newStartDateMilliseconds
       );
 
-      const raceStartTimeMilliSeconds =
-        (resultWithOriginalStartTime &&
-          resultWithOriginalStartTime.originalStartTime) ||
-        raceTimerStartDate.getTime();
-      const elapsedToCompare =
-        (resultWithOriginalStartTime &&
-          resultWithOriginalStartTime.originalElapsedTime) ||
-        elapsedTime;
-      const newStartDateMilliseconds = selectedTimeDate.getTime();
-      const elapsedDiff = raceStartTimeMilliSeconds - newStartDateMilliseconds;
-      const newElapsedTime = elapsedDiff + elapsedToCompare;
+      const newElapsedTime = Math.abs(elapsedDiff + elapsedTime);
 
       let shortestElapsed = newElapsedTime;
       viewBoatResultList.forEach((boatResult) => {
@@ -470,7 +489,8 @@ function Race() {
       // Don't allow setting the start time to a value
       // past the shortest elapsed time of a boat that finished.
       shortestElapsed += elapsedDiff;
-      if (elapsedDiff >= shortestElapsed) {
+      // TODO: check this validation.
+      if (Math.abs(newElapsedTime) <= Math.abs(shortestElapsed)) {
         setStartTimePromptVisible(true);
         setRaceTimerStartDate(raceTimerStartDate);
         return;
@@ -490,7 +510,7 @@ function Race() {
 
       storeRaceResults({
         boatResults: updatedBoatsElapsed,
-        raceStartTime: selectedTimeDate,
+        raceStartTime: selectedTimeDate.getTime(),
         raceElapsedTime: newElapsedTime,
         raceState: raceState,
       }).then((response) => {
@@ -516,48 +536,26 @@ function Race() {
     }
   };
 
-  const getDateTimeForCurrentDay = (date, zeroSeconds = false) => {
-    const originalDate = new Date(date);
-    const newTimeDate = new Date();
-    newTimeDate.setHours(originalDate.getHours());
-    newTimeDate.setMinutes(originalDate.getMinutes());
-    zeroSeconds
-      ? newTimeDate.setSeconds(0)
-      : newTimeDate.setSeconds(originalDate.getSeconds());
-    return newTimeDate;
-  };
-
-  const startRaceTimer = (stopWatchTime = 0) => {
-    setRaceState(RACE_STATE.STARTED_AND_RUNNING);
-
-    setStopWatchStartTime(stopWatchTime);
-    setElapsedTime(stopWatchTime);
-    setStopWatchState(STOPWATCH_STATE.STARTED);
-  };
-
-  const handleEditElapsedTime = (result) => {
-    setBoatEditResult(result);
-    setEditElapsedTimePromptVisible(true);
-  };
-
   const handleBoatElapsedTimeEdit = () => {
     setEditElapsedTimePromptVisible(false);
 
     const updatedElapsedTimeResults = Array.from(viewBoatResultList);
+    // Find the boat that just got edited
     const resultWithOriginalElapsedTime = updatedElapsedTimeResults.find(
       (item) => item.boat.id === boatEditResult.boat.id
     );
 
+    // Set the boat results elapsedTime and originalElapsedTime
+    // with the elapsed time that was set in the time input.
     if (boatElapsedTime <= elapsedTime && boatElapsedTime > 0) {
       resultWithOriginalElapsedTime.elapsedTime = boatElapsedTime;
+      resultWithOriginalElapsedTime.originalElapsedTime = boatElapsedTime;
+
       storeRaceResults({
-        raceStartTime: raceTimerStartDate.getTime(),
-        raceElapsedTime: elapsedTime,
         boatResults: updatedElapsedTimeResults,
         raceState: raceState,
       }).then((response) => {
         if (response.ok) {
-          setViewBoatResultList(updatedElapsedTimeResults);
           updateResultList();
           setBoatElapsedTime(0);
           setBoatEditResult(null);

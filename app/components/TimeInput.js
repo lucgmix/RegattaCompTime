@@ -72,7 +72,6 @@ function TimeInput({ duration, onDurationChange }) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    backgroundColor: "#fff",
     padding: 24,
   },
 });

@@ -5,6 +5,7 @@ import Button from "./Button";
 import Screen from "./Screen";
 import Text from "../components/Text";
 import SectionHeader from "../components/SectionHeader";
+import defaultStyles from "../config/styles";
 
 function ElapsedTimeInputModal({
   boatEditResult,
@@ -20,16 +21,22 @@ function ElapsedTimeInputModal({
 
         <View style={styles.container}>
           <View style={styles.boatMetaContainer}>
-            <Text style={styles.boatMeta}>
+            <Text style={styles.boatMetaTitle}>
               {boatEditResult && boatEditResult.boat.boatName}
             </Text>
-            <Text style={styles.boatMeta}>
+            <Text style={styles.boatMetaType}>
               {boatEditResult && boatEditResult.boat.boatType}
             </Text>
-            <Text style={styles.timeHeader}>Elapsed Time</Text>
+            <Text style={styles.boatMetaRating}>
+              {`FS: ${boatEditResult && boatEditResult.boat.ratingFS}`}
+            </Text>
+            <Text style={styles.boatMetaRating}>
+              {`NFS: ${boatEditResult && boatEditResult.boat.ratingNFS}`}
+            </Text>
           </View>
 
           <View style={styles.timeInputContainer}>
+            <Text style={styles.timeHeader}>Elapsed Time</Text>
             <TimeInput
               duration={
                 (boatEditResult &&
@@ -38,12 +45,12 @@ function ElapsedTimeInputModal({
               }
               onDurationChange={onElapsedTimeChange}
             />
-            <Button
-              title={buttonLabel}
-              onPress={onModalButtonPress}
-              style={{ minWidth: 80 }}
-            ></Button>
           </View>
+          <Button
+            title={buttonLabel}
+            onPress={onModalButtonPress}
+            style={{ minWidth: 80, marginTop: 24 }}
+          ></Button>
         </View>
       </Screen>
     </Modal>
@@ -57,11 +64,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  boatMeta: {
-    fontSize: 22,
+  boatMetaTitle: {
+    fontSize: 28,
+  },
+  boatMetaType: {
+    fontSize: 18,
+  },
+  boatMetaRating: {
+    fontSize: 16,
   },
   boatMetaContainer: {
-    marginTop: 12,
+    marginTop: 14,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -74,6 +87,11 @@ const styles = StyleSheet.create({
   timeInputContainer: {
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: defaultStyles.colors.primary300,
+    borderRadius: 8,
+    padding: 12,
+    paddingBottom: 24,
+    marginTop: 12,
   },
 });
 

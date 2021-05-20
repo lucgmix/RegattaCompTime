@@ -4,7 +4,7 @@ import {
   getElapsedDiff,
   secondsToHms,
   getCorrectedTime,
-  timeToString,
+  millisecondsToDuration,
   formatDate,
 } from "../utils/phrf";
 
@@ -26,12 +26,12 @@ export function PhrfProvider({ children }) {
         getElapsedDiff,
         getCorrectedTime,
         secondsToHms,
-        timeToString,
         formatDate,
         isAlternatePHRF,
         setIsAlternatePHRF,
         ratingOverride,
         setRatingOverride,
+        millisecondsToDuration,
         // getSelectedRating,
       }}
     >
