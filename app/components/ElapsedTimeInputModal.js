@@ -14,8 +14,6 @@ function ElapsedTimeInputModal({
   onModalButtonPress,
   buttonLabel,
 }) {
-  console.log(boatEditResult);
-
   return (
     <Modal visible={isModalVisible} animationType="fade">
       <Screen>
