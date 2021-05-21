@@ -29,7 +29,9 @@ function ElapsedTimeInputModal({
             <Text style={styles.boatMetaType}>
               {boatEditResult && boatEditResult.boat.boatType}
             </Text>
-            {!boatEditResult.boat.useNFSRating ? (
+            {boatEditResult &&
+            boatEditResult.boat &&
+            !boatEditResult.boat.useNFSRating ? (
               <Text style={styles.boatMetaRating}>
                 {`Rating: ${boatEditResult && boatEditResult.boat.ratingFS}`}
               </Text>
