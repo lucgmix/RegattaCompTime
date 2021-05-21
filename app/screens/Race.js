@@ -475,6 +475,21 @@ function Race() {
         newStartDateMilliseconds
       );
 
+      let boatCorrectedElapsedTime;
+      const updatedBoatsElapsed = Array.from(viewBoatResultList).map(
+        (boatResult) => {
+          boatCorrectedElapsedTime = Math.round(
+            boatResult.originalStartTime -
+              newStartDateMilliseconds +
+              boatResult.originalElapsedTime
+          );
+          if (boatResult.elapsedTime !== 0 && boatCorrectedElapsedTime > 0) {
+            boatResult.elapsedTime = boatCorrectedElapsedTime;
+          }
+          return boatResult;
+        }
+      );
+
       const newElapsedTime = Math.abs(elapsedDiff + elapsedTime);
 
       let shortestElapsed = newElapsedTime;
@@ -488,25 +503,14 @@ function Race() {
 
       // Don't allow setting the start time to a value
       // past the shortest elapsed time of a boat that finished.
-      shortestElapsed += elapsedDiff;
-      // TODO: check this validation.
-      if (Math.abs(newElapsedTime) <= Math.abs(shortestElapsed)) {
+      if (
+        Math.abs(newElapsedTime) <= Math.abs(shortestElapsed) ||
+        boatCorrectedElapsedTime < 0
+      ) {
         setStartTimePromptVisible(true);
         setRaceTimerStartDate(raceTimerStartDate);
         return;
       }
-
-      const updatedBoatsElapsed = viewBoatResultList.map((boatResult) => {
-        if (boatResult.elapsedTime !== 0) {
-          const boatCorrectedElapsedTime = Math.round(
-            boatResult.originalStartTime -
-              newStartDateMilliseconds +
-              boatResult.originalElapsedTime
-          );
-          boatResult.elapsedTime = boatCorrectedElapsedTime;
-        }
-        return boatResult;
-      });
 
       storeRaceResults({
         boatResults: updatedBoatsElapsed,
@@ -547,9 +551,16 @@ function Race() {
 
     // Set the boat results elapsedTime and originalElapsedTime
     // with the elapsed time that was set in the time input.
-    if (boatElapsedTime <= elapsedTime && boatElapsedTime > 0) {
-      resultWithOriginalElapsedTime.elapsedTime = boatElapsedTime;
-      resultWithOriginalElapsedTime.originalElapsedTime = boatElapsedTime;
+    if (
+      Math.floor(boatElapsedTime) < Math.floor(elapsedTime) &&
+      boatElapsedTime > 0
+    ) {
+      const elapsedDiff = differenceInMilliseconds(
+        Math.abs(boatElapsedTime),
+        resultWithOriginalElapsedTime.originalElapsedTime
+      );
+      resultWithOriginalElapsedTime.elapsedTime = Math.abs(boatElapsedTime);
+      resultWithOriginalElapsedTime.originalElapsedTime += elapsedDiff;
 
       storeRaceResults({
         boatResults: updatedElapsedTimeResults,
@@ -566,7 +577,7 @@ function Race() {
     }
   };
 
-  const onElapsedTimeChanged = (time) => {
+  const onBoatElapsedTimeChanged = (time) => {
     setBoatElapsedTime(time * 1000);
   };
 
@@ -624,7 +635,7 @@ function Race() {
       <ElapsedTimeInputModal
         isModalVisible={editElapsedTimePromptVisible}
         boatEditResult={boatEditResult}
-        onElapsedTimeChange={onElapsedTimeChanged}
+        onElapsedTimeChange={onBoatElapsedTimeChanged}
         onModalButtonPress={handleBoatElapsedTimeEdit}
         buttonLabel="Done"
       />
