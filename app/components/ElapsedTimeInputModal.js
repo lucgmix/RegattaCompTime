@@ -14,6 +14,8 @@ function ElapsedTimeInputModal({
   onModalButtonPress,
   buttonLabel,
 }) {
+  console.log(boatEditResult);
+
   return (
     <Modal visible={isModalVisible} animationType="fade">
       <Screen>
@@ -27,12 +29,15 @@ function ElapsedTimeInputModal({
             <Text style={styles.boatMetaType}>
               {boatEditResult && boatEditResult.boat.boatType}
             </Text>
-            <Text style={styles.boatMetaRating}>
-              {`FS: ${boatEditResult && boatEditResult.boat.ratingFS}`}
-            </Text>
-            <Text style={styles.boatMetaRating}>
-              {`NFS: ${boatEditResult && boatEditResult.boat.ratingNFS}`}
-            </Text>
+            {!boatEditResult.boat.useNFSRating ? (
+              <Text style={styles.boatMetaRating}>
+                {`Rating: ${boatEditResult && boatEditResult.boat.ratingFS}`}
+              </Text>
+            ) : (
+              <Text style={styles.boatMetaRating}>
+                {`Rating: ${boatEditResult && boatEditResult.boat.ratingNFS}`}
+              </Text>
+            )}
           </View>
 
           <View style={styles.timeInputContainer}>
