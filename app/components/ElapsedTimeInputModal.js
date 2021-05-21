@@ -49,7 +49,7 @@ function ElapsedTimeInputModal({
           <Button
             title={buttonLabel}
             onPress={onModalButtonPress}
-            style={{ minWidth: 80, marginTop: 24 }}
+            buttonStyle={{ minWidth: 80, marginTop: 24 }}
           ></Button>
         </View>
       </Screen>
