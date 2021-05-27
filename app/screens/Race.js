@@ -512,10 +512,6 @@ function Race() {
       // past the shortest elapsed time of a boat that finished.
       if (Math.abs(newElapsedTime) < Math.abs(shortestElapsed)) {
         setStartTimePromptVisible(true);
-        // if (!isNaN(raceTimerStartDate)) {
-        // setRaceTimerStartDate(raceTimerStartDate);
-        //setRaceTimerStartDate(new Date(date.getTime()));
-        // }
         return;
       }
 
@@ -581,6 +577,8 @@ function Race() {
       storeRaceResults({
         boatResults: updatedElapsedTimeResults,
         raceState: raceState,
+        raceElapsedTime: elapsedTime,
+        raceStartTime: raceTimerStartDate,
       }).then((response) => {
         if (response.ok) {
           updateResultList();
