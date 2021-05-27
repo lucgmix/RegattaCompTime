@@ -50,9 +50,15 @@ function correctTimeSortResults(
   const notFinishItems = raceResults.filter((item) => item.rank === "-");
 
   if (raceState === RACE_STATE.FINISHED) {
-    let rankCount = finishItems.length + 1;
-    raceResults.map((item) => {
-      if (item && item.rank === "-") {
+    const sortedRaceResults = correctedTimeSortList(
+      finishItems,
+      isAlternatePHRF,
+      getCorrectedTime
+    );
+
+    let rankCount = 1;
+    sortedRaceResults.map((item) => {
+      if (item) {
         item.rank = rankCount;
         rankCount++;
         return item;
@@ -60,23 +66,33 @@ function correctTimeSortResults(
       return item;
     });
 
-    raceResults.sort((a, b) => {
-      return a.rank > b.rank ? 1 : -1;
-    });
     notFinishItems.map((item) => (item.rank = "-"));
+    return sortedRaceResults.concat(notFinishItems);
   } else {
-    raceResults.sort((a, b) => {
-      const boatACorrectedTime =
-        a.correctedTime ||
-        getCorrectedTime(elapsedTime, a.boat.rating, isAlternatePHRF);
-      const boatBCorrectedTime =
-        b.correctedTime ||
-        getCorrectedTime(elapsedTime, b.boat.rating, isAlternatePHRF);
-      return boatACorrectedTime > boatBCorrectedTime ? 1 : -1;
-    });
+    correctedTimeSortList(raceResults, isAlternatePHRF, getCorrectedTime);
   }
-
   return raceResults;
+}
+
+function correctedTimeSortList(
+  boatRaceResults,
+  isAlternatePHRF,
+  getCorrectedTime
+) {
+  const raceResults = Array.from(boatRaceResults);
+  return raceResults.sort((a, b) => {
+    const boatACorrectedTime = getCorrectedTime(
+      a.elapsedTime,
+      a.boat.rating,
+      isAlternatePHRF
+    );
+    const boatBCorrectedTime = getCorrectedTime(
+      b.elapsedTime,
+      b.boat.rating,
+      isAlternatePHRF
+    );
+    return boatACorrectedTime > boatBCorrectedTime ? 1 : -1;
+  });
 }
 
 const getRaceHelpString = (tag) => {
