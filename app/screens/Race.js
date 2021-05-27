@@ -44,7 +44,6 @@ function correctTimeSortResults(
   raceState
 ) {
   if (isEmpty(resultList)) return;
-
   const raceResults = Array.from(resultList);
   const finishItems = raceResults.filter((item) => item.rank !== "-");
   const notFinishItems = raceResults.filter((item) => item.rank === "-");
@@ -518,12 +517,13 @@ function Race() {
       let boatCorrectedElapsedTime;
       const updatedBoatsElapsed = Array.from(viewBoatResultList).map(
         (boatResult) => {
-          boatCorrectedElapsedTime = Math.abs(
-            Math.round(boatResult.originalElapsedTime + elapsedDiff)
-          );
-          boatResult.elapsedTime = boatCorrectedElapsedTime;
-          boatResult.elapsedTime = boatCorrectedElapsedTime;
-          boatResult.originalElapsedTime = boatCorrectedElapsedTime;
+          if (boatResult.elapsedTime !== 0) {
+            boatCorrectedElapsedTime = Math.abs(
+              Math.round(boatResult.originalElapsedTime + elapsedDiff)
+            );
+            boatResult.elapsedTime = boatCorrectedElapsedTime;
+            boatResult.originalElapsedTime = boatCorrectedElapsedTime;
+          }
           return boatResult;
         }
       );
