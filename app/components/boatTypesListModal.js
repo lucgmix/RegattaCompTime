@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Modal, View, StyleSheet } from "react-native";
 import Screen from "./Screen";
-import Button from "../components/Button";
+import Button from "./Button";
 import DropDownPicker from "react-native-dropdown-picker";
 import boatTypesList from "../config/boatTypesList.json";
 import defaultStyles from "../config/styles";
 import { useWindowDimensions } from "react-native";
-import Text from "../components/Text";
+import Text from "./Text";
 
 function BoatTypesListModal({
   buttonTitle,
