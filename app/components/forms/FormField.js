@@ -9,7 +9,7 @@ import Text from "../Text";
 
 import { Input } from "react-native-elements";
 
-function AppFormField({ label, name, width, value, ...otherProps }) {
+function AppFormField({ label, name, width, value, style, ...otherProps }) {
   const {
     setFieldTouched,
     setFieldValue,
@@ -25,7 +25,7 @@ function AppFormField({ label, name, width, value, ...otherProps }) {
   }, [value]);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <Text style={styles.label}>{label}</Text>
       <Input
         style={styles.input}

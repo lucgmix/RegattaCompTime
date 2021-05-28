@@ -16,7 +16,11 @@ function TimeInputModal({
       <Screen>
         <View style={styles.container}>
           <TimeInput duration={duration} onDurationChange={onDurationChange} />
-          <Button title={buttonLabel} onPress={onModalButtonPress}></Button>
+          <Button
+            title={buttonLabel}
+            onPress={onModalButtonPress}
+            style={{ minWidth: 80 }}
+          ></Button>
         </View>
       </Screen>
     </Modal>

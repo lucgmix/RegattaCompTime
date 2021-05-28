@@ -21,6 +21,7 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import DialogPrompt from "../components/DialogPrompt";
+import HelpDialogPrompt from "../components/HelpDialogPrompt";
 import BoatCreator, { BOAT_CREATOR_MODE } from "./BoatCreator";
 import { v4 as uuidv4 } from "uuid";
 
@@ -44,9 +45,8 @@ function sortBoatArray(boatList) {
 
 function Fleet() {
   const [selectedBoat, setSelectedBoat] = useState(null);
-  const [isCreateBoatModalVisible, setIsCreateBoatModalVisible] = useState(
-    false
-  );
+  const [isCreateBoatModalVisible, setIsCreateBoatModalVisible] =
+    useState(false);
   const [boatCreatorMode, setBoatCreatorMode] = useState();
   const [viewBoatList, setViewBoatList] = useState([]);
   const { storeBoatList, getBoatList, boatDataChanged } = useStorage();
@@ -165,6 +165,9 @@ function Fleet() {
 
   useEffect(() => {
     populateBoatList();
+    return () => {
+      setBoatList([]);
+    };
   }, [boatDataChanged]);
 
   return (
@@ -182,7 +185,7 @@ function Fleet() {
         />
       )}
 
-      <DialogPrompt
+      <HelpDialogPrompt
         title="Fleet Help"
         message={getFleetHelpString("message")}
         content={getFleetHelpString("content")}
@@ -279,7 +282,7 @@ function Fleet() {
         ListHeaderComponent={() => (
           <BoatListItem
             name="Boat"
-            type="Type"
+            type="Class"
             ratingFS="FS"
             ratingNFS="NFS"
             ratingOverride={ratingOverride}
@@ -299,6 +302,7 @@ function Fleet() {
                 name={item.boatName}
                 ratingFS={item.ratingFS}
                 ratingNFS={item.ratingNFS}
+                ratingError={item.ratingError}
                 type={item.boatType}
                 defaultRating={item.defaultRating}
                 ratingOverride={item.ratingOverride}

@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     backgroundColor: defaultStyles.colors.primary,
     paddingTop: 10,
     paddingBottom: 10,
-    minWidth: 80,
+    minWidth: 60,
   },
   text: {
     color: defaultStyles.colors.white,

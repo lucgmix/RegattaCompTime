@@ -18,6 +18,7 @@ import { useStorage } from "../context/StorageContext";
 import colors from "../config/colors";
 import TimeInpuModal from "../components/TimeInputModal";
 import DialogPrompt from "../components/DialogPrompt";
+import HelpDialogPrompt from "../components/HelpDialogPrompt";
 
 import { Entypo } from "@expo/vector-icons";
 import SectionHeader from "../components/SectionHeader";
@@ -108,7 +109,7 @@ function TimeDelta() {
     switch (tag) {
       case "message":
         textToStyle = {
-          sentence: `The {0} section is were you can compare the time difference between boats based on the race duration and the boat's handicap.\n\nBoats above the selected reference boat (negative time values) owe you time.\n\nThe selected reference boat owes time to boats below it (positive time values)`,
+          sentence: `The {0} section is were you can compare the time difference between boats based on the race duration and the boat's handicap.\n\nBoats above the selected reference boat (negative time values) owe you time.\n\nThe selected reference boat owes time to boats below it (positive time values).`,
           boldText: ["Time Delta"],
         };
         break;
@@ -133,10 +134,17 @@ function TimeDelta() {
         );
       }
     });
+    return () => {
+      setBoatSelectList([]);
+    };
   }, [boatDataChanged]);
 
   useEffect(() => {
     updateBoatList(selectedBoat);
+    return () => {
+      setSelectedBoat(null);
+      setBoatResultsList([]);
+    };
   }, [isAlternatePHRF, raceDuration, boatDataChanged]);
 
   // Scroll to selected boat result
@@ -146,7 +154,7 @@ function TimeDelta() {
 
   return (
     <Screen style={styles.container}>
-      <DialogPrompt
+      <HelpDialogPrompt
         title="Time Delta Help"
         message={getTimeDeltaHelpString("message")}
         content={getTimeDeltaHelpString("content")}
@@ -207,7 +215,7 @@ function TimeDelta() {
           <TimeDeltaListItem
             boatName="Boat"
             rating="Rating"
-            boatType="Type"
+            boatType="Class"
             correctedTime="Time Delta"
             isHeader
           />
@@ -224,6 +232,7 @@ function TimeDelta() {
               <TimeDeltaListItem
                 boatName={item.boat.boatName}
                 rating={item.boat.rating}
+                ratingError={item.boat.ratingError}
                 boatType={item.boat.boatType}
                 correctedTime={secondsToHms(item.diff)}
                 isSelectedItem={
@@ -267,6 +276,7 @@ const styles = StyleSheet.create({
   },
   setTimeButton: {
     marginRight: 8,
+    minWidth: 80,
   },
 });
 

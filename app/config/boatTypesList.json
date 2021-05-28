@@ -1,0 +1,433 @@
+{
+  "boatTypeList": [
+    {
+      "id": "1",
+      "boatType": "1947 Wooden Viking",
+      "ratingFS": "",
+      "ratingNFS": "315"
+    },
+    {
+      "id": "2",
+      "boatType": "Alberg 29",
+      "ratingFS": "253",
+      "ratingNFS": "267"
+    },
+    { "id": "3", "boatType": "Aloha 30", "ratingFS": "", "ratingNFS": "186" },
+    {
+      "id": "4",
+      "boatType": "Aloha 30 WK",
+      "ratingFS": "",
+      "ratingNFS": "188"
+    },
+    {
+      "id": "5",
+      "boatType": "B 32  Mod",
+      "ratingFS": "73",
+      "ratingNFS": "104"
+    },
+    {
+      "id": "6",
+      "boatType": "Beneteau 1st 28.5",
+      "ratingFS": "",
+      "ratingNFS": ""
+    },
+    {
+      "id": "7",
+      "boatType": "Beneteau 1st Class 10",
+      "ratingFS": "100",
+      "ratingNFS": "127"
+    },
+    {
+      "id": "8",
+      "boatType": "Beneteau 321",
+      "ratingFS": "",
+      "ratingNFS": "192"
+    },
+    {
+      "id": "9",
+      "boatType": "Beneteau 345SD",
+      "ratingFS": "143",
+      "ratingNFS": "165"
+    },
+    {
+      "id": "10",
+      "boatType": "Beneteau First 235",
+      "ratingFS": "",
+      "ratingNFS": ""
+    },
+    { "id": "11", "boatType": "Bluenose", "ratingFS": "", "ratingNFS": "239" },
+    {
+      "id": "12",
+      "boatType": "Bluenose 23",
+      "ratingFS": "252",
+      "ratingNFS": "260"
+    },
+    {
+      "id": "13",
+      "boatType": "Bombardier 7.6",
+      "ratingFS": "",
+      "ratingNFS": "192"
+    },
+    { "id": "14", "boatType": "C&C 115", "ratingFS": "66", "ratingNFS": "93" },
+    { "id": "15", "boatType": "C&C 24", "ratingFS": "227", "ratingNFS": "253" },
+    { "id": "16", "boatType": "C&C 25", "ratingFS": "211", "ratingNFS": "232" },
+    {
+      "id": "17",
+      "boatType": "C&C 25 Redline",
+      "ratingFS": "234",
+      "ratingNFS": "255"
+    },
+    {
+      "id": "18",
+      "boatType": "C&C 25-1",
+      "ratingFS": "212",
+      "ratingNFS": "234"
+    },
+    {
+      "id": "19",
+      "boatType": "C&C 25-1 OB",
+      "ratingFS": "209",
+      "ratingNFS": "228"
+    },
+    {
+      "id": "20",
+      "boatType": "C&C 25-2 IB",
+      "ratingFS": "232",
+      "ratingNFS": "254"
+    },
+    { "id": "21", "boatType": "C&C 26", "ratingFS": "212", "ratingNFS": "229" },
+    {
+      "id": "22",
+      "boatType": "C&C 27-2",
+      "ratingFS": "204",
+      "ratingNFS": "226"
+    },
+    {
+      "id": "23",
+      "boatType": "C&C 27-3",
+      "ratingFS": "188",
+      "ratingNFS": "209"
+    },
+    {
+      "id": "24",
+      "boatType": "C&C 27-4",
+      "ratingFS": "192",
+      "ratingNFS": "210"
+    },
+    {
+      "id": "25",
+      "boatType": "C&C 27-5",
+      "ratingFS": "195",
+      "ratingNFS": "214"
+    },
+    { "id": "26", "boatType": "C&C 29", "ratingFS": "", "ratingNFS": "222" },
+    {
+      "id": "27",
+      "boatType": "C&C 29-1",
+      "ratingFS": "194",
+      "ratingNFS": "220"
+    },
+    {
+      "id": "28",
+      "boatType": "C&C 29-2",
+      "ratingFS": "181",
+      "ratingNFS": "202"
+    },
+    { "id": "29", "boatType": "C&C 30", "ratingFS": "184", "ratingNFS": "202" },
+    { "id": "30", "boatType": "C&C 30-1", "ratingFS": "", "ratingNFS": "211" },
+    {
+      "id": "31",
+      "boatType": "C&C 30-1 SD",
+      "ratingFS": "183",
+      "ratingNFS": "207"
+    },
+    { "id": "32", "boatType": "C&C 30-2", "ratingFS": "", "ratingNFS": "198" },
+    {
+      "id": "33",
+      "boatType": "C&C 31 Corvette",
+      "ratingFS": "206",
+      "ratingNFS": "233"
+    },
+    {
+      "id": "34",
+      "boatType": "C&C 33 MK II",
+      "ratingFS": "135",
+      "ratingNFS": "153"
+    },
+    { "id": "35", "boatType": "C&C 35-1", "ratingFS": "", "ratingNFS": "168" },
+    {
+      "id": "36",
+      "boatType": "C&C Redwing 30",
+      "ratingFS": "",
+      "ratingNFS": "230"
+    },
+    { "id": "37", "boatType": "Cal 25", "ratingFS": "236", "ratingNFS": "257" },
+    {
+      "id": "38",
+      "boatType": "Catalina 22",
+      "ratingFS": "268",
+      "ratingNFS": "279"
+    },
+    {
+      "id": "39",
+      "boatType": "Catalina 30",
+      "ratingFS": "185",
+      "ratingNFS": "203"
+    },
+    {
+      "id": "40",
+      "boatType": "Catalina 320 WK",
+      "ratingFS": "",
+      "ratingNFS": "189"
+    },
+    {
+      "id": "41",
+      "boatType": "Catalina 34-2",
+      "ratingFS": "166",
+      "ratingNFS": "187"
+    },
+    {
+      "id": "42",
+      "boatType": "Chrysler 26",
+      "ratingFS": "",
+      "ratingNFS": "252"
+    },
+    {
+      "id": "43",
+      "boatType": "Columbia 8.7",
+      "ratingFS": "",
+      "ratingNFS": "244"
+    },
+    { "id": "44", "boatType": "CS 22", "ratingFS": "265", "ratingNFS": "289" },
+    { "id": "45", "boatType": "CS 27", "ratingFS": "228", "ratingNFS": "258" },
+    { "id": "46", "boatType": "CS 30", "ratingFS": "153", "ratingNFS": "173" },
+    { "id": "47", "boatType": "CS 33", "ratingFS": "149", "ratingNFS": "164" },
+    { "id": "48", "boatType": "CS 36 Merlin", "ratingFS": "", "ratingNFS": "" },
+    {
+      "id": "49",
+      "boatType": "Discovery 7.9 OB SD",
+      "ratingFS": "",
+      "ratingNFS": "246"
+    },
+    { "id": "50", "boatType": "DS 16 SD", "ratingFS": "", "ratingNFS": "315" },
+    {
+      "id": "51",
+      "boatType": "Etchells 22",
+      "ratingFS": "98",
+      "ratingNFS": "135"
+    },
+    {
+      "id": "52",
+      "boatType": "Evelyn 32-2",
+      "ratingFS": "102",
+      "ratingNFS": "126"
+    },
+    {
+      "id": "53",
+      "boatType": "Fabola Diva 39",
+      "ratingFS": "101",
+      "ratingNFS": "133"
+    },
+    {
+      "id": "54",
+      "boatType": "Goman Exp 35 SD",
+      "ratingFS": "119",
+      "ratingNFS": "138"
+    },
+    {
+      "id": "55",
+      "boatType": "Goman Express 20",
+      "ratingFS": "",
+      "ratingNFS": "284"
+    },
+    {
+      "id": "56",
+      "boatType": "Grampian 26 CB MOD",
+      "ratingFS": "",
+      "ratingNFS": "262"
+    },
+    {
+      "id": "57",
+      "boatType": "Grampian 28",
+      "ratingFS": "",
+      "ratingNFS": "235"
+    },
+    {
+      "id": "58",
+      "boatType": "Hunter 30-2",
+      "ratingFS": "",
+      "ratingNFS": "227"
+    },
+    { "id": "59", "boatType": "J/70", "ratingFS": "117", "ratingNFS": "153" },
+    { "id": "60", "boatType": "J-22", "ratingFS": "170", "ratingNFS": "189" },
+    { "id": "61", "boatType": "J-24", "ratingFS": "164", "ratingNFS": "181" },
+    { "id": "62", "boatType": "J-27", "ratingFS": "134", "ratingNFS": "157" },
+    { "id": "63", "boatType": "J-28", "ratingFS": "169", "ratingNFS": "191" },
+    { "id": "64", "boatType": "J-30", "ratingFS": "128", "ratingNFS": "149" },
+    { "id": "65", "boatType": "J-80", "ratingFS": "126", "ratingNFS": "154" },
+    {
+      "id": "66",
+      "boatType": "Jeanneau Fantasia",
+      "ratingFS": "",
+      "ratingNFS": "245"
+    },
+    { "id": "67", "boatType": "Kelt 7.6", "ratingFS": "", "ratingNFS": "244" },
+    {
+      "id": "68",
+      "boatType": "Kirby 25",
+      "ratingFS": "166",
+      "ratingNFS": "183"
+    },
+    {
+      "id": "69",
+      "boatType": "Laser 28",
+      "ratingFS": "127",
+      "ratingNFS": "146"
+    },
+    {
+      "id": "70",
+      "boatType": "MacGregor 26s (Classic)",
+      "ratingFS": "",
+      "ratingNFS": ""
+    },
+    {
+      "id": "71",
+      "boatType": "Mega 30",
+      "ratingFS": "162",
+      "ratingNFS": "182"
+    },
+    {
+      "id": "72",
+      "boatType": "Mini 12 Metre",
+      "ratingFS": "",
+      "ratingNFS": ""
+    },
+    {
+      "id": "73",
+      "boatType": "Mirage 24",
+      "ratingFS": "218",
+      "ratingNFS": "239"
+    },
+    {
+      "id": "74",
+      "boatType": "Mirage 25",
+      "ratingFS": "237",
+      "ratingNFS": "245"
+    },
+    {
+      "id": "75",
+      "boatType": "Mirage 27",
+      "ratingFS": "237",
+      "ratingNFS": "252"
+    },
+    {
+      "id": "76",
+      "boatType": "Mirage 27-2",
+      "ratingFS": "216",
+      "ratingNFS": "243"
+    },
+    { "id": "77", "boatType": "Mirage 29", "ratingFS": "", "ratingNFS": "217" },
+    {
+      "id": "78",
+      "boatType": "Mirage 30",
+      "ratingFS": "190",
+      "ratingNFS": "208"
+    },
+    {
+      "id": "79",
+      "boatType": "Niagara 26",
+      "ratingFS": "184",
+      "ratingNFS": "202"
+    },
+    {
+      "id": "80",
+      "boatType": "Niagara 26 OB",
+      "ratingFS": "",
+      "ratingNFS": "200"
+    },
+    {
+      "id": "81",
+      "boatType": "Niagara 35",
+      "ratingFS": "194",
+      "ratingNFS": "215"
+    },
+    {
+      "id": "82",
+      "boatType": "Nonsuch 26",
+      "ratingFS": "",
+      "ratingNFS": "251"
+    },
+    { "id": "83", "boatType": "Roue 20", "ratingFS": "", "ratingNFS": "221" },
+    {
+      "id": "84",
+      "boatType": "Sabre 32 KCB",
+      "ratingFS": "",
+      "ratingNFS": "199"
+    },
+    {
+      "id": "85",
+      "boatType": "San Juan 24",
+      "ratingFS": "211",
+      "ratingNFS": "228"
+    },
+    {
+      "id": "86",
+      "boatType": "Sandpiper 565",
+      "ratingFS": "",
+      "ratingNFS": ""
+    },
+    { "id": "87", "boatType": "Shark", "ratingFS": "218", "ratingNFS": "231" },
+    { "id": "88", "boatType": "Soling", "ratingFS": "140", "ratingNFS": "182" },
+    { "id": "89", "boatType": "Sonic 23", "ratingFS": "", "ratingNFS": "261" },
+    { "id": "90", "boatType": "Star", "ratingFS": "", "ratingNFS": "" },
+    {
+      "id": "91",
+      "boatType": "Tanzer 22",
+      "ratingFS": "222",
+      "ratingNFS": "242"
+    },
+    {
+      "id": "92",
+      "boatType": "Tanzer 25 ",
+      "ratingFS": "174",
+      "ratingNFS": "194"
+    },
+    {
+      "id": "93",
+      "boatType": "Tanzer 26",
+      "ratingFS": "220",
+      "ratingNFS": "243"
+    },
+    { "id": "94", "boatType": "Tanzer 29", "ratingFS": "", "ratingNFS": "208" },
+    {
+      "id": "95",
+      "boatType": "Tanzer 29 Mod",
+      "ratingFS": "",
+      "ratingNFS": "222"
+    },
+    {
+      "id": "96",
+      "boatType": "Tanzer 7.5",
+      "ratingFS": "",
+      "ratingNFS": "246"
+    },
+    {
+      "id": "97",
+      "boatType": "Tanzer 8.5",
+      "ratingFS": "",
+      "ratingNFS": "242"
+    },
+    {
+      "id": "98",
+      "boatType": "Viking 28",
+      "ratingFS": "189",
+      "ratingNFS": "208"
+    },
+    {
+      "id": "99",
+      "boatType": "Viper 640",
+      "ratingFS": "107",
+      "ratingNFS": "125"
+    }
+  ]
+}

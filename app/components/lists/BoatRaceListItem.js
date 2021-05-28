@@ -17,10 +17,13 @@ function BoatRaceListItem({
   rank = "-",
   name,
   boatType,
+  rating,
+  ratingError,
   correctedTime,
   elapsedTime,
   isHeader,
   onFinishClick,
+  onEditClick,
   renderMode,
 }) {
   const finishDisabled =
@@ -58,7 +61,7 @@ function BoatRaceListItem({
             isHeader && headerStyles.label,
           ]}
         >
-          {isHeader ? `${name}\n${boatType}` : name}
+          {isHeader ? `${name}\n${boatType} / ${rating}` : name}
         </Text>
         {!isHeader && (
           <Text
@@ -69,7 +72,8 @@ function BoatRaceListItem({
               isHeader && headerStyles.label,
             ]}
           >
-            {boatType}
+            {`${boatType} / `}
+            <Text style={styles.rating(ratingError)}>{rating}</Text>
           </Text>
         )}
       </View>
@@ -95,13 +99,26 @@ function BoatRaceListItem({
           </Text>
         )}
       </View>
-      {!isHeader && (
+
+      {(!isHeader && renderMode === RACE_ITEM_MODE.RACING) ||
+      renderMode === RACE_ITEM_MODE.DEFAULT ||
+      renderMode === RACE_ITEM_MODE.BOAT_FINISHED ||
+      renderMode === RACE_ITEM_MODE.BOAT_DNF ? (
         <Button
           disabled={finishDisabled}
           buttonStyle={styles.finishButton}
           onPress={onFinishClick}
           title="Finish"
         ></Button>
+      ) : (
+        !isHeader &&
+        renderMode === RACE_ITEM_MODE.RACE_FINISHED && (
+          <Button
+            buttonStyle={styles.finishButton}
+            onPress={onEditClick}
+            title="Edit..."
+          ></Button>
+        )
       )}
     </View>
   );
@@ -122,11 +139,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   }),
   rank: {
-    flex: 0.33,
+    flex: 0.28,
     alignSelf: "center",
     fontWeight: "700",
   },
-  nameContainer: { flex: 0.7 },
+  nameContainer: { flex: 1 },
   name: {
     fontWeight: "700",
     flex: 1,
@@ -136,8 +153,17 @@ const styles = StyleSheet.create({
     color: colors.subText,
   },
   timeContainer: {
-    flex: 0.56,
+    flex: 0.5,
     justifyContent: "space-between",
+  },
+  rating(ratingError) {
+    return {
+      fontSize: 13,
+      fontWeight: ratingError ? "700" : "400",
+      color: ratingError
+        ? defaultStyles.colors.darkRed
+        : defaultStyles.colors.text,
+    };
   },
   correctedTime: {
     fontWeight: "700",
@@ -155,23 +181,19 @@ const headerStyles = StyleSheet.create({
     backgroundColor: defaultStyles.colors.primary,
     flex: 1,
   },
-  nameContainer: { flex: 0.7 },
+  nameContainer: { flex: 0.9 },
   label: {
     color: colors.white,
     fontWeight: "600",
+    fontSize: 14,
   },
   timeContainer: {
-    flex: 1.03,
+    flex: 0.82,
     alignItems: "flex-start",
   },
   correctedTime: {
     fontWeight: "600",
     color: colors.white,
-  },
-  rank: {
-    fontSize: 14,
-  },
-  name: {
     fontSize: 14,
   },
 });

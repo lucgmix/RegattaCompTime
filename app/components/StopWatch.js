@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import Button from "../components/Button";
 import Text from "../components/Text";
-import { timeToString, formatDate } from "../utils/phrf";
+import { formatDate, millisecondsToDuration } from "../utils/phrf";
 import colors from "../config/colors";
 import { Entypo } from "@expo/vector-icons";
 
@@ -31,7 +31,9 @@ function StopWatch({
   date,
 }) {
   const [timerInterval, setTimerInterval] = useState(0);
-  const [timeDisplay, setTimeDisplay] = useState(timeToString(startTimeOffset));
+  const [timeDisplay, setTimeDisplay] = useState(
+    millisecondsToDuration(startTimeOffset)
+  );
   const [currentDate, setCurrentDate] = useState(date);
   const [status, setStatus] = useState();
 
@@ -43,7 +45,7 @@ function StopWatch({
       setInterval(function printTime() {
         elapsedTime = Date.now() - startTime;
         onElapsedChange(elapsedTime);
-        setTimeDisplay(timeToString(elapsedTime));
+        setTimeDisplay(millisecondsToDuration(elapsedTime));
       }, 100)
     );
   };
@@ -60,7 +62,7 @@ function StopWatch({
     clearInterval(timerInterval);
     startTime = 0;
     elapsedTime = 0;
-    setTimeDisplay(timeToString(0));
+    setTimeDisplay(millisecondsToDuration(0));
   };
 
   const isCurrentDateInThePast = () => {
@@ -87,7 +89,7 @@ function StopWatch({
 
   useEffect(() => {
     if (startTimeOffset) {
-      setTimeDisplay(timeToString(startTimeOffset));
+      setTimeDisplay(millisecondsToDuration(startTimeOffset));
     }
   }, [startTimeOffset]);
 

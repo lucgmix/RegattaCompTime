@@ -25,11 +25,8 @@ const SECTIONS = {
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
-  const {
-    getPHRFIsAlternateFormula,
-    getRatingOverride,
-    storeValueForKey,
-  } = useStorage();
+  const { getPHRFIsAlternateFormula, getRatingOverride, storeValueForKey } =
+    useStorage();
   const { setIsAlternatePHRF, setRatingOverride } = usePHRF();
 
   const saveCurrentScreen = (screenName) => {
@@ -86,22 +83,6 @@ const AppNavigator = () => {
         }}
         listeners={({ navigation, route }) => ({
           tabPress: (e) => {
-            console.log("navigation", navigation);
-            saveCurrentScreen(route.name);
-          },
-        })}
-      />
-      <Tab.Screen
-        name={SECTIONS.RACE.name}
-        component={Race}
-        options={{
-          tabBarIcon: ({ size, color }) => (
-            <Feather name="flag" size={size} color={color} />
-          ),
-          title: SECTIONS.RACE.title,
-        }}
-        listeners={({ navigation, route }) => ({
-          tabPress: (e) => {
             saveCurrentScreen(route.name);
           },
         })}
@@ -121,7 +102,21 @@ const AppNavigator = () => {
           },
         })}
       />
-
+      <Tab.Screen
+        name={SECTIONS.RACE.name}
+        component={Race}
+        options={{
+          tabBarIcon: ({ size, color }) => (
+            <Feather name="flag" size={size} color={color} />
+          ),
+          title: SECTIONS.RACE.title,
+        }}
+        listeners={({ navigation, route }) => ({
+          tabPress: (e) => {
+            saveCurrentScreen(route.name);
+          },
+        })}
+      />
       <Tab.Screen
         name={SECTIONS.SETTINGS.name}
         component={Settings}

@@ -128,32 +128,14 @@ export function millisecondsToHms(timeInMiliseconds) {
   return `${s}:${m}:${h}`;
 }
 
-const millisecondsToDuration = (milliseconds) => {
+export function millisecondsToDuration(milliseconds) {
   const seconds = Math.floor(milliseconds / 1000) % 60;
   const minutes = Math.floor((milliseconds / (1000 * 60)) % 60);
   const hours = Math.floor((milliseconds / (1000 * 60 * 60)) % 24);
 
-  return `${hours}:${minutes}:${seconds}`;
-};
-
-export function timeToString(time) {
-  const diffInHrs = time / 3600000;
-  const hh = Math.floor(diffInHrs);
-
-  const diffInMin = (diffInHrs - hh) * 60;
-  const mm = Math.floor(diffInMin);
-
-  const diffInSec = (diffInMin - mm) * 60;
-  const ss = Math.floor(diffInSec);
-
-  const diffInMs = (diffInSec - ss) * 100;
-  const ms = Math.floor(diffInMs);
-
-  const formattedHH = hh.toString().padStart(2, "0");
-  const formattedMM = mm.toString().padStart(2, "0");
-  const formattedSS = ss.toString().padStart(2, "0");
-
-  return `${formattedHH}:${formattedMM}:${formattedSS}`;
+  return `${hours.toString().padStart(2, "0")}:${minutes
+    .toString()
+    .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 }
 
 export function formatDate(date, showZeroSeconds = false, showAmPm = false) {
