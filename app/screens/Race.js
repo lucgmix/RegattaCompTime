@@ -38,7 +38,6 @@ function ratingSortResults(resultList) {
 
 function correctTimeSortResults(
   resultList,
-  elapsedTime,
   isAlternatePHRF,
   getCorrectedTime,
   raceState
@@ -183,7 +182,6 @@ function Race() {
             setViewBoatResultList(
               correctTimeSortResults(
                 boats,
-                elapsedTime,
                 isAlternatePHRF,
                 getCorrectedTime,
                 RACE_STATE.FINISHED
@@ -251,7 +249,6 @@ function Race() {
       setViewBoatResultList(
         correctTimeSortResults(
           getUpdatedResultRanking(updatedBoatResultList),
-          elapsedTime,
           isAlternatePHRF,
           getCorrectedTime,
           raceState
@@ -383,7 +380,6 @@ function Race() {
       // Update all boats with elapedTime and corrected time and save
       sortedBoatResultList = correctTimeSortResults(
         allBoatResultList,
-        noMillisecondsElapsedTime,
         isAlternatePHRF,
         getCorrectedTime,
         RACE_STATE.FINISHED

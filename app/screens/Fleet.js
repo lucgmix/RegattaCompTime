@@ -59,7 +59,7 @@ function Fleet() {
 
   const updateFleetWithBoat = () => {
     setIsCreateBoatModalVisible(false);
-    populateBoatList();
+    updateBoatList();
   };
 
   const toggleDeleteConfirmPrompt = () => {
