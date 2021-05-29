@@ -164,8 +164,14 @@ function Race() {
         if (ok && !isEmpty(resultsData.boatResults)) {
           const updatedBoatsResultsData = resultsData.boatResults.map(
             (result) => {
-              result.boat = boatData.find((boat) => boat.id === result.boat.id);
-              return result;
+              const updatedBoat = boatData.find(
+                (boat) => boat.id === result.boat.id
+              );
+              if (updatedBoat) {
+                result.boat = updatedBoat;
+                return result;
+              }
+              return null;
             }
           );
 
