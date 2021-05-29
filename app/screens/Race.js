@@ -162,18 +162,21 @@ function Race() {
     getBoatList().then(({ boatData }) => {
       getRaceResults().then(({ ok, resultsData }) => {
         if (ok && !isEmpty(resultsData.boatResults)) {
-          const updatedBoatsResultsData = resultsData.boatResults.map(
-            (result) => {
-              const updatedBoat = boatData.find(
-                (boat) => boat.id === result.boat.id
-              );
-              if (updatedBoat) {
-                result.boat = updatedBoat;
-                return result;
+          const updatedBoatsResultsData = boatData.reduce((acc, boat) => {
+            const updatedBoatResult = resultsData.boatResults.find(
+              (boatResult) => {
+                return boatResult.boat.id === boat.id;
               }
-              return null;
+            );
+
+            if (updatedBoatResult) {
+              updatedBoatResult.boat = boat;
+              acc.push(updatedBoatResult);
+              return acc;
+            } else {
+              return { boat, rank: "-", elapsedTime: 0, correctedTime: 0 };
             }
-          );
+          }, []);
 
           const boats = updatedBoatsResultsData || viewBoatResultList;
           if (resultsData.raceState && Array.isArray(boats)) {
@@ -234,6 +237,7 @@ function Race() {
             return result;
           }
         });
+
         // We have a result so we update the boat and the results data.
         if (resultOfBoat) {
           const newResult = {
