@@ -2,6 +2,7 @@
   "expo": {
     "name": "Regatta Comp Time",
     "description": "Sailboat Racing Handicap Comparator",
+    "developer": "Luc Grégoire",
     "slug": "RegattaCompTime",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -14,9 +15,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },

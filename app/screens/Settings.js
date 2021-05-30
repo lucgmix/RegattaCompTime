@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { Divider } from "react-native-elements";
 
@@ -12,6 +12,7 @@ import PhrfAlternateRadioGroup from "../components/PhrfAlternateRadioGroup";
 import PhrfRatingOverrideRadioGroup from "../components/PhrfRatingOverrideRadioGroup";
 
 import { RATING_OVERRIDE, PHRF_FORMULA } from "../config/constants";
+import About from "../components/About";
 
 function Settings(props) {
   const {
@@ -104,6 +105,8 @@ function Settings(props) {
           value={alternatePHRFValue}
           onUpdateSelection={updatePhrfFormula}
         />
+        <Divider style={styles.divider} />
+        <About />
       </ScrollView>
     </Screen>
   );
