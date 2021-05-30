@@ -47,7 +47,7 @@ function RaceTimer({
   );
 
   const onChange = (event, selectedDate) => {
-    // setShow(Platform.OS === "ios");
+    setShow(Platform.OS === "ios");
     if (selectedDate) {
       setDate(selectedDate);
     }
@@ -62,8 +62,8 @@ function RaceTimer({
   };
 
   const handleTimePicker = (date) => {
-    setDate(date);
     setShow(false);
+    setDate(date);
     onTimeChange(date);
   };
 
