@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import TimeDelta from "../screens/TimeDelta";
 import Race from "../screens/Race";
@@ -13,6 +13,8 @@ import { useStorage } from "../context/StorageContext";
 import { Entypo, Feather } from "@expo/vector-icons";
 import { CURRENT_SCREEN_KEY } from "../config/constants";
 
+import { ModalContext } from "../context/AppModalContext";
+
 const SECTIONS = {
   RACE: { name: "race", title: "Race" },
   TIMEDELTA: { name: "timedelta", title: "Time Delta" },
@@ -26,6 +28,7 @@ const AppNavigator = () => {
   const { getPHRFIsAlternateFormula, getRatingOverride, storeValueForKey } =
     useStorage();
   const { setIsAlternatePHRF, setRatingOverride } = usePHRF();
+  const { showAppModal } = useContext(ModalContext);
 
   const saveCurrentScreen = (screenName) => {
     storeValueForKey(CURRENT_SCREEN_KEY, screenName);
@@ -43,6 +46,9 @@ const AppNavigator = () => {
         setRatingOverride(result.data);
       }
     });
+
+    //TODO: Store and restore value for showing modal.
+    //showAppModal(true);
   }, []);
 
   return (

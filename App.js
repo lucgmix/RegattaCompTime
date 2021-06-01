@@ -12,6 +12,8 @@ import {
 //For full spash screen implementation,
 //See https://medium.com/@darshancc23/how-to-add-a-splash-screen-on-react-native-and-expo-dddfd44772f3
 
+import { ModalProvider } from "./app/context/AppModalContext";
+
 import { LogBox } from "react-native";
 import _ from "lodash";
 
@@ -38,7 +40,9 @@ export default function App() {
     <StorageDataContext>
       <PhrfProvider>
         <NavigationContainer theme={navigationTheme}>
-          <AppNavigator />
+          <ModalProvider>
+            <AppNavigator />
+          </ModalProvider>
         </NavigationContainer>
       </PhrfProvider>
     </StorageDataContext>
