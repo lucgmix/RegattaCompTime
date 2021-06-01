@@ -5,7 +5,6 @@ import Race from "../screens/Race";
 import Settings from "../screens/Settings";
 import Fleet from "../screens/Fleet";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { View } from "react-native";
 
 import { usePHRF } from "../context/PhrfContext";
 import { useStorage } from "../context/StorageContext";
@@ -15,7 +14,6 @@ import { Entypo, Feather } from "@expo/vector-icons";
 import { CURRENT_SCREEN_KEY } from "../config/constants";
 
 const SECTIONS = {
-  BLANK: { name: "blank", title: "blank" },
   RACE: { name: "race", title: "Race" },
   TIMEDELTA: { name: "timedelta", title: "Time Delta" },
   FLEET: { name: "fleet", title: "Fleet" },
@@ -49,8 +47,7 @@ const AppNavigator = () => {
 
   return (
     <Tab.Navigator
-      initialRouteName={SECTIONS.BLANK.name}
-      hiddenTabs={[SECTIONS.BLANK.name]}
+      initialRouteName={SECTIONS.FLEET.name}
       tabBarOptions={{
         showLabel: true,
         showIcon: true,
@@ -59,15 +56,7 @@ const AppNavigator = () => {
           fontSize: 13,
         },
       }}
-      screenOptions={({ route }) => ({
-        tabBarButton: [SECTIONS.BLANK.name].includes(route.name)
-          ? () => {
-              return null;
-            }
-          : undefined,
-      })}
     >
-      <Tab.Screen name={SECTIONS.BLANK.name} component={BlankComponent} />
       <Tab.Screen
         name={SECTIONS.FLEET.name}
         component={Fleet}
@@ -135,25 +124,5 @@ const AppNavigator = () => {
     </Tab.Navigator>
   );
 };
-
-function BlankComponent({ navigation }) {
-  const { getValueForKey } = useStorage();
-
-  const jumpToLastUsedScreen = () => {
-    getValueForKey(CURRENT_SCREEN_KEY).then((response) => {
-      if (response.ok && response.data) {
-        navigation.jumpTo(response.data);
-      } else {
-        navigation.jumpTo(SECTIONS.FLEET.name);
-      }
-    });
-  };
-
-  useEffect(() => {
-    jumpToLastUsedScreen();
-  }, []);
-
-  return <View />;
-}
 
 export default AppNavigator;
