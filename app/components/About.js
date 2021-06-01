@@ -11,9 +11,10 @@ function About() {
       <Text style={([defaultStyles.text], styles.title)}>About</Text>
       <View style={styles.textContainer}>
         <Text style={styles.text}>Name: {Constants.manifest.name}</Text>
-        <Text style={styles.text}>
+        {/* <Text style={styles.text}>
           App Version: {Constants.manifest.version}
-        </Text>
+        </Text> */}
+        <Text style={styles.text}>App Version: Beta 1.0</Text>
         <Text style={styles.text}>
           Sdk Version: {Constants.manifest.sdkVersion}
         </Text>

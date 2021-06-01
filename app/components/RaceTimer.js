@@ -97,7 +97,7 @@ function RaceTimer({
           <Button
             disabled={startTimeDisabled}
             buttonStyle={styles.button}
-            title={editMode ? "Edit Start Time..." : "Start Race..."}
+            title={editMode ? "Edit Start Time..." : "Start Time..."}
             onPress={handleShowTimepicker}
           />
           {!editMode && (

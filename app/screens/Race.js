@@ -742,7 +742,6 @@ function Race() {
         editMode={raceState === RACE_STATE.FINISHED}
       />
       <StopWatch
-        startLabel="Start Race"
         stopLabel="Finish Race"
         resetLabel="Clear Race"
         startTimeOffset={stopWatchStartTime}
