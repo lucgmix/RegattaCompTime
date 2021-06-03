@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, Dimensions, View, ScrollView, StyleSheet } from "react-native";
 import { Overlay } from "react-native-elements";
 import Text from "./Text";
@@ -13,6 +13,8 @@ import {
   Feather,
 } from "@expo/vector-icons";
 import CheckBox from "react-native-check-box";
+import { useStorage } from "../context/StorageContext";
+import { WELCOME_SCREEN_KEY } from "../config/constants";
 
 const appIcon = require("../assets/logo.png");
 const iconSize = 24;
@@ -21,15 +23,26 @@ function WelcomeDialogPrompt({
   title,
   positive,
   onPositiveButtonPress,
+  onDontShowAgainClick,
   isVisible = false,
 }) {
   const [dontShowAgainChecked, setDontShowAgainChecked] = useState(false);
+  const { getValueForKey } = useStorage();
 
   const windowWidth = Dimensions.get("window").width - 160;
 
   const handleDontShowAgain = () => {
     setDontShowAgainChecked(!dontShowAgainChecked);
+    onDontShowAgainClick(!dontShowAgainChecked);
   };
+
+  useEffect(() => {
+    getValueForKey(WELCOME_SCREEN_KEY).then((response) => {
+      if (response.ok && response.data) {
+        setDontShowAgainChecked(response.data);
+      }
+    });
+  }, []);
 
   return (
     <Overlay isVisible={isVisible}>
@@ -166,10 +179,10 @@ const styles = StyleSheet.create({
     color: defaultStyles.colors.primary,
     fontWeight: "600",
     fontSize: 18,
+    marginBottom: 8,
   },
   message: { marginTop: 16 },
   smallLogo: {
-    marginTop: 8,
     marginBottom: 8,
     width: 70,
     height: 70,

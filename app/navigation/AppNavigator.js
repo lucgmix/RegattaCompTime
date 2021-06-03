@@ -8,11 +8,10 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { usePHRF } from "../context/PhrfContext";
 import { useStorage } from "../context/StorageContext";
+import { CURRENT_SCREEN_KEY, WELCOME_SCREEN_KEY } from "../config/constants";
 
 //Icons https://icons.expo.fyi/
 import { Entypo, Feather } from "@expo/vector-icons";
-import { CURRENT_SCREEN_KEY } from "../config/constants";
-
 import { ModalContext } from "../context/AppModalContext";
 
 const SECTIONS = {
@@ -25,8 +24,12 @@ const SECTIONS = {
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
-  const { getPHRFIsAlternateFormula, getRatingOverride, storeValueForKey } =
-    useStorage();
+  const {
+    getPHRFIsAlternateFormula,
+    getRatingOverride,
+    storeValueForKey,
+    getValueForKey,
+  } = useStorage();
   const { setIsAlternatePHRF, setRatingOverride } = usePHRF();
   const { showAppModal } = useContext(ModalContext);
 
@@ -47,8 +50,13 @@ const AppNavigator = () => {
       }
     });
 
-    //TODO: Store and restore value for showing modal.
-    showAppModal(true);
+    getValueForKey(WELCOME_SCREEN_KEY).then((response) => {
+      if (response.ok && response.data) {
+        showAppModal(!response.data);
+      } else {
+        showAppModal(true);
+      }
+    });
   }, []);
 
   return (
