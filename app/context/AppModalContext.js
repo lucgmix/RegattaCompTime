@@ -23,7 +23,7 @@ const ModalProvider = ({ children }) => {
   return (
     <Provider value={{ modalVisible, showAppModal }}>
       <WelcomeDialogPrompt
-        title="Welcome to Regatte Comp Time"
+        title="Welcome to Regatta Comp Time"
         positive="Got it"
         isVisible={modalVisible}
         onPositiveButtonPress={() => showAppModal(false)}
