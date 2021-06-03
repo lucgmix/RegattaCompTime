@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     color: defaultStyles.colors.primary,
     fontWeight: "600",
     fontSize: 18,
+    marginBottom: 8,
   },
   message: { marginTop: 16 },
 });
