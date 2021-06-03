@@ -48,7 +48,7 @@ const AppNavigator = () => {
     });
 
     //TODO: Store and restore value for showing modal.
-    //showAppModal(true);
+    showAppModal(true);
   }, []);
 
   return (

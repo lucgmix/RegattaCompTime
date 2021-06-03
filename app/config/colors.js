@@ -25,4 +25,5 @@ export default {
   orange: "orange",
   darkRed: "#db0000",
   transparent: "#00000000",
+  semiTransparentGray: "#0c0c0caa",
 };
