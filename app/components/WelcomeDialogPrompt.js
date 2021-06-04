@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image, Dimensions, View, ScrollView, StyleSheet } from "react-native";
+import { Animated, Image, View, ScrollView, StyleSheet } from "react-native";
 import { Overlay } from "react-native-elements";
 import Text from "./Text";
 import Button from "./Button";
@@ -29,8 +29,6 @@ function WelcomeDialogPrompt({
   const [dontShowAgainChecked, setDontShowAgainChecked] = useState(false);
   const { getValueForKey } = useStorage();
 
-  const windowWidth = Dimensions.get("window").width - 160;
-
   const handleDontShowAgain = () => {
     setDontShowAgainChecked(!dontShowAgainChecked);
     onDontShowAgainClick(!dontShowAgainChecked);
@@ -45,7 +43,7 @@ function WelcomeDialogPrompt({
   }, []);
 
   return (
-    <Overlay isVisible={isVisible}>
+    <Overlay isVisible={isVisible} overlayStyle={styles.overlay}>
       <Screen>
         <View style={styles.container}>
           <Image style={styles.smallLogo} source={appIcon} />
@@ -70,7 +68,6 @@ function WelcomeDialogPrompt({
                 }
                 iconLabel="Fleet"
                 message={`The Fleet section is where you manage the boats that will be used in the Time Delta and Race sections.`}
-                width={windowWidth}
               />
 
               <SectionHelp
@@ -83,7 +80,6 @@ function WelcomeDialogPrompt({
                 }
                 iconLabel="Time Delta"
                 message={`The Time Delta section is were you can compare the compensated time difference between boats in the Fleet based on the race duration of your boat.`}
-                width={windowWidth}
               />
 
               <SectionHelp
@@ -96,7 +92,6 @@ function WelcomeDialogPrompt({
                 }
                 iconLabel="Race"
                 message={`The Race section allows you to track realtime results (Corrected Time and Elapsed race time) of boats in the Fleet.`}
-                width={windowWidth}
               />
 
               <SectionHelp
@@ -109,7 +104,6 @@ function WelcomeDialogPrompt({
                 }
                 iconLabel="Settings"
                 message={`The Settings section allows you to apply global parameters that will affect all sections.`}
-                width={windowWidth}
               />
               <SectionHelp
                 icon={
@@ -120,7 +114,6 @@ function WelcomeDialogPrompt({
                   />
                 }
                 message={`Displays the Help of a Section. `}
-                width={windowWidth}
               />
             </ScrollView>
           </Dialog.ScrollArea>
@@ -131,7 +124,7 @@ function WelcomeDialogPrompt({
                 flexDirection: "row",
                 justifyContent: "center",
                 alignItems: "center",
-                padding: 4,
+                padding: 8,
                 marginTop: 16,
               }}
             >
@@ -160,7 +153,6 @@ function WelcomeDialogPrompt({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginBottom: 8,
     backgroundColor: defaultStyles.colors.transparent,
   },
   scrollviewContainer: { paddingBottom: 16 },
@@ -171,19 +163,22 @@ const styles = StyleSheet.create({
     marginRight: 16,
     backgroundColor: defaultStyles.colors.transparent,
   },
-  button: { minWidth: 100, margin: 4, marginTop: 16 },
-  buttonContainer: { justifyContent: "center", alignItems: "center" },
+  button: { minWidth: 100, marginTop: 16, marginBottom: 16 },
+  buttonContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
   title: {
     justifyContent: "center",
     alignSelf: "center",
     color: defaultStyles.colors.primary,
     fontWeight: "600",
-    fontSize: 18,
-    marginBottom: 8,
+    fontSize: 20,
+    marginBottom: 4,
   },
   message: { marginTop: 16 },
   smallLogo: {
-    marginBottom: 8,
+    marginBottom: 4,
     width: 70,
     height: 70,
     resizeMode: "contain",
@@ -195,6 +190,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
   },
+  overlay: {
+    marginLeft: 8,
+    marginRight: 8,
+    marginBottom: Platform.OS === "ios" ? 80 : 56,
+    marginTop: Platform.OS === "ios" ? 48 : 24,
+  },
 });
 
 export default WelcomeDialogPrompt;
@@ -203,7 +204,7 @@ export function SectionHelp({ icon, iconLabel, message, width }) {
   const iconSize = 28;
 
   return (
-    <View style={sectionStyles.container(width)}>
+    <View style={sectionStyles.container}>
       <View style={sectionStyles.iconContainer}>
         {icon}
         <Text style={sectionStyles.iconLabel}>{iconLabel}</Text>
@@ -214,14 +215,12 @@ export function SectionHelp({ icon, iconLabel, message, width }) {
 }
 
 const sectionStyles = StyleSheet.create({
-  container(width) {
-    return {
-      flexDirection: "row",
-      justifyContent: "flex-start",
-      alignItems: "flex-start",
-      width: width,
-      marginTop: 8,
-    };
+  container: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    marginTop: 8,
+    marginRight: 116,
   },
   iconContainer: {
     flexDirection: "row",

@@ -13,9 +13,11 @@ function SectionHeader({ title, onHelpPress, helpVisible = true }) {
       {helpVisible && (
         <View style={styles.helpButton}>
           <Button
-            type="clear"
             onPress={onHelpPress}
-            buttonStyle={{ justifyContent: "flex-end" }}
+            buttonStyle={{
+              justifyContent: "flex-end",
+              backgroundColor: defaultStyles.colors.light,
+            }}
             icon={
               <Ionicons
                 name="ios-help-circle-outline"
