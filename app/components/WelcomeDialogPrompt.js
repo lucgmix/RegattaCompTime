@@ -114,8 +114,7 @@ function WelcomeDialogPrompt({
                     color={defaultStyles.colors.primary}
                   />
                 }
-                iconLabel="Help"
-                message={`Screens that have this icon at the top right have help details you should consult. `}
+                message={`Screens with this icon (at the top right) have help you can consult for more details.`}
               />
             </ScrollView>
           </Dialog.ScrollArea>
