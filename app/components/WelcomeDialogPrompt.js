@@ -53,9 +53,10 @@ function WelcomeDialogPrompt({
             <ScrollView contentContainerStyle={styles.scrollviewContainer}>
               <Text style={styles.message}>
                 Regatta Comp Time allows you to quickly compare boat results
-                after a race. Use Time Delta section for time differences based
-                on boat's ratings. Use the Race section to track boat's
-                compensated/corrected time in "Real Time".
+                during or after a race using the PHRF-LO handicap ratings. Use
+                Time Delta section to compare time differences based on race
+                duration. Use the Race section to track compensated/corrected
+                time in "Real Time" of the boats in the fleet.
               </Text>
 
               <SectionHelp
@@ -67,7 +68,7 @@ function WelcomeDialogPrompt({
                   />
                 }
                 iconLabel="Fleet"
-                message={`The Fleet section is where you manage the boats that will be used in the Time Delta and Race sections.`}
+                message={`The Fleet section is where you manage the boats (Add, Edit, Duplicate, Delete) that will be used in the Time Delta and Race sections.`}
               />
 
               <SectionHelp
@@ -79,7 +80,7 @@ function WelcomeDialogPrompt({
                   />
                 }
                 iconLabel="Time Delta"
-                message={`The Time Delta section is were you can compare the compensated time difference between boats in the Fleet based on the race duration of your boat.`}
+                message={`The Time Delta section is were you can compare the compensated/corrected time difference between boats in the Fleet based on the race duration of your boat.`}
               />
 
               <SectionHelp
@@ -91,7 +92,7 @@ function WelcomeDialogPrompt({
                   />
                 }
                 iconLabel="Race"
-                message={`The Race section allows you to track realtime results (Corrected Time and Elapsed race time) of boats in the Fleet.`}
+                message={`The Race section allows you to track results (Corrected Time and Elapsed race time) of boats in the Fleet in real time.`}
               />
 
               <SectionHelp
@@ -103,7 +104,7 @@ function WelcomeDialogPrompt({
                   />
                 }
                 iconLabel="Settings"
-                message={`The Settings section allows you to apply global parameters that will affect all sections.`}
+                message={`The Settings section allows you to apply global parameters that will affect all sections, such as PHRF Rating Overrride, PHRF-LO Formula. More options are also availiable. `}
               />
               <SectionHelp
                 icon={
@@ -113,7 +114,8 @@ function WelcomeDialogPrompt({
                     color={defaultStyles.colors.primary}
                   />
                 }
-                message={`Displays the Help of a Section. `}
+                iconLabel="Help"
+                message={`Screens that have this icon at the top right have help details you should consult. `}
               />
             </ScrollView>
           </Dialog.ScrollArea>
@@ -154,6 +156,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: defaultStyles.colors.transparent,
+    marginTop: Platform.OS === "ios" ? 16 : 0,
+    padding: 0,
   },
   scrollviewContainer: { paddingBottom: 16 },
   content: {
@@ -191,6 +195,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   overlay: {
+    padding: 0,
     marginLeft: 8,
     marginRight: 8,
     marginBottom: Platform.OS === "ios" ? 80 : 56,
@@ -219,7 +224,7 @@ const sectionStyles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    marginTop: 8,
+    marginTop: 12,
     marginRight: 116,
   },
   iconContainer: {
@@ -229,10 +234,8 @@ const sectionStyles = StyleSheet.create({
   },
   iconLabel: {
     marginLeft: 4,
-    marginTop: 5,
     color: defaultStyles.colors.primary,
     fontWeight: "600",
-    fontSize: 14,
   },
-  message: { marginTop: 5, marginLeft: 8, fontSize: 14 },
+  message: { marginTop: 3, marginLeft: 12, fontSize: 14 },
 });
