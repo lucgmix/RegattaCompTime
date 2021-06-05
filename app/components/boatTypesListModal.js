@@ -7,6 +7,7 @@ import boatTypesList from "../config/boatTypesList.json";
 import defaultStyles from "../config/styles";
 import { useWindowDimensions } from "react-native";
 import Text from "./Text";
+import { capitalizeTheFirstLetterOfEachWord } from "../utils/boatListCleaner";
 
 function BoatTypesListModal({
   buttonTitle,
@@ -21,9 +22,11 @@ function BoatTypesListModal({
 
   useEffect(() => {
     const boatTypeItems = boatTypesList.boatTypeList.map((item) => {
+      const boatType = capitalizeTheFirstLetterOfEachWord(item.boatType);
+      item.boatType = boatType;
       return {
         id: item.id,
-        label: item.boatType,
+        label: boatType,
         value: JSON.stringify(item),
       };
     });
