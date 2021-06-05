@@ -7,13 +7,19 @@ import Button from "./Button";
 function ShowWelcomeHelp({ onButtonPress }) {
   return (
     <View style={styles.container}>
-      <Text style={([defaultStyles.text], styles.title)}>Help</Text>
+      <Text style={([defaultStyles.text], styles.title)}>
+        Welcome Screen Help
+      </Text>
       <View style={styles.textContainer}>
-        <Text style={styles.text}>Show Welcome Help Screen</Text>
+        <Text style={styles.text}>
+          The Welcome shows general information about the application at
+          startup. From here, you can display this screen at anytime even if you
+          checked 'Don't show again'.
+        </Text>
         <Button
-          title="Show"
+          title="Show Welcome Screen"
           onPress={onButtonPress}
-          buttonStyle={{ width: 120, marginTop: 16 }}
+          buttonStyle={{ marginTop: 16 }}
         />
       </View>
     </View>
