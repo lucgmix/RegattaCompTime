@@ -9,9 +9,9 @@ export default {
   secondary: "#f0c630", //"#e49624", //
   black: "#000",
   white: "#fff",
-  medium: "#6e6969",
-  mediumlight: "#e5dada",
-  light: "#f8f4f4",
+  medium: "#69696e",
+  mediumlight: "#d9d9e1",
+  light: "#f4f4f7",
   dark: "#0c0c0c",
   danger: "#ff5252",
   gray: "#ccc",
@@ -25,4 +25,5 @@ export default {
   orange: "orange",
   darkRed: "#db0000",
   transparent: "#00000000",
+  semiTransparentGray: "#0c0c0caa",
 };

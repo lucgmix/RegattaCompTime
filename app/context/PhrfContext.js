@@ -40,19 +40,6 @@ export function PhrfProvider({ children }) {
   );
 }
 
-// function getSelectedRating(boatArray) {
-//   if (Array.isArray(boatArray)) {
-//     return boatArray.map((item) => {
-//       if (item.defaultRating === RATING.FS) {
-//         item.rating = item.ratingFS;
-//       } else {
-//         item.rating = item.ratingNFS;
-//       }
-//       return item;
-//     });
-//   }
-// }
-
 export function usePHRF() {
   return useContext(PhrfContext);
 }

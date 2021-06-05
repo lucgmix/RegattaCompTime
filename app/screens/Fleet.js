@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   FlatList,
   Modal,
@@ -13,8 +13,6 @@ import Button from "../components/Button";
 import { ScrollView } from "react-native-gesture-handler";
 import BoatListItem from "../components/lists/BoatListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
-import { useStorage } from "../context/StorageContext";
-import { usePHRF } from "../context/PhrfContext";
 import {
   Ionicons,
   AntDesign,
@@ -26,6 +24,10 @@ import BoatCreator, { BOAT_CREATOR_MODE } from "./BoatCreator";
 import { v4 as uuidv4 } from "uuid";
 
 import defaultStyles from "../config/styles";
+
+import { useStorage } from "../context/StorageContext";
+import { usePHRF } from "../context/PhrfContext";
+import { CURRENT_SCREEN_KEY } from "../config/constants";
 
 let listItemHeight = 0;
 
@@ -43,7 +45,7 @@ function sortBoatArray(boatList) {
   });
 }
 
-function Fleet() {
+function Fleet({ navigation }) {
   const [selectedBoat, setSelectedBoat] = useState(null);
   const [isCreateBoatModalVisible, setIsCreateBoatModalVisible] =
     useState(false);
@@ -54,12 +56,23 @@ function Fleet() {
 
   const [promptVisible, setPromptVisible] = useState(false);
   const [helpPromptVisible, setHelpPromptVisible] = useState(false);
+  const [sectionVisible, setSectionVisible] = useState(false);
 
   const { ratingOverride } = usePHRF();
+  const { getValueForKey } = useStorage();
+
+  const jumpToLastUsedScreen = (navigation) => {
+    getValueForKey(CURRENT_SCREEN_KEY).then((response) => {
+      if (response.ok && response.data) {
+        navigation.jumpTo(response.data);
+      }
+      setSectionVisible(true);
+    });
+  };
 
   const updateFleetWithBoat = () => {
     setIsCreateBoatModalVisible(false);
-    populateBoatList();
+    updateBoatList();
   };
 
   const toggleDeleteConfirmPrompt = () => {
@@ -163,6 +176,10 @@ function Fleet() {
     return applyBoldStyle(textToStyle);
   };
 
+  useLayoutEffect(() => {
+    jumpToLastUsedScreen(navigation);
+  }, []);
+
   useEffect(() => {
     populateBoatList();
     return () => {
@@ -171,158 +188,162 @@ function Fleet() {
   }, [boatDataChanged]);
 
   return (
-    <Screen style={styles.container}>
-      {selectedBoat && (
-        <DialogPrompt
-          title="Delete Boat"
-          message="Are you sure you want to delete this boat?"
-          content={`${selectedBoat.boatType} ${selectedBoat.boatName}`}
-          positive="Yes"
-          neutral="No"
-          isVisible={promptVisible}
-          onNeutralButtonPress={toggleDeleteConfirmPrompt}
-          onPositiveButtonPress={handleConfirmDeleteBoat}
+    sectionVisible && (
+      <Screen style={styles.container}>
+        {selectedBoat && (
+          <DialogPrompt
+            title="Delete Boat"
+            message="Are you sure you want to delete this boat?"
+            content={`${selectedBoat.boatType} ${selectedBoat.boatName}`}
+            positive="Yes"
+            neutral="No"
+            isVisible={promptVisible}
+            onNeutralButtonPress={toggleDeleteConfirmPrompt}
+            onPositiveButtonPress={handleConfirmDeleteBoat}
+          />
+        )}
+
+        <HelpDialogPrompt
+          title="Fleet Help"
+          message={getFleetHelpString("message")}
+          content={getFleetHelpString("content")}
+          positive="Got it"
+          isVisible={helpPromptVisible}
+          onPositiveButtonPress={() => setHelpPromptVisible(false)}
         />
-      )}
 
-      <HelpDialogPrompt
-        title="Fleet Help"
-        message={getFleetHelpString("message")}
-        content={getFleetHelpString("content")}
-        positive="Got it"
-        isVisible={helpPromptVisible}
-        onPositiveButtonPress={() => setHelpPromptVisible(false)}
-      />
+        <SectionHeader title="Fleet" onHelpPress={handleHelpPress} />
 
-      <SectionHeader title="Fleet" onHelpPress={handleHelpPress} />
-
-      <View style={styles.buttonContainer}>
-        <View style={styles.buttonGroup}>
-          <Button
-            buttonStyle={styles.buttonStyleLeft}
-            title="Add"
-            onPress={handleAddBoatButtonPress}
-            icon={
-              <Ionicons
-                name="md-add-sharp"
-                size={18}
-                color={defaultStyles.colors.white}
-              />
-            }
-          />
-          <Button
-            buttonStyle={styles.buttonStyleLeft}
-            disabled={!selectedBoat}
-            title="Edit"
-            onPress={handleEditBoatButtonPress}
-            icon={
-              <AntDesign
-                name="edit"
-                size={16}
-                color={
-                  !selectedBoat
-                    ? defaultStyles.colors.disabledText
-                    : defaultStyles.colors.white
-                }
-              />
-            }
-          />
+        <View style={styles.buttonContainer}>
+          <View style={styles.buttonGroup}>
+            <Button
+              buttonStyle={styles.buttonStyleLeft}
+              title="Add"
+              onPress={handleAddBoatButtonPress}
+              icon={
+                <Ionicons
+                  name="md-add-sharp"
+                  size={18}
+                  color={defaultStyles.colors.white}
+                />
+              }
+            />
+            <Button
+              buttonStyle={styles.buttonStyleLeft}
+              disabled={!selectedBoat}
+              title="Edit"
+              onPress={handleEditBoatButtonPress}
+              icon={
+                <AntDesign
+                  name="edit"
+                  size={16}
+                  color={
+                    !selectedBoat
+                      ? defaultStyles.colors.disabledText
+                      : defaultStyles.colors.white
+                  }
+                />
+              }
+            />
+          </View>
+          <View style={styles.buttonGroup}>
+            <Button
+              buttonStyle={styles.buttonStyleRight}
+              disabled={!selectedBoat}
+              title="Duplicate"
+              onPress={handleDuplicateBoatButtonPress}
+              icon={
+                <MaterialCommunityIcons
+                  name="content-duplicate"
+                  size={16}
+                  color={
+                    !selectedBoat
+                      ? defaultStyles.colors.disabledText
+                      : defaultStyles.colors.white
+                  }
+                />
+              }
+            />
+            <Button
+              buttonStyle={styles.buttonStyleRight}
+              disabled={!selectedBoat}
+              title="Delete"
+              onPress={handleDeleteBoatButtonPress}
+              icon={
+                <AntDesign
+                  name="delete"
+                  size={16}
+                  color={
+                    !selectedBoat
+                      ? defaultStyles.colors.disabledText
+                      : defaultStyles.colors.white
+                  }
+                />
+              }
+            />
+          </View>
         </View>
-        <View style={styles.buttonGroup}>
-          <Button
-            buttonStyle={styles.buttonStyleRight}
-            disabled={!selectedBoat}
-            title="Duplicate"
-            onPress={handleDuplicateBoatButtonPress}
-            icon={
-              <MaterialCommunityIcons
-                name="content-duplicate"
-                size={16}
-                color={
-                  !selectedBoat
-                    ? defaultStyles.colors.disabledText
-                    : defaultStyles.colors.white
-                }
-              />
-            }
-          />
-          <Button
-            buttonStyle={styles.buttonStyleRight}
-            disabled={!selectedBoat}
-            title="Delete"
-            onPress={handleDeleteBoatButtonPress}
-            icon={
-              <AntDesign
-                name="delete"
-                size={16}
-                color={
-                  !selectedBoat
-                    ? defaultStyles.colors.disabledText
-                    : defaultStyles.colors.white
-                }
-              />
-            }
-          />
-        </View>
-      </View>
-      <FlatList
-        ref={boatListRef}
-        data={viewBoatList}
-        getItemLayout={(_, index) => {
-          return {
-            length: listItemHeight,
-            offset: listItemHeight * index,
-            index,
-          };
-        }}
-        keyExtractor={(boatItem) => {
-          return boatItem.id;
-        }}
-        ItemSeparatorComponent={() => <ListItemSeparator />}
-        ListHeaderComponent={() => (
-          <BoatListItem
-            name="Boat"
-            type="Class"
-            ratingFS="FS"
-            ratingNFS="NFS"
-            ratingOverride={ratingOverride}
-            isHeader
-          />
-        )}
-        stickyHeaderIndices={[0]}
-        renderItem={({ item }) => (
-          <TouchableWithoutFeedback onPress={() => handleBoatItemClicked(item)}>
-            <View
-              onLayout={(event) => {
-                const { height } = event.nativeEvent.layout;
-                listItemHeight = height;
-              }}
+        <FlatList
+          ref={boatListRef}
+          data={viewBoatList}
+          getItemLayout={(_, index) => {
+            return {
+              length: listItemHeight,
+              offset: listItemHeight * index,
+              index,
+            };
+          }}
+          keyExtractor={(boatItem) => {
+            return boatItem.id;
+          }}
+          ItemSeparatorComponent={() => <ListItemSeparator />}
+          ListHeaderComponent={() => (
+            <BoatListItem
+              name="Boat"
+              type="Class"
+              ratingFS="FS"
+              ratingNFS="NFS"
+              ratingOverride={ratingOverride}
+              isHeader
+            />
+          )}
+          stickyHeaderIndices={[0]}
+          renderItem={({ item }) => (
+            <TouchableWithoutFeedback
+              onPress={() => handleBoatItemClicked(item)}
             >
-              <BoatListItem
-                name={item.boatName}
-                ratingFS={item.ratingFS}
-                ratingNFS={item.ratingNFS}
-                ratingError={item.ratingError}
-                type={item.boatType}
-                defaultRating={item.defaultRating}
-                ratingOverride={item.ratingOverride}
-                isSelectedItem={selectedBoat && selectedBoat.id === item.id}
-              />
-            </View>
-          </TouchableWithoutFeedback>
-        )}
-      />
-      <Modal visible={isCreateBoatModalVisible} animationType="fade">
-        <ScrollView>
-          <BoatCreator
-            isModalVisible={isCreateBoatModalVisible}
-            onSubmitButtonPress={updateFleetWithBoat}
-            selectedBoat={selectedBoat}
-            viewMode={boatCreatorMode}
-          />
-        </ScrollView>
-      </Modal>
-    </Screen>
+              <View
+                onLayout={(event) => {
+                  const { height } = event.nativeEvent.layout;
+                  listItemHeight = height;
+                }}
+              >
+                <BoatListItem
+                  name={item.boatName}
+                  ratingFS={item.ratingFS}
+                  ratingNFS={item.ratingNFS}
+                  ratingError={item.ratingError}
+                  type={item.boatType}
+                  defaultRating={item.defaultRating}
+                  ratingOverride={item.ratingOverride}
+                  isSelectedItem={selectedBoat && selectedBoat.id === item.id}
+                />
+              </View>
+            </TouchableWithoutFeedback>
+          )}
+        />
+        <Modal visible={isCreateBoatModalVisible} animationType="fade">
+          <ScrollView>
+            <BoatCreator
+              isModalVisible={isCreateBoatModalVisible}
+              onSubmitButtonPress={updateFleetWithBoat}
+              selectedBoat={selectedBoat}
+              viewMode={boatCreatorMode}
+            />
+          </ScrollView>
+        </Modal>
+      </Screen>
+    )
   );
 }
 

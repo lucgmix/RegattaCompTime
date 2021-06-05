@@ -17,7 +17,6 @@ import { usePHRF } from "../context/PhrfContext";
 import { useStorage } from "../context/StorageContext";
 import colors from "../config/colors";
 import TimeInpuModal from "../components/TimeInputModal";
-import DialogPrompt from "../components/DialogPrompt";
 import HelpDialogPrompt from "../components/HelpDialogPrompt";
 
 import { Entypo } from "@expo/vector-icons";
@@ -109,14 +108,14 @@ function TimeDelta() {
     switch (tag) {
       case "message":
         textToStyle = {
-          sentence: `The {0} section is were you can compare the time difference between boats based on the race duration and the boat's handicap.\n\nBoats above the selected reference boat (negative time values) owe you time.\n\nThe selected reference boat owes time to boats below it (positive time values).`,
+          sentence: `The {0} section is were you can compare the time difference between boats based on the race duration of the reference boat (typically your own boat) and the boat's handicap.\n\nBoats above the selected reference boat (negative time values) owe you time.\n\nThe selected reference boat owes time to boats below it (positive time values).`,
           boldText: ["Time Delta"],
         };
         break;
       case "content":
         textToStyle = {
-          sentence: `{0} button is used to enter the race duration of the reference boat and then choose the reference boat ({1}) to compare the time differences (Time Delta).\n\nTip: Select any boat in the list by clicking on it to change the reference boat.`,
-          boldText: ["Set", "Select Reference Boat"],
+          sentence: `{0} Allows to enter the race duration of the reference boat.\n\n{1} Click and choose the reference boat, typically your own boat, to compare the time differences (Time Delta).\n\nTip: Select any boat in the list by clicking on it to change the reference boat.`,
+          boldText: ["Set Duration...", "Select Reference Boat"],
         };
         break;
     }
@@ -177,7 +176,7 @@ function TimeDelta() {
         </View>
         <Button
           buttonStyle={styles.setTimeButton}
-          title="Set"
+          title="Set Duration..."
           onPress={handleSetRaceDuration}
         ></Button>
       </View>

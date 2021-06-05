@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { Divider } from "react-native-elements";
 
@@ -12,6 +12,9 @@ import PhrfAlternateRadioGroup from "../components/PhrfAlternateRadioGroup";
 import PhrfRatingOverrideRadioGroup from "../components/PhrfRatingOverrideRadioGroup";
 
 import { RATING_OVERRIDE, PHRF_FORMULA } from "../config/constants";
+import About from "../components/About";
+import ShowWelcomeHelp from "../components/ShowWelcomeHelp";
+import { ModalContext } from "../context/AppModalContext";
 
 function Settings(props) {
   const {
@@ -29,6 +32,8 @@ function Settings(props) {
     storePHRFIsAlternateFormula,
     storeRatingOverride,
   } = useStorage();
+
+  const { showAppModal } = useContext(ModalContext);
 
   const updatePhrfFormula = (value) => {
     setAlternatePHRFValue(value);
@@ -91,6 +96,10 @@ function Settings(props) {
     }
   };
 
+  const handleShowHelpPressed = () => {
+    showAppModal(true);
+  };
+
   return (
     <Screen style={styles.container}>
       <SectionHeader title="Settings" helpVisible={false} />
@@ -104,6 +113,10 @@ function Settings(props) {
           value={alternatePHRFValue}
           onUpdateSelection={updatePhrfFormula}
         />
+        <Divider style={styles.divider} />
+        <ShowWelcomeHelp onButtonPress={handleShowHelpPressed} />
+        <Divider style={styles.divider} />
+        <About />
       </ScrollView>
     </Screen>
   );

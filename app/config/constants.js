@@ -10,3 +10,5 @@ export const RATING_OVERRIDE = {
 };
 
 export const CURRENT_SCREEN_KEY = "@current_screen";
+
+export const WELCOME_SCREEN_KEY = "@welcome_screen";

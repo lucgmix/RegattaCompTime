@@ -99,12 +99,16 @@ const styles = StyleSheet.create({
   },
   warningText: {
     justifyContent: "center",
-    backgroundColor: defaultStyles.colors.light,
+    backgroundColor: defaultStyles.colors.orange,
     paddingLeft: 32,
     paddingRight: 32,
     paddingTop: 16,
     paddingBottom: 16,
     margin: 16,
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: defaultStyles.colors.orange,
+    overflow: "hidden",
   },
 });
 

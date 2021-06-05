@@ -17,7 +17,6 @@ export const STOPWATCH_STATE = {
 };
 
 function StopWatch({
-  startLabel,
   stopLabel,
   resetLabel,
   onElapsedChange,
@@ -124,12 +123,6 @@ function StopWatch({
           <Text style={styles.timeLabel}>{timeDisplay}</Text>
         </View>
         <View style={styles.buttonContainer}>
-          {/* <Button
-          // disabled={timerInterval !== 0}
-          buttonStyle={styles.button}
-          title={startLabel}
-          onPress={handleStart}
-        ></Button> */}
           <Button
             disabled={endRaceDisabled}
             buttonStyle={styles.stopButton}

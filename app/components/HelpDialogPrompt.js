@@ -20,7 +20,7 @@ function HelpDialogPrompt({
   isVisible = false,
 }) {
   return (
-    <Overlay isVisible={isVisible}>
+    <Overlay isVisible={isVisible} overlayStyle={styles.overlay}>
       <Screen>
         <View style={styles.container}>
           <Text style={styles.title}>{title}</Text>
@@ -84,8 +84,15 @@ const styles = StyleSheet.create({
     color: defaultStyles.colors.primary,
     fontWeight: "600",
     fontSize: 18,
+    marginBottom: 8,
   },
   message: { marginTop: 16 },
+  overlay: {
+    marginLeft: 8,
+    marginRight: 8,
+    marginBottom: Platform.OS === "ios" ? 80 : 56,
+    marginTop: Platform.OS === "ios" ? 48 : 24,
+  },
 });
 
 export default HelpDialogPrompt;

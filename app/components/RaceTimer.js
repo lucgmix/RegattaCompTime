@@ -47,7 +47,7 @@ function RaceTimer({
   );
 
   const onChange = (event, selectedDate) => {
-    // setShow(Platform.OS === "ios");
+    setShow(Platform.OS === "ios");
     if (selectedDate) {
       setDate(selectedDate);
     }
@@ -62,8 +62,8 @@ function RaceTimer({
   };
 
   const handleTimePicker = (date) => {
-    setDate(date);
     setShow(false);
+    setDate(date);
     onTimeChange(date);
   };
 
@@ -97,7 +97,7 @@ function RaceTimer({
           <Button
             disabled={startTimeDisabled}
             buttonStyle={styles.button}
-            title={editMode ? "Edit Start Time..." : "Start Race..."}
+            title={editMode ? "Edit Start Time..." : "Start Time..."}
             onPress={handleShowTimepicker}
           />
           {!editMode && (

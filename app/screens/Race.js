@@ -38,7 +38,6 @@ function ratingSortResults(resultList) {
 
 function correctTimeSortResults(
   resultList,
-  elapsedTime,
   isAlternatePHRF,
   getCorrectedTime,
   raceState
@@ -160,55 +159,70 @@ function Race() {
   };
 
   const populateResultList = () => {
-    getRaceResults().then(({ ok, resultsData }) => {
-      if (ok && !isEmpty(resultsData.boatResults)) {
-        const boats = resultsData.boatResults || viewBoatResultList;
-        if (resultsData.raceState && Array.isArray(boats)) {
-          setRaceState(resultsData.raceState);
+    getBoatList().then(({ boatData }) => {
+      getRaceResults().then(({ ok, resultsData }) => {
+        if (ok && !isEmpty(resultsData.boatResults)) {
+          const updatedBoatsResultsData = boatData.reduce((acc, boat) => {
+            const updatedBoatResult = resultsData.boatResults.find(
+              (boatResult) => {
+                return boatResult.boat.id === boat.id;
+              }
+            );
 
-          if (resultsData.raceState !== RACE_STATE.FINISHED) {
-            if (resultsData.raceState === RACE_STATE.RESET_CLEARED) {
-              setRaceState(resultsData.raceState);
-              setStopWatchState(STOPWATCH_STATE.RESET);
+            if (updatedBoatResult) {
+              updatedBoatResult.boat = boat;
+              acc.push(updatedBoatResult);
+              return acc;
+            } else {
+              return { boat, rank: "-", elapsedTime: 0, correctedTime: 0 };
+            }
+          }, []);
+
+          const boats = updatedBoatsResultsData || viewBoatResultList;
+          if (resultsData.raceState && Array.isArray(boats)) {
+            setRaceState(resultsData.raceState);
+
+            if (resultsData.raceState !== RACE_STATE.FINISHED) {
+              if (resultsData.raceState === RACE_STATE.RESET_CLEARED) {
+                setRaceState(resultsData.raceState);
+                setStopWatchState(STOPWATCH_STATE.RESET);
+                resultsData.raceStartTime &&
+                  setRaceTimerStartDate(new Date(resultsData.raceStartTime));
+                resultsData.raceElapsedTime &&
+                  setStopWatchStartTime(resultsData.raceElapsedTime);
+              }
+              setViewBoatResultList(ratingSortResults(boats));
+              raceStartTimeAction(
+                getDateTimeForCurrentDay(resultsData.raceStartTime)
+              );
+            } else {
+              setViewBoatResultList(
+                correctTimeSortResults(
+                  boats,
+                  isAlternatePHRF,
+                  getCorrectedTime,
+                  RACE_STATE.FINISHED
+                )
+              );
+
+              resultsData.raceElapsedTime &&
+                setElapsedTime(resultsData.raceElapsedTime);
               resultsData.raceStartTime &&
                 setRaceTimerStartDate(new Date(resultsData.raceStartTime));
               resultsData.raceElapsedTime &&
                 setStopWatchStartTime(resultsData.raceElapsedTime);
+
+              setRaceState(RACE_STATE.FINISHED);
+              setStopWatchState(STOPWATCH_STATE.STOPPED);
             }
-            setViewBoatResultList(ratingSortResults(boats));
-            raceStartTimeAction(
-              getDateTimeForCurrentDay(resultsData.raceStartTime)
-            );
-          } else {
-            setViewBoatResultList(
-              correctTimeSortResults(
-                boats,
-                elapsedTime,
-                isAlternatePHRF,
-                getCorrectedTime,
-                RACE_STATE.FINISHED
-              )
-            );
-
-            resultsData.raceElapsedTime &&
-              setElapsedTime(resultsData.raceElapsedTime);
-            resultsData.raceStartTime &&
-              setRaceTimerStartDate(new Date(resultsData.raceStartTime));
-            resultsData.raceElapsedTime &&
-              setStopWatchStartTime(resultsData.raceElapsedTime);
-
-            setRaceState(RACE_STATE.FINISHED);
-            setStopWatchState(STOPWATCH_STATE.STOPPED);
           }
-        }
-      } else {
-        getBoatList().then(({ boatData }) => {
+        } else {
           const boatResultList = boatData.map((boat) => {
             return { boat, rank: "-", elapsedTime: 0, correctedTime: 0 };
           });
           setViewBoatResultList(ratingSortResults(boatResultList));
-        });
-      }
+        }
+      });
     });
   };
 
@@ -251,7 +265,6 @@ function Race() {
       setViewBoatResultList(
         correctTimeSortResults(
           getUpdatedResultRanking(updatedBoatResultList),
-          elapsedTime,
           isAlternatePHRF,
           getCorrectedTime,
           raceState
@@ -383,7 +396,6 @@ function Race() {
       // Update all boats with elapedTime and corrected time and save
       sortedBoatResultList = correctTimeSortResults(
         allBoatResultList,
-        noMillisecondsElapsedTime,
         isAlternatePHRF,
         getCorrectedTime,
         RACE_STATE.FINISHED
@@ -730,7 +742,6 @@ function Race() {
         editMode={raceState === RACE_STATE.FINISHED}
       />
       <StopWatch
-        startLabel="Start Race"
         stopLabel="Finish Race"
         resetLabel="Clear Race"
         startTimeOffset={stopWatchStartTime}
