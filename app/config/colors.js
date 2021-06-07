@@ -22,7 +22,7 @@ export default {
   green: "#85e085",
   darkGreen: "#007700",
   mediumGreen: "#009900",
-  orange: "orange",
+  orange: "#ffa500",
   darkRed: "#db0000",
   transparent: "#00000000",
   semiTransparentGray: "#0c0c0caa",
