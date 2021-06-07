@@ -364,6 +364,7 @@ const styles = StyleSheet.create({
   },
   buttonStyleLeft: {
     marginRight: 4,
+    minWidth: 80,
   },
   buttonStyleRight: {
     marginLeft: 4,

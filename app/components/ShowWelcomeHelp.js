@@ -19,7 +19,7 @@ function ShowWelcomeHelp({ onButtonPress }) {
         <Button
           title="Show Welcome Screen"
           onPress={onButtonPress}
-          buttonStyle={{ marginTop: 16 }}
+          buttonStyle={{ marginTop: 16, alignSelf: "flex-start" }}
         />
       </View>
     </View>
@@ -46,6 +46,8 @@ const styles = StyleSheet.create({
     marginRight: 4,
     padding: 16,
     borderRadius: 8,
+    flexDirection: "column",
+    justifyContent: "center",
   },
   text: {
     fontSize: 14,
