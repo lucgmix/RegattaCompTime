@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontWeight: "700",
   },
-  nameContainer: { flex: 1 },
+  nameContainer: { flex: 0.86 },
   name: {
     fontWeight: "700",
     flex: 1,
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     color: colors.subText,
   },
   timeContainer: {
-    flex: 0.5,
+    flex: 0.58,
     justifyContent: "space-between",
   },
   rating(ratingError) {
@@ -180,6 +180,7 @@ const headerStyles = StyleSheet.create({
   container: {
     backgroundColor: defaultStyles.colors.primary,
     flex: 1,
+    paddingRight: 80,
   },
   nameContainer: { flex: 0.9 },
   label: {
@@ -188,7 +189,7 @@ const headerStyles = StyleSheet.create({
     fontSize: 14,
   },
   timeContainer: {
-    flex: 0.82,
+    flex: 0.6,
     alignItems: "flex-start",
   },
   correctedTime: {
