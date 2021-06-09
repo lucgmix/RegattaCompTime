@@ -3,8 +3,17 @@ import {
   FlatList,
   StyleSheet,
   TouchableWithoutFeedback,
+  TouchableOpacity,
   View,
 } from "react-native";
+
+import {
+  Cell,
+  Table,
+  TableWrapper,
+  Row,
+  Rows,
+} from "react-native-table-component";
 
 import Picker from "../components/Picker";
 import Screen from "../components/Screen";
@@ -28,13 +37,28 @@ let listItemHeight = 0;
 
 function TimeDelta() {
   const [selectedBoat, setSelectedBoat] = useState();
+  const [selectedIndex, setSelectedIndex] = useState();
+
   const [boatSelectList, setBoatSelectList] = useState([]);
   const [boatResultsList, setBoatResultsList] = useState([]);
   const [raceDuration, setRaceDuration] = useState(3600);
   const [isTimeModalVisible, setIsTimeModalVisible] = useState(false);
   const [helpPromptVisible, setHelpPromptVisible] = useState(false);
 
-  const resultListRef = useRef();
+  const [tableHead, setTablehead] = useState([
+    "Boat",
+    "Class",
+    "Rating",
+    "Time Delta",
+  ]);
+  const [tableData, setTableData] = useState([
+    // ["1", "2", "3", "4"],
+    // ["a", "b", "c", "d"],
+    // ["1", "2", "3", "456\n789"],
+    // ["a", "b", "c", "d"],
+  ]);
+
+  // const resultListRef = useRef();
   const { getBoatList, boatDataChanged } = useStorage();
 
   const { getElapsedDiff, secondsToHms, isAlternatePHRF } = usePHRF();
@@ -67,15 +91,25 @@ function TimeDelta() {
         const boatWithMatchingId = boatData.find((boat) => boat.id === item.id);
 
         if (boatWithMatchingId) {
-          setBoatResultsList(
-            getElapsedDiff(
-              boatData,
-              boatWithMatchingId.rating,
-              raceDuration,
-              isAlternatePHRF
-            )
+          const boatResults = getElapsedDiff(
+            boatData,
+            boatWithMatchingId.rating,
+            raceDuration,
+            isAlternatePHRF
           );
+          setBoatResultsList(boatResults);
 
+          const resultsTable = boatResults.reduce((acc, boatResult) => {
+            const boat = boatResult.boat;
+            acc.push([
+              boat.boatName,
+              boat.boatType,
+              boat.rating,
+              secondsToHms(boatResult.diff),
+            ]);
+            return acc;
+          }, []);
+          setTableData(resultsTable);
           setSelectedBoat(boatWithMatchingId);
         }
       } else {
@@ -94,12 +128,14 @@ function TimeDelta() {
         (resultItem) => resultItem.id === (selectedBoat.id || item.id)
       );
 
-      resultListRef &&
-        indexOfSelectedBoatResult > -1 &&
-        resultListRef.current.scrollToIndex({
-          animated: true,
-          index: indexOfSelectedBoatResult,
-        });
+      setSelectedIndex(indexOfSelectedBoatResult);
+
+      // resultListRef &&
+      //   indexOfSelectedBoatResult > -1 &&
+      //   resultListRef.current.scrollToIndex({
+      //     animated: true,
+      //     index: indexOfSelectedBoatResult,
+      //   });
     });
   };
 
@@ -122,6 +158,30 @@ function TimeDelta() {
 
     return applyBoldStyle(textToStyle);
   };
+
+  const TouchableCell = (data, index) => {
+    return (
+      <TouchableWithoutFeedback onPress={() => setSelectedIndex(index)}>
+        <View>
+          <Text
+            style={[
+              selectedIndex === index ? styles.textSelected : styles.text,
+            ]}
+          >
+            {data}
+          </Text>
+        </View>
+      </TouchableWithoutFeedback>
+    );
+  };
+
+  // const TouchableRow = (component, index) => {
+  //   return (
+  //     <TouchableWithoutFeedback onPress={() => setSelectedIndex(index)}>
+  //       {component}
+  //     </TouchableWithoutFeedback>
+  //   );
+  // };
 
   // Update dropdown otpions and viewBoatList when viewBoatList changes.
   useEffect(() => {
@@ -195,7 +255,47 @@ function TimeDelta() {
         selectedItem={selectedBoat}
         onSelectItem={handleOnSelectedBoat}
       />
-      <FlatList
+      {/* <Table borderStyle={{ borderWidth: 2, borderColor: "#c8e1ff" }}>
+        <Row data={tableHead} style={styles.head} textStyle={styles.text} />
+        <Rows data={tableData} textStyle={styles.text} />
+      </Table> */}
+      <View style={styles.tableContainer}>
+        <Table
+        // borderStyle={{
+        //   borderWidth: 1,
+        //   borderColor: defaultStyles.colors.gray,
+        // }}
+        >
+          <Row
+            data={tableHead}
+            style={styles.head}
+            textStyle={styles.headText}
+          />
+          {tableData.map((rowData, index) => {
+            //console.log("\nrowData", rowData);
+            return (
+              <TableWrapper key={index} style={styles.row}>
+                {rowData.map((cellData, cellIndex) => {
+                  //console.log("cellIndex", cellIndex);
+                  return (
+                    <Cell
+                      key={cellIndex}
+                      data={TouchableCell(cellData, index)}
+                      textStyle={styles.text}
+                      style={
+                        selectedIndex === index
+                          ? styles.selectedRowCell
+                          : styles.rowCell
+                      }
+                    />
+                  );
+                })}
+              </TableWrapper>
+            );
+          })}
+        </Table>
+      </View>
+      {/* <FlatList
         onContentSizeChange={selectBoatInList}
         ref={resultListRef}
         data={boatResultsList}
@@ -241,7 +341,7 @@ function TimeDelta() {
             </View>
           </TouchableWithoutFeedback>
         )}
-      />
+      /> */}
     </Screen>
   );
 }
@@ -276,6 +376,48 @@ const styles = StyleSheet.create({
   setTimeButton: {
     marginRight: 8,
     minWidth: 80,
+  },
+
+  tableContainer: {
+    flex: 1,
+    backgroundColor: "#fff",
+    // marginLeft: 24,
+  },
+  head: { height: 50, backgroundColor: defaultStyles.colors.primary },
+  headText: {
+    alignSelf: "flex-start",
+    color: defaultStyles.colors.white,
+    marginLeft: 12,
+  },
+  text: { alignSelf: "flex-start", marginLeft: 12, fontSize: 14 },
+  textSelected: {
+    alignSelf: "flex-start",
+    marginLeft: 12,
+    fontSize: 14,
+  },
+  row: {
+    flexDirection: "row",
+    backgroundColor: defaultStyles.colors.white,
+  },
+  btn: {
+    width: 58,
+    height: 18,
+    backgroundColor: "#78B7BB",
+    borderRadius: 2,
+    alignSelf: "flex-start",
+  },
+  btnText: { textAlign: "center", color: "#fff" },
+  selectedRowCell: {
+    height: 50,
+    flex: 1,
+    alignSelf: "flex-start",
+    backgroundColor: defaultStyles.colors.primary500,
+  },
+  rowCell: {
+    height: 50,
+    flex: 1,
+    alignSelf: "flex-start",
+    backgroundColor: defaultStyles.colors.transparent,
   },
 });
 
