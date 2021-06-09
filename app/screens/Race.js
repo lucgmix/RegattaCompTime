@@ -55,12 +55,23 @@ function correctTimeSortResults(
     );
 
     let rankCount = 1;
-    sortedRaceResults.map((item) => {
+    let previousResult;
+    sortedRaceResults.map((item, index) => {
       if (item) {
-        item.rank = rankCount;
-        rankCount++;
+        if (
+          previousResult &&
+          previousResult.correctedTime === item.correctedTime
+        ) {
+          previousResult.rank = rankCount;
+          item.rank = rankCount;
+        } else {
+          rankCount = index + 1;
+          item.rank = rankCount;
+        }
+        previousResult = item;
         return item;
       }
+
       return item;
     });
 
