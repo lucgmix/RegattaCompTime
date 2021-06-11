@@ -56,7 +56,7 @@ function WelcomeDialogPrompt({
                 during or after a race using the PHRF-LO handicap ratings. Use
                 Time Delta section to compare time differences based on race
                 duration. Use the Race section to track compensated/corrected
-                time in "Real Time" of the boats in the fleet.
+                times of the fleet as the race progresses (real time).
               </Text>
 
               <SectionHelp
@@ -68,7 +68,7 @@ function WelcomeDialogPrompt({
                   />
                 }
                 iconLabel="Fleet"
-                message={`The Fleet section is where you manage the boats (Add, Edit, Duplicate, Delete) that will be used in the Time Delta and Race sections.`}
+                message={`Create your fleet under this section. You can manage each boat at any time (Add, Edit, Duplicate, Delete). Your fleet will be used to calculate Time Delta and Race results.`}
               />
 
               <SectionHelp
@@ -92,7 +92,7 @@ function WelcomeDialogPrompt({
                   />
                 }
                 iconLabel="Race"
-                message={`The Race section allows you to track results (Corrected Time and Elapsed race time) of boats in the Fleet in real time.`}
+                message={`The Race section allows you to start a race for your fleet and track compensated/corrected times of each boat. Click Finish for participating boats to see results. Note that race start time and boat elapsed times can be edited for more accuracy after you finished a race (Finish Race button).`}
               />
 
               <SectionHelp
@@ -114,7 +114,7 @@ function WelcomeDialogPrompt({
                     color={defaultStyles.colors.primary}
                   />
                 }
-                message={`Screens with this icon (at the top right) have help you can consult for more details.`}
+                message={`When displayed, click this help icon for more details about the specific section.`}
               />
             </ScrollView>
           </Dialog.ScrollArea>

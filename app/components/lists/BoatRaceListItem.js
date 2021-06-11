@@ -61,7 +61,7 @@ function BoatRaceListItem({
             isHeader && headerStyles.label,
           ]}
         >
-          {isHeader ? `${name}\n${boatType} / ${rating}` : name}
+          {isHeader ? `${name}\n${boatType}/${rating}` : name}
         </Text>
         {!isHeader && (
           <Text
@@ -72,7 +72,7 @@ function BoatRaceListItem({
               isHeader && headerStyles.label,
             ]}
           >
-            {`${boatType} / `}
+            {`${boatType}/`}
             <Text style={styles.rating(ratingError)}>{rating}</Text>
           </Text>
         )}

@@ -733,7 +733,7 @@ function Race() {
       <DialogPrompt
         title="Finish Race"
         message="Are you sure you want to finish this race?"
-        content="This will stop the race timer and sort final results."
+        content={`This will stop the race timer and sort final results.\n\nTip : When a race is finished, you can edit race start time and boat elapsed time for more accurate results. Any boat data can also be updated under the Fleet tab. Changes to boat data will immediately be reflected in the Race section potentially affecting results.`}
         positive="Yes"
         negative="Cancel"
         isVisible={stopRacePromptVisible}
