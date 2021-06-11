@@ -102,6 +102,7 @@ function Fleet({ navigation }) {
         id: uuidv4(),
       };
       boatList.push(selectedBoatCopy);
+      setSelectedBoat(selectedBoatCopy);
 
       storeBoatList(boatList).then((result) => {
         if (result.ok) {
