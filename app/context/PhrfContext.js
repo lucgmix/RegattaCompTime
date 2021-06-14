@@ -18,6 +18,12 @@ const PhrfContext = createContext();
 export function PhrfProvider({ children }) {
   const [isAlternatePHRF, setIsAlternatePHRF] = useState(false);
   const [ratingOverride, setRatingOverride] = useState("");
+  const [standardTOT, setStandardTOT] = useState();
+  const [alternateTOT, setAlternateTOT] = useState();
+  const [standardTOT_A, setStandardTOT_A] = useState();
+  const [standardTOT_B, setStandardTOT_B] = useState();
+  const [alternateTOT_A, setAlternateTOT_A] = useState();
+  const [alternateTOT_B, setAlternateTOT_B] = useState();
 
   return (
     <PhrfContext.Provider
@@ -32,7 +38,6 @@ export function PhrfProvider({ children }) {
         ratingOverride,
         setRatingOverride,
         millisecondsToDuration,
-        // getSelectedRating,
       }}
     >
       {children}

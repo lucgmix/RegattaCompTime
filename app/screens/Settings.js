@@ -100,6 +100,16 @@ function Settings(props) {
     showAppModal(true);
   };
 
+  const handleStandardABChange = (a, b) => {
+    console.log("handleStandardABChange", a);
+    console.log(b);
+  };
+
+  const handleAlternateABChange = (a, b) => {
+    console.log("handleAlternateABChange", a);
+    console.log(b);
+  };
+
   return (
     <Screen style={styles.container}>
       <SectionHeader title="Settings" helpVisible={false} />
@@ -112,6 +122,10 @@ function Settings(props) {
         <PhrfAlternateRadioGroup
           value={alternatePHRFValue}
           onUpdateSelection={updatePhrfFormula}
+          onUpdateStandardAB={handleStandardABChange}
+          onUpdateAlternateAB={handleAlternateABChange}
+          formulaA="657"
+          formulaB="214"
         />
         <Divider style={styles.divider} />
         <ShowWelcomeHelp onButtonPress={handleShowHelpPressed} />

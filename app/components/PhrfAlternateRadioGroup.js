@@ -3,10 +3,28 @@ import { View, StyleSheet } from "react-native";
 import color from "../config/colors";
 import Text from "../components/Text";
 import { RadioButton } from "react-native-paper";
-import defaultStyles from "../config/styles";
 import { PHRF_FORMULA } from "../config/constants";
 
-function PhrfAlternateRadioGroup({ value, onUpdateSelection }) {
+import TextEditPHRF_AB from "../components/TextEditPHRF_AB";
+import defaultStyles from "../config/styles";
+
+function PhrfAlternateRadioGroup({
+  value,
+  formulaA,
+  formulaB,
+  onUpdateSelection,
+  onUpdateStandardAB,
+  onUpdateAlternateAB,
+}) {
+  console.log("PhrfAlternateRadioGroup A", formulaA);
+  const handleStandardABApply = (a, b) => {
+    onUpdateStandardAB(a, b);
+  };
+
+  const handleAlternateABApply = (a, b) => {
+    onUpdateAlternateAB(a, b);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={([defaultStyles.text], styles.title)}>PHRF-LO Formula</Text>
@@ -29,6 +47,12 @@ function PhrfAlternateRadioGroup({ value, onUpdateSelection }) {
             usually found in club events as well as the effects of diminishing
             wind due to sunset.
           </Text>
+          <TextEditPHRF_AB
+            otherStyles={styles.textInputAB}
+            onApplyAB={handleStandardABApply}
+            formulaA={formulaA}
+            formulaB={formulaB}
+          />
         </View>
 
         <View>
@@ -49,6 +73,12 @@ function PhrfAlternateRadioGroup({ value, onUpdateSelection }) {
             stated in the Notice of Race and Sailing Instructions, in order to
             be valid.
           </Text>
+          <TextEditPHRF_AB
+            otherStyles={styles.textInputAB}
+            onApplyAB={handleAlternateABApply}
+            formulaA={formulaA}
+            formulaB={formulaB}
+          />
         </View>
       </RadioButton.Group>
     </View>
@@ -91,6 +121,9 @@ const styles = StyleSheet.create({
   },
   title: {
     marginLeft: 4,
+  },
+  textInputAB: {
+    marginLeft: 64,
   },
 });
 
