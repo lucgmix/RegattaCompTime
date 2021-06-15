@@ -16,7 +16,7 @@ function TextEditPHRF_AB({
 }) {
   const [valueA, setValueA] = useState(formulaA);
   const [valueB, setValueB] = useState(formulaB);
-  const [editable, setEditable] = useState(true);
+  const [editable, setEditable] = useState(false);
   const [errorPromptVisible, setErrorPromptVisible] = useState(false);
 
   const onEditButtonPress = () => {
@@ -54,8 +54,8 @@ function TextEditPHRF_AB({
         onPositiveButtonPress={() => setErrorPromptVisible(false)}
       />
       <Text style={styles.description}>
-        The PHRF values of A and B in the PHRF formula might have changed. Check
-        the latest values with your club handicaper for more accurate results.
+        The PHRF values of A and B in the PHRF formula might have changed.
+        Validate these values with your club handicaper.
       </Text>
       <View style={styles.container}>
         <View style={{ flexDirection: "row" }}>
@@ -139,10 +139,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 8,
+    marginLeft: 8,
   },
   textInput(editable) {
     return {
-      width: 60,
+      width: 48,
       marginLeft: 4,
       padding: 6,
       borderWidth: 1,
