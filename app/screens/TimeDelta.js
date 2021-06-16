@@ -136,7 +136,7 @@ function TimeDelta() {
     return () => {
       setBoatSelectList([]);
     };
-  }, [boatDataChanged, formulaABChanged]);
+  }, [boatDataChanged]);
 
   useEffect(() => {
     updateBoatList(selectedBoat);
