@@ -66,8 +66,8 @@ function TextEditPHRF_AB({
               placeholderTextColor={defaultStyles.colors.gray}
               style={styles.textInput(editable)}
               keyboardType={"numeric"}
-              maxLength={3}
               editable={editable}
+              maxLength={10}
               {...otherProps}
               onChangeText={(text) => setValueA(text)}
               value={valueA}
@@ -81,8 +81,8 @@ function TextEditPHRF_AB({
               placeholderTextColor={defaultStyles.colors.gray}
               style={styles.textInput(editable)}
               keyboardType={"numeric"}
-              maxLength={3}
               editable={editable}
+              maxLength={10}
               {...otherProps}
               onChangeText={(text) => setValueB(text)}
               value={valueB}
@@ -111,13 +111,14 @@ function TextEditPHRF_AB({
 const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: defaultStyles.colors.mediumlight,
-    padding: 8,
+    padding: 4,
     borderWidth: 1,
     borderRadius: 8,
     borderColor: defaultStyles.colors.darkgray,
   },
   container: {
     flexDirection: "row",
+    flexWrap: "wrap",
     justifyContent: "space-between",
     alignItems: "center",
     borderWidth: 1,
@@ -133,19 +134,22 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 12,
     marginBottom: 4,
+    padding: 4,
   },
   inputContainer: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    padding: 8,
-    marginLeft: 8,
+    padding: 6,
+    paddingTop: 8,
+    paddingBottom: 8,
+    marginLeft: 4,
   },
   textInput(editable) {
     return {
-      width: 48,
+      minWidth: 48,
       marginLeft: 4,
-      padding: 6,
+      padding: 4,
       borderWidth: 1,
       borderRadius: 4,
       borderColor: editable

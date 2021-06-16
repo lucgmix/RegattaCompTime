@@ -35,7 +35,7 @@ function TimeDelta() {
   const [helpPromptVisible, setHelpPromptVisible] = useState(false);
 
   const resultListRef = useRef();
-  const { getBoatList, boatDataChanged } = useStorage();
+  const { getBoatList, boatDataChanged, formulaABChanged } = useStorage();
 
   const { getElapsedDiff, secondsToHms, isAlternatePHRF } = usePHRF();
 
@@ -136,7 +136,7 @@ function TimeDelta() {
     return () => {
       setBoatSelectList([]);
     };
-  }, [boatDataChanged]);
+  }, [boatDataChanged, formulaABChanged]);
 
   useEffect(() => {
     updateBoatList(selectedBoat);
@@ -144,12 +144,12 @@ function TimeDelta() {
       setSelectedBoat(null);
       setBoatResultsList([]);
     };
-  }, [isAlternatePHRF, raceDuration, boatDataChanged]);
+  }, [isAlternatePHRF, raceDuration, boatDataChanged, formulaABChanged]);
 
   // Scroll to selected boat result
   useEffect(() => {
     selectBoatInList(selectedBoat);
-  }, [selectedBoat, boatSelectList, boatDataChanged]);
+  }, [selectedBoat, boatSelectList, boatDataChanged, formulaABChanged]);
 
   return (
     <Screen style={styles.container}>

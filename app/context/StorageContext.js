@@ -11,6 +11,7 @@ const StorageContext = createContext();
 
 export function StorageDataContext({ children }) {
   const [boatDataChanged, setBoatDataChanged] = useState(false);
+  const [formulaABChanged, setFormulaABChanged] = useState(false);
 
   const fetchStoredBoatList = async () => {
     const storedBoatListResult = await storage.get("@boat_list");
@@ -38,6 +39,24 @@ export function StorageDataContext({ children }) {
       .catch((error) => {
         return { ok: false, error };
       });
+  };
+
+  const storeFormulaAB = (value) => {
+    return storage
+      .store("@formulaAB", value)
+      .then((response) => {
+        if (value && response.ok) {
+          setFormulaABChanged(!formulaABChanged);
+          return { ok: true };
+        }
+      })
+      .catch((error) => {
+        return { ok: false, error };
+      });
+  };
+
+  const getFormulaAB = () => {
+    return getValueForKey("@formulaAB");
   };
 
   const getRaceResults = async () => {
@@ -122,6 +141,9 @@ export function StorageDataContext({ children }) {
         getBoatList,
         getRaceResults,
         boatDataChanged,
+        storeFormulaAB,
+        getFormulaAB,
+        formulaABChanged,
         storePHRFIsAlternateFormula,
         getPHRFIsAlternateFormula,
         storeRatingOverride,

@@ -10,13 +10,14 @@ import defaultStyles from "../config/styles";
 
 function PhrfAlternateRadioGroup({
   value,
-  formulaA,
-  formulaB,
+  standardFormulaA,
+  standardFormulaB,
+  alternateFormulaA,
+  alternateFormulaB,
   onUpdateSelection,
   onUpdateStandardAB,
   onUpdateAlternateAB,
 }) {
-  console.log("PhrfAlternateRadioGroup A", formulaA);
   const handleStandardABApply = (a, b) => {
     onUpdateStandardAB(a, b);
   };
@@ -50,8 +51,8 @@ function PhrfAlternateRadioGroup({
           <TextEditPHRF_AB
             otherStyles={styles.textInputAB}
             onApplyAB={handleStandardABApply}
-            formulaA={formulaA}
-            formulaB={formulaB}
+            formulaA={standardFormulaA}
+            formulaB={standardFormulaB}
           />
         </View>
 
@@ -76,8 +77,8 @@ function PhrfAlternateRadioGroup({
           <TextEditPHRF_AB
             otherStyles={styles.textInputAB}
             onApplyAB={handleAlternateABApply}
-            formulaA={formulaA}
-            formulaB={formulaB}
+            formulaA={alternateFormulaA}
+            formulaB={alternateFormulaB}
           />
         </View>
       </RadioButton.Group>

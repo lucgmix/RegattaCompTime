@@ -22,6 +22,14 @@ function Settings(props) {
     setIsAlternatePHRF,
     ratingOverride,
     setRatingOverride,
+    standardTOT_A,
+    standardTOT_B,
+    alternateTOT_A,
+    alternateTOT_B,
+    setStandardTOT_A,
+    setStandardTOT_B,
+    setAlternateTOT_A,
+    setAlternateTOT_B,
   } = usePHRF();
   const [alternatePHRFValue, setAlternatePHRFValue] = useState(
     isAlternatePHRF ? PHRF_FORMULA.ALTERNATE : PHRF_FORMULA.STANDARD
@@ -31,6 +39,7 @@ function Settings(props) {
     getBoatList,
     storePHRFIsAlternateFormula,
     storeRatingOverride,
+    storeFormulaAB,
   } = useStorage();
 
   const { showAppModal } = useContext(ModalContext);
@@ -86,7 +95,7 @@ function Settings(props) {
         });
       }
     });
-  }; //
+  };
 
   const useRating = (preferedRating, otherRating) => {
     if (!isEmpty(preferedRating)) {
@@ -101,13 +110,22 @@ function Settings(props) {
   };
 
   const handleStandardABChange = (a, b) => {
-    console.log("handleStandardABChange", a);
-    console.log(b);
+    setStandardTOT_A(a);
+    setStandardTOT_B(b);
+    storeFormulaAB(getFormulaABObject(a, b, alternateTOT_A, alternateTOT_B));
   };
 
   const handleAlternateABChange = (a, b) => {
-    console.log("handleAlternateABChange", a);
-    console.log(b);
+    setAlternateTOT_A(a);
+    setAlternateTOT_B(b);
+    storeFormulaAB(getFormulaABObject(standardTOT_A, standardTOT_B, a, b));
+  };
+
+  const getFormulaABObject = (standardA, standardB, alternateA, alternateB) => {
+    return {
+      standardFormula: { a: standardA, b: standardB },
+      alternateFormula: { a: alternateA, b: alternateB },
+    };
   };
 
   return (
@@ -124,8 +142,10 @@ function Settings(props) {
           onUpdateSelection={updatePhrfFormula}
           onUpdateStandardAB={handleStandardABChange}
           onUpdateAlternateAB={handleAlternateABChange}
-          formulaA="657"
-          formulaB="214"
+          standardFormulaA={standardTOT_A}
+          standardFormulaB={standardTOT_B}
+          alternateFormulaA={alternateTOT_A}
+          alternateFormulaB={alternateTOT_B}
         />
         <Divider style={styles.divider} />
         <ShowWelcomeHelp onButtonPress={handleShowHelpPressed} />
