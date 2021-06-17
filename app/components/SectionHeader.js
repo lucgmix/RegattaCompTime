@@ -2,16 +2,38 @@ import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import Text from "../components/Text";
 import defaultStyles from "../config/styles";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, Fontisto } from "@expo/vector-icons";
 import Button from "../components/Button";
 
-function SectionHeader({ title, onHelpPress, helpVisible = true }) {
+function SectionHeader({
+  title,
+  onEmailPress,
+  onHelpPress,
+  emailVisible = false,
+  emailEnabled = false,
+  helpVisible = true,
+}) {
   return (
     <View style={[styles.container, !helpVisible && styles.helpNotVisible]}>
       {helpVisible && <View style={styles.spacer}></View>}
       <Text style={[styles.headerText]}>{title}</Text>
-      {helpVisible && (
-        <View style={styles.helpButton}>
+      <View style={styles.rightButtonsContainer}>
+        {emailVisible && (
+          <TouchableOpacity disabled={!emailEnabled} onPress={onEmailPress}>
+            <View style={styles.emailButton}>
+              <Fontisto
+                name="paper-plane"
+                size={20}
+                color={
+                  emailEnabled
+                    ? defaultStyles.colors.primary
+                    : defaultStyles.colors.disabledText
+                }
+              />
+            </View>
+          </TouchableOpacity>
+        )}
+        {helpVisible && (
           <Button
             onPress={onHelpPress}
             buttonStyle={{
@@ -26,8 +48,8 @@ function SectionHeader({ title, onHelpPress, helpVisible = true }) {
               />
             }
           />
-        </View>
-      )}
+        )}
+      </View>
     </View>
   );
 }
@@ -49,9 +71,16 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: defaultStyles.colors.primary,
   },
-  helpButton: {
+  rightButtonsContainer: {
+    flexDirection: "row",
     position: "absolute",
     right: 0,
+  },
+  emailButton: {
+    minWidth: 60,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "flex-end",
   },
 });
 

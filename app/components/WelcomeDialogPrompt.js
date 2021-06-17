@@ -11,6 +11,7 @@ import {
   Ionicons,
   Entypo,
   Feather,
+  Fontisto,
 } from "@expo/vector-icons";
 import CheckBox from "react-native-check-box";
 import { useStorage } from "../context/StorageContext";
@@ -108,9 +109,19 @@ function WelcomeDialogPrompt({
               />
               <SectionHelp
                 icon={
+                  <Fontisto
+                    name="paper-plane"
+                    size={iconSize - 3}
+                    color={defaultStyles.colors.primary}
+                  />
+                }
+                message={`When displayed and enabled, click this icon to email the section data.`}
+              />
+              <SectionHelp
+                icon={
                   <Ionicons
                     name="ios-help-circle-outline"
-                    size={iconSize}
+                    size={iconSize + 2}
                     color={defaultStyles.colors.primary}
                   />
                 }

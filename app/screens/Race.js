@@ -16,7 +16,8 @@ import HelpDialogPrompt from "../components/HelpDialogPrompt";
 import { isEmpty } from "lodash";
 import RaceTimer from "../components/RaceTimer";
 import ElapsedTimeInputModal from "../components/ElapsedTimeInputModal";
-import { differenceInMilliseconds, toDate, format, set } from "date-fns/";
+import { differenceInMilliseconds, format } from "date-fns/";
+import * as MailComposer from "expo-mail-composer";
 
 const RACE_STATE = {
   NOT_STARTED: "not_started",
@@ -154,12 +155,68 @@ function Race() {
 
   const [stopWatchState, setStopWatchState] = useState();
   const [raceState, setRaceState] = useState(RACE_STATE.NOT_STARTED);
+  const [emailEnabled, setEmailEnabled] = useState(false);
 
   const { getBoatList, getRaceResults, storeRaceResults, boatDataChanged } =
     useStorage();
 
-  const { getCorrectedTime, isAlternatePHRF, millisecondsToDuration } =
-    usePHRF();
+  const {
+    getCorrectedTime,
+    isAlternatePHRF,
+    millisecondsToDuration,
+    deviceCanEmail,
+  } = usePHRF();
+
+  const handleEmailPress = () => {
+    MailComposer.composeAsync({
+      subject: `RegattaCompTime - Race of ${format(
+        raceTimerStartDate,
+        "MMMM do, yyyy h:mm:ss a"
+      )}`,
+      body: buildContent(),
+    }).then((result) => {
+      // result
+      // MailComposerStatus.CANCELLED
+      // MailComposerStatus.SAVED
+      // MailComposerStatus.SENT
+      // MailComposerStatus.UNDETERMINED
+    });
+  };
+
+  const buildContent = () => {
+    let contentText = `Race Results - ${format(
+      raceTimerStartDate,
+      "MMMM do  yyyy"
+    )} \n\nRace Start: ${format(
+      raceTimerStartDate,
+      "h:mm:ss a"
+    )}\nRace Elapsed Time: ${millisecondsToDuration(elapsedTime)}\n\n`;
+
+    viewBoatResultList.map((result) => {
+      const ct = getBoatCorrectedTime(result, result.elapsedTime);
+      if (result && result.rank !== "-") {
+        contentText += `${result.rank}  ${result.boat.boatName}\n    Class: ${
+          result.boat.boatType
+        }\n    Rating: ${result.boat.rating} (${getFS_NFS(
+          result.boat.rating,
+          result.boat
+        )})\n    Elapsed Time: ${millisecondsToDuration(
+          result.elapsedTime
+        )}\n    Corrected Time: ${ct}`;
+        contentText += `\n\n`;
+      }
+    });
+
+    function getFS_NFS(rating, boat) {
+      if (rating.toString() === boat.ratingFS) {
+        return "FS";
+      }
+      if (rating.toString() === boat.ratingNFS) {
+        return "NFS";
+      }
+    }
+    return contentText;
+  };
 
   const handleHelpPress = () => {
     setHelpPromptVisible(true);
@@ -400,6 +457,8 @@ function Race() {
     const boatThatFinished = Array.from(allBoatResultList).filter(
       (result) => result.rank > 0
     );
+
+    setEmailEnabled(boatThatFinished && boatThatFinished.length > 0);
 
     let sortedBoatResultList = allBoatResultList;
     // If no boats finished, skip sorting.
@@ -740,7 +799,13 @@ function Race() {
         onNegativeButtonPress={() => setStopRacePromptVisible(false)}
         onPositiveButtonPress={handleStopRaceConfirm}
       />
-      <SectionHeader title="Race" onHelpPress={handleHelpPress} />
+      <SectionHeader
+        title="Race"
+        onEmailPress={handleEmailPress}
+        onHelpPress={handleHelpPress}
+        emailVisible={deviceCanEmail}
+        emailEnabled={emailEnabled}
+      />
       <RaceTimer
         startDate={raceTimerStartDate}
         onTimeChange={handleStartTimeChange}

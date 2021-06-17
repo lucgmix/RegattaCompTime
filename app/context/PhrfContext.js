@@ -13,6 +13,7 @@ import {
 } from "../config/constants";
 
 import { useStorage } from "../context/StorageContext";
+import * as MailComposer from "expo-mail-composer";
 
 const RATING = {
   FS: "FS",
@@ -32,6 +33,8 @@ export function PhrfProvider({ children }) {
   const [alternateTOT_B, setAlternateTOT_B] = useState(
     PHRF_FORMULA_ALTERNATE_B
   );
+
+  const [deviceCanEmail, setDeviceCanEmail] = useState(false);
 
   const { getFormulaAB } = useStorage();
 
@@ -115,6 +118,10 @@ export function PhrfProvider({ children }) {
         setAlternateTOT_B(result.data.alternateFormula.b);
       }
     });
+
+    MailComposer.isAvailableAsync().then((value) => {
+      setDeviceCanEmail(value);
+    });
   }, []);
 
   return (
@@ -138,6 +145,7 @@ export function PhrfProvider({ children }) {
         ratingOverride,
         setRatingOverride,
         millisecondsToDuration,
+        deviceCanEmail,
       }}
     >
       {children}
