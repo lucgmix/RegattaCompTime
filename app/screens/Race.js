@@ -246,8 +246,8 @@ function Race() {
             }
           }, []);
 
-          const boats = updatedBoatsResultsData || viewBoatResultList;
-          if (resultsData.raceState && Array.isArray(boats)) {
+          const boatResults = updatedBoatsResultsData || viewBoatResultList;
+          if (resultsData.raceState && Array.isArray(boatResults)) {
             setRaceState(resultsData.raceState);
 
             if (resultsData.raceState !== RACE_STATE.FINISHED) {
@@ -259,19 +259,25 @@ function Race() {
                 resultsData.raceElapsedTime &&
                   setStopWatchStartTime(resultsData.raceElapsedTime);
               }
-              setViewBoatResultList(ratingSortResults(boats));
+              setViewBoatResultList(ratingSortResults(boatResults));
               raceStartTimeAction(
                 getDateTimeForCurrentDay(resultsData.raceStartTime)
               );
             } else {
               setViewBoatResultList(
                 correctTimeSortResults(
-                  boats,
+                  boatResults,
                   isAlternatePHRF,
                   getCorrectedTime,
                   RACE_STATE.FINISHED
                 )
               );
+
+              const hasResults =
+                boatResults.find((result) => result.elapsedTime > 0) !==
+                undefined;
+              console.log(hasResults);
+              setEmailEnabled(hasResults);
 
               resultsData.raceElapsedTime &&
                 setElapsedTime(resultsData.raceElapsedTime);
@@ -724,8 +730,16 @@ function Race() {
   const handleAppStateChange = (newState) => {
     if (newState === "active") {
       populateResultList();
+      updateResultList();
     }
   };
+
+  useEffect(() => {
+    populateResultList();
+    return () => {
+      setViewBoatResultList([]);
+    };
+  }, []);
 
   useEffect(() => {
     populateResultList();

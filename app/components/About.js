@@ -19,7 +19,7 @@ function About() {
           Sdk Version: {Constants.manifest.sdkVersion}
         </Text>
         <Text style={styles.text}>App icon: Suzanne Roy</Text>
-        <Text style={styles.text}>Developer: Luc Grégoire</Text>
+        <Text style={styles.text}>Developed by Luc Grégoire</Text>
       </View>
     </View>
   );
