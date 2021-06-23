@@ -10,8 +10,10 @@ import {
   PHRF_FORMULA_STANDARD_B,
   PHRF_FORMULA_ALTERNATE_A,
   PHRF_FORMULA_ALTERNATE_B,
+  RATING_OVERRIDE,
 } from "../config/constants";
 
+import { differenceInMilliseconds, format } from "date-fns/";
 import { useStorage } from "../context/StorageContext";
 import * as MailComposer from "expo-mail-composer";
 
@@ -109,6 +111,46 @@ export function PhrfProvider({ children }) {
       .sort((a, b) => (a.correctedTime > b.correctedTime ? 1 : -1));
   }
 
+  const getSettings = () => {
+    let ratingOverrideLabel = "PHRF Rating Override: ";
+    switch (ratingOverride) {
+      case RATING_OVERRIDE.NONE:
+        ratingOverrideLabel += "Default";
+        break;
+      case RATING_OVERRIDE.FS:
+        ratingOverrideLabel += "FS (Flying Spinnaker)";
+        break;
+      case RATING_OVERRIDE.NFS:
+        ratingOverrideLabel += "NFS (Non Flying Spinnaker)";
+        break;
+    }
+    return {
+      PHRF_Formula: `PHRF Formula: ${
+        isAlternatePHRF ? "Alternate" : "Primary"
+      }`,
+      PHRF_Rating_Override: ratingOverrideLabel,
+    };
+  };
+
+  const sendEmail = (subject, body) => {
+    const bodyWithSettings =
+      `--------------------------------------------------\nSettings:\n${
+        getSettings().PHRF_Rating_Override
+      }\n${
+        getSettings().PHRF_Formula
+      }\n--------------------------------------------------\n\n` + body;
+    MailComposer.composeAsync({
+      subject: subject,
+      body: bodyWithSettings,
+    }).then((result) => {
+      // result
+      // MailComposerStatus.CANCELLED
+      // MailComposerStatus.SAVED
+      // MailComposerStatus.SENT
+      // MailComposerStatus.UNDETERMINED
+    });
+  };
+
   useEffect(() => {
     getFormulaAB().then((result) => {
       if (result && result.ok && result.data) {
@@ -146,6 +188,7 @@ export function PhrfProvider({ children }) {
         setRatingOverride,
         millisecondsToDuration,
         deviceCanEmail,
+        sendEmail,
       }}
     >
       {children}

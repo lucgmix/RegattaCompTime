@@ -14,7 +14,7 @@ function About() {
         {/* <Text style={styles.text}>
           App Version: {Constants.manifest.version}
         </Text> */}
-        <Text style={styles.text}>App Version: Beta 8</Text>
+        <Text style={styles.text}>App Version: Beta 10</Text>
         <Text style={styles.text}>
           Sdk Version: {Constants.manifest.sdkVersion}
         </Text>

@@ -17,7 +17,6 @@ import { isEmpty } from "lodash";
 import RaceTimer from "../components/RaceTimer";
 import ElapsedTimeInputModal from "../components/ElapsedTimeInputModal";
 import { differenceInMilliseconds, format } from "date-fns/";
-import * as MailComposer from "expo-mail-composer";
 
 const RACE_STATE = {
   NOT_STARTED: "not_started",
@@ -165,29 +164,24 @@ function Race() {
     isAlternatePHRF,
     millisecondsToDuration,
     deviceCanEmail,
+    sendEmail,
   } = usePHRF();
 
   const handleEmailPress = () => {
-    MailComposer.composeAsync({
-      subject: `RegattaCompTime - Race of ${format(
+    sendEmail(
+      `RegattaCompTime - Race of ${format(
         raceTimerStartDate,
         "MMMM do, yyyy h:mm:ss a"
       )}`,
-      body: buildContent(),
-    }).then((result) => {
-      // result
-      // MailComposerStatus.CANCELLED
-      // MailComposerStatus.SAVED
-      // MailComposerStatus.SENT
-      // MailComposerStatus.UNDETERMINED
-    });
+      buildEmailContent()
+    );
   };
 
-  const buildContent = () => {
-    let contentText = `Race Results - ${format(
+  const buildEmailContent = () => {
+    let contentText = `Race Date : ${format(
       raceTimerStartDate,
       "MMMM do  yyyy"
-    )} \n\nRace Start: ${format(
+    )} \nRace Start Time: ${format(
       raceTimerStartDate,
       "h:mm:ss a"
     )}\nRace Elapsed Time: ${millisecondsToDuration(elapsedTime)}\n\n`;
@@ -276,7 +270,6 @@ function Race() {
               const hasResults =
                 boatResults.find((result) => result.elapsedTime > 0) !==
                 undefined;
-              console.log(hasResults);
               setEmailEnabled(hasResults);
 
               resultsData.raceElapsedTime &&

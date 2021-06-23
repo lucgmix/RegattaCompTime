@@ -27,7 +27,8 @@ import defaultStyles from "../config/styles";
 
 import { useStorage } from "../context/StorageContext";
 import { usePHRF } from "../context/PhrfContext";
-import { CURRENT_SCREEN_KEY } from "../config/constants";
+import { CURRENT_SCREEN_KEY, RATING_OVERRIDE } from "../config/constants";
+import { isEmpty } from "lodash";
 
 let listItemHeight = 0;
 
@@ -57,9 +58,33 @@ function Fleet({ navigation }) {
   const [promptVisible, setPromptVisible] = useState(false);
   const [helpPromptVisible, setHelpPromptVisible] = useState(false);
   const [sectionVisible, setSectionVisible] = useState(false);
+  const [emailEnabled, setEmailEnabled] = useState(false);
 
-  const { ratingOverride } = usePHRF();
+  const { ratingOverride, deviceCanEmail, sendEmail } = usePHRF();
   const { getValueForKey } = useStorage();
+
+  const handleEmailPress = () => {
+    sendEmail(`RegattaCompTime - Fleet`, buildEmailContent());
+  };
+
+  const buildEmailContent = () => {
+    let contentText = ``;
+    sortBoatArray(viewBoatList).map((result, index) => {
+      const defaultRating = `${
+        result.useNFSRating ? result.ratingNFS : result.ratingFS
+      } (${result.useNFSRating ? RATING_OVERRIDE.NFS : RATING_OVERRIDE.FS})`;
+      contentText += `${index + 1} ${result.boatName}\n   Class: ${
+        result.boatType
+      }\n   Rating: ${result.rating}\n   Rating FS: ${
+        result.ratingFS
+      }\n   Rating NFS: ${
+        result.ratingNFS
+      }\n   Default Rating: ${defaultRating}`;
+
+      contentText += `\n\n`;
+    });
+    return contentText;
+  };
 
   const jumpToLastUsedScreen = (navigation) => {
     getValueForKey(CURRENT_SCREEN_KEY).then((response) => {
@@ -153,6 +178,7 @@ function Fleet({ navigation }) {
 
   const setBoatList = (boatData) => {
     setViewBoatList(sortBoatArray(boatData));
+    setEmailEnabled(!isEmpty(boatData));
     selectedBoat &&
       setSelectedBoat(boatData.find((boat) => boat.id === selectedBoat.id));
   };
@@ -173,7 +199,6 @@ function Fleet({ navigation }) {
         };
         break;
     }
-
     return applyBoldStyle(textToStyle);
   };
 
@@ -213,7 +238,13 @@ function Fleet({ navigation }) {
           onPositiveButtonPress={() => setHelpPromptVisible(false)}
         />
 
-        <SectionHeader title="Fleet" onHelpPress={handleHelpPress} />
+        <SectionHeader
+          title="Fleet"
+          onEmailPress={handleEmailPress}
+          onHelpPress={handleHelpPress}
+          emailVisible={deviceCanEmail}
+          emailEnabled={emailEnabled}
+        />
 
         <View style={styles.buttonContainer}>
           <View style={styles.buttonGroup}>

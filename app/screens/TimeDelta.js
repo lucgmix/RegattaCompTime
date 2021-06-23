@@ -22,6 +22,7 @@ import HelpDialogPrompt from "../components/HelpDialogPrompt";
 import { Entypo } from "@expo/vector-icons";
 import SectionHeader from "../components/SectionHeader";
 import defaultStyles from "../config/styles";
+import { RATING_OVERRIDE } from "../config/constants";
 import { isEmpty } from "lodash";
 
 let listItemHeight = 0;
@@ -33,11 +34,65 @@ function TimeDelta() {
   const [raceDuration, setRaceDuration] = useState(3600);
   const [isTimeModalVisible, setIsTimeModalVisible] = useState(false);
   const [helpPromptVisible, setHelpPromptVisible] = useState(false);
+  const [emailEnabled, setEmailEnabled] = useState(false);
 
   const resultListRef = useRef();
   const { getBoatList, boatDataChanged, formulaABChanged } = useStorage();
 
-  const { getElapsedDiff, secondsToHms, isAlternatePHRF } = usePHRF();
+  const {
+    getElapsedDiff,
+    secondsToHms,
+    isAlternatePHRF,
+    deviceCanEmail,
+    sendEmail,
+  } = usePHRF();
+
+  const handleEmailPress = () => {
+    sendEmail(`RegattaCompTime - Time Delta`, buildEmailContent());
+  };
+
+  const buildEmailContent = () => {
+    let contentText = ``;
+    const boatWithMatchingId = boatResultsList.find((resultItem) => {
+      return resultItem.boat.id === (selectedBoat && selectedBoat.id);
+    });
+
+    const timeDiffList = getElapsedDiff(
+      boatSelectList,
+      boatWithMatchingId.boat.rating,
+      raceDuration,
+      isAlternatePHRF
+    );
+
+    contentText += `Duration: ${secondsToHms(raceDuration)}\n\n`;
+
+    timeDiffList.map((result, index) => {
+      const isReferenceBoat = result.boat.id === boatWithMatchingId.boat.id;
+      const referenceLabel = isReferenceBoat ? " (Reference Boat)" : "";
+      const defaultRating = `${
+        result.boat.useNFSRating ? result.boat.ratingNFS : result.boat.ratingFS
+      } (${
+        result.boat.useNFSRating ? RATING_OVERRIDE.NFS : RATING_OVERRIDE.FS
+      })`;
+
+      const ratingOverride = result.boat.ratingOverride;
+      const ratingOverrideValue =
+        !isEmpty(ratingOverride) && ratingOverride === RATING_OVERRIDE.FS
+          ? `${result.boat.ratingFS} (FS)`
+          : !isEmpty(ratingOverride)
+          ? `${result.boat.ratingNFS} (NFS)`
+          : "";
+
+      contentText += `${index + 1} ${
+        result.boat.boatName
+      }${referenceLabel}\n   Class: ${result.boat.boatType}\n   Rating: ${
+        ratingOverrideValue || defaultRating
+      }\n   Time Delta: ${secondsToHms(result.diff)}`;
+
+      contentText += `\n\n`;
+    });
+    return contentText;
+  };
 
   const handleOnSelectedBoat = (item) => {
     updateBoatList(item);
@@ -77,10 +132,12 @@ function TimeDelta() {
           );
 
           setSelectedBoat(boatWithMatchingId);
+          setEmailEnabled(true);
         }
       } else {
         setBoatResultsList([]);
         setSelectedBoat(null);
+        setEmailEnabled(false);
       }
     });
   };
@@ -161,7 +218,13 @@ function TimeDelta() {
         isVisible={helpPromptVisible}
         onPositiveButtonPress={() => setHelpPromptVisible(false)}
       />
-      <SectionHeader title="Time Delta" onHelpPress={handleHelpPress} />
+      <SectionHeader
+        title="Time Delta"
+        onHelpPress={handleHelpPress}
+        onEmailPress={handleEmailPress}
+        emailVisible={deviceCanEmail}
+        emailEnabled={emailEnabled}
+      />
       <View style={styles.timeInputContainer}>
         <View
           style={{
