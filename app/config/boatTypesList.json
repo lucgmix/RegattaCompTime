@@ -2,7 +2,7 @@
   "boatTypeList": [
     {
       "id": "1",
-      "boatType": "11 METER",
+      "boatType": "11 METER -SB",
       "ratingFS": "99",
       "ratingNFS": "117"
     },
@@ -14,7 +14,7 @@
     },
     {
       "id": "3",
-      "boatType": "1D 35",
+      "boatType": "1D 35 CF -SB",
       "ratingFS": "45",
       "ratingNFS": "66"
     },
@@ -57,7 +57,7 @@
     },
     {
       "id": "11",
-      "boatType": "ABBOTT 22",
+      "boatType": "ABBOTT 22 IB",
       "ratingFS": "252",
       "ratingNFS": "264"
     },
@@ -87,7 +87,7 @@
     },
     {
       "id": "16",
-      "boatType": "ABBOTT 36",
+      "boatType": "ABBOTT 36 DK",
       "ratingFS": "105",
       "ratingNFS": "114"
     },
@@ -231,7 +231,7 @@
     },
     {
       "id": "40",
-      "boatType": "ALOHA 28/8.5",
+      "boatType": "ALOHA 28/8.5 TM",
       "ratingFS": "189",
       "ratingNFS": "201"
     },
@@ -243,13 +243,13 @@
     },
     {
       "id": "42",
-      "boatType": "ALOHA 30",
+      "boatType": "ALOHA 30 SD",
       "ratingFS": "156",
       "ratingNFS": "165"
     },
     {
       "id": "43",
-      "boatType": "ALOHA 30  MOD",
+      "boatType": "ALOHA 30 WK MOD",
       "ratingFS": "150",
       "ratingNFS": "159"
     },
@@ -261,7 +261,7 @@
     },
     {
       "id": "45",
-      "boatType": "ALOHA 32",
+      "boatType": "ALOHA 32 SD",
       "ratingFS": "183",
       "ratingNFS": "195"
     },
@@ -339,13 +339,13 @@
     },
     {
       "id": "58",
-      "boatType": "ANTRIM 27",
+      "boatType": "ANTRIM 27 IB -SB",
       "ratingFS": "93",
       "ratingNFS": "126"
     },
     {
       "id": "59",
-      "boatType": "ANTRIM 27 OB",
+      "boatType": "ANTRIM 27 OB -SB",
       "ratingFS": "84",
       "ratingNFS": "117"
     },
@@ -369,13 +369,13 @@
     },
     {
       "id": "63",
-      "boatType": "ARCHAMBAULT 35",
+      "boatType": "ARCHAMBAULT 35 CF",
       "ratingFS": "66",
       "ratingNFS": "90"
     },
     {
       "id": "64",
-      "boatType": "ARCHAMBAULT 40RC  MOD",
+      "boatType": "ARCHAMBAULT 40RC CF MOD",
       "ratingFS": "33",
       "ratingNFS": "54"
     },
@@ -387,7 +387,7 @@
     },
     {
       "id": "66",
-      "boatType": "AURORA 40",
+      "boatType": "AURORA 40 KCB",
       "ratingFS": "120",
       "ratingNFS": "132"
     },
@@ -399,13 +399,13 @@
     },
     {
       "id": "68",
-      "boatType": "B 25",
+      "boatType": "B 25 -SB",
       "ratingFS": "135",
       "ratingNFS": "150"
     },
     {
       "id": "69",
-      "boatType": "B 32 OB MOD",
+      "boatType": "B 32 OB MOD -SB",
       "ratingFS": "84",
       "ratingNFS": "102"
     },
@@ -453,7 +453,7 @@
     },
     {
       "id": "77",
-      "boatType": "BAVARIA 32/33 CRUISER",
+      "boatType": "BAVARIA 32/33 CRUISER DK",
       "ratingFS": "144",
       "ratingNFS": "153"
     },
@@ -465,7 +465,7 @@
     },
     {
       "id": "79",
-      "boatType": "BAVARIA 38",
+      "boatType": "BAVARIA 38 SD",
       "ratingFS": "117",
       "ratingNFS": "126"
     },
@@ -501,7 +501,7 @@
     },
     {
       "id": "85",
-      "boatType": "BENETEAU 1ST 10R",
+      "boatType": "BENETEAU 1ST 10R CF **",
       "ratingFS": "81",
       "ratingNFS": "105"
     },
@@ -525,7 +525,7 @@
     },
     {
       "id": "89",
-      "boatType": "BENETEAU 1ST 235",
+      "boatType": "BENETEAU 1ST 235 SD/WK",
       "ratingFS": "216",
       "ratingNFS": "225"
     },
@@ -555,7 +555,7 @@
     },
     {
       "id": "94",
-      "boatType": "BENETEAU 1ST 285 LIB CUP",
+      "boatType": "BENETEAU 1ST 285 LIB CUP SD/WK",
       "ratingFS": "210",
       "ratingNFS": "219"
     },
@@ -567,7 +567,7 @@
     },
     {
       "id": "96",
-      "boatType": "BENETEAU 1ST 285",
+      "boatType": "BENETEAU 1ST 285 SD/WK",
       "ratingFS": "213",
       "ratingNFS": "222"
     },
@@ -579,7 +579,7 @@
     },
     {
       "id": "98",
-      "boatType": "BENETEAU 1ST 29",
+      "boatType": "BENETEAU 1ST 29 SM",
       "ratingFS": "180",
       "ratingNFS": "192"
     },
@@ -609,7 +609,7 @@
     },
     {
       "id": "103",
-      "boatType": "BENETEAU 1ST 305",
+      "boatType": "BENETEAU 1ST 305 SD",
       "ratingFS": "159",
       "ratingNFS": "171"
     },
@@ -633,13 +633,13 @@
     },
     {
       "id": "107",
-      "boatType": "BENETEAU 1ST 310",
+      "boatType": "BENETEAU 1ST 310 SD",
       "ratingFS": "153",
       "ratingNFS": "165"
     },
     {
       "id": "108",
-      "boatType": "BENETEAU 1st 32",
+      "boatType": "BENETEAU 1st 32 TM",
       "ratingFS": "141",
       "ratingNFS": "153"
     },
@@ -651,19 +651,19 @@
     },
     {
       "id": "110",
-      "boatType": "BENETEAU 1ST 325",
+      "boatType": "BENETEAU 1ST 325 SD",
       "ratingFS": "156",
       "ratingNFS": "168"
     },
     {
       "id": "111",
-      "boatType": "BENETEAU 1ST 325",
+      "boatType": "BENETEAU 1ST 325 TM",
       "ratingFS": "141",
       "ratingNFS": "153"
     },
     {
       "id": "112",
-      "boatType": "BENETEAU 1ST 32S5",
+      "boatType": "BENETEAU 1ST 32S5 WK",
       "ratingFS": "159",
       "ratingNFS": "168"
     },
@@ -675,13 +675,13 @@
     },
     {
       "id": "114",
-      "boatType": "BENETEAU 1ST 345",
+      "boatType": "BENETEAU 1ST 345 SD",
       "ratingFS": "138",
       "ratingNFS": "150"
     },
     {
       "id": "115",
-      "boatType": "BENETEAU 1ST 35-2",
+      "boatType": "BENETEAU 1ST 35-2 CF",
       "ratingFS": "64",
       "ratingNFS": "85"
     },
@@ -693,13 +693,13 @@
     },
     {
       "id": "117",
-      "boatType": "BENETEAU 1ST 35S5",
+      "boatType": "BENETEAU 1ST 35S5 SD/WK",
       "ratingFS": "138",
       "ratingNFS": "147"
     },
     {
       "id": "118",
-      "boatType": "BENETEAU 1ST 35S5",
+      "boatType": "BENETEAU 1ST 35S5 TM SD/WK",
       "ratingFS": "135",
       "ratingNFS": "144"
     },
@@ -711,31 +711,31 @@
     },
     {
       "id": "120",
-      "boatType": "BENETEAU 1ST 36.7",
+      "boatType": "BENETEAU 1ST 36.7 **",
       "ratingFS": "78",
       "ratingNFS": "87"
     },
     {
       "id": "121",
-      "boatType": "BENETEAU 1ST 36.7",
+      "boatType": "BENETEAU 1ST 36.7 SD",
       "ratingFS": "84",
       "ratingNFS": "93"
     },
     {
       "id": "122",
-      "boatType": "BENETEAU 1ST 38",
+      "boatType": "BENETEAU 1ST 38 TM",
       "ratingFS": "102",
       "ratingNFS": "114"
     },
     {
       "id": "123",
-      "boatType": "BENETEAU 1ST 38",
+      "boatType": "BENETEAU 1ST 38 TM SD",
       "ratingFS": "108",
       "ratingNFS": "120"
     },
     {
       "id": "124",
-      "boatType": "BENETEAU 1ST 38S5",
+      "boatType": "BENETEAU 1ST 38S5 SD",
       "ratingFS": "102",
       "ratingNFS": "111"
     },
@@ -747,19 +747,19 @@
     },
     {
       "id": "126",
-      "boatType": "BENETEAU 1ST 40",
+      "boatType": "BENETEAU 1ST 40 SD",
       "ratingFS": "51",
       "ratingNFS": "66"
     },
     {
       "id": "127",
-      "boatType": "BENETEAU 1ST 40",
+      "boatType": "BENETEAU 1ST 40 TM (TK)",
       "ratingFS": "39",
       "ratingNFS": "57"
     },
     {
       "id": "128",
-      "boatType": "BENETEAU 1ST 40",
+      "boatType": "BENETEAU 1ST 40 TM SD",
       "ratingFS": "48",
       "ratingNFS": "66"
     },
@@ -777,25 +777,25 @@
     },
     {
       "id": "131",
-      "boatType": "BENETEAU 1ST 40.7",
+      "boatType": "BENETEAU 1ST 40.7 SD",
       "ratingFS": "60",
       "ratingNFS": "69"
     },
     {
       "id": "132",
-      "boatType": "BENETEAU 1ST 405",
+      "boatType": "BENETEAU 1ST 405 TM",
       "ratingFS": "96",
       "ratingNFS": "111"
     },
     {
       "id": "133",
-      "boatType": "BENETEAU 1ST 405",
+      "boatType": "BENETEAU 1ST 405 TM SD",
       "ratingFS": "99",
       "ratingNFS": "114"
     },
     {
       "id": "134",
-      "boatType": "BENETEAU 1ST 41S5",
+      "boatType": "BENETEAU 1ST 41S5 WK",
       "ratingFS": "84",
       "ratingNFS": "93"
     },
@@ -807,19 +807,19 @@
     },
     {
       "id": "136",
-      "boatType": "BENETEAU 1ST 42",
+      "boatType": "BENETEAU 1ST 42 TM",
       "ratingFS": "81",
       "ratingNFS": "93"
     },
     {
       "id": "137",
-      "boatType": "BENETEAU 1ST 42S7 I",
+      "boatType": "BENETEAU 1ST 42S7 WKI",
       "ratingFS": "84",
       "ratingNFS": "93"
     },
     {
       "id": "138",
-      "boatType": "BENETEAU 1ST 44.7",
+      "boatType": "BENETEAU 1ST 44.7 DK",
       "ratingFS": "33",
       "ratingNFS": "42"
     },
@@ -831,7 +831,7 @@
     },
     {
       "id": "140",
-      "boatType": "BENETEAU 1ST 45",
+      "boatType": "BENETEAU 1ST 45 DK",
       "ratingFS": "18",
       "ratingNFS": "30"
     },
@@ -843,7 +843,7 @@
     },
     {
       "id": "142",
-      "boatType": "BENETEAU 1ST 47.7",
+      "boatType": "BENETEAU 1ST 47.7 SD/WK",
       "ratingFS": "33",
       "ratingNFS": "42"
     },
@@ -873,13 +873,13 @@
     },
     {
       "id": "147",
-      "boatType": "BENETEAU 1ST FIG. SOLO MOD",
+      "boatType": "BENETEAU 1ST FIG. SOLO MOD -SB",
       "ratingFS": "102",
       "ratingNFS": "120"
     },
     {
       "id": "148",
-      "boatType": "BENETEAU 1ST FIGARO SOLO",
+      "boatType": "BENETEAU 1ST FIGARO SOLO -SB",
       "ratingFS": "108",
       "ratingNFS": "126"
     },
@@ -897,13 +897,13 @@
     },
     {
       "id": "151",
-      "boatType": "BENETEAU 323",
+      "boatType": "BENETEAU 323 DK",
       "ratingFS": "135",
       "ratingNFS": "147"
     },
     {
       "id": "152",
-      "boatType": "BENETEAU 323",
+      "boatType": "BENETEAU 323 SD",
       "ratingFS": "141",
       "ratingNFS": "153"
     },
@@ -933,13 +933,13 @@
     },
     {
       "id": "157",
-      "boatType": "BENETEAU 49",
+      "boatType": "BENETEAU 49 DK",
       "ratingFS": "69",
       "ratingNFS": "84"
     },
     {
       "id": "158",
-      "boatType": "BENETEAU 49",
+      "boatType": "BENETEAU 49 SD",
       "ratingFS": "75",
       "ratingNFS": "90"
     },
@@ -975,7 +975,7 @@
     },
     {
       "id": "164",
-      "boatType": "BENETEAU OCEANIS 331",
+      "boatType": "BENETEAU OCEANIS 331 SD",
       "ratingFS": "147",
       "ratingNFS": "159"
     },
@@ -987,19 +987,19 @@
     },
     {
       "id": "166",
-      "boatType": "BENETEAU OCEANIS 34",
+      "boatType": "BENETEAU OCEANIS 34 SD",
       "ratingFS": "150",
       "ratingNFS": "162"
     },
     {
       "id": "167",
-      "boatType": "BENETEAU OCEANIS 350",
+      "boatType": "BENETEAU OCEANIS 350 WK",
       "ratingFS": "162",
       "ratingNFS": "174"
     },
     {
       "id": "168",
-      "boatType": "BENETEAU OCEANIS 351",
+      "boatType": "BENETEAU OCEANIS 351 WK",
       "ratingFS": "150",
       "ratingNFS": "162"
     },
@@ -1017,13 +1017,13 @@
     },
     {
       "id": "171",
-      "boatType": "BENETEAU OCEANIS 37",
+      "boatType": "BENETEAU OCEANIS 37 DK",
       "ratingFS": "126",
       "ratingNFS": "141"
     },
     {
       "id": "172",
-      "boatType": "BENETEAU OCEANIS 370",
+      "boatType": "BENETEAU OCEANIS 370 WK",
       "ratingFS": "150",
       "ratingNFS": "159"
     },
@@ -1059,7 +1059,7 @@
     },
     {
       "id": "178",
-      "boatType": "BENETEAU OCEANIS 411",
+      "boatType": "BENETEAU OCEANIS 411 DK",
       "ratingFS": "114",
       "ratingNFS": "129"
     },
@@ -1071,7 +1071,7 @@
     },
     {
       "id": "180",
-      "boatType": "BENETEAU OCEANIS 423",
+      "boatType": "BENETEAU OCEANIS 423 SD",
       "ratingFS": "120",
       "ratingNFS": "135"
     },
@@ -1083,13 +1083,13 @@
     },
     {
       "id": "182",
-      "boatType": "BENETEAU OCEANIS 46",
+      "boatType": "BENETEAU OCEANIS 46 DK",
       "ratingFS": "69",
       "ratingNFS": "81"
     },
     {
       "id": "183",
-      "boatType": "BENETEAU OCEANIS 46",
+      "boatType": "BENETEAU OCEANIS 46 SD",
       "ratingFS": "75",
       "ratingNFS": "87"
     },
@@ -1185,13 +1185,13 @@
     },
     {
       "id": "199",
-      "boatType": "BRISTOL 27",
+      "boatType": "BRISTOL 27 OB",
       "ratingFS": "225",
       "ratingNFS": "234"
     },
     {
       "id": "200",
-      "boatType": "BRISTOL 27",
+      "boatType": "BRISTOL 27 SM",
       "ratingFS": "246",
       "ratingNFS": "255"
     },
@@ -1269,13 +1269,13 @@
     },
     {
       "id": "213",
-      "boatType": "C&C 110",
+      "boatType": "C&C 110 CF",
       "ratingFS": "81",
       "ratingNFS": "99"
     },
     {
       "id": "214",
-      "boatType": "C&C 110",
+      "boatType": "C&C 110 CF SD",
       "ratingFS": "87",
       "ratingNFS": "105"
     },
@@ -1287,7 +1287,7 @@
     },
     {
       "id": "216",
-      "boatType": "C&C 115",
+      "boatType": "C&C 115 CF**",
       "ratingFS": "57",
       "ratingNFS": "72"
     },
@@ -1311,7 +1311,7 @@
     },
     {
       "id": "220",
-      "boatType": "C&C 25-1",
+      "boatType": "C&C 25-1 IB",
       "ratingFS": "219",
       "ratingNFS": "231"
     },
@@ -1323,7 +1323,7 @@
     },
     {
       "id": "222",
-      "boatType": "C&C 25-2",
+      "boatType": "C&C 25-2 IB",
       "ratingFS": "222",
       "ratingNFS": "234"
     },
@@ -1359,7 +1359,7 @@
     },
     {
       "id": "228",
-      "boatType": "C&C 27-3",
+      "boatType": "C&C 27-3 **",
       "ratingFS": "189",
       "ratingNFS": "201"
     },
@@ -1371,7 +1371,7 @@
     },
     {
       "id": "230",
-      "boatType": "C&C 27-5",
+      "boatType": "C&C 27-5 **",
       "ratingFS": "177",
       "ratingNFS": "189"
     },
@@ -1389,13 +1389,13 @@
     },
     {
       "id": "233",
-      "boatType": "C&C 27-5",
+      "boatType": "C&C 27-5 SD",
       "ratingFS": "183",
       "ratingNFS": "195"
     },
     {
       "id": "234",
-      "boatType": "C&C 29",
+      "boatType": "C&C 29 **",
       "ratingFS": "177",
       "ratingNFS": "189"
     },
@@ -1407,19 +1407,19 @@
     },
     {
       "id": "236",
-      "boatType": "C&C 29",
+      "boatType": "C&C 29 SD",
       "ratingFS": "183",
       "ratingNFS": "195"
     },
     {
       "id": "237",
-      "boatType": "C&C 29-2",
+      "boatType": "C&C 29-2 **",
       "ratingFS": "177",
       "ratingNFS": "189"
     },
     {
       "id": "238",
-      "boatType": "C&C 29-2",
+      "boatType": "C&C 29-2 SD",
       "ratingFS": "183",
       "ratingNFS": "195"
     },
@@ -1437,7 +1437,7 @@
     },
     {
       "id": "241",
-      "boatType": "C&C 30",
+      "boatType": "C&C 30 **",
       "ratingFS": "174",
       "ratingNFS": "186"
     },
@@ -1449,7 +1449,7 @@
     },
     {
       "id": "243",
-      "boatType": "C&C 30",
+      "boatType": "C&C 30 SD",
       "ratingFS": "174",
       "ratingNFS": "186"
     },
@@ -1467,7 +1467,7 @@
     },
     {
       "id": "246",
-      "boatType": "C&C 30-2",
+      "boatType": "C&C 30-2 SD/WK",
       "ratingFS": "153",
       "ratingNFS": "165"
     },
@@ -1497,7 +1497,7 @@
     },
     {
       "id": "251",
-      "boatType": "C&C 32",
+      "boatType": "C&C 32 KCB",
       "ratingFS": "162",
       "ratingNFS": "174"
     },
@@ -1515,7 +1515,7 @@
     },
     {
       "id": "254",
-      "boatType": "C&C 33-2",
+      "boatType": "C&C 33-2 **",
       "ratingFS": "132",
       "ratingNFS": "144"
     },
@@ -1533,7 +1533,7 @@
     },
     {
       "id": "257",
-      "boatType": "C&C 34",
+      "boatType": "C&C 34 **",
       "ratingFS": "141",
       "ratingNFS": "153"
     },
@@ -1545,19 +1545,19 @@
     },
     {
       "id": "259",
-      "boatType": "C&C 34 MOD 2",
+      "boatType": "C&C 34 MOD 2 WK",
       "ratingFS": "147",
       "ratingNFS": "159"
     },
     {
       "id": "260",
-      "boatType": "C&C 34/36+ (XL)",
+      "boatType": "C&C 34/36+ DK(XL)",
       "ratingFS": "90",
       "ratingNFS": "102"
     },
     {
       "id": "261",
-      "boatType": "C&C 34/36+",
+      "boatType": "C&C 34/36+ WK",
       "ratingFS": "102",
       "ratingNFS": "114"
     },
@@ -1593,7 +1593,7 @@
     },
     {
       "id": "267",
-      "boatType": "C&C 35-2",
+      "boatType": "C&C 35-2 SM",
       "ratingFS": "132",
       "ratingNFS": "144"
     },
@@ -1605,7 +1605,7 @@
     },
     {
       "id": "269",
-      "boatType": "C&C 35-3",
+      "boatType": "C&C 35-3 KCB",
       "ratingFS": "129",
       "ratingNFS": "141"
     },
@@ -1617,7 +1617,7 @@
     },
     {
       "id": "271",
-      "boatType": "C&C 35-3",
+      "boatType": "C&C 35-3 WK",
       "ratingFS": "132",
       "ratingNFS": "144"
     },
@@ -1647,13 +1647,13 @@
     },
     {
       "id": "276",
-      "boatType": "C&C 36 INVADER",
+      "boatType": "C&C 36 INVADER SM",
       "ratingFS": "180",
       "ratingNFS": "195"
     },
     {
       "id": "277",
-      "boatType": "C&C 36",
+      "boatType": "C&C 36 KCB",
       "ratingFS": "135",
       "ratingNFS": "147"
     },
@@ -1665,7 +1665,7 @@
     },
     {
       "id": "279",
-      "boatType": "C&C 37",
+      "boatType": "C&C 37 KCB",
       "ratingFS": "111",
       "ratingNFS": "123"
     },
@@ -1677,31 +1677,31 @@
     },
     {
       "id": "281",
-      "boatType": "C&C 37/40+",
+      "boatType": "C&C 37/40+ SM WK",
       "ratingFS": "81",
       "ratingNFS": "93"
     },
     {
       "id": "282",
-      "boatType": "C&C 37/40+",
+      "boatType": "C&C 37/40+ SM WK/DK",
       "ratingFS": "75",
       "ratingNFS": "87"
     },
     {
       "id": "283",
-      "boatType": "C&C 37/40+ (XL)",
+      "boatType": "C&C 37/40+ TM (XL) DK",
       "ratingFS": "72",
       "ratingNFS": "84"
     },
     {
       "id": "284",
-      "boatType": "C&C 37/40+ (XL)",
+      "boatType": "C&C 37/40+ TM (XL) WK",
       "ratingFS": "75",
       "ratingNFS": "87"
     },
     {
       "id": "285",
-      "boatType": "C&C 37/40+ (XL)",
+      "boatType": "C&C 37/40+ TM (XL) WK/DK",
       "ratingFS": "72",
       "ratingNFS": "84"
     },
@@ -1761,7 +1761,7 @@
     },
     {
       "id": "295",
-      "boatType": "C&C 38-3",
+      "boatType": "C&C 38-3 WK",
       "ratingFS": "108",
       "ratingNFS": "120"
     },
@@ -1791,7 +1791,7 @@
     },
     {
       "id": "300",
-      "boatType": "C&C 40-2",
+      "boatType": "C&C 40-2 TM DK",
       "ratingFS": "93",
       "ratingNFS": "105"
     },
@@ -1810,19 +1810,19 @@
     },
     {
       "id": "304",
-      "boatType": "C&C 41",
+      "boatType": "C&C 41 KCB",
       "ratingFS": "87",
       "ratingNFS": "99"
     },
     {
       "id": "305",
-      "boatType": "C&C 41",
+      "boatType": "C&C 41 SM KCB",
       "ratingFS": "99",
       "ratingNFS": "111"
     },
     {
       "id": "306",
-      "boatType": "C&C 41",
+      "boatType": "C&C 41 WK",
       "ratingFS": "78",
       "ratingNFS": "90"
     },
@@ -1853,13 +1853,13 @@
     { "id": "311", "boatType": "C&C 43", "ratingFS": "84", "ratingNFS": "96" },
     {
       "id": "312",
-      "boatType": "C&C 43",
+      "boatType": "C&C 43 TM",
       "ratingFS": "78",
       "ratingNFS": "90"
     },
     {
       "id": "313",
-      "boatType": "C&C 44",
+      "boatType": "C&C 44 KCB",
       "ratingFS": "57",
       "ratingNFS": "69"
     },
@@ -1871,20 +1871,20 @@
     },
     {
       "id": "315",
-      "boatType": "C&C 44",
+      "boatType": "C&C 44 SD/WK",
       "ratingFS": "63",
       "ratingNFS": "75"
     },
     { "id": "316", "boatType": "C&C 48", "ratingFS": "66", "ratingNFS": "78" },
     {
       "id": "317",
-      "boatType": "C&C 99",
+      "boatType": "C&C 99 CF DK **",
       "ratingFS": "93",
       "ratingNFS": "111"
     },
     {
       "id": "318",
-      "boatType": "C&C 99",
+      "boatType": "C&C 99 CF SD **",
       "ratingFS": "99",
       "ratingNFS": "117"
     },
@@ -1908,13 +1908,13 @@
     },
     {
       "id": "322",
-      "boatType": "C&C SR 25",
+      "boatType": "C&C SR 25  -SB",
       "ratingFS": "126",
       "ratingNFS": "141"
     },
     {
       "id": "323",
-      "boatType": "C&C SR 33",
+      "boatType": "C&C SR 33 -SB",
       "ratingFS": "81",
       "ratingNFS": "93"
     },
@@ -1932,7 +1932,7 @@
     },
     {
       "id": "326",
-      "boatType": "CAL 21",
+      "boatType": "CAL 21  -SB",
       "ratingFS": "267",
       "ratingNFS": "279"
     },
@@ -1950,13 +1950,13 @@
     },
     {
       "id": "329",
-      "boatType": "CAL 25-2",
+      "boatType": "CAL 25-2 IB",
       "ratingFS": "216",
       "ratingNFS": "228"
     },
     {
       "id": "330",
-      "boatType": "CAL 25-2",
+      "boatType": "CAL 25-2 SD",
       "ratingFS": "216",
       "ratingNFS": "228"
     },
@@ -2040,7 +2040,7 @@
     },
     {
       "id": "344",
-      "boatType": "CAL T/2",
+      "boatType": "CAL T/2 TM",
       "ratingFS": "192",
       "ratingNFS": "204"
     },
@@ -2100,13 +2100,13 @@
     },
     {
       "id": "354",
-      "boatType": "CAPRI 22 CATALINA",
+      "boatType": "CAPRI 22 CATALINA WK",
       "ratingFS": "201",
       "ratingNFS": "213"
     },
     {
       "id": "355",
-      "boatType": "CAPRI 23.5",
+      "boatType": "CAPRI 23.5 -SB",
       "ratingFS": "102",
       "ratingNFS": "135"
     },
@@ -2130,13 +2130,13 @@
     },
     {
       "id": "359",
-      "boatType": "CAPRI 26",
+      "boatType": "CAPRI 26 IB",
       "ratingFS": "222",
       "ratingNFS": "231"
     },
     {
       "id": "360",
-      "boatType": "CAPRI 30",
+      "boatType": "CAPRI 30 IB",
       "ratingFS": "120",
       "ratingNFS": "132"
     },
@@ -2160,7 +2160,7 @@
     },
     {
       "id": "364",
-      "boatType": "CARRERA 290",
+      "boatType": "CARRERA 290 -SB",
       "ratingFS": "99",
       "ratingNFS": "126"
     },
@@ -2214,13 +2214,13 @@
     },
     {
       "id": "373",
-      "boatType": "CATALINA 22",
+      "boatType": "CATALINA 22 SD/WK",
       "ratingFS": "252",
       "ratingNFS": "267"
     },
     {
       "id": "374",
-      "boatType": "CATALINA 25",
+      "boatType": "CATALINA 25 IB",
       "ratingFS": "225",
       "ratingNFS": "237"
     },
@@ -2238,19 +2238,19 @@
     },
     {
       "id": "377",
-      "boatType": "CATALINA 25",
+      "boatType": "CATALINA 25 TM",
       "ratingFS": "213",
       "ratingNFS": "225"
     },
     {
       "id": "378",
-      "boatType": "CATALINA 250",
+      "boatType": "CATALINA 250 WK",
       "ratingFS": "228",
       "ratingNFS": "237"
     },
     {
       "id": "379",
-      "boatType": "CATALINA 27",
+      "boatType": "CATALINA 27 IB",
       "ratingFS": "216",
       "ratingNFS": "228"
     },
@@ -2262,13 +2262,13 @@
     },
     {
       "id": "381",
-      "boatType": "CATALINA 27",
+      "boatType": "CATALINA 27 TM IB",
       "ratingFS": "207",
       "ratingNFS": "219"
     },
     {
       "id": "382",
-      "boatType": "CATALINA 27  OB",
+      "boatType": "CATALINA 27 TM OB",
       "ratingFS": "201",
       "ratingNFS": "213"
     },
@@ -2286,13 +2286,13 @@
     },
     {
       "id": "385",
-      "boatType": "CATALINA 28",
+      "boatType": "CATALINA 28 TM",
       "ratingFS": "186",
       "ratingNFS": "198"
     },
     {
       "id": "386",
-      "boatType": "CATALINA 28",
+      "boatType": "CATALINA 28 WK",
       "ratingFS": "195",
       "ratingNFS": "207"
     },
@@ -2304,7 +2304,7 @@
     },
     {
       "id": "388",
-      "boatType": "CATALINA 28-2",
+      "boatType": "CATALINA 28-2 WK",
       "ratingFS": "201",
       "ratingNFS": "213"
     },
@@ -2322,25 +2322,25 @@
     },
     {
       "id": "391",
-      "boatType": "CATALINA 30-1/2/3",
+      "boatType": "CATALINA 30-1/2/3 SD",
       "ratingFS": "183",
       "ratingNFS": "195"
     },
     {
       "id": "392",
-      "boatType": "CATALINA 30-1/2/3",
+      "boatType": "CATALINA 30-1/2/3 TM",
       "ratingFS": "171",
       "ratingNFS": "183"
     },
     {
       "id": "393",
-      "boatType": "CATALINA 30-1/2/3",
+      "boatType": "CATALINA 30-1/2/3 TM BS",
       "ratingFS": "162",
       "ratingNFS": "174"
     },
     {
       "id": "394",
-      "boatType": "CATALINA 30-1/2/3",
+      "boatType": "CATALINA 30-1/2/3 TM BS WK",
       "ratingFS": "168",
       "ratingNFS": "180"
     },
@@ -2352,7 +2352,7 @@
     },
     {
       "id": "396",
-      "boatType": "CATALINA 309",
+      "boatType": "CATALINA 309 WK",
       "ratingFS": "174",
       "ratingNFS": "183"
     },
@@ -2364,7 +2364,7 @@
     },
     {
       "id": "398",
-      "boatType": "CATALINA 310",
+      "boatType": "CATALINA 310 WK",
       "ratingFS": "174",
       "ratingNFS": "183"
     },
@@ -2376,7 +2376,7 @@
     },
     {
       "id": "400",
-      "boatType": "CATALINA 320-1/2",
+      "boatType": "CATALINA 320-1/2 WK",
       "ratingFS": "156",
       "ratingNFS": "168"
     },
@@ -2388,19 +2388,19 @@
     },
     {
       "id": "402",
-      "boatType": "CATALINA 34",
+      "boatType": "CATALINA 34 SD/WK",
       "ratingFS": "159",
       "ratingNFS": "171"
     },
     {
       "id": "403",
-      "boatType": "CATALINA 34",
+      "boatType": "CATALINA 34 TM",
       "ratingFS": "147",
       "ratingNFS": "159"
     },
     {
       "id": "404",
-      "boatType": "CATALINA 34",
+      "boatType": "CATALINA 34 TM WK",
       "ratingFS": "153",
       "ratingNFS": "165"
     },
@@ -2412,25 +2412,25 @@
     },
     {
       "id": "406",
-      "boatType": "CATALINA 34-2",
+      "boatType": "CATALINA 34-2 TM WK",
       "ratingFS": "153",
       "ratingNFS": "165"
     },
     {
       "id": "407",
-      "boatType": "CATALINA 34-2",
+      "boatType": "CATALINA 34-2 WK",
       "ratingFS": "150",
       "ratingNFS": "162"
     },
     {
       "id": "408",
-      "boatType": "CATALINA 350-1",
+      "boatType": "CATALINA 350-1 WK",
       "ratingFS": "129",
       "ratingNFS": "141"
     },
     {
       "id": "409",
-      "boatType": "CATALINA 355",
+      "boatType": "CATALINA 355 WK",
       "ratingFS": "126",
       "ratingNFS": "153"
     },
@@ -2442,7 +2442,7 @@
     },
     {
       "id": "411",
-      "boatType": "CATALINA 36",
+      "boatType": "CATALINA 36 TM",
       "ratingFS": "129",
       "ratingNFS": "141"
     },
@@ -2454,19 +2454,19 @@
     },
     {
       "id": "413",
-      "boatType": "CATALINA 36-2",
+      "boatType": "CATALINA 36-2 TM",
       "ratingFS": "138",
       "ratingNFS": "150"
     },
     {
       "id": "414",
-      "boatType": "CATALINA 36-2",
+      "boatType": "CATALINA 36-2 TM WK",
       "ratingFS": "141",
       "ratingNFS": "153"
     },
     {
       "id": "415",
-      "boatType": "CATALINA 36-2",
+      "boatType": "CATALINA 36-2 WK",
       "ratingFS": "147",
       "ratingNFS": "159"
     },
@@ -2478,25 +2478,25 @@
     },
     {
       "id": "417",
-      "boatType": "CATALINA 380",
+      "boatType": "CATALINA 380 WK",
       "ratingFS": "126",
       "ratingNFS": "138"
     },
     {
       "id": "418",
-      "boatType": "CATALINA 387",
+      "boatType": "CATALINA 387 WK",
       "ratingFS": "126",
       "ratingNFS": "138"
     },
     {
       "id": "419",
-      "boatType": "CATALINA 400 MARK II-1",
+      "boatType": "CATALINA 400 MARK II-1 SD/WK",
       "ratingFS": "132",
       "ratingNFS": "144"
     },
     {
       "id": "420",
-      "boatType": "CATALINA 400 MARK II-2",
+      "boatType": "CATALINA 400 MARK II-2 SD/WK",
       "ratingFS": "132",
       "ratingNFS": "144"
     },
@@ -2514,13 +2514,13 @@
     },
     {
       "id": "423",
-      "boatType": "CATALINA 42-2",
+      "boatType": "CATALINA 42-2 WK",
       "ratingFS": "108",
       "ratingNFS": "120"
     },
     {
       "id": "424",
-      "boatType": "CATALINA 470",
+      "boatType": "CATALINA 470 WK",
       "ratingFS": "102",
       "ratingNFS": "114"
     },
@@ -2532,7 +2532,7 @@
     },
     {
       "id": "426",
-      "boatType": "CAYENNE 12.5",
+      "boatType": "CAYENNE 12.5 TM",
       "ratingFS": "81",
       "ratingNFS": "90"
     },
@@ -2640,7 +2640,7 @@
     },
     {
       "id": "444",
-      "boatType": "COLUMBIA 26-2",
+      "boatType": "COLUMBIA 26-2 SD",
       "ratingFS": "228",
       "ratingNFS": "240"
     },
@@ -2652,7 +2652,7 @@
     },
     {
       "id": "446",
-      "boatType": "COLUMBIA 30",
+      "boatType": "COLUMBIA 30 SD",
       "ratingFS": "201",
       "ratingNFS": "213"
     },
@@ -2676,7 +2676,7 @@
     },
     {
       "id": "450",
-      "boatType": "COLUMBIA 7.6",
+      "boatType": "COLUMBIA 7.6 IB",
       "ratingFS": "216",
       "ratingNFS": "228"
     },
@@ -2718,7 +2718,7 @@
     },
     {
       "id": "457",
-      "boatType": "CONCORDIA 47",
+      "boatType": "CONCORDIA 47 -SB",
       "ratingFS": "-15",
       "ratingNFS": "-3"
     },
@@ -2784,7 +2784,7 @@
     },
     {
       "id": "468",
-      "boatType": "CORBIN 39 CUTT",
+      "boatType": "CORBIN 39 CUTT TM",
       "ratingFS": "162",
       "ratingNFS": "174"
     },
@@ -2834,25 +2834,25 @@
     },
     {
       "id": "478",
-      "boatType": "CS 27",
+      "boatType": "CS 27 SD",
       "ratingFS": "207",
       "ratingNFS": "219"
     },
     {
       "id": "479",
-      "boatType": "CS 30",
+      "boatType": "CS 30 **",
       "ratingFS": "150",
       "ratingNFS": "162"
     },
     {
       "id": "480",
-      "boatType": "CS 30",
+      "boatType": "CS 30 SD",
       "ratingFS": "156",
       "ratingNFS": "168"
     },
     {
       "id": "481",
-      "boatType": "CS 30",
+      "boatType": "CS 30 WK",
       "ratingFS": "156",
       "ratingNFS": "168"
     },
@@ -2865,20 +2865,20 @@
     },
     {
       "id": "484",
-      "boatType": "CS 33",
+      "boatType": "CS 33 SD",
       "ratingFS": "153",
       "ratingNFS": "165"
     },
     { "id": "485", "boatType": "CS 34", "ratingFS": "132", "ratingNFS": "144" },
     {
       "id": "486",
-      "boatType": "CS 34",
+      "boatType": "CS 34 SD",
       "ratingFS": "138",
       "ratingNFS": "150"
     },
     {
       "id": "487",
-      "boatType": "CS 34",
+      "boatType": "CS 34 WK",
       "ratingFS": "138",
       "ratingNFS": "150"
     },
@@ -2897,56 +2897,56 @@
     },
     {
       "id": "491",
-      "boatType": "CS 36 MERLIN",
+      "boatType": "CS 36 MERLIN SD",
       "ratingFS": "135",
       "ratingNFS": "147"
     },
     {
       "id": "492",
-      "boatType": "CS 36 MERLIN",
+      "boatType": "CS 36 MERLIN WK",
       "ratingFS": "135",
       "ratingNFS": "147"
     },
     {
       "id": "493",
-      "boatType": "CS 36",
+      "boatType": "CS 36 SD",
       "ratingFS": "129",
       "ratingNFS": "141"
     },
     { "id": "494", "boatType": "CS 40", "ratingFS": "87", "ratingNFS": "99" },
     {
       "id": "495",
-      "boatType": "CS 40",
+      "boatType": "CS 40 SD",
       "ratingFS": "93",
       "ratingNFS": "105"
     },
     {
       "id": "496",
-      "boatType": "CS 40",
+      "boatType": "CS 40 TM",
       "ratingFS": "78",
       "ratingNFS": "87"
     },
     {
       "id": "497",
-      "boatType": "CS 40  MOD",
+      "boatType": "CS 40 TM MOD",
       "ratingFS": "72",
       "ratingNFS": "81"
     },
     {
       "id": "498",
-      "boatType": "CS 40",
+      "boatType": "CS 40 TM SD",
       "ratingFS": "84",
       "ratingNFS": "93"
     },
     {
       "id": "499",
-      "boatType": "CS 40",
+      "boatType": "CS 40 WK",
       "ratingFS": "93",
       "ratingNFS": "105"
     },
     {
       "id": "500",
-      "boatType": "CUSTOM 21",
+      "boatType": "CUSTOM 21 -SB",
       "ratingFS": "174",
       "ratingNFS": "180"
     },
@@ -3007,7 +3007,7 @@
     },
     {
       "id": "511",
-      "boatType": "DEHLER 38-2 J/V",
+      "boatType": "DEHLER 38-2 J/V SD",
       "ratingFS": "54",
       "ratingNFS": "66"
     },
@@ -3037,7 +3037,7 @@
     },
     {
       "id": "516",
-      "boatType": "DELPHIA 40.3",
+      "boatType": "DELPHIA 40.3 SD",
       "ratingFS": "129",
       "ratingNFS": "138"
     },
@@ -3049,19 +3049,19 @@
     },
     {
       "id": "518",
-      "boatType": "DIDI MINI TRANSAT 6.5",
+      "boatType": "DIDI MINI TRANSAT 6.5 -SB",
       "ratingFS": "114",
       "ratingNFS": "147"
     },
     {
       "id": "519",
-      "boatType": "DISCOVERY 7.9",
+      "boatType": "DISCOVERY 7.9 IB SD",
       "ratingFS": "219",
       "ratingNFS": "231"
     },
     {
       "id": "520",
-      "boatType": "DISCOVERY 7.9",
+      "boatType": "DISCOVERY 7.9 SD",
       "ratingFS": "213",
       "ratingNFS": "225"
     },
@@ -3103,7 +3103,7 @@
     },
     {
       "id": "527",
-      "boatType": "DS 16",
+      "boatType": "DS 16 SD  -SB",
       "ratingFS": "294",
       "ratingNFS": "303"
     },
@@ -3111,7 +3111,7 @@
     { "id": "529", "boatType": "DS 22", "ratingFS": "258", "ratingNFS": "270" },
     {
       "id": "530",
-      "boatType": "DS 22",
+      "boatType": "DS 22 KCB",
       "ratingFS": "273",
       "ratingNFS": "285"
     },
@@ -3153,19 +3153,19 @@
     },
     {
       "id": "537",
-      "boatType": "DUFOUR 31",
+      "boatType": "DUFOUR 31 SD",
       "ratingFS": "204",
       "ratingNFS": "216"
     },
     {
       "id": "538",
-      "boatType": "DUFOUR 32 CLASSIC",
+      "boatType": "DUFOUR 32 CLASSIC DK",
       "ratingFS": "153",
       "ratingNFS": "165"
     },
     {
       "id": "539",
-      "boatType": "DUFOUR 34 CLASSIC",
+      "boatType": "DUFOUR 34 CLASSIC DK",
       "ratingFS": "126",
       "ratingNFS": "138"
     },
@@ -3195,19 +3195,19 @@
     },
     {
       "id": "544",
-      "boatType": "DUFOUR 382 GL",
+      "boatType": "DUFOUR 382 GL TM DK",
       "ratingFS": "108",
       "ratingNFS": "123"
     },
     {
       "id": "545",
-      "boatType": "DUFOUR 40",
+      "boatType": "DUFOUR 40 DK",
       "ratingFS": "78",
       "ratingNFS": "87"
     },
     {
       "id": "546",
-      "boatType": "DUFOUR 405 GL",
+      "boatType": "DUFOUR 405 GL SD",
       "ratingFS": "84",
       "ratingNFS": "96"
     },
@@ -3219,7 +3219,7 @@
     },
     {
       "id": "548",
-      "boatType": "DUFOUR 410",
+      "boatType": "DUFOUR 410 SD",
       "ratingFS": "78",
       "ratingNFS": "90"
     },
@@ -3346,7 +3346,7 @@
     },
     {
       "id": "570",
-      "boatType": "ELITE 346",
+      "boatType": "ELITE 346 TM",
       "ratingFS": "123",
       "ratingNFS": "135"
     },
@@ -3394,7 +3394,7 @@
     },
     {
       "id": "578",
-      "boatType": "ERICSON 27",
+      "boatType": "ERICSON 27 IB",
       "ratingFS": "234",
       "ratingNFS": "246"
     },
@@ -3478,7 +3478,7 @@
     },
     {
       "id": "592",
-      "boatType": "ERICSON 38-2",
+      "boatType": "ERICSON 38-2 WK",
       "ratingFS": "123",
       "ratingNFS": "135"
     },
@@ -3490,7 +3490,7 @@
     },
     {
       "id": "594",
-      "boatType": "ESSE 850",
+      "boatType": "ESSE 850 -SB",
       "ratingFS": "72",
       "ratingNFS": "105"
     },
@@ -3520,7 +3520,7 @@
     },
     {
       "id": "599",
-      "boatType": "EVELYN 32-2",
+      "boatType": "EVELYN 32-2 IB",
       "ratingFS": "108",
       "ratingNFS": "129"
     },
@@ -3556,7 +3556,7 @@
     },
     {
       "id": "605",
-      "boatType": "F3 FRERS 36",
+      "boatType": "F3 FRERS 36 TM",
       "ratingFS": "93",
       "ratingNFS": "105"
     },
@@ -3568,7 +3568,7 @@
     },
     {
       "id": "607",
-      "boatType": "FARR 30 (MUMM)",
+      "boatType": "FARR 30 (MUMM) CF -SB",
       "ratingFS": "48",
       "ratingNFS": "78"
     },
@@ -3581,19 +3581,19 @@
     { "id": "609", "boatType": "FARR 38", "ratingFS": "87", "ratingNFS": "96" },
     {
       "id": "610",
-      "boatType": "FARR 395",
+      "boatType": "FARR 395  -SB",
       "ratingFS": "30",
       "ratingNFS": "63"
     },
     {
       "id": "611",
-      "boatType": "FARR 39ML",
+      "boatType": "FARR 39ML  -SB",
       "ratingFS": "15",
       "ratingNFS": "33"
     },
     {
       "id": "612",
-      "boatType": "FARR 40",
+      "boatType": "FARR 40  -SB",
       "ratingFS": "6",
       "ratingNFS": "27"
     },
@@ -3606,7 +3606,7 @@
     { "id": "614", "boatType": "FARR 44", "ratingFS": "3", "ratingNFS": "12" },
     {
       "id": "615",
-      "boatType": "FARR 45",
+      "boatType": "FARR 45 CF  -SB",
       "ratingFS": "-18",
       "ratingNFS": "0"
     },
@@ -3624,7 +3624,7 @@
     },
     {
       "id": "618",
-      "boatType": "FAST 40",
+      "boatType": "FAST 40  -SB",
       "ratingFS": "96",
       "ratingNFS": "129"
     },
@@ -3642,7 +3642,7 @@
     },
     {
       "id": "621",
-      "boatType": "FLYING TIGER 10M",
+      "boatType": "FLYING TIGER 10M CF -SB",
       "ratingFS": "51",
       "ratingNFS": "84"
     },
@@ -3654,7 +3654,7 @@
     },
     {
       "id": "623",
-      "boatType": "FOLKBOAT FR",
+      "boatType": "FOLKBOAT FR IB",
       "ratingFS": "276",
       "ratingNFS": "279"
     },
@@ -3672,7 +3672,7 @@
     },
     {
       "id": "626",
-      "boatType": "FREEDOM 25",
+      "boatType": "FREEDOM 25 IB",
       "ratingFS": "234",
       "ratingNFS": "252"
     },
@@ -3702,13 +3702,13 @@
     },
     {
       "id": "631",
-      "boatType": "FREEDOM 33-2  CK",
+      "boatType": "FREEDOM 33-2 CF CK DK",
       "ratingFS": "153",
       "ratingNFS": "153"
     },
     {
       "id": "632",
-      "boatType": "FREEDOM 33-2  CK FXK",
+      "boatType": "FREEDOM 33-2 CF CK FXK",
       "ratingFS": "156",
       "ratingNFS": "156"
     },
@@ -3720,13 +3720,13 @@
     },
     {
       "id": "634",
-      "boatType": "FREEDOM 38",
+      "boatType": "FREEDOM 38 WK",
       "ratingFS": "144",
       "ratingNFS": "150"
     },
     {
       "id": "635",
-      "boatType": "FREEDOM 40/40",
+      "boatType": "FREEDOM 40/40 WK",
       "ratingFS": "96",
       "ratingNFS": "102"
     },
@@ -3799,37 +3799,37 @@
     },
     {
       "id": "648",
-      "boatType": "GIEA 33/96",
+      "boatType": "GIBSEA 33/96",
       "ratingFS": "150",
       "ratingNFS": "162"
     },
     {
       "id": "649",
-      "boatType": "GIEA 37/106",
+      "boatType": "GIBSEA 37/106",
       "ratingFS": "129",
       "ratingNFS": "141"
     },
     {
       "id": "650",
-      "boatType": "GIEA 7.6",
+      "boatType": "GIBSEA 7.6",
       "ratingFS": "204",
       "ratingNFS": "216"
     },
     {
       "id": "651",
-      "boatType": "GIEA 7.6",
+      "boatType": "GIBSEA 7.6 IB",
       "ratingFS": "210",
       "ratingNFS": "222"
     },
     {
       "id": "652",
-      "boatType": "GIEA 84",
+      "boatType": "GIBSEA 84",
       "ratingFS": "186",
       "ratingNFS": "198"
     },
     {
       "id": "653",
-      "boatType": "GIEA 9.2",
+      "boatType": "GIBSEA 9.2",
       "ratingFS": "168",
       "ratingNFS": "180"
     },
@@ -3889,13 +3889,13 @@
     },
     {
       "id": "663",
-      "boatType": "GOMAN EXP 30-2",
+      "boatType": "GOMAN EXP 30-2 SD",
       "ratingFS": "144",
       "ratingNFS": "156"
     },
     {
       "id": "664",
-      "boatType": "GOMAN EXP 30M",
+      "boatType": "GOMAN EXP 30M IB",
       "ratingFS": "132",
       "ratingNFS": "144"
     },
@@ -3913,7 +3913,7 @@
     },
     {
       "id": "667",
-      "boatType": "GOMAN EXP 35",
+      "boatType": "GOMAN EXP 35 SD",
       "ratingFS": "120",
       "ratingNFS": "132"
     },
@@ -3937,19 +3937,19 @@
     },
     {
       "id": "671",
-      "boatType": "GRAMPIAN 26",
+      "boatType": "GRAMPIAN 26 IB",
       "ratingFS": "222",
       "ratingNFS": "234"
     },
     {
       "id": "672",
-      "boatType": "GRAMPIAN 26 IB  MOD",
+      "boatType": "GRAMPIAN 26 IB KCB MOD",
       "ratingFS": "234",
       "ratingNFS": "246"
     },
     {
       "id": "673",
-      "boatType": "GRAMPIAN 26 OB",
+      "boatType": "GRAMPIAN 26 OB **",
       "ratingFS": "216",
       "ratingNFS": "228"
     },
@@ -3967,7 +3967,7 @@
     },
     {
       "id": "676",
-      "boatType": "GRAMPIAN 28",
+      "boatType": "GRAMPIAN 28 SD",
       "ratingFS": "201",
       "ratingNFS": "213"
     },
@@ -3985,7 +3985,7 @@
     },
     {
       "id": "679",
-      "boatType": "GRAMPIAN 30  MOD",
+      "boatType": "GRAMPIAN 30 TM MOD",
       "ratingFS": "186",
       "ratingNFS": "198"
     },
@@ -4064,13 +4064,13 @@
     },
     {
       "id": "693",
-      "boatType": "HANSE 342",
+      "boatType": "HANSE 342 SD",
       "ratingFS": "126",
       "ratingNFS": "135"
     },
     {
       "id": "694",
-      "boatType": "HANSE 350",
+      "boatType": "HANSE 350 SD",
       "ratingFS": "120",
       "ratingNFS": "132"
     },
@@ -4088,7 +4088,7 @@
     },
     {
       "id": "697",
-      "boatType": "HANSE 370",
+      "boatType": "HANSE 370 SD",
       "ratingFS": "99",
       "ratingNFS": "108"
     },
@@ -4100,7 +4100,7 @@
     },
     {
       "id": "699",
-      "boatType": "HANSE 370E",
+      "boatType": "HANSE 370E SD",
       "ratingFS": "96",
       "ratingNFS": "105"
     },
@@ -4118,13 +4118,13 @@
     },
     {
       "id": "702",
-      "boatType": "HANSE 400",
+      "boatType": "HANSE 400 SD",
       "ratingFS": "84",
       "ratingNFS": "93"
     },
     {
       "id": "703",
-      "boatType": "HANSE 400-2",
+      "boatType": "HANSE 400-2 SD",
       "ratingFS": "84",
       "ratingNFS": "93"
     },
@@ -4136,19 +4136,19 @@
     },
     {
       "id": "705",
-      "boatType": "HANSE 415",
+      "boatType": "HANSE 415 SD",
       "ratingFS": "69",
       "ratingNFS": "87"
     },
     {
       "id": "706",
-      "boatType": "HANSE 430E",
+      "boatType": "HANSE 430E SD",
       "ratingFS": "72",
       "ratingNFS": "84"
     },
     {
       "id": "707",
-      "boatType": "HANSE 445",
+      "boatType": "HANSE 445 SD",
       "ratingFS": "60",
       "ratingNFS": "72"
     },
@@ -4166,7 +4166,7 @@
     },
     {
       "id": "710",
-      "boatType": "HAFARM 28",
+      "boatType": "HAWKFARM 28",
       "ratingFS": "171",
       "ratingNFS": "180"
     },
@@ -4184,13 +4184,13 @@
     },
     {
       "id": "713",
-      "boatType": "HENDERSON 30",
+      "boatType": "HENDERSON 30  -SB",
       "ratingFS": "54",
       "ratingNFS": "87"
     },
     {
       "id": "714",
-      "boatType": "HENDERSON SR 27",
+      "boatType": "HENDERSON SR 27 -SB",
       "ratingFS": "114",
       "ratingNFS": "129"
     },
@@ -4239,19 +4239,19 @@
     { "id": "722", "boatType": "HO 28", "ratingFS": "249", "ratingNFS": "261" },
     {
       "id": "723",
-      "boatType": "HOBIE 33",
+      "boatType": "HOBIE 33  -SB",
       "ratingFS": "111",
       "ratingNFS": "144"
     },
     {
       "id": "724",
-      "boatType": "HOBIE 33 MOD",
+      "boatType": "HOBIE 33 MOD  -SB",
       "ratingFS": "105",
       "ratingNFS": "138"
     },
     {
       "id": "725",
-      "boatType": "HOLDER 20",
+      "boatType": "HOLDER 20  -SB",
       "ratingFS": "189",
       "ratingNFS": "204"
     },
@@ -4323,7 +4323,7 @@
     },
     {
       "id": "737",
-      "boatType": "HUGHES 35",
+      "boatType": "HUGHES 35 SD",
       "ratingFS": "150",
       "ratingNFS": "162"
     },
@@ -4335,7 +4335,7 @@
     },
     {
       "id": "739",
-      "boatType": "HUGHES 38",
+      "boatType": "HUGHES 38 TM",
       "ratingFS": "144",
       "ratingNFS": "156"
     },
@@ -4383,7 +4383,7 @@
     },
     {
       "id": "747",
-      "boatType": "HUNTER 23",
+      "boatType": "HUNTER 23 WK",
       "ratingFS": "240",
       "ratingNFS": "252"
     },
@@ -4395,7 +4395,7 @@
     },
     {
       "id": "749",
-      "boatType": "HUNTER 25",
+      "boatType": "HUNTER 25 SD",
       "ratingFS": "237",
       "ratingNFS": "249"
     },
@@ -4407,25 +4407,25 @@
     },
     {
       "id": "751",
-      "boatType": "HUNTER 25.5",
+      "boatType": "HUNTER 25.5 IB",
       "ratingFS": "213",
       "ratingNFS": "225"
     },
     {
       "id": "752",
-      "boatType": "HUNTER 25.5",
+      "boatType": "HUNTER 25.5 IB SD",
       "ratingFS": "219",
       "ratingNFS": "231"
     },
     {
       "id": "753",
-      "boatType": "HUNTER 25.5",
+      "boatType": "HUNTER 25.5 SD",
       "ratingFS": "213",
       "ratingNFS": "225"
     },
     {
       "id": "754",
-      "boatType": "HUNTER 26.5",
+      "boatType": "HUNTER 26.5 WK",
       "ratingFS": "192",
       "ratingNFS": "201"
     },
@@ -4437,7 +4437,7 @@
     },
     {
       "id": "756",
-      "boatType": "HUNTER 27",
+      "boatType": "HUNTER 27 TM",
       "ratingFS": "216",
       "ratingNFS": "228"
     },
@@ -4455,7 +4455,7 @@
     },
     {
       "id": "759",
-      "boatType": "HUNTER 28",
+      "boatType": "HUNTER 28 WK",
       "ratingFS": "186",
       "ratingNFS": "195"
     },
@@ -4467,7 +4467,7 @@
     },
     {
       "id": "761",
-      "boatType": "HUNTER 28.5",
+      "boatType": "HUNTER 28.5 SD",
       "ratingFS": "171",
       "ratingNFS": "183"
     },
@@ -4485,19 +4485,19 @@
     },
     {
       "id": "764",
-      "boatType": "HUNTER 30",
+      "boatType": "HUNTER 30 TM",
       "ratingFS": "174",
       "ratingNFS": "186"
     },
     {
       "id": "765",
-      "boatType": "HUNTER 30-2",
+      "boatType": "HUNTER 30-2 WK",
       "ratingFS": "174",
       "ratingNFS": "180"
     },
     {
       "id": "766",
-      "boatType": "HUNTER 306",
+      "boatType": "HUNTER 306 SD",
       "ratingFS": "165",
       "ratingNFS": "180"
     },
@@ -4509,19 +4509,19 @@
     },
     {
       "id": "768",
-      "boatType": "HUNTER 31",
+      "boatType": "HUNTER 31 SD",
       "ratingFS": "174",
       "ratingNFS": "186"
     },
     {
       "id": "769",
-      "boatType": "HUNTER 310",
+      "boatType": "HUNTER 310 WK",
       "ratingFS": "168",
       "ratingNFS": "177"
     },
     {
       "id": "770",
-      "boatType": "HUNTER 31-2",
+      "boatType": "HUNTER 31-2 SD",
       "ratingFS": "162",
       "ratingNFS": "174"
     },
@@ -4539,7 +4539,7 @@
     },
     {
       "id": "773",
-      "boatType": "HUNTER 320/326",
+      "boatType": "HUNTER 320/326 SD",
       "ratingFS": "162",
       "ratingNFS": "174"
     },
@@ -4563,7 +4563,7 @@
     },
     {
       "id": "777",
-      "boatType": "HUNTER 33-2",
+      "boatType": "HUNTER 33-2 DK",
       "ratingFS": "159",
       "ratingNFS": "168"
     },
@@ -4581,19 +4581,19 @@
     },
     {
       "id": "780",
-      "boatType": "HUNTER 34",
+      "boatType": "HUNTER 34 SD",
       "ratingFS": "150",
       "ratingNFS": "162"
     },
     {
       "id": "781",
-      "boatType": "HUNTER 340",
+      "boatType": "HUNTER 340 DK",
       "ratingFS": "150",
       "ratingNFS": "156"
     },
     {
       "id": "782",
-      "boatType": "HUNTER 340",
+      "boatType": "HUNTER 340 SD/WK",
       "ratingFS": "156",
       "ratingNFS": "162"
     },
@@ -4605,13 +4605,13 @@
     },
     {
       "id": "784",
-      "boatType": "HUNTER 35 LEGEND",
+      "boatType": "HUNTER 35 LEGEND SD/WK",
       "ratingFS": "138",
       "ratingNFS": "147"
     },
     {
       "id": "785",
-      "boatType": "HUNTER 35.5 LEG",
+      "boatType": "HUNTER 35.5 LEG WK",
       "ratingFS": "141",
       "ratingNFS": "150"
     },
@@ -4623,7 +4623,7 @@
     },
     {
       "id": "787",
-      "boatType": "HUNTER 356/36-2",
+      "boatType": "HUNTER 356/36-2 SD",
       "ratingFS": "144",
       "ratingNFS": "153"
     },
@@ -4641,7 +4641,7 @@
     },
     {
       "id": "790",
-      "boatType": "HUNTER 37 LEGEND",
+      "boatType": "HUNTER 37 LEGEND WK",
       "ratingFS": "108",
       "ratingNFS": "117"
     },
@@ -4653,19 +4653,19 @@
     },
     {
       "id": "792",
-      "boatType": "HUNTER 376",
+      "boatType": "HUNTER 376 SD",
       "ratingFS": "105",
       "ratingNFS": "114"
     },
     {
       "id": "793",
-      "boatType": "HUNTER 376",
+      "boatType": "HUNTER 376 SD/WK",
       "ratingFS": "105",
       "ratingNFS": "114"
     },
     {
       "id": "794",
-      "boatType": "HUNTER 38",
+      "boatType": "HUNTER 38 SD",
       "ratingFS": "105",
       "ratingNFS": "111"
     },
@@ -4677,13 +4677,13 @@
     },
     {
       "id": "796",
-      "boatType": "HUNTER 386",
+      "boatType": "HUNTER 386 SD",
       "ratingFS": "105",
       "ratingNFS": "114"
     },
     {
       "id": "797",
-      "boatType": "HUNTER 39",
+      "boatType": "HUNTER 39 SD/WK",
       "ratingFS": "123",
       "ratingNFS": "129"
     },
@@ -4695,37 +4695,37 @@
     },
     {
       "id": "799",
-      "boatType": "HUNTER 40",
+      "boatType": "HUNTER 40 SD",
       "ratingFS": "111",
       "ratingNFS": "123"
     },
     {
       "id": "800",
-      "boatType": "HUNTER 41",
+      "boatType": "HUNTER 41 SD/WK",
       "ratingFS": "111",
       "ratingNFS": "120"
     },
     {
       "id": "801",
-      "boatType": "HUNTER 42 PASSAGE",
+      "boatType": "HUNTER 42 PASSAGE WK",
       "ratingFS": "93",
       "ratingNFS": "105"
     },
     {
       "id": "802",
-      "boatType": "HUNTER 45 LEGEND",
+      "boatType": "HUNTER 45 LEGEND SD",
       "ratingFS": "69",
       "ratingNFS": "81"
     },
     {
       "id": "803",
-      "boatType": "HUNTER 460",
+      "boatType": "HUNTER 460 WK",
       "ratingFS": "108",
       "ratingNFS": "120"
     },
     {
       "id": "804",
-      "boatType": "HUNTER 466",
+      "boatType": "HUNTER 466 WK",
       "ratingFS": "108",
       "ratingNFS": "120"
     },
@@ -4816,7 +4816,7 @@
     },
     {
       "id": "820",
-      "boatType": "IRWIN 30",
+      "boatType": "IRWIN 30 SD",
       "ratingFS": "183",
       "ratingNFS": "195"
     },
@@ -4834,13 +4834,13 @@
     },
     {
       "id": "823",
-      "boatType": "IRWIN 34 CIT",
+      "boatType": "IRWIN 34 CIT SD",
       "ratingFS": "177",
       "ratingNFS": "189"
     },
     {
       "id": "824",
-      "boatType": "IRWIN 38 CIT",
+      "boatType": "IRWIN 38 CIT SD/WK",
       "ratingFS": "129",
       "ratingNFS": "141"
     },
@@ -4864,7 +4864,7 @@
     },
     {
       "id": "828",
-      "boatType": "ISLANDER 26-2",
+      "boatType": "ISLANDER 26-2 IB",
       "ratingFS": "225",
       "ratingNFS": "237"
     },
@@ -4906,68 +4906,68 @@
     },
     {
       "id": "835",
-      "boatType": "J 100",
+      "boatType": "J 100 CF",
       "ratingFS": "72",
       "ratingNFS": "93"
     },
     {
       "id": "836",
-      "boatType": "J 105",
+      "boatType": "J 105  -SB",
       "ratingFS": "69",
       "ratingNFS": "102"
     },
     { "id": "837", "boatType": "J 109", "ratingFS": "63", "ratingNFS": "96" },
     {
       "id": "838",
-      "boatType": "J 111",
+      "boatType": "J 111  -SB",
       "ratingFS": "27",
       "ratingNFS": "60"
     },
     {
       "id": "839",
-      "boatType": "J 112E",
+      "boatType": "J 112E  -SB",
       "ratingFS": "45",
       "ratingNFS": "78"
     },
     {
       "id": "840",
-      "boatType": "J 120",
+      "boatType": "J 120 CF",
       "ratingFS": "45",
       "ratingNFS": "78"
     },
     {
       "id": "841",
-      "boatType": "J 122",
+      "boatType": "J 122 CF",
       "ratingFS": "21",
       "ratingNFS": "51"
     },
     {
       "id": "842",
-      "boatType": "J 124",
+      "boatType": "J 124 CF",
       "ratingFS": "24",
       "ratingNFS": "42"
     },
     {
       "id": "843",
-      "boatType": "J 133",
+      "boatType": "J 133 -SB",
       "ratingFS": "3",
       "ratingNFS": "36"
     },
     {
       "id": "844",
-      "boatType": "J 145 CR",
+      "boatType": "J 145 CR CF  -SB",
       "ratingFS": "-18",
       "ratingNFS": "15"
     },
     {
       "id": "845",
-      "boatType": "J 22",
+      "boatType": "J 22 **",
       "ratingFS": "162",
       "ratingNFS": "174"
     },
     {
       "id": "846",
-      "boatType": "J 24",
+      "boatType": "J 24 **",
       "ratingFS": "168",
       "ratingNFS": "177"
     },
@@ -4975,13 +4975,13 @@
     { "id": "848", "boatType": "J 28", "ratingFS": "168", "ratingNFS": "177" },
     {
       "id": "849",
-      "boatType": "J 28",
+      "boatType": "J 28 SD",
       "ratingFS": "177",
       "ratingNFS": "186"
     },
     {
       "id": "850",
-      "boatType": "J 29 7/8",
+      "boatType": "J 29 7/8 IB",
       "ratingFS": "114",
       "ratingNFS": "126"
     },
@@ -4993,7 +4993,7 @@
     },
     {
       "id": "852",
-      "boatType": "J 29 MH",
+      "boatType": "J 29 MH IB",
       "ratingFS": "111",
       "ratingNFS": "123"
     },
@@ -5007,7 +5007,7 @@
     { "id": "855", "boatType": "J 32", "ratingFS": "123", "ratingNFS": "132" },
     {
       "id": "856",
-      "boatType": "J 32",
+      "boatType": "J 32 SD",
       "ratingFS": "129",
       "ratingNFS": "138"
     },
@@ -5015,68 +5015,68 @@
     { "id": "858", "boatType": "J 34", "ratingFS": "114", "ratingNFS": "126" },
     {
       "id": "859",
-      "boatType": "J 34C",
+      "boatType": "J 34C SD",
       "ratingFS": "123",
       "ratingNFS": "135"
     },
-    { "id": "860", "boatType": "J 35", "ratingFS": "72", "ratingNFS": "84" },
+    { "id": "860", "boatType": "J 35 **", "ratingFS": "72", "ratingNFS": "84" },
     { "id": "861", "boatType": "J 35C", "ratingFS": "99", "ratingNFS": "108" },
     {
       "id": "862",
-      "boatType": "J 35C",
+      "boatType": "J 35C SD",
       "ratingFS": "105",
       "ratingNFS": "114"
     },
     { "id": "863", "boatType": "J 36", "ratingFS": "87", "ratingNFS": "96" },
     {
       "id": "864",
-      "boatType": "J 37C",
+      "boatType": "J 37C SD",
       "ratingFS": "90",
       "ratingNFS": "102"
     },
     {
       "id": "865",
-      "boatType": "J 40",
+      "boatType": "J 40 SD",
       "ratingFS": "96",
       "ratingNFS": "105"
     },
     { "id": "866", "boatType": "J 41", "ratingFS": "78", "ratingNFS": "90" },
     { "id": "867", "boatType": "J 42", "ratingFS": "75", "ratingNFS": "87" },
-    { "id": "868", "boatType": "J 42", "ratingFS": "81", "ratingNFS": "93" },
+    { "id": "868", "boatType": "J 42 SD", "ratingFS": "81", "ratingNFS": "93" },
     { "id": "869", "boatType": "J 44", "ratingFS": "33", "ratingNFS": "45" },
     {
       "id": "870",
-      "boatType": "J 44",
+      "boatType": "J 44 SD/WK",
       "ratingFS": "39",
       "ratingNFS": "51"
     },
     {
       "id": "871",
-      "boatType": "J 70",
+      "boatType": "J 70 CF  -SB",
       "ratingFS": "102",
       "ratingNFS": "135"
     },
     {
       "id": "872",
-      "boatType": "J 80",
+      "boatType": "J 80  -SB **",
       "ratingFS": "105",
       "ratingNFS": "138"
     },
     {
       "id": "873",
-      "boatType": "J 88",
+      "boatType": "J 88 CF  -SB",
       "ratingFS": "72",
       "ratingNFS": "105"
     },
     {
       "id": "874",
-      "boatType": "J 92",
+      "boatType": "J 92  -SB",
       "ratingFS": "93",
       "ratingNFS": "126"
     },
     {
       "id": "875",
-      "boatType": "J 92S",
+      "boatType": "J 92S  -SB",
       "ratingFS": "81",
       "ratingNFS": "114"
     },
@@ -5084,13 +5084,13 @@
     { "id": "877", "boatType": "J 99", "ratingFS": "63", "ratingNFS": "93" },
     {
       "id": "878",
-      "boatType": "JEANNEAU 23 FUN",
+      "boatType": "JEANNEAU 23 FUN -SB",
       "ratingFS": "192",
       "ratingNFS": "201"
     },
     {
       "id": "879",
-      "boatType": "JEANNEAU 23/24 TONIC",
+      "boatType": "JEANNEAU 23/24 TONIC -SB",
       "ratingFS": "246",
       "ratingNFS": "264"
     },
@@ -5126,7 +5126,7 @@
     },
     {
       "id": "885",
-      "boatType": "JEANNEAU 3200 SUN FAST MOD",
+      "boatType": "JEANNEAU 3200 SUN FAST MOD CF",
       "ratingFS": "81",
       "ratingNFS": "96"
     },
@@ -5180,7 +5180,7 @@
     },
     {
       "id": "894",
-      "boatType": "JEANNEAU 36i",
+      "boatType": "JEANNEAU 36i SD",
       "ratingFS": "105",
       "ratingNFS": "117"
     },
@@ -5210,7 +5210,7 @@
     },
     {
       "id": "899",
-      "boatType": "JEANNEAU 379 SUN ODYSSEY",
+      "boatType": "JEANNEAU 379 SUN ODYSSEY SD/WK",
       "ratingFS": "102",
       "ratingNFS": "114"
     },
@@ -5246,7 +5246,7 @@
     },
     {
       "id": "905",
-      "boatType": "JEANNEAU 40 SUN ODYSSEY",
+      "boatType": "JEANNEAU 40 SUN ODYSSEY SD",
       "ratingFS": "114",
       "ratingNFS": "126"
     },
@@ -5276,7 +5276,7 @@
     },
     {
       "id": "910",
-      "boatType": "JEANNEAU 44 SUN ODYSSEY DS",
+      "boatType": "JEANNEAU 44 SUN ODYSSEY DS  SD",
       "ratingFS": "93",
       "ratingNFS": "109"
     },
@@ -5300,7 +5300,7 @@
     },
     {
       "id": "914",
-      "boatType": "JEANNEAU 50 SUN ODYS DS",
+      "boatType": "JEANNEAU 50 SUN ODYS DS SD",
       "ratingFS": "72",
       "ratingNFS": "84"
     },
@@ -5318,7 +5318,7 @@
     },
     {
       "id": "917",
-      "boatType": "JOUBERT/NIVELT 33  CUS",
+      "boatType": "JOUBERT/NIVELT 33 CF CUS",
       "ratingFS": "102",
       "ratingNFS": "111"
     },
@@ -5348,13 +5348,13 @@
     },
     {
       "id": "922",
-      "boatType": "K6 SK",
+      "boatType": "K6 SK  -SB",
       "ratingFS": "108",
       "ratingNFS": "141"
     },
     {
       "id": "923",
-      "boatType": "KALIK 33",
+      "boatType": "KALIK 33 TM",
       "ratingFS": "141",
       "ratingNFS": "153"
     },
@@ -5372,7 +5372,7 @@
     },
     {
       "id": "926",
-      "boatType": "KELT 7.6 R",
+      "boatType": "KELT 7.6 SDR",
       "ratingFS": "222",
       "ratingNFS": "234"
     },
@@ -5408,7 +5408,7 @@
     },
     {
       "id": "932",
-      "boatType": "KIRBY 25",
+      "boatType": "KIRBY 25 **",
       "ratingFS": "165",
       "ratingNFS": "174"
     },
@@ -5529,7 +5529,7 @@
     },
     {
       "id": "953",
-      "boatType": "LASER 28",
+      "boatType": "LASER 28 **",
       "ratingFS": "126",
       "ratingNFS": "141"
     },
@@ -5571,19 +5571,19 @@
     },
     {
       "id": "960",
-      "boatType": "LUNA 24",
+      "boatType": "LUNA 24 TM",
       "ratingFS": "183",
       "ratingNFS": "189"
     },
     {
       "id": "961",
-      "boatType": "LUNA 24  MOD",
+      "boatType": "LUNA 24 TM MOD",
       "ratingFS": "174",
       "ratingNFS": "180"
     },
     {
       "id": "962",
-      "boatType": "LUNA 24  MOD 2",
+      "boatType": "LUNA 24 TM MOD 2",
       "ratingFS": "180",
       "ratingNFS": "186"
     },
@@ -5679,49 +5679,49 @@
     },
     {
       "id": "978",
-      "boatType": "MEGA 30",
+      "boatType": "MEGA 30 DK",
       "ratingFS": "153",
       "ratingNFS": "165"
     },
     {
       "id": "979",
-      "boatType": "MEGA 30  MOD",
+      "boatType": "MEGA 30 DK MOD",
       "ratingFS": "147",
       "ratingNFS": "159"
     },
     {
       "id": "980",
-      "boatType": "MEGA 30",
+      "boatType": "MEGA 30 IB",
       "ratingFS": "165",
       "ratingNFS": "180"
     },
     {
       "id": "981",
-      "boatType": "MELGES 20",
+      "boatType": "MELGES 20 CF -SB",
       "ratingFS": "117",
       "ratingNFS": "150"
     },
     {
       "id": "982",
-      "boatType": "MELGES 24",
+      "boatType": "MELGES 24 CF  -SB",
       "ratingFS": "75",
       "ratingNFS": "108"
     },
     {
       "id": "983",
-      "boatType": "MELGES 30/32 MOD",
+      "boatType": "MELGES 30/32 MOD CF  -SB",
       "ratingFS": "15",
       "ratingNFS": "48"
     },
     {
       "id": "984",
-      "boatType": "MELGES 32",
+      "boatType": "MELGES 32 CF  -SB",
       "ratingFS": "12",
       "ratingNFS": "45"
     },
     {
       "id": "985",
-      "boatType": "MELGES IC37  - SB",
+      "boatType": "MELGES IC37 CF - SB",
       "ratingFS": "-9",
       "ratingNFS": "24"
     },
@@ -5763,7 +5763,7 @@
     },
     {
       "id": "992",
-      "boatType": "MIRAGE 24",
+      "boatType": "MIRAGE 24 SM",
       "ratingFS": "225",
       "ratingNFS": "237"
     },
@@ -5775,7 +5775,7 @@
     },
     {
       "id": "994",
-      "boatType": "MIRAGE 25",
+      "boatType": "MIRAGE 25 IB",
       "ratingFS": "216",
       "ratingNFS": "228"
     },
@@ -5787,7 +5787,7 @@
     },
     {
       "id": "996",
-      "boatType": "MIRAGE 26",
+      "boatType": "MIRAGE 26 IB",
       "ratingFS": "216",
       "ratingNFS": "228"
     },
@@ -5853,7 +5853,7 @@
     },
     {
       "id": "1007",
-      "boatType": "MIRAGE 32  MOD",
+      "boatType": "MIRAGE 32 WK MOD",
       "ratingFS": "174",
       "ratingNFS": "186"
     },
@@ -5877,13 +5877,13 @@
     },
     {
       "id": "1011",
-      "boatType": "MIRAGE 35",
+      "boatType": "MIRAGE 35 SM",
       "ratingFS": "150",
       "ratingNFS": "162"
     },
     {
       "id": "1012",
-      "boatType": "MIRAGE 35",
+      "boatType": "MIRAGE 35 TM WK",
       "ratingFS": "141",
       "ratingNFS": "153"
     },
@@ -5895,7 +5895,7 @@
     },
     {
       "id": "1014",
-      "boatType": "MIRAGE 39",
+      "boatType": "MIRAGE 39 WK",
       "ratingFS": "117",
       "ratingNFS": "129"
     },
@@ -6177,7 +6177,7 @@
     },
     {
       "id": "1061",
-      "boatType": "NEWPORT 30-2",
+      "boatType": "NEWPORT 30-2 SD",
       "ratingFS": "189",
       "ratingNFS": "201"
     },
@@ -6201,13 +6201,13 @@
     },
     {
       "id": "1065",
-      "boatType": "NIAGARA 26",
+      "boatType": "NIAGARA 26 IB",
       "ratingFS": "186",
       "ratingNFS": "198"
     },
     {
       "id": "1066",
-      "boatType": "NIAGARA 26 OB",
+      "boatType": "NIAGARA 26 OB **",
       "ratingFS": "180",
       "ratingNFS": "192"
     },
@@ -6261,7 +6261,7 @@
     },
     {
       "id": "1075",
-      "boatType": "NONSUCH 22",
+      "boatType": "NONSUCH 22 IB",
       "ratingFS": "234",
       "ratingNFS": "234"
     },
@@ -6273,7 +6273,7 @@
     },
     {
       "id": "1077",
-      "boatType": "NONSUCH 26/260",
+      "boatType": "NONSUCH 26/260 SD",
       "ratingFS": "234",
       "ratingNFS": "234"
     },
@@ -6285,7 +6285,7 @@
     },
     {
       "id": "1079",
-      "boatType": "NONSUCH 30",
+      "boatType": "NONSUCH 30 SD",
       "ratingFS": "165",
       "ratingNFS": "165"
     },
@@ -6303,13 +6303,13 @@
     },
     {
       "id": "1082",
-      "boatType": "NONSUCH 33",
+      "boatType": "NONSUCH 33 SD",
       "ratingFS": "174",
       "ratingNFS": "174"
     },
     {
       "id": "1083",
-      "boatType": "NONSUCH 36",
+      "boatType": "NONSUCH 36 SD",
       "ratingFS": "168",
       "ratingNFS": "168"
     },
@@ -6375,7 +6375,7 @@
     },
     {
       "id": "1094",
-      "boatType": "NORTHERN 25",
+      "boatType": "NORTHERN 25 IB",
       "ratingFS": "228",
       "ratingNFS": "240"
     },
@@ -6459,7 +6459,7 @@
     },
     {
       "id": "1108",
-      "boatType": "ODAY 25",
+      "boatType": "ODAY 25 TM",
       "ratingFS": "225",
       "ratingNFS": "237"
     },
@@ -6477,13 +6477,13 @@
     },
     {
       "id": "1111",
-      "boatType": "ODAY 27",
+      "boatType": "ODAY 27 IB",
       "ratingFS": "210",
       "ratingNFS": "222"
     },
     {
       "id": "1112",
-      "boatType": "ODAY 27-2",
+      "boatType": "ODAY 27-2 IB WK",
       "ratingFS": "225",
       "ratingNFS": "237"
     },
@@ -6495,13 +6495,13 @@
     },
     {
       "id": "1114",
-      "boatType": "ODAY 28",
+      "boatType": "ODAY 28 TM DK",
       "ratingFS": "189",
       "ratingNFS": "201"
     },
     {
       "id": "1115",
-      "boatType": "ODAY 280",
+      "boatType": "ODAY 280 WK",
       "ratingFS": "234",
       "ratingNFS": "246"
     },
@@ -6519,7 +6519,7 @@
     },
     {
       "id": "1118",
-      "boatType": "ODAY 31",
+      "boatType": "ODAY 31 DK",
       "ratingFS": "177",
       "ratingNFS": "189"
     },
@@ -6531,7 +6531,7 @@
     },
     {
       "id": "1120",
-      "boatType": "ODAY 32-2",
+      "boatType": "ODAY 32-2 WK",
       "ratingFS": "174",
       "ratingNFS": "186"
     },
@@ -6543,19 +6543,19 @@
     },
     {
       "id": "1122",
-      "boatType": "ODAY 35",
+      "boatType": "ODAY 35 SD",
       "ratingFS": "138",
       "ratingNFS": "150"
     },
     {
       "id": "1123",
-      "boatType": "ODAY 39",
+      "boatType": "ODAY 39 SD",
       "ratingFS": "123",
       "ratingNFS": "135"
     },
     {
       "id": "1124",
-      "boatType": "ODAY 40",
+      "boatType": "ODAY 40 TM SD",
       "ratingFS": "120",
       "ratingNFS": "132"
     },
@@ -6603,19 +6603,19 @@
     },
     {
       "id": "1132",
-      "boatType": "OLSON 29",
+      "boatType": "OLSON 29 IB",
       "ratingFS": "105",
       "ratingNFS": "135"
     },
     {
       "id": "1133",
-      "boatType": "OLSON 30",
+      "boatType": "OLSON 30 **",
       "ratingFS": "108",
       "ratingNFS": "132"
     },
     {
       "id": "1134",
-      "boatType": "OLSON 30",
+      "boatType": "OLSON 30 IB",
       "ratingFS": "114",
       "ratingNFS": "138"
     },
@@ -6681,25 +6681,25 @@
     },
     {
       "id": "1145",
-      "boatType": "ONTARIO 32",
+      "boatType": "ONTARIO 32 TM",
       "ratingFS": "174",
       "ratingNFS": "186"
     },
     {
       "id": "1146",
-      "boatType": "OOD 34",
+      "boatType": "OOD 34 SM",
       "ratingFS": "132",
       "ratingNFS": "144"
     },
     {
       "id": "1147",
-      "boatType": "OPEN 40",
+      "boatType": "OPEN 40  -SB",
       "ratingFS": "-21",
       "ratingNFS": "12"
     },
     {
       "id": "1148",
-      "boatType": "OPEN 60",
+      "boatType": "OPEN 60  -SB",
       "ratingFS": "-123",
       "ratingNFS": "-90"
     },
@@ -6741,7 +6741,7 @@
     },
     {
       "id": "1155",
-      "boatType": "PACESHIP PY 26",
+      "boatType": "PACESHIP PY 26 IB",
       "ratingFS": "210",
       "ratingNFS": "222"
     },
@@ -6753,7 +6753,7 @@
     },
     {
       "id": "1157",
-      "boatType": "PEARSON 10M",
+      "boatType": "PEARSON 10M TM",
       "ratingFS": "144",
       "ratingNFS": "156"
     },
@@ -6783,7 +6783,7 @@
     },
     {
       "id": "1162",
-      "boatType": "PEARSON 26 ARIEL",
+      "boatType": "PEARSON 26 ARIEL IB",
       "ratingFS": "261",
       "ratingNFS": "270"
     },
@@ -6885,7 +6885,7 @@
     },
     {
       "id": "1179",
-      "boatType": "PEARSON 36-2",
+      "boatType": "PEARSON 36-2 TM",
       "ratingFS": "132",
       "ratingNFS": "144"
     },
@@ -6909,7 +6909,7 @@
     },
     {
       "id": "1183",
-      "boatType": "PEARSON 39-2",
+      "boatType": "PEARSON 39-2 KCB",
       "ratingFS": "120",
       "ratingNFS": "132"
     },
@@ -6963,7 +6963,7 @@
     },
     {
       "id": "1192",
-      "boatType": "PERRY 58",
+      "boatType": "PERRY 58 CF",
       "ratingFS": "-12",
       "ratingNFS": "6"
     },
@@ -6975,7 +6975,7 @@
     },
     {
       "id": "1194",
-      "boatType": "PETERSON 34",
+      "boatType": "PETERSON 34 SM",
       "ratingFS": "123",
       "ratingNFS": "135"
     },
@@ -7029,7 +7029,7 @@
     },
     {
       "id": "1203",
-      "boatType": "POGO MINI TRANSAT 650",
+      "boatType": "POGO MINI TRANSAT 650 -SB",
       "ratingFS": "129",
       "ratingNFS": "162"
     },
@@ -7059,7 +7059,7 @@
     },
     {
       "id": "1208",
-      "boatType": "QUEST 33",
+      "boatType": "QUEST 33 IB  -SB",
       "ratingFS": "78",
       "ratingNFS": "111"
     },
@@ -7083,7 +7083,7 @@
     },
     {
       "id": "1212",
-      "boatType": "RANGER 23",
+      "boatType": "RANGER 23 TM",
       "ratingFS": "228",
       "ratingNFS": "240"
     },
@@ -7215,7 +7215,7 @@
     },
     {
       "id": "1234",
-      "boatType": "ROCKET 22",
+      "boatType": "ROCKET 22 CF -SB",
       "ratingFS": "99",
       "ratingNFS": "132"
     },
@@ -7275,7 +7275,7 @@
     },
     {
       "id": "1244",
-      "boatType": "S2 6.8",
+      "boatType": "S2 6.8 SD",
       "ratingFS": "252",
       "ratingNFS": "264"
     },
@@ -7293,13 +7293,13 @@
     },
     {
       "id": "1247",
-      "boatType": "S2 7.3/24",
+      "boatType": "S2 7.3/24 IB",
       "ratingFS": "240",
       "ratingNFS": "252"
     },
     {
       "id": "1248",
-      "boatType": "S2 7.3/24",
+      "boatType": "S2 7.3/24 SD",
       "ratingFS": "240",
       "ratingNFS": "252"
     },
@@ -7311,7 +7311,7 @@
     },
     {
       "id": "1250",
-      "boatType": "S2 7.9",
+      "boatType": "S2 7.9 IB",
       "ratingFS": "171",
       "ratingNFS": "180"
     },
@@ -7329,7 +7329,7 @@
     },
     {
       "id": "1253",
-      "boatType": "S2 9.1",
+      "boatType": "S2 9.1 **",
       "ratingFS": "129",
       "ratingNFS": "138"
     },
@@ -7341,7 +7341,7 @@
     },
     {
       "id": "1255",
-      "boatType": "S2 9.1",
+      "boatType": "S2 9.1 SM",
       "ratingFS": "141",
       "ratingNFS": "153"
     },
@@ -7359,7 +7359,7 @@
     },
     {
       "id": "1258",
-      "boatType": "SABRE 28-1",
+      "boatType": "SABRE 28-1 SD",
       "ratingFS": "204",
       "ratingNFS": "216"
     },
@@ -7395,7 +7395,7 @@
     },
     {
       "id": "1264",
-      "boatType": "SABRE 32",
+      "boatType": "SABRE 32 KCB",
       "ratingFS": "171",
       "ratingNFS": "183"
     },
@@ -7413,13 +7413,13 @@
     },
     {
       "id": "1267",
-      "boatType": "SABRE 34-2",
+      "boatType": "SABRE 34-2 KCB",
       "ratingFS": "144",
       "ratingNFS": "156"
     },
     {
       "id": "1268",
-      "boatType": "SABRE 34-2",
+      "boatType": "SABRE 34-2 WK",
       "ratingFS": "144",
       "ratingNFS": "156"
     },
@@ -7431,7 +7431,7 @@
     },
     {
       "id": "1270",
-      "boatType": "SABRE 36-2",
+      "boatType": "SABRE 36-2 WK",
       "ratingFS": "126",
       "ratingNFS": "135"
     },
@@ -7443,7 +7443,7 @@
     },
     {
       "id": "1272",
-      "boatType": "SABRE 386",
+      "boatType": "SABRE 386 TM",
       "ratingFS": "96",
       "ratingNFS": "105"
     },
@@ -7455,7 +7455,7 @@
     },
     {
       "id": "1274",
-      "boatType": "SABRE 402",
+      "boatType": "SABRE 402 WK",
       "ratingFS": "87",
       "ratingNFS": "96"
     },
@@ -7467,7 +7467,7 @@
     },
     {
       "id": "1276",
-      "boatType": "SABRE 426",
+      "boatType": "SABRE 426 WK",
       "ratingFS": "78",
       "ratingNFS": "90"
     },
@@ -7491,19 +7491,19 @@
     },
     {
       "id": "1280",
-      "boatType": "SAGA 43",
+      "boatType": "SAGA 43 SD",
       "ratingFS": "69",
       "ratingNFS": "90"
     },
     {
       "id": "1281",
-      "boatType": "SAGA 43  MOD",
+      "boatType": "SAGA 43 SD MOD",
       "ratingFS": "72",
       "ratingNFS": "93"
     },
     {
       "id": "1282",
-      "boatType": "SAN JUAN 21",
+      "boatType": "SAN JUAN 21  -SB",
       "ratingFS": "258",
       "ratingNFS": "270"
     },
@@ -7521,7 +7521,7 @@
     },
     {
       "id": "1285",
-      "boatType": "SAN JUAN 24",
+      "boatType": "SAN JUAN 24 IB",
       "ratingFS": "219",
       "ratingNFS": "231"
     },
@@ -7575,7 +7575,7 @@
     },
     {
       "id": "1294",
-      "boatType": "SANTANA 20  MOD",
+      "boatType": "SANTANA 20 SD/WK MOD",
       "ratingFS": "213",
       "ratingNFS": "225"
     },
@@ -7605,7 +7605,7 @@
     },
     {
       "id": "1299",
-      "boatType": "SANTANA 30-30",
+      "boatType": "SANTANA 30-30 WK",
       "ratingFS": "132",
       "ratingNFS": "144"
     },
@@ -7677,13 +7677,13 @@
     },
     {
       "id": "1311",
-      "boatType": "SCHOCK 40 MH",
+      "boatType": "SCHOCK 40 MH  -SB",
       "ratingFS": "-24",
       "ratingNFS": "9"
     },
     {
       "id": "1312",
-      "boatType": "SCREAMER 12 M",
+      "boatType": "SCREAMER 12 M  -SB",
       "ratingFS": "84",
       "ratingNFS": "117"
     },
@@ -7725,7 +7725,7 @@
     },
     {
       "id": "1319",
-      "boatType": "SEAFARER 38C",
+      "boatType": "SEAFARER 38C TM",
       "ratingFS": "198",
       "ratingNFS": "210"
     },
@@ -7749,7 +7749,7 @@
     },
     {
       "id": "1323",
-      "boatType": "SEIDELMANN 25",
+      "boatType": "SEIDELMANN 25 IB",
       "ratingFS": "228",
       "ratingNFS": "240"
     },
@@ -7761,13 +7761,13 @@
     },
     {
       "id": "1325",
-      "boatType": "SEIDELMANN 37",
+      "boatType": "SEIDELMANN 37 SM SD",
       "ratingFS": "138",
       "ratingNFS": "150"
     },
     {
       "id": "1326",
-      "boatType": "SHARK 24",
+      "boatType": "SHARK 24 **",
       "ratingFS": "222",
       "ratingNFS": "231"
     },
@@ -7779,7 +7779,7 @@
     },
     {
       "id": "1328",
-      "boatType": "SIRIUS 21/22",
+      "boatType": "SIRIUS 21/22 KCB",
       "ratingFS": "252",
       "ratingNFS": "264"
     },
@@ -7791,13 +7791,13 @@
     },
     {
       "id": "1330",
-      "boatType": "SIRIUS 28",
+      "boatType": "SIRIUS 28 WK",
       "ratingFS": "189",
       "ratingNFS": "201"
     },
     {
       "id": "1331",
-      "boatType": "SKUD 18.2-1/2",
+      "boatType": "SKUD 18.2-1/2 CF  -SB",
       "ratingFS": "168",
       "ratingNFS": "201"
     },
@@ -7821,7 +7821,7 @@
     },
     {
       "id": "1335",
-      "boatType": "SOTO 40",
+      "boatType": "SOTO 40 CF  -SB",
       "ratingFS": "-27",
       "ratingNFS": "6"
     },
@@ -7833,7 +7833,7 @@
     },
     {
       "id": "1337",
-      "boatType": "SOVEREL 27",
+      "boatType": "SOVEREL 27 IB",
       "ratingFS": "144",
       "ratingNFS": "153"
     },
@@ -7851,7 +7851,7 @@
     },
     {
       "id": "1340",
-      "boatType": "SOVEREL 33-2",
+      "boatType": "SOVEREL 33-2 IB",
       "ratingFS": "87",
       "ratingNFS": "105"
     },
@@ -7869,7 +7869,7 @@
     },
     {
       "id": "1343",
-      "boatType": "SPARHA 42",
+      "boatType": "SPARHAWK 42",
       "ratingFS": "96",
       "ratingNFS": "102"
     },
@@ -7899,7 +7899,7 @@
     },
     {
       "id": "1348",
-      "boatType": "STAR",
+      "boatType": "STAR  -SB",
       "ratingFS": "123",
       "ratingNFS": "123"
     },
@@ -7935,7 +7935,7 @@
     },
     {
       "id": "1354",
-      "boatType": "STARWIND 27",
+      "boatType": "STARWIND 27 IB",
       "ratingFS": "198",
       "ratingNFS": "210"
     },
@@ -7965,7 +7965,7 @@
     },
     {
       "id": "1359",
-      "boatType": "SWAN 44-2",
+      "boatType": "SWAN 44-2 TM SD",
       "ratingFS": "81",
       "ratingNFS": "90"
     },
@@ -7983,13 +7983,13 @@
     },
     {
       "id": "1362",
-      "boatType": "TANZER 22",
+      "boatType": "TANZER 22 **",
       "ratingFS": "222",
       "ratingNFS": "234"
     },
     {
       "id": "1363",
-      "boatType": "TANZER 22",
+      "boatType": "TANZER 22 KCB",
       "ratingFS": "228",
       "ratingNFS": "240"
     },
@@ -8001,7 +8001,7 @@
     },
     {
       "id": "1365",
-      "boatType": "TANZER 25",
+      "boatType": "TANZER 25 IB",
       "ratingFS": "180",
       "ratingNFS": "189"
     },
@@ -8025,7 +8025,7 @@
     },
     {
       "id": "1369",
-      "boatType": "TANZER 26",
+      "boatType": "TANZER 26 IB",
       "ratingFS": "219",
       "ratingNFS": "231"
     },
@@ -8073,7 +8073,7 @@
     },
     {
       "id": "1377",
-      "boatType": "TANZER 7.5",
+      "boatType": "TANZER 7.5 SD",
       "ratingFS": "234",
       "ratingNFS": "249"
     },
@@ -8085,7 +8085,7 @@
     },
     {
       "id": "1379",
-      "boatType": "TARTAN 101 (C&C)",
+      "boatType": "TARTAN 101 (C&C) CF",
       "ratingFS": "78",
       "ratingNFS": "108"
     },
@@ -8139,31 +8139,31 @@
     },
     {
       "id": "1388",
-      "boatType": "TARTAN 3400",
+      "boatType": "TARTAN 3400 KCB",
       "ratingFS": "120",
       "ratingNFS": "132"
     },
     {
       "id": "1389",
-      "boatType": "TARTAN 3400",
+      "boatType": "TARTAN 3400 SD",
       "ratingFS": "120",
       "ratingNFS": "132"
     },
     {
       "id": "1390",
-      "boatType": "TARTAN 3500",
+      "boatType": "TARTAN 3500 DK",
       "ratingFS": "126",
       "ratingNFS": "138"
     },
     {
       "id": "1391",
-      "boatType": "TARTAN 3500",
+      "boatType": "TARTAN 3500 SD",
       "ratingFS": "132",
       "ratingNFS": "144"
     },
     {
       "id": "1392",
-      "boatType": "TARTAN 3700",
+      "boatType": "TARTAN 3700 WK",
       "ratingFS": "114",
       "ratingNFS": "126"
     },
@@ -8187,19 +8187,19 @@
     },
     {
       "id": "1396",
-      "boatType": "TARTAN 4100",
+      "boatType": "TARTAN 4100 TM SD",
       "ratingFS": "84",
       "ratingNFS": "93"
     },
     {
       "id": "1397",
-      "boatType": "TARTAN 4100   MOD",
+      "boatType": "TARTAN 4100 TM SD MOD",
       "ratingFS": "84",
       "ratingNFS": "93"
     },
     {
       "id": "1398",
-      "boatType": "TARTAN 41-2",
+      "boatType": "TARTAN 41-2 SD",
       "ratingFS": "108",
       "ratingNFS": "120"
     },
@@ -8265,13 +8265,13 @@
     },
     {
       "id": "1409",
-      "boatType": "I 27",
+      "boatType": "TMI 27",
       "ratingFS": "174",
       "ratingNFS": "186"
     },
     {
       "id": "1410",
-      "boatType": "TRIPP 26",
+      "boatType": "TRIPP 26  -SB",
       "ratingFS": "117",
       "ratingNFS": "138"
     },
@@ -8307,7 +8307,7 @@
     },
     {
       "id": "1416",
-      "boatType": "ULTIMATE 20",
+      "boatType": "ULTIMATE 20  -SB",
       "ratingFS": "135",
       "ratingNFS": "168"
     },
@@ -8319,7 +8319,7 @@
     },
     {
       "id": "1418",
-      "boatType": "US 27",
+      "boatType": "US 27 SD",
       "ratingFS": "210",
       "ratingNFS": "222"
     },
@@ -8415,7 +8415,7 @@
     },
     {
       "id": "1434",
-      "boatType": "VIKING 28",
+      "boatType": "VIKING 28 IB",
       "ratingFS": "183",
       "ratingNFS": "195"
     },
@@ -8463,13 +8463,13 @@
     },
     {
       "id": "1442",
-      "boatType": "VIPER 640",
+      "boatType": "VIPER 640 CF  -SB",
       "ratingFS": "87",
       "ratingNFS": "120"
     },
     {
       "id": "1443",
-      "boatType": "VIPER 830",
+      "boatType": "VIPER 830 CF  -SB",
       "ratingFS": "48",
       "ratingNFS": "81"
     },
@@ -8493,7 +8493,7 @@
     },
     {
       "id": "1447",
-      "boatType": "VX ONE",
+      "boatType": "VX ONE  -SB",
       "ratingFS": "96",
       "ratingNFS": "129"
     },
@@ -8589,7 +8589,7 @@
     },
     {
       "id": "1463",
-      "boatType": "X 119",
+      "boatType": "X 119 SM",
       "ratingFS": "63",
       "ratingNFS": "75"
     },
@@ -8631,20 +8631,20 @@
     { "id": "1474", "boatType": "X 95", "ratingFS": "147", "ratingNFS": "156" },
     {
       "id": "1475",
-      "boatType": "X 95",
+      "boatType": "X 95 TM",
       "ratingFS": "138",
       "ratingNFS": "147"
     },
     {
       "id": "1476",
-      "boatType": "X 95  MOD 2",
+      "boatType": "X 95 TM MOD 2",
       "ratingFS": "138",
       "ratingNFS": "147"
     },
     { "id": "1477", "boatType": "X 99", "ratingFS": "108", "ratingNFS": "117" },
     {
       "id": "1478",
-      "boatType": "YAMAHA 33",
+      "boatType": "YAMAHA 33 SM",
       "ratingFS": "141",
       "ratingNFS": "153"
     },
@@ -8662,7 +8662,7 @@
     },
     {
       "id": "1481",
-      "boatType": "ZERO MINI TRANSAT 6.5",
+      "boatType": "ZERO MINI TRANSAT 6.5  -SB",
       "ratingFS": "126",
       "ratingNFS": "159"
     }
