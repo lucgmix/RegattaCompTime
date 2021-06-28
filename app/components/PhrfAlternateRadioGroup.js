@@ -34,6 +34,7 @@ function PhrfAlternateRadioGroup({
         value={value}
         style={styles.radionGroup}
       >
+        <Text style={styles.formula}>TT = A / (B + TD)</Text>
         <View>
           <View style={styles.radioButton}>
             <RadioButton
@@ -95,6 +96,10 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
     borderRadius: 8,
     margin: 4,
+  },
+  formula: {
+    marginTop: 8,
+    textAlign: "center",
   },
   radioButton: {
     flexDirection: "row",

@@ -13,7 +13,6 @@ import {
   RATING_OVERRIDE,
 } from "../config/constants";
 
-import { differenceInMilliseconds, format } from "date-fns/";
 import { useStorage } from "../context/StorageContext";
 import * as MailComposer from "expo-mail-composer";
 
