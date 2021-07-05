@@ -15,11 +15,15 @@ export function StorageDataContext({ children }) {
 
   const fetchStoredBoatList = async () => {
     const storedBoatListResult = await storage.get("@boat_list");
-    if (storedBoatListResult.ok) {
+    if (storedBoatListResult && storedBoatListResult.ok) {
       return { ok: true, boatData: storedBoatListResult.data };
     } else {
-      console.warn(storedBoatListResult.error);
-      return { ok: false, error: storedBoatListResult.error };
+      if (storedBoatListResult) {
+        console.warn(storedBoatListResult.error);
+        return { ok: false, error: storedBoatListResult.error };
+      } else {
+        return { ok: true, boatData: [] };
+      }
     }
   };
 

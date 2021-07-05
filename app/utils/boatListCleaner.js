@@ -1,5 +1,3 @@
-import { words } from "lodash";
-
 export const capitalizeTheFirstLetterOfEachWord = (words) => {
   let separateWord = words.split(" ");
   for (var i = 0; i < separateWord.length; i++) {
@@ -14,10 +12,11 @@ export const capitalizeTheFirstLetterOfEachWord = (words) => {
 };
 
 const excludeChars = (word) => {
+  if (!word) return "";
   let cleanedWord = "";
-  const excludedWords = ["*"];
-  for (let i = 0; i < excludedWords.length; i++) {
-    cleanedWord = word.replaceAll(excludedWords[i], "");
+  const excludedWordPatterns = [/\*/gi];
+  for (let i = 0; i < excludedWordPatterns.length; i++) {
+    cleanedWord = word.replace(excludedWordPatterns[i], "");
   }
   return cleanedWord;
 };
