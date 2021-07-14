@@ -46,16 +46,45 @@ export function PhrfProvider({ children }) {
    * @param {*} isAlternate true to use alternate PHRF system (daytime racing), otherwise use standard for evening racing.
    */
   function getCorrectedTime(elapsedSeconds, phrfRating, isAlternate) {
-    return Math.round(
-      elapsedSeconds *
-        (isAlternate
-          ? getFormulaTOT(alternateTOT_A, alternateTOT_B, phrfRating)
-          : getFormulaTOT(standardTOT_A, standardTOT_B, phrfRating))
-    );
+    return elapsedSeconds * getFormulaTOT(phrfRating, isAlternate);
   }
 
-  function getFormulaTOT(a, b, phrfRating) {
-    return Number(a) / (Number(b) + Number(phrfRating));
+  function getFormulaTOT(phrfRating, isAlternate) {
+    const standardFormula =
+      Number(standardTOT_A) / (Number(standardTOT_B) + Number(phrfRating));
+    const alternateFormula =
+      Number(alternateTOT_A) / (Number(alternateTOT_B) + Number(phrfRating));
+    return isAlternate ? alternateFormula : standardFormula;
+  }
+
+  /**
+   * TimeDelta relative TOT factor calculation;
+   * Calculated by dividing the TOT factor (TF) = 566.431 / (401.431 + PHRF) for each boat,
+   * by the TOT factor for the reference boat.
+   * @param {*} referenceBoatPhrfRating
+   * @param {*} otherBoatPhrfRating
+   * @param {*} isAlternate
+   */
+  function getTimeDeltaTOT(
+    referenceBoatPhrfRating,
+    otherBoatPhrfRating,
+    isAlternate
+  ) {
+    const refTOT = getFormulaTOT(referenceBoatPhrfRating, isAlternate);
+    const otherBoatTOT = getFormulaTOT(otherBoatPhrfRating, isAlternate);
+    return otherBoatTOT / refTOT;
+  }
+
+  function getTimeDeltaCorrectedTime(
+    elapsedSeconds,
+    referenceBoatPhrfRating,
+    otherBoatPhrfRating,
+    isAlternate
+  ) {
+    return (
+      elapsedSeconds /
+      getTimeDeltaTOT(referenceBoatPhrfRating, otherBoatPhrfRating, isAlternate)
+    );
   }
 
   /**
@@ -72,20 +101,22 @@ export function PhrfProvider({ children }) {
     isAlternate
   ) {
     const results = getResults(boatList, elapsedSeconds, isAlternate);
-    const referenceCorrectedTime = getCorrectedTime(
+    const referenceCorrectedTime = getTimeDeltaCorrectedTime(
       elapsedSeconds,
+      referencePHRF,
       referencePHRF,
       isAlternate
     );
 
     return results
       .map((result) => {
-        const correctedTime = getCorrectedTime(
+        const correctedTime = getTimeDeltaCorrectedTime(
           elapsedSeconds,
+          referencePHRF,
           result.boat.rating,
           isAlternate
         );
-        result.diff = referenceCorrectedTime - correctedTime;
+        result.diff = correctedTime - referenceCorrectedTime;
         return result;
       })
       .sort((a, b) => (a.diff > b.diff ? 1 : -1));
@@ -170,6 +201,7 @@ export function PhrfProvider({ children }) {
       value={{
         getElapsedDiff,
         getCorrectedTime,
+        getTimeDeltaCorrectedTime,
         getFormulaTOT,
         standardTOT_A,
         standardTOT_B,
