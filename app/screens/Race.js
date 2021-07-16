@@ -180,7 +180,7 @@ function Race() {
   const buildEmailContent = () => {
     let contentText = `Race Date : ${format(
       raceTimerStartDate,
-      "MMMM do  yyyy"
+      "EEEE, MMMM do  yyyy"
     )} \nRace Start Time: ${format(
       raceTimerStartDate,
       "h:mm:ss a"
