@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { Divider } from "react-native-elements";
 
@@ -16,6 +16,10 @@ import About from "../components/About";
 import ShowWelcomeHelp from "../components/ShowWelcomeHelp";
 import { ModalContext } from "../context/AppModalContext";
 
+const getAlternatePHRFValue = (isAlternatePHRF) => {
+  return isAlternatePHRF ? PHRF_FORMULA.ALTERNATE : PHRF_FORMULA.STANDARD;
+};
+
 function Settings(props) {
   const {
     isAlternatePHRF,
@@ -32,8 +36,9 @@ function Settings(props) {
     setAlternateTOT_B,
   } = usePHRF();
   const [alternatePHRFValue, setAlternatePHRFValue] = useState(
-    isAlternatePHRF ? PHRF_FORMULA.ALTERNATE : PHRF_FORMULA.STANDARD
+    getAlternatePHRFValue(isAlternatePHRF)
   );
+
   const {
     storeBoatList,
     getBoatList,
@@ -127,6 +132,10 @@ function Settings(props) {
       alternateFormula: { a: alternateA, b: alternateB },
     };
   };
+
+  useEffect(() => {
+    setAlternatePHRFValue(getAlternatePHRFValue(isAlternatePHRF));
+  }, [isAlternatePHRF]);
 
   return (
     <Screen style={styles.container}>

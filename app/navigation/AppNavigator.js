@@ -30,7 +30,6 @@ const AppNavigator = () => {
     storeValueForKey,
     getValueForKey,
   } = useStorage();
-  const { setIsAlternatePHRF, setRatingOverride } = usePHRF();
   const { showAppModal } = useContext(ModalContext);
 
   const saveCurrentScreen = (screenName) => {
@@ -38,18 +37,6 @@ const AppNavigator = () => {
   };
 
   useEffect(() => {
-    getPHRFIsAlternateFormula().then((result) => {
-      if (result.ok) {
-        setIsAlternatePHRF(result.data);
-      }
-    });
-
-    getRatingOverride().then((result) => {
-      if (result.ok) {
-        setRatingOverride(result.data);
-      }
-    });
-
     getValueForKey(WELCOME_SCREEN_KEY).then((response) => {
       if (response.ok && response.data) {
         showAppModal(!response.data);

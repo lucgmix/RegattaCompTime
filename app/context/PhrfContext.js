@@ -37,7 +37,8 @@ export function PhrfProvider({ children }) {
 
   const [deviceCanEmail, setDeviceCanEmail] = useState(false);
 
-  const { getFormulaAB } = useStorage();
+  const { getFormulaAB, getPHRFIsAlternateFormula, getRatingOverride } =
+    useStorage();
 
   /**
    * Return the corrected time for the specified PHRF rating and elapsed race time.
@@ -182,6 +183,19 @@ export function PhrfProvider({ children }) {
   };
 
   useEffect(() => {
+    getRatingOverride().then((result) => {
+      if (result.ok) {
+        setRatingOverride(result.data);
+      }
+    });
+
+    getPHRFIsAlternateFormula().then((result) => {
+      if (result.ok) {
+        console.log("result.data", result.data);
+        setIsAlternatePHRF(result.data);
+      }
+    });
+
     getFormulaAB().then((result) => {
       if (result && result.ok && result.data) {
         setStandardTOT_A(result.data.standardFormula.a);
