@@ -239,7 +239,7 @@ function Race() {
               acc.push(updatedBoatResult);
               return acc;
             } else {
-              return { boat, rank: "-", elapsedTime: 0, correctedTime: 0 };
+              return createEmptyBoatResult(boat);
             }
           }, []);
 
@@ -288,12 +288,16 @@ function Race() {
           }
         } else {
           const boatResultList = boatData.map((boat) => {
-            return { boat, rank: "-", elapsedTime: 0, correctedTime: 0 };
+            return createEmptyBoatResult(boat);
           });
           setViewBoatResultList(ratingSortResults(boatResultList));
         }
       });
     });
+  };
+
+  const createEmptyBoatResult = (boat) => {
+    return { boat, rank: "-", elapsedTime: 0, correctedTime: 0 };
   };
 
   const updateResultList = () => {
@@ -323,12 +327,7 @@ function Race() {
           return newResult;
         } else {
           // Boat was not in results so we create the result object
-          return {
-            boat: boat,
-            rank: "-",
-            elapsedTime: 0,
-            correctedTime: 0,
-          };
+          return createEmptyBoatResult(boat);
         }
       });
 
