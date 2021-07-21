@@ -41,6 +41,7 @@ function TimeDelta() {
 
   const {
     getElapsedDiff,
+    getTimeDeltaCorrectedTime,
     secondsToHms,
     isAlternatePHRF,
     deviceCanEmail,
@@ -120,8 +121,9 @@ function TimeDelta() {
     getBoatList().then(({ boatData }) => {
       if (!isEmpty(boatData)) {
         const boatWithMatchingId = boatData.find((boat) => boat.id === item.id);
-
         if (boatWithMatchingId) {
+          getTimeDeltaCorrectedTime();
+
           setBoatResultsList(
             getElapsedDiff(
               boatData,
@@ -143,21 +145,17 @@ function TimeDelta() {
   };
 
   const selectBoatInList = (item) => {
-    const selectedBoat = selectedBoat || item;
-    if (!selectedBoat) return;
+    if (!item) return;
+    const indexOfSelectedBoatResult = boatResultsList.findIndex(
+      (resultItem) => resultItem.boat.id === item.id
+    );
 
-    getBoatList().then(({ boatData }) => {
-      const indexOfSelectedBoatResult = boatData.findIndex(
-        (resultItem) => resultItem.id === (selectedBoat.id || item.id)
-      );
-
-      resultListRef &&
-        indexOfSelectedBoatResult > -1 &&
-        resultListRef.current.scrollToIndex({
-          animated: true,
-          index: indexOfSelectedBoatResult,
-        });
-    });
+    resultListRef &&
+      indexOfSelectedBoatResult > -1 &&
+      resultListRef.current.scrollToIndex({
+        animated: true,
+        index: indexOfSelectedBoatResult,
+      });
   };
 
   const getTimeDeltaHelpString = (tag) => {
@@ -259,7 +257,7 @@ function TimeDelta() {
         onSelectItem={handleOnSelectedBoat}
       />
       <FlatList
-        onContentSizeChange={selectBoatInList}
+        onContentSizeChange={() => selectBoatInList(selectedBoat)}
         ref={resultListRef}
         data={boatResultsList}
         getItemLayout={(_, index) => {
