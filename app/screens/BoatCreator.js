@@ -16,6 +16,8 @@ import { v4 as uuidv4 } from "uuid";
 
 import BoatTypesListModal from "../components/BoatTypesListModal";
 
+import { RATING_OVERRIDE } from "../config/constants";
+
 export const BOAT_CREATOR_MODE = {
   ADD: "add",
   UPDATE: "update",
@@ -27,11 +29,6 @@ const FIELD_LABEL = {
   FS: "FS (Flying Spinnaker Handicap Rating)",
   NFS: "NFS (Non Flying Spinnaker Handicap Rating)",
   DEFAULT_RATING: "Default Rating",
-};
-
-const DEFAULT_RATING = {
-  FS: "FS",
-  NFS: "NFS",
 };
 
 const validationSchema = Yup.object().shape({
@@ -105,7 +102,7 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
   const [viewBoatList, setViewBoatList] = useState([]);
   const [editableBoat, setEditableBoat] = useState(selectedBoat);
   const defaultRatingValue =
-    editableBoat && editableBoat.defaultRating === DEFAULT_RATING.NFS; // false = FS, true = NFS
+    editableBoat && editableBoat.defaultRating === RATING_OVERRIDE.NFS; // false = FS, true = NFS
   const [useNFSRating, setUseNFSRating] = useState(defaultRatingValue);
   const [boatTypeValue, setBoatTypeValue] = useState();
   const [boatFSValue, setBoatFSValue] = useState();
@@ -118,7 +115,7 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
   };
 
   const getDefaultRatingLabel = () => {
-    return useNFSRating ? DEFAULT_RATING.NFS : DEFAULT_RATING.FS;
+    return useNFSRating ? RATING_OVERRIDE.NFS : RATING_OVERRIDE.FS;
   };
 
   const handleSubmit = async (boat, { resetForm }) => {
@@ -151,7 +148,7 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
   function populateRating(boatArray) {
     if (Array.isArray(boatArray)) {
       return boatArray.map((item) => {
-        if (item.defaultRating === DEFAULT_RATING.FS) {
+        if (item.defaultRating === RATING_OVERRIDE.FS) {
           item.rating = Number(item.ratingFS);
         } else {
           item.rating = Number(item.ratingNFS);
@@ -214,7 +211,7 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
           ratingNFS: (editableBoat && editableBoat.ratingNFS) || null,
           useNFSRating: (editableBoat && editableBoat.useNFSRating) || false,
           defaultRating:
-            (editableBoat && editableBoat.defaultRating) || DEFAULT_RATING.FS,
+            (editableBoat && editableBoat.defaultRating) || RATING_OVERRIDE.FS,
         }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
@@ -257,8 +254,8 @@ function BoatCreator({ selectedBoat, onSubmitButtonPress, viewMode }) {
         <FormSwitch
           name="useNFSRating"
           label={FIELD_LABEL.DEFAULT_RATING}
-          valueFalseLabel={DEFAULT_RATING.FS}
-          valueTrueLabel={DEFAULT_RATING.NFS}
+          valueFalseLabel={RATING_OVERRIDE.FS}
+          valueTrueLabel={RATING_OVERRIDE.NFS}
           onToggleSwitch={(isNFSRating) =>
             toggleDefaultRatingSwitch(isNFSRating)
           }

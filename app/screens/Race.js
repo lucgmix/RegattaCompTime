@@ -17,6 +17,7 @@ import { isEmpty } from "lodash";
 import RaceTimer from "../components/RaceTimer";
 import ElapsedTimeInputModal from "../components/ElapsedTimeInputModal";
 import { differenceInMilliseconds, format } from "date-fns/";
+import { RATING_OVERRIDE } from "../config/constants";
 
 const RACE_STATE = {
   NOT_STARTED: "not_started",
@@ -205,10 +206,10 @@ function Race() {
 
     function getFS_NFS(rating, boat) {
       if (rating.toString() === boat.ratingFS) {
-        return "FS";
+        return RATING_OVERRIDE.FS;
       }
       if (rating.toString() === boat.ratingNFS) {
-        return "NFS";
+        return RATING_OVERRIDE.NFS;
       }
     }
     return contentText;

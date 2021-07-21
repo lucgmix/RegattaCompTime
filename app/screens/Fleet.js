@@ -333,8 +333,8 @@ function Fleet({ navigation }) {
             <BoatListItem
               name="Boat"
               type="Class"
-              ratingFS="FS"
-              ratingNFS="NFS"
+              ratingFS={RATING_OVERRIDE.FS}
+              ratingNFS={RATING_OVERRIDE.NFS}
               ratingOverride={ratingOverride}
               isHeader
             />

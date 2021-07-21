@@ -70,7 +70,7 @@ function Settings(props) {
           switch (value) {
             case RATING_OVERRIDE.NONE:
               boat.rating =
-                boat.defaultRating === "FS"
+                boat.defaultRating === RATING_OVERRIDE.FS
                   ? useRating(boat.ratingFS, boat.ratingNFS)
                   : useRating(boat.ratingNFS, boat.ratingFS);
               boat.ratingOverride = RATING_OVERRIDE.NONE;

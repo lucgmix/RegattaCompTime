@@ -16,11 +16,6 @@ import {
 import { useStorage } from "../context/StorageContext";
 import * as MailComposer from "expo-mail-composer";
 
-const RATING = {
-  FS: "FS",
-  NFS: "NFS",
-};
-
 const PhrfContext = createContext();
 
 export function PhrfProvider({ children }) {
@@ -191,7 +186,6 @@ export function PhrfProvider({ children }) {
 
     getPHRFIsAlternateFormula().then((result) => {
       if (result.ok) {
-        console.log("result.data", result.data);
         setIsAlternatePHRF(result.data);
       }
     });

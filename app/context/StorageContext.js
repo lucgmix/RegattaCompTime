@@ -1,12 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import storage from "../utils/storage";
 
-const RATING_OVERRIDE = {
-  NONE: "",
-  FS: "FS",
-  NFS: "NFS",
-};
-
 const StorageContext = createContext();
 
 export function StorageDataContext({ children }) {
