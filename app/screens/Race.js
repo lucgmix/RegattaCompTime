@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { AppState, FlatList, StyleSheet, View } from "react-native";
 import Screen from "../components/Screen";
 import SectionHeader from "../components/SectionHeader";
@@ -158,6 +158,8 @@ function Race() {
 
   const { getBoatList, getRaceResults, storeRaceResults, boatDataChanged } =
     useStorage();
+
+  const raceResultListRef = useRef();
 
   const {
     getCorrectedTime,
@@ -479,6 +481,11 @@ function Race() {
     }).then((response) => {
       if (response.ok) {
         setViewBoatResultList(sortedBoatResultList);
+        raceResultListRef &&
+          raceResultListRef.current.scrollToIndex({
+            animated: false,
+            index: 0,
+          });
       }
     });
   };
@@ -838,6 +845,7 @@ function Race() {
         date={raceTimerStartDate}
       />
       <FlatList
+        ref={raceResultListRef}
         data={viewBoatResultList}
         keyExtractor={(resultItem) => {
           return resultItem.boat.id;
