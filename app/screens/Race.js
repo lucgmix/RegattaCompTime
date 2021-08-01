@@ -331,14 +331,21 @@ function Race() {
         }
       });
 
-      setViewBoatResultList(
-        correctTimeSortResults(
-          getUpdatedResultRanking(updatedBoatResultList),
-          isAlternatePHRF,
-          getCorrectedTime,
-          raceState
-        )
-      );
+      if (
+        raceState === RACE_STATE.NOT_STARTED ||
+        raceState === RACE_STATE.RESET_CLEARED
+      ) {
+        setViewBoatResultList(ratingSortResults(updatedBoatResultList));
+      } else {
+        setViewBoatResultList(
+          correctTimeSortResults(
+            getUpdatedResultRanking(updatedBoatResultList),
+            isAlternatePHRF,
+            getCorrectedTime,
+            raceState
+          )
+        );
+      }
     });
   };
 
