@@ -743,12 +743,6 @@ function Race() {
 
   useEffect(() => {
     populateResultList();
-    return () => {
-      setViewBoatResultList([]);
-    };
-  }, [boatDataChanged]);
-
-  useEffect(() => {
     updateResultList();
     return () => {
       setViewBoatResultList([]);
