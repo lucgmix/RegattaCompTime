@@ -709,6 +709,13 @@ function Race() {
   const onBoatElapsedTimeChanged = (time) => {
     if (time !== 0) {
       setBoatElapsedTime(time * 1000);
+    } else {
+      boatEditResult.correctedTime = 0;
+      boatEditResult.elapsedTime = 0;
+      boatEditResult.originalElapsedTime = 0;
+      boatEditResult.rank = "-";
+      setBoatEditResult(boatEditResult);
+      setBoatElapsedTime(0);
     }
   };
 

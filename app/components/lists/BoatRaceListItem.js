@@ -102,8 +102,7 @@ function BoatRaceListItem({
 
       {(!isHeader && renderMode === RACE_ITEM_MODE.RACING) ||
       renderMode === RACE_ITEM_MODE.DEFAULT ||
-      renderMode === RACE_ITEM_MODE.BOAT_FINISHED ||
-      renderMode === RACE_ITEM_MODE.BOAT_DNF ? (
+      renderMode === RACE_ITEM_MODE.BOAT_FINISHED ? (
         <Button
           disabled={finishDisabled}
           buttonStyle={styles.finishButton}
@@ -112,7 +111,8 @@ function BoatRaceListItem({
         ></Button>
       ) : (
         !isHeader &&
-        renderMode === RACE_ITEM_MODE.RACE_FINISHED && (
+        (renderMode === RACE_ITEM_MODE.RACE_FINISHED ||
+          RACE_ITEM_MODE.BOAT_DNF) && (
           <Button
             buttonStyle={styles.finishButton}
             onPress={onEditClick}
