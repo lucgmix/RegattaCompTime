@@ -14,11 +14,13 @@ function About() {
         {/* <Text style={styles.text}>
           App Version: {Constants.manifest.version}
         </Text> */}
-        <Text style={styles.text}>App Version: Beta 13</Text>
+        <Text style={styles.text}>App Version: Beta 14</Text>
         <Text style={styles.text}>
-          Sdk Version: {Constants.manifest.sdkVersion}
+          SDK Version: {Constants.manifest.sdkVersion}
         </Text>
         <Text style={styles.text}>App icon: Suzanne Roy</Text>
+        <Text style={styles.text}>Concept/UX feedback: Simon Grégoire</Text>
+
         <Text style={styles.text}>Developed by Luc Grégoire</Text>
       </View>
     </View>
